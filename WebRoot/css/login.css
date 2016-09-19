@@ -1,23 +1,15 @@
 @CHARSET "UTF-8";
+.bg{
+   background:url(/images/bg.jpg);
+   filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+   -moz-background-size:100% 100%;
+   background-size:100% 100%;
+}
 
-.linear {
-	width: 100%;
-	height: 100%;
-	FILTER: progid:  DXImageTransform.Microsoft.Gradient(gradientType=0,
-		startColorStr=#0099FF, endColorStr=#09C7F7 );
-	/*IE*/
-	background: -moz-linear-gradient(top, #0099FF, #09C7F7);
-	/*火狐*/
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0099FF),
-		to(#09C7F7) );
-	/*谷歌*/
-	background-image: -webkit-gradient(linear, left bottom, left top, color-start(0, #0099FF),
-		color-stop(1, #09C7F7) );
-	/* Safari & Chrome*/
-	filter: progid:  DXImageTransform.Microsoft.gradient(GradientType=0,
-		startColorstr='#0099FF', endColorstr='#09C7F7' );
-	/*IE6 & IE7*/
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0099FF', endColorstr='#09C7F7')";
-	/* IE8 */
+
+.login_bg{
+   background:url(/images/bg.jpg);
+   filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+   -moz-background-size:100% 100%;
+   background-size:100% 100%;
 }
