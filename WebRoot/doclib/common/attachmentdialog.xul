@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"document.creator","document.createdate","document.ownertable",
+ "document.ownerid","document.author","document.changedate","document.changeby","document.libnum",
+ "document.doctype","document.attachname","document.urltype","document.urlpath","document.status"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="附件"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						文档编号:<a:bind value="document.docnum"/><itextbox id="document.docnum"/>		
+						描 述:<a:bind value="document.description"/><itextbox id="document.description" cols="40"/>		
+						</row>
+						<row>
+						文档类型:<a:bind value="document.doctype"/><icombobox id="document.doctype"/>		
+						文件名:<a:bind value="document.attachname"/><itextbox id="document.attachname" cols="40"/>		
+						</row>
+						<row>
+						创建人:<a:bind value="document.creator"/><itextbox id="document.creator"/>		
+						创建时间:<a:bind value="document.createdate"/><idatebox id="document.createdate"/>		
+						</row>
+						<row>
+						文档类别:<a:bind value="document.urltype"/><icombobox id="document.urltype"/>		
+						文档路径:<a:bind value="document.urlpath"/><itextbox id="document.urlpath" cols="40"/>		
+						</row>
+						<row>
+						文档状态:<a:bind value="document.status"/><icombobox id="document.status"/>		
+						作者:<a:bind value="document.author"/><itextbox id="document.author"/>		
+						</row>
+						<row>
+						最近一次修改时间:<a:bind value="document.changedate"/><idatebox id="document.changedate"/>		
+						修改人:<a:bind value="document.changeby"/><itextbox id="document.changeby"/>		
+						</row>
+						<row>
+						写作时间:<a:bind value="document.authordate"/><idatebox id="document.authordate"/>	
+						所属部门:<a:bind value="document.ownerdept"/><ibandbox id="document.ownerdept" lookup="department"/>	
+						</row>
+						<row>
+						所属目录:<a:bind value="document.libnum"/><itextbox id="document.libnum" />
+						在列表显示？:<a:bind value="document.inlistshow"/><icheckbox id="document.inlistshow"/>
+						</row>
+					</rows>
+				</grid>
+				<div align="right">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+				</div>
+ </groupbox>				
+</editwindow>

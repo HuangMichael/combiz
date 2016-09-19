@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="contract" title="合同管理" resize="true" wfenabled="true"
+	use="combiz.ui.contract.ContractWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="合同管理" width="70px" />
+			<tab id="contlinetab" label="合同采购行" width="100px" />
+			<tab id="contpaytab" label="合同付款" width="70px" />
+			<tab id="conttermstab" label="合同条款" width="70px" />
+			<tab id="contchangetab" label="合同变更审批单" width="120px" />
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("cntnum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<!-- 从这里开始修改搜索字段 -->
+						合同编号：
+						<stextbox data="cntnum" cols="10" />
+						描述:
+						<stextbox data="description" cols="20" />
+
+						<!-- 修改搜索字段结束 -->
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="cntnum" label="合同编号"
+							sort="auto" width="10%" />
+						<resultlistheader data="bidnum" label="招标编号"
+							sort="auto" width="10%" />
+						<resultlistheader data="owner" label="甲方"
+							sort="auto" width="20%" />
+						<resultlistheader data="vendor" label="乙方"
+							sort="auto" width="20%" />
+						<resultlistheader data="createby" label="创建人"
+							sort="auto" width="20%" />
+						<resultlistheader data="sigdate" label="合同签定日期"
+							sort="auto" width="20%" />
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 操作票 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"contract.status","contract.statusdate"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<groupbox>
+					<caption label="合同管理" />
+					<grid>
+						<rows>
+							<row>
+								合同编号:
+								<a:bind value="contract.cntnum" />
+								<itextbox id="contract.cntnum"
+									cols="20" />
+								状 态:
+								<a:bind value="contract.status" />
+								<itextbox id="contract.status" />
+								状态时间:
+								<a:bind value="contract.statusdate" />
+								<idatebox id="contract.statusdate" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<hbox width="100%">
+					<groupbox>
+						<caption label="基本信息" />
+						<grid>
+							<rows>
+								<row>
+									合同名称:
+									<a:bind
+										value="contract.description" />
+									<itextbox id="contract.description" />
+								</row>
+								<row>
+									招标编号:
+									<a:bind value="contract.bidnum" />
+									<itextbox id="contract.bidnum" />
+								</row>
+								<row>
+									合同版本:
+									<a:bind value="contract.cntversion" />
+									<itextbox id="contract.cntversion" />
+								</row>
+								<row>
+									部门:
+									<a:bind value="contract.deptnum" />
+									<ibandbox id="contract.deptnum"
+										lookup="department" />
+								</row>
+								<row>
+									合同类型:
+									<a:bind value="contract.cnttype" />
+									<icombobox id="contract.cnttype" />
+								</row>
+								<row>
+									采购方式:
+									<a:bind value="contract.potype" />
+									<icombobox id="contract.potype" />
+								</row>
+								<row>
+									合同分类:
+									<a:bind value="contract.cntclass" />
+									<icombobox id="contract.cntclass" />
+								</row>
+								<row>
+									合同总额:
+									<a:bind value="contract.totalcost" />
+									<ilongbox id="contract.totalcost" />
+								</row>
+								<row>
+									付款方式:
+									<a:bind value="contract.paymold" />
+									<icombobox id="contract.paymold" />
+								</row>
+								<row>
+									合同签定日期:
+									<a:bind value="contract.sigdate" />
+									<idatebox id="contract.sigdate" />
+								</row>
+
+							</rows>
+						</grid>
+					</groupbox>
+
+					<groupbox>
+						<caption label="变更信息" />
+						<grid>
+							<rows>
+								<row>
+									原始合同:
+									<a:bind value="contract.parent" />
+									<itextbox id="contract.parent" />
+								</row>
+								<row>
+									有变更合同:
+									<a:bind value="contract.haschild" />
+									<itextbox id="contract.haschild" />
+								</row>
+								<row>
+									创建人:
+									<a:bind value="contract.createby" />
+									<ibandbox id="contract.createby"
+										lookup="labor" />
+								</row>
+								<row>
+									创建时间:
+									<a:bind value="contract.createdate" />
+									<idatebox id="contract.createdate" />
+								</row>
+								<row>
+									合同有效期开始时间:
+									<a:bind
+										value="contract.cntstartdate" />
+									<idatebox
+										id="contract.cntstartdate" />
+								</row>
+								<row>
+									合同有效期结束时间:
+									<a:bind value="contract.cntenddate" />
+									<idatebox id="contract.cntenddate" />
+								</row>
+								<row>
+									要求开始日期:
+									<a:bind
+										value="contract.cmdstartdate" />
+									<idatebox
+										id="contract.cmdstartdate" />
+								</row>
+								<row>
+									要求截至日期:
+									<a:bind value="contract.cmdenddate" />
+									<idatebox id="contract.cmdenddate" />
+								</row>
+								<row>
+									合同工期:
+									<a:bind value="contract.cntdur" />
+									<itextbox id="contract.cntdur" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+				<hbox width="100%">
+					<groupbox>
+						<caption label="甲方" />
+						<grid>
+							<rows>
+								<row>
+									甲方:
+									<a:bind value="contract.owner" />
+									<ibandbox id="contract.owner"
+										lookup="companies" />
+								</row>
+								<row>
+									甲方代表:
+									<a:bind value="contract.owneronbf" />
+									<itextbox id="contract.owneronbf"
+										cols="20" />
+								</row>
+								<row>
+									甲方联系人:
+									<a:bind
+										value="contract.ownercontact" />
+									<itextbox id="contract.ownercontact"
+										cols="20" />
+								</row>
+								<row>
+									甲方开户银行:
+									<a:bind value="contract.ownerbank" />
+									<idoublebox id="contract.ownerbank"
+										cols="20" />
+								</row>
+								<row>
+									甲方帐号:
+									<a:bind
+										value="contract.owneraccount" />
+									<idoublebox
+										id="contract.owneraccount" cols="20" />
+								</row>
+								<row>
+									甲方联系电话:
+									<a:bind value="contract.ownerphone" />
+									<idoublebox id="contract.ownerphone"
+										cols="20" />
+								</row>
+								<row>
+									甲方联系EMAIL:
+									<a:bind value="contract.owneremail" />
+									<idoublebox id="contract.owneremail"
+										cols="20" />
+								</row>
+								<row>
+									甲方联系地址:
+									<a:bind
+										value="contract.owneraddress" />
+									<idoublebox
+										id="contract.owneraddress" cols="20" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox>
+						<caption label="乙方" />
+						<grid>
+							<rows>
+								<row>
+									乙方:
+									<a:bind value="contract.vendor" />
+									<ibandbox id="contract.vendor"
+										lookup="companies" />
+								</row>
+								<row>
+									乙方代表:
+									<a:bind value="contract.vendoronbf" />
+									<itextbox id="contract.vendoronbf"
+										cols="20" />
+								</row>
+								<row>
+									乙方联系人:
+									<a:bind
+										value="contract.vendorcontact" />
+									<itextbox
+										id="contract.vendorcontact" cols="20" />
+								</row>
+								<row>
+									乙方开户银行:
+									<a:bind value="contract.vendorbank" />
+									<idoublebox id="contract.vendorbank"
+										cols="20" />
+								</row>
+								<row>
+									乙方帐号:
+									<a:bind
+										value="contract.vendoraccount" />
+									<idoublebox
+										id="contract.vendoraccount" cols="20" />
+								</row>
+								<row>
+									乙方联系电话:
+									<a:bind
+										value="contract.vendorphone" />
+									<idoublebox
+										id="contract.vendorphone" cols="20" />
+								</row>
+								<row>
+									乙方联系EMAIL:
+									<a:bind
+										value="contract.vendoremail" />
+									<idoublebox
+										id="contract.vendoremail" cols="20" />
+								</row>
+								<row>
+									乙方联系地址:
+									<a:bind
+										value="contract.vendoraddress" />
+									<idoublebox
+										id="contract.vendoraddress" cols="20" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+			</tabpanel>
+
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+							合同编号:
+							<a:bind value="contract.cntnum" />
+							<textbox id="contract2.cntnum" />
+							状 态:
+							<a:bind value="contract.status" />
+							<itextbox id="contract2.status" />
+							状态时间:
+							<a:bind value="contract.statusdate" />
+							<idatebox id="contract2.statusdate" />
+						</row>
+					</rows>
+				</grid>
+				<listwindow id="cntline" title="合同采购行"
+					use="combiz.ui.contract.ContlineList"
+					dialog="/contract/contractlinedialog.xul">
+					<tablelist band="cntline" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="linenum"
+								label="行项目编号" sort="auto" width="5%" />
+							<tablelistheader data="itemnum"
+								label="库存项目" sort="auto" width="15%" />
+								<tablelistheader data="description"
+								label="描述" sort="auto" width="20%" />
+							<tablelistheader data="taxlinecost"
+								label="含税总价" sort="auto" width="15%" />
+							<tablelistheader data="receivedtotalcost"
+								label="接收到的总价" sort="auto" width="15%" />
+							<tablelistheader data="enterby" label="录入人"
+								sort="auto" width="20%" />
+							<tablelistheader data="inspection"
+								label="需要检查" sort="auto" width="10%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+
+			<tabpanel>
+
+				<listwindow id="cntpay" title="合同付款行"
+					use="combiz.ui.contract.CntpaylineList"
+					dialog="/contract/cntpaylinedialog.xul">
+					<tablelist band="cntpay" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="payline" label="付款行"
+								sort="auto" width="20%" />
+							<tablelistheader data="paytype" label="付款类型"
+								sort="auto" width="20%" />
+							<tablelistheader data="haspay" label="已付款"
+								sort="auto" width="20%" />
+							<tablelistheader data="requestby"
+								label="申请人" sort="auto" width="20%" />
+							<tablelistheader data="paydate" label="支付日期"
+								sort="auto" width="20%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+
+			<tabpanel>
+
+				<listwindow id="cntterms" title="合同条款"
+					use="combiz.ui.contract.CnttermslineList"
+					dialog="/contract/cnttermslinedialog.xul">
+					<tablelist band="cntterms" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="termnum" label="条款编号"
+								sort="auto" width="50%" />
+							<tablelistheader data="termtype"
+								label="条款类型" sort="auto" width="50%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+
+			<tabpanel>
+
+				<listwindow id="cntchange" title="合同变更审批单"
+					use="combiz.ui.contract.CntchangelineList"
+					dialog="/contract/cntchangelinedialog.xul">
+					<tablelist band="cntchange" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="cntversion"
+								label="合同版本" sort="auto" width="25%" />
+							<tablelistheader data="status" label="状态"
+								sort="auto" width="20%" />
+							<tablelistheader data="changeby" label="变更人"
+								sort="auto" width="25%" />
+							<tablelistheader data="changedate"
+								label="变更日期" sort="auto" width="30%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

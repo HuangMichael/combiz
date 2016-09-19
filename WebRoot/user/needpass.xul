@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="二次确认密码" use="combiz.ui.user.NeedPassDialog" width="350" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ <groupbox><caption label="请输入密码"/>
+	请输入您的密码以便于确认身份：<ipasswordbox id="oldpassword" cols="40"/>
+	<separator/>
+	<button label="确   定" onClick="mainWnd.confirm()"/>
+	<button label="取   消" onClick="mainWnd.cancel()"/>
+	
+ </groupbox>
+	
+</window>

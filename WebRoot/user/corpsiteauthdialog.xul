@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"corpsiteauth.corpnum"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="地点授权"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						地点:<a:bind value="corpsiteauth.sitenum"/><ibandbox id="corpsiteauth.sitenum" lookup="corpsite"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						地点描述：<a:bind value="corpsite.description"/><itextbox id="corpsite.description" cols="30"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						组织机构：<a:bind value="corpsiteauth.corpnum"/><itextbox id="corpsiteauth.corpnum"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>		
+		
+</editwindow>

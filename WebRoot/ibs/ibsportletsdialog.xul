@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"ibsportlets.portlet","ibsportlets.rowpos","ibsportlets.colpos","ibsportlets.plwidth","ibsportlets.plheight"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="门户窗口定义"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						名称:<a:bind value="ibsportlets.portlet"/><itextbox id="ibsportlets.portlet"/>
+						标题:<a:bind value="ibsportlets.pltitle"/><itextbox id="ibsportlets.pltitle" cols="50"/>
+						</row>
+						<row>
+						类型:<a:bind value="ibsportlets.portlettype"/><icombobox id="ibsportlets.portlettype"/>
+						页面地址：<a:bind value="ibsportlets.pagepath"/><itextbox id="ibsportlets.pagepath"  cols="50"/>
+						</row>
+						
+						<row>
+						行坐标:<a:bind value="ibsportlets.rowpos"/><ilongbox id="ibsportlets.rowpos"  cols="8"/>
+						列坐标:<a:bind value="ibsportlets.colpos"/><ilongbox id="ibsportlets.colpos"  cols="8"/>
+						</row>
+						<row>
+						宽:<a:bind value="ibsportlets.plwidth"/><ilongbox id="ibsportlets.plwidth"  cols="8"/>
+						高:<a:bind value="ibsportlets.plheight"/><ilongbox id="ibsportlets.plheight"  cols="8"/>
+						</row>
+						<row>
+						宽度百分比？<a:bind value="ibsportlets.ispercent"/><icheckbox id="ibsportlets.ispercent"/>
+						管理页面：<a:bind value="ibsportlets.ctrlpage"/><itextbox id="ibsportlets.ctrlpage" cols="40"/>
+						</row>
+						<row spans="1,3">
+						备注:<a:bind value="ibsportlets.remark"/><itextbox id="ibsportlets.remark" cols="60"/>
+						</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

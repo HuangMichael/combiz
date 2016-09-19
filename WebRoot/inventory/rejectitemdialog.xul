@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"rejectitem.rejlinenum","rejectitem.itemnum","rejectitem.warehouse","rejectitem.binnum","rejectitem.lotnum"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="报废单明细"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 报废单明细 -->
+					<rows>
+						<row>
+							报废单明细行号:<!-- 报废单明细行号 -->
+							<a:bind value="rejectitem.rejlinenum" />
+							<ilongbox id="rejectitem.rejlinenum" />
+							库存编号:<!-- 库存编号 -->
+							<a:bind value="rejectitem.itemnum" />
+							<itextbox id="rejectitem.itemnum" />
+							描述:<!-- 描述 -->
+							<a:bind value="item.description" />
+							<itextbox id="item.description" />
+						</row>
+						<row>
+							库房:<!-- 库房 -->
+							<a:bind value="rejectitem.warehouse" />
+							<itextbox id="rejectitem.warehouse" />
+							箱柜:<!-- 箱柜 -->
+							<a:bind value="rejectitem.binnum" />
+							<itextbox id="rejectitem.binnum" />
+							批次号:<!-- 批次号 -->
+							<a:bind value="rejectitem.lotnum" />
+							<itextbox id="rejectitem.lotnum" />
+						</row>
+						<row>
+							报废数量:<!-- 报废数量 -->
+							<a:bind value="rejectitem.rejectqty" />
+							<idoublebox id="rejectitem.rejectqty" />
+						</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="修改用户密码" use="combiz.ui.user.ModifyPwDialog" width="350" closable="true"
+ 	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+<!-- //////////////////数据区///////////////////////// -->		
+<div align="center">
+	旧 密 码：<ipasswordbox id="oldpassword" cols="40"/><separator></separator>
+	新 密 码：<ipasswordbox id="newpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	确认密码：<ipasswordbox id="cnewpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	         <button label="确定" onClick="mainWnd.confirm()"></button><button label="取消" onClick="mainWnd.cancel();"></button>
+</div>
+<!-- //////////////////数据区///////////////////////// -->	
+</window>
+<!-- 
+	<window 
+	xmlns="http://www.w3c.com/2005/zul"  
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3c.com/2005/zul http://www.zkoss.org/2005/zul/zul.xsd" 
+	id="modifypw" use="combiz.ui.user.ModifyPwDialog" title="修改用户密码" border="normal" closable="true" width="350">
+	旧 密 码：<ipasswordbox id="oldpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	新 密 码：<ipasswordbox id="newpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	确认密码：<ipasswordbox id="cnewpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	         <div align="center"><button label="确定" onClick="modifypw.checkNewPassword();"></button><button label="取消" onClick="modifypw.cancel();"></button></div>
+	</window>
+ -->

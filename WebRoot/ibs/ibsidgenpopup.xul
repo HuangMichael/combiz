@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<commonlistwindow id="ibsidgenList" title="数据库表主键（ID）信息" edittype="LISTONLY" width="600" 
+tablename="ibsidgen" searchable="false" autodata="true" closable="true">
+	<tablelist band="ibsidgenList" pageSize="20">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="tablename" label="表名" sort="auto" width="40%" />
+			<tablelistheader data="seed" label="增量" sort="auto" width="30%" />
+			<tablelistheader data="idvalue" label="目前的ID值" sort="auto" width="30%" />
+		</listhead>
+	</tablelist>
+		<div align="center">
+			<button label="关闭窗口" onClick="ibsidgenList.onClose()"/>
+		</div>	
+</commonlistwindow>

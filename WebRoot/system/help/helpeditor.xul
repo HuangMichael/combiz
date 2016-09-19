@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="helpEditorWnd" title="帮助文档" border="normal" closable="true">
+<iframe id="helpEditor"/>
+<div align="right">
+<button label="关闭编辑窗口" onClick="helpEditorWnd.onClose();"/><space spacing="5px"/>
+</div>
+</window>

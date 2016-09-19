@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="itemtree" title="物资分类" resize="true" use="combiz.ui.inventory.ItemClassWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="物资分类"/><!--物资分类 -->
+<tree use="combiz.ui.basedata.ClassTree" width="180"/>
+</groupbox>
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="物资编码" width="90px"/><!-- 物资编码 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						物资分类:<a:bind value="classification.classid"/><itextbox id="classification.classid"/><!-- 物资分类 -->
+						描述:<a:bind value="classification.description"/><itextbox id="classification.description" cols="40"/><!--描述  -->
+						</row>
+					</rows>
+				</grid>
+				<!-- 物资列表 -->
+				<listwindow id="itemclass" title="物资编码" applink="item" use="combiz.ui.inventory.ItemTreeList" dialog="/inventory/itemtreedialog.xul">
+					<tablelist band="itemclass" pageSize="15"><!-- 物资编码 -->					
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="itemnum" label="物料" sort="auto" width="10%"/><!-- 物料 -->
+							<tablelistheader data="description" label="描述" sort="auto" width="45%"/><!-- 描述 -->
+							<tablelistheader data="classid" label="库存分类" sort="auto" width="10%"/><!--库存分类  -->
+							<tablelistheader data="modelnum" label="箱柜" sort="auto" width="10%"/><!-- 箱柜 -->
+							<tablelistheader data="orderunit" label="订购单位" sort="auto" width="10%"/><!-- 订购单位 -->
+							<tablelistheader data="lottype" label="批次管理" sort="auto" width="15%"/><!-- 批次管理 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				<space/>
+				
+			</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

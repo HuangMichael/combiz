@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="BUDGETITEM" title="预算项目设置" resize="true" use="combiz.ui.budget.BudgetitemWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+
+	<hbox spacing="0">
+		<!-- **********************************  结果树页面 ********************************** -->
+		<vbox>
+		<groupbox>
+			<caption label="预算项目树" />
+			预算版本：<listbox use="combiz.ui.budget.BudgetItemVersion"/>
+			<tree use="combiz.ui.budget.BudgetItemTree" width="200" openchild="true"/>
+		</groupbox>
+		</vbox>
+
+		<!-- ********************************** //顶级标签 ********************************** -->
+		<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+			<tabs>
+				<tab id="main" label="预算项目" width="90px" />
+			</tabs>
+
+			<tabpanels width="100%">
+				<!-- ********************************** 主数据窗口 ********************************** -->
+				<!-- 初始化设置字段的必输和只读 -->
+				<zscript>
+					<![CDATA[
+				 String[] required = {};
+				 mainWnd.setRequired(required);
+				 String[] readonly = {};
+				 mainWnd.setReadonly(readonly);
+				 ]]>
+				</zscript>
+				<tabpanel>
+					<grid>
+						<rows>
+							<!-- ******************************************************************** -->
+							<!-- *************************在下面修改主界面字段**************************** -->
+							<!-- ********************************************************************-->
+							<row spans="1,1,2">
+								项目编号:
+								<a:bind value="budgetitem.buditem" />
+								<itextbox id="budgetitem.buditem" />
+								<a:bind value="budgetitem.description" />
+								<itextbox id="budgetitem.description" cols="40"/>
+
+							</row>
+							<row>
+								核算类型:
+								<a:bind value="budgetitem.budtype" />
+								<icombobox id="budgetitem.budtype" />
+								预算周期类型:
+								<a:bind value="budgetitem.budperiod" />
+								<icombobox id="budgetitem.budperiod" cols="10"/>
+
+							</row>
+							<row>
+								预算分类:
+								<a:bind value="budgetitem.budclass" />
+								<icombobox id="budgetitem.budclass" />
+								预算子分类:
+								<a:bind value="budgetitem.childclass" />
+								<icombobox id="budgetitem.childclass" cols="10"/>
+							</row>
+							<!--
+							<row>
+								父级:
+								<a:bind value="budgetitem.parent" />
+								<itextbox id="budgetitem.parent" />
+								有子集？:
+								<a:bind value="budgetitem.haschild" />
+								<icheckbox id="budgetitem.haschild" />
+							</row>
+
+							-->
+							
+							<row>
+								序号:
+								<a:bind value="budgetitem.orderby" />
+								<ilongbox id="budgetitem.orderby" cols="6"/>
+								计量单位:
+								<a:bind value="budgetitem.meaunit" />
+								<itextbox id="budgetitem.meaunit" cols="6"/>
+							</row>
+							<row spans="1,3">
+								是否启用:
+								<a:bind value="budgetitem.enabled" />
+								<icheckbox id="budgetitem.enabled" />
+							</row>
+							<row spans="1,3">
+								备注说明:
+								<a:bind value="budgetitem.remark" />
+								<itextbox id="budgetitem.remark" rows="4" cols="90" />
+							</row>
+
+						</rows>
+					</grid>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+	</hbox>
+</mainwindow>

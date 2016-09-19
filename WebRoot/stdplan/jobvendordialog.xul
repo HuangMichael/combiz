@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 承包单位 -->
+ <groupbox><caption label="承包单位"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						承包单位编号<!-- 承包单位编号 -->:<a:bind value="jobvendor.vendor"/><ibandbox id="jobvendor.vendor" lookup="companies"/>
+						描述<!-- 描述 -->:<a:bind value="vendordesp.description"/><itextbox id="vendordesp.description" cols="30"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						任务编号<!-- 任务编号 -->:<a:bind value="jobvendor.tasknum"/><itextbox id="jobvendor.tasknum" cols="10"/>
+						合同号<!-- 合同号 -->：<a:bind value="jobvendor.contract"/><ibandbox id="jobvendor.contract" lookup="cntnum"/>
+						</row>
+						<row>
+						费率<!-- 费率 -->：<a:bind value="jobvendor.rate"/><idoublebox id="jobvendor.rate" cols="20"/>
+						合同行编号<!-- 合同行编号 -->：<a:bind value="jobvendor.cntlinenum"/><ilongbox id="jobvendor.cntlinenum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

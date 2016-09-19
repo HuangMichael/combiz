@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="IBSLANG" title="语言管理" resize="true" use="combiz.ui.ibs.IbslangWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="语言管理" width="90px"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("langkey,langpkg");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						语言文本：<stextbox data="message" cols="30"/>
+						语言KEY：<stextbox data="langkey" cols="20"/>
+						语言包名：<scombobox data="langpkg" cols="10"/>
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="langkey" label="语言KEY" sort="auto" width="20%"/>
+						<resultlistheader data="message" label="语言文本" sort="auto" width="70%"/>
+						<resultlistheader data="langpkg" label="语言包名" sort="auto" width="10%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {""};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						语言KEY:<a:bind value="ibslang.langkey"/><itextbox id="ibslang.langkey"/>
+						语言包名:<a:bind value="ibslang.langpkg"/><icombobox id="ibslang.langpkg" />
+						</row>
+						<row spans="1,3">
+						语言文本:<a:bind value="ibslang.message"/><itextbox id="ibslang.message" rows="6" cols="70"/>
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

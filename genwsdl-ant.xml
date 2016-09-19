@@ -1,0 +1,12 @@
+
+<project basedir="." name="genwsdl">
+  
+ 	<path id="project.classpath">
+        <fileset file="WebRoot/WEB-INF/lib/*.jar"/>
+	</path>
+	
+<taskdef name="wsgen" classname="org.codehaus.xfire.gen.WsGenTask" classpathref="project.classpath"/>
+<wsgen outputDirectory="${basedir}/genfile" package="inbasis.ws.client" overwrite="true"
+  wsdl="http://hxlhost1:7008/inbasis/service/SayHiService?wsdl" />
+	
+</project>

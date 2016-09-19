@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"labor.laborname","labor.deptnum","labor.craft","labor.jobcode","labor.employeetype","labor.email","labor.wkaddress"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="人员信息"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						人员:<a:bind value="labor.labornum"/><ibandbox id="labor.labornum" lookup="labor"/>
+						姓名:<a:bind value="labor.laborname"/><itextbox id="labor.laborname"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						部门：<a:bind value="labor.deptnum"/><itextbox id="labor.deptnum"/>
+						专业：<a:bind value="labor.craft"/><itextbox id="labor.craft"/>
+						
+						</row>						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						职务:<a:bind value="labor.jobcode"/><itextbox id="labor.jobcode"/>
+						雇佣类型：<a:bind value="labor.employeetype"/><itextbox id="labor.employeetype"/>
+						</row>						
+						<!-- //////////////////////row//////////////// -->		
+						<row>
+						电子邮箱：<a:bind value="labor.email"/><itextbox id="labor.email" cols="30"/>
+						工作地址:<a:bind value="labor.wkaddress"/><itextbox id="labor.wkaddress" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>
+</editwindow>

@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.WorkSheet">
+<Version>2.0</Version>
+<TableDataMap>
+<NameTableData name="inbasis.wobugeq">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="bugnum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from wobugeq where bugnum='[?bugnum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.equpment">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="bugnum" type="0">
+</Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from wobugeq a,equipment b where a.eqnum=b.eqnum and a.bugnum='[?bugnum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.locations">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="bugnum" type="0">
+</Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select t.location,t.description ,w.location ,w.bugnum from locations t,wobugeq w 
+where t.location= w.location and w.bugnum='[?bugnum|?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings pageOrder="1" isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.23062992125984252" left="0.160041666666667" bottom="0.23062992125984252" right="0.19129166666666703" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportExportAttr pdfPrinting="false"/>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,19.0,19.0,19.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0,22.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[97.0,36.0,36.0,36.0,36.0,81.0,72.0,76.0,55.0,64.0,27.0,64.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="1" cs="13" rs="3" s="0"><O t="S">缺陷单</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="6" s="1"><O t="S">运行部门：</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="6" cs="3" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="DEPTNUM" dsDisplayName="inbasis.equpment" />
+</O><CellExpandAttr />
+</C>
+<C c="1" r="7" cs="2" s="1"><O t="S">电压等级：</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="7" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="PRESSURE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="8" cs="2" s="1"><O t="S">设备种类：</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="9" cs="2" s="1"><O t="S">设备分类：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="10" cs="5" s="4"><O t="S">设备类型</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="11" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="CLASSID" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="16" rs="2" s="4"><O t="S">缺陷汇报</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="16" cs="2" s="5"><O t="S">发现时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="16" cs="4" s="6"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="FINDTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="17" cs="2" s="5"><O t="S">缺陷类别：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="18" rs="3" s="4"><O t="S">运行部门意见</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="18" cs="12" rs="2" s="7"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="RUNDEPTOPINION" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="20" cs="3" s="8"><O t="S">缺陷再评类别：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="21" rs="4" s="4"><O t="S">运行车间意见</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="21" cs="12" rs="2" s="9"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIRDEPTOPINION" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="23" cs="2" s="8"><O t="S">缺陷定级：</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="24" cs="2" s="10"><O t="S">日期：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="25" s="4"><O t="S">处理完成时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="25" cs="4" s="6"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIREDTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="26" rs="2" s="4"><O t="S">缺陷处理情况</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="26" cs="12" rs="2" s="11"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIREDCOMMENT" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="28" rs="2" s="4"><O t="S"> 遗留问题 及处理意见</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="28" cs="12" rs="2" s="11"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="UNRESOLVEDBUG" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="30" s="4"><O t="S">是否完全消除</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="30" cs="2" s="12"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="ISRESOLVED" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="31" s="1"><O t="S">缺陷降级情况</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="31" cs="2" s="12"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="ISDEGRADED" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="32" rs="2" s="13"><O t="S">验收意见</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="32" cs="12" rs="2" s="9"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="CHECKDEPTOPINION" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="34" s="1"><O t="S">缺陷最终定级</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="34" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="LASTBUGTYPE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="35" s="1"><O t="S">验收时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="35" cs="5" s="14"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="CHECKTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="35" cs="2" s="15"><O t="S">验收负责人（签名）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="36" cs="12" rs="2" s="9"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGANALIS" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="38" rs="3" s="16"><O t="S">局生技部意见</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="38" cs="12" rs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="PRODTDEPTOPINION" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="40" cs="2" s="17"><O t="S">日期：</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="40" cs="3" s="18"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="PRODTDEPTTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="40" s="17"><O t="S">签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="40" cs="2" s="19"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="PRODTDEPTLABORNUM" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="41" rs="2" s="1"><O t="S">备注</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="41" cs="12" rs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REMARK" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="6" cs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.locations" columnName="DESCRIPTION" />
+</O><CellExpandAttr />
+</C>
+<C c="8" r="6" cs="3" s="1"><O t="S">缺陷单编号：</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="7" cs="3" s="20"><O t="S">名称及运行编号：</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="10" cs="3" s="4"><O t="S">设备型号</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="10" cs="5" s="4"><O t="S">设备生产厂家</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="11" cs="3" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="MODEL" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="11" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="MANUFACTURER" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="16" cs="2" s="5"><O t="S">汇报人(签名)：</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="24" cs="4" s="21"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIRDEPTTIME" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="24" cs="2" s="10"><O t="S">签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="25" cs="2" s="8"><O t="S">处理负责人(签名)：</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="31" cs="2" s="8"><O t="S">审批人（签名）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="31" s="15"><O t="S">所降等级：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="7" s="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="8" cs="5" s="23"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="9" cs="5" s="23"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="17" cs="4" s="24"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGTYPE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="17" cs="6" s="25"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="20" cs="5" s="24"><O t="S"></O><CellExpandAttr />
+</C>
+<C c="3" r="23" cs="2" s="26"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIRDEPTBUGTYPE" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="23" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="23" s="26"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="23" s="26"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="23" s="24"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="25" cs="3" s="24"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="31" s="28"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="DEGRADEBUGTYPE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="30" s="29"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="35" cs="3" s="28"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="CHECKDEPTLABORNUM" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="40" s="30"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="40" s="31"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="34" cs="7" s="23"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="7" rs="3" s="1"><O t="S">   缺陷设备   基本情况</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="36" s="13"><O t="S">缺陷总结分析</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="12" cs="12" rs="4" s="9"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="DESCRIPTION" dsDisplayName="inbasis.wobugeq" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="0"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="37" s="13"><O t="S">（技术原因 ）</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="20" cs="2" s="28"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="RUNDEPTBUGTYPE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="20" s="29"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="20" s="32"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="15" s="33"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="13" s="13"><O t="S">缺陷情况描述</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="14" s="34"><O t="S">（部位、内容）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="12" s="34"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="31" cs="2" s="35"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="30" s="29"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="30" cs="8" s="25"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="16" cs="2" s="26"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPORTLABORNUM" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="16" s="23"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="7" cs="2" s="22"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="RUNNUMBER" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="31" s="35"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="6" cs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGNUM" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="23" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="23" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="25" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="25" s="23"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="23" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="40"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="16" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="23" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="40"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="35" s="29"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="35" s="35"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="6" cs="2" s="36"><O t="S">位置/线路：</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="24" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIRDEPTLABORNUM" dsDisplayName="inbasis.wobugeq" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="25" s="27"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="24"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="24" s="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="31" cs="2" s="26"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="APPROVELABORNUM" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="31" s="35"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="0"><O t="S"></O><CellExpandAttr />
+</C>
+<C c="3" r="9" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="CLASSID" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="8" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.equpment" columnName="CLASSID" />
+</O><CellExpandAttr direction="2" />
+</C>
+</CellElementList>
+<WorkSheetAttr />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="50" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left color="-16777216"
+ /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</Report>

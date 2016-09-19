@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invusetrans.issuetype","invusetrans.transdate","invusetrans.actualdate","invusetrans.quantity","invusetrans.curbal","invusetrans.physcnt","invusetrans.unitcost","invusetrans.actualcost","invusetrans.linecost","invusetrans.ponum","invusetrans.polinenum","invusetrans.conversion","invusetrans.wonum","invusetrans.location","invusetrans.eqnum","invusetrans.enterby","invusetrans.memo","invusetrans.issuetolabor","invusetrans.packnum","invusetrans.binnum","invusetrans.lotnum","invusetrans.roteqnum","invusetrans.exchangerate","invusetrans.reqqty","invusetrans.invrectransid","invusetrans.issueid"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="物料事物处理"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid ><!-- 物料事物处理-->
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						发放类型:<!-- 发放类型 --><a:bind value="invusetrans.issuetype"/><itextbox id="invusetrans.issuetype"/>
+						交易日期:<!-- 交易日期 --><a:bind value="invusetrans.transdate"/><idatebox id="invusetrans.transdate"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						实际日期:<!-- 实际日期 --><a:bind value="invusetrans.actualdate"/><idatebox id="invusetrans.actualdate"/>
+						交易数量:<!-- 交易数量 --><a:bind value="invusetrans.quantity"/><idoublebox id="invusetrans.quantity" format="0.00"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						当前余量:<!-- 当前余量 --><a:bind value="invusetrans.curbal"/><idoublebox id="invusetrans.curbal" format="0.00"/>
+						实际盘点数量:<!-- 实际盘点数量 --><a:bind value="invusetrans.physcnt"/><idoublebox id="invusetrans.physcnt" format="0.00"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						单价:<!-- 单价 --><a:bind value="invusetrans.unitcost"/><idoublebox id="invusetrans.unitcost"/>
+						实际单价:<!-- 实际单价 --><a:bind value="invusetrans.actualcost"/><idoublebox id="invusetrans.actualcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						发放总价:<!-- 发放总价 --><a:bind value="invusetrans.linecost"/><idoublebox id="invusetrans.linecost"/>
+						采购单:<!-- 采购单 --><a:bind value="invusetrans.ponum"/><itextbox id="invusetrans.ponum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						采购单行:<!-- 采购单行 --><a:bind value="invusetrans.polinenum"/><ilongbox id="invusetrans.polinenum"/>
+						转换系数:<!-- 转换系数 --><a:bind value="invusetrans.conversion"/><idoublebox id="invusetrans.conversion"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<row>
+						工单:<!--工单  --><a:bind value="invusetrans.wonum"/><itextbox id="invusetrans.wonum"/>
+						记帐位置:<!-- 记帐位置 --><a:bind value="invusetrans.location"/><itextbox id="invusetrans.location"/>
+						</row>
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备编号:<!-- 设备编号 --><a:bind value="invusetrans.eqnum"/><itextbox id="invusetrans.eqnum"/>
+						录入人:<!-- 录入人 --><a:bind value="invusetrans.enterby"/><itextbox id="invusetrans.enterby"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						备忘:<!--  备忘--><a:bind value="invusetrans.memo"/><itextbox id="invusetrans.memo"/>
+						发至员工:<!-- 发至员工 --><a:bind value="invusetrans.issuetolabor"/><itextbox id="invusetrans.issuetolabor"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						装箱单编号:<!-- 装箱单编号： --><a:bind value="invusetrans.packnum"/><itextbox id="invusetrans.packnum"/>
+						箱柜编号:<!-- 箱柜编号： --><a:bind value="invusetrans.binnum"/><itextbox id="invusetrans.binnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						批次编号:<!-- 批次编号： --><a:bind value="invusetrans.lotnum"/><itextbox id="invusetrans.lotnum"/>
+						周转设备编号:<!-- 周转设备编号 --><a:bind value="invusetrans.roteqnum"/><itextbox id="invusetrans.roteqnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						汇率:<!--汇率： --><a:bind value="invusetrans.exchangerate"/><idoublebox id="invusetrans.exchangerate"/>
+						申请数量:<!-- 申请数量： --><a:bind value="invusetrans.reqqty"/><idoublebox id="invusetrans.reqqty" format="0.00"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						收据标识:<!-- 收据标识： --><a:bind value="invusetrans.invrectransid"/><ilongbox id="invusetrans.invrectransid"/>
+						退料情况:<!-- 退料情况：--><a:bind value="invusetrans.issueid"/><ilongbox id="invusetrans.issueid"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+
+</editwindow>

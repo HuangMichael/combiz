@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="故障代码" width="650" use="combiz.ui.common.lookup.LookupFailurecodeWindow">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			<tab label="列表" width="70px"/>
+			<tab label="按分类" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+					<groupbox id="searchBox">
+						<caption label="过滤器"/>
+						故障代码：<stextbox data="failurecode" cols="10" />
+						描述：<stextbox data="description" cols="10" />
+						<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+					</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				
+				<!-- //////////////////数据列表区///////////////////////// -->		
+					<pagenavigator/>
+					<lookuplist pageSize="20">
+						<listhead>
+							<lookuplistheader data="failurecode" label="故障代码" sort="auto" width="40%"/>
+							<lookuplistheader data="description" label="描述" sort="auto" width="60%"/>
+						</listhead>
+					</lookuplist>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+
+					<div align="center">
+					<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+					<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+					</div>
+			</tabpanel>
+			
+			<tabpanel>
+				<hbox spacing="0">
+					<groupbox><caption label="故障代码分类"/>
+						<tree use="combiz.ui.common.lookup.FindFailureOfClassTree" width="200"/>
+					</groupbox>
+					
+						<listwindow id="failureofclass" title="故障代码" searchable="false" autodata="false" tablename="failurecode" 
+						use="combiz.system.ui.CommonListWindow" edittype="LISTONLY" width="100%">
+						<tablelist band="failureofclass" pageSize="8">
+							<listhead>
+								<tablelistheader src="/images/img_listitem.gif"/>
+								<tablelistheader data="failurecode" label="故障代码" sort="auto" width="40%"/>
+								<tablelistheader data="description" label="描述" sort="auto" width="60%"/>
+							</listhead>
+						</tablelist>
+						</listwindow>
+				</hbox>
+						<div align="center">
+						<button label=" 确 定 " onClick="lookupWnd.failurecodeOfok(event)"/>
+						<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+						</div>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</lookupwindow>

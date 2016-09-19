@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="wfcompasgWnd" use="combiz.ui.common.WFCompAssignListWindow"
+ edittype="LISTONLY" searchable="false" actionlink="wfreturn:撤回工作流" orderby="startdate desc">
+<tablelist band="wfcompasgWnd" pageSize="8">
+	<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="assigncode" label="分配人" sort="auto" width="20%"/>
+			<tablelistheader data="description" label="描述" sort="auto" width="40%"/>
+			<tablelistheader data="app" label="应用程序" sort="auto" width="10%"/>
+			<tablelistheader data="assignstatus" label="任务状态" sort="auto" width="10%"/>
+			<tablelistheader data="startdate" label="启动时间" sort="auto" width="20%"/>
+	</listhead>
+	<!-- tablelistfoot/ -->
+</tablelist>
+</listwindow>

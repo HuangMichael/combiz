@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="工单" width="800"><!-- 工单 -->
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="haschildren='是'";
+lookupWnd.setQueryString(queryString);
+
+lookupWnd.setOrderby("");
+]]></zscript>
+
+<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器"/><!--过滤器  -->
+		工单:<!-- 工单： --><stextbox data="wonum"/>
+		描述:<!-- 描述： --><stextbox data="description"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="wonum" label="工单" sort="auto" width="20%"/><!-- 工单 -->
+			<lookuplistheader data="description" label="描述" sort="auto" width="30%"/><!-- 描述 -->
+			<lookuplistheader data="location" label="位置" sort="auto" width="15%"/><!-- 位置 -->
+			<lookuplistheader data="eqnum" label="设备" sort="auto" width="15%"/><!--设备  -->
+			<lookuplistheader data="equipment.description" label="设备名称" sort="auto" width="20%"/><!-- 设备名称 -->
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->	
+
+	<div align="center">
+	<button label="确 定" onClick="lookupWnd.ok(event)"/><!--  确 定  -->
+	<button label="取 消" onClick="lookupWnd.cancel(event)"/><!--  取 消  -->
+	</div>
+	
+</lookupwindow>

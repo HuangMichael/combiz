@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibslist" title="值列表" resize="true" use="combiz.ui.ibs.IbslistWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="值列表" width="70px"/>
+			<tab id="listusetab" label="何处使用" width="90px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						值列表：<stextbox data="listname"/>
+						描述：<stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="listname" label="值列表" sort="auto" width="30%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="50%"/>
+						<resultlistheader data="listtype" label="类型" sort="auto" width="20%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						值列表:<a:bind value="ibslist.listname"/><itextbox id="ibslist.listname"/>
+						描述：<a:bind value="ibslist.description"/><itextbox id="ibslist.description" cols="60"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						值列表类型：<a:bind value="ibslist.listtype"/><icombobox id="ibslist.listtype"/>
+						<label/><label/>		
+						</row>
+						<!-- //////////////////////row//////////////// -->
+				
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				
+				<separator spacing="5px"/>
+			<!-- ********************************** 值列表窗口 ********************************** -->
+				<tabbox width="100%">
+					<tabs>
+						<tab label="静态值列表"/>
+						<tab label="动态值列表"/>
+					</tabs>
+					<tabpanels>
+						<!-- //////////////////////静态值列表//////////////// -->
+						<tabpanel>
+						<listwindow id="ibslistvalueTable" title="静态值列表" orderby="orderby"
+						use="combiz.ui.ibs.IbslistvalueList" dialog="/ibs/ibslistvaluedialog.xul">
+							<tablelist band="ibslistvalueTable" pageSize="8">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="value" label="值" sort="auto" width="30%"/>
+									<tablelistheader data="valdesc" label="描述" sort="auto" width="50%"/>
+									<tablelistheader data="orderby" label="排序" sort="auto" width="10%"/>
+									<tablelistheader data="defaults" label="默认值" sort="auto" width="10%"/>
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel>
+						<!-- //////////////////////动态值列表//////////////// -->
+						<tabpanel>
+						<listwindow id="ibslisttableTable" title="动态值列表" use="combiz.ui.ibs.IbslisttableList" dialog="/ibs/ibslisttabledialog.xul">
+							<tablelist band="ibslisttableTable" pageSize="8">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="targetfield" label="目标字段" sort="auto" width="15%"/>
+									<tablelistheader data="tablename" label="目标表" sort="auto" width="15%" applink="ibstables"/>
+									<tablelistheader data="validwhere" label="效验" sort="auto" width="35%"/>
+									<tablelistheader data="listwhere" label="查找过滤" sort="auto" width="35%"/>
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						<separator spacing="6px"/>
+						*帮助*：不需要设置查找的字段的值拷贝关系，在上面的动态值列表中已经配置。
+						<listwindow id="ibslistcolmap" title="动态拷贝值配置" use="combiz.ui.ibs.IbslistcolmapList" dialog="/ibs/ibslistcolmapdialog.xul">
+							<tablelist band="ibslistcolmap" pageSize="8">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="lookupcol" label="写值字段" sort="auto" width="15%"/>
+									<tablelistheader data="tablename" label="目标表" sort="auto" width="15%" applink="ibstables"/>
+									<tablelistheader data="targetcol" label="目标字段" sort="auto" width="35%"/>
+									<tablelistheader data="nullfill" label="空值是否带入？" sort="auto" width="35%"/>
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel>
+						
+					</tabpanels>
+				</tabbox>
+			<!-- ********************************** //值列表窗口 ********************************** -->
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		<tabpanel>
+			<listwindow id="listuseTable" title="值列表使用" edittype="listonly">
+				<tablelist band="listuseTable" pageSize="8">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="colname" label="字段名" sort="auto" width="15%"/>
+						<tablelistheader data="tablename" label="表名" sort="auto" width="15%" applink="ibstables"/>
+						<tablelistheader data="title" label="标题" sort="auto" width="20%"/>
+						<tablelistheader data="dbtype" label="数据库层数据类型" sort="auto" width="20%"/>
+						<tablelistheader data="length" label="长度" sort="auto" width="15%"/>
+						<tablelistheader data="notnull" label="必需的" sort="auto" width="15%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+			</listwindow>
+		</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

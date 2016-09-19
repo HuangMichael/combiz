@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GBK"?>
+<commonlistwindow id="apptreesearchWnd" title="树组合查询配置" width="900" tablename="ibstreesearch" 
+use="combiz.ui.ibs.IbstreesearchList" dialog="/ibs/apptreesearchdialog.xul">
+	<tablelist band="apptreesearchWnd" pageSize="8">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="searchlist" label="搜索值列表" sort="auto" width="20%"/>
+			<tablelistheader data="description" label="描述" sort="auto" width="30%"/>
+			<tablelistheader data="listtype" label="值列表类型" sort="auto" width="20%"/>
+			<tablelistheader data="searchbandfld" label="搜索绑定字段" sort="auto" width="30%"/>
+			<tablelistheader data="islabor" label="人员值列表？" sort="auto" width="30%"/>
+			<tablelistheader data="isdepartment" label="部门值列表？" sort="auto" width="30%"/>
+		</listhead>
+	</tablelist>
+	<div align="center">
+	<button label="保存数据" onClick="apptreesearchWnd.save()"/>
+	<button label="关闭窗口" onClick="apptreesearchWnd.onClose()"/>
+	</div>		
+</commonlistwindow>

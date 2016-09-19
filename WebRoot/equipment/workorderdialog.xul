@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption llabel="工单"><!-- 工单 --><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						工单编号:<!-- 工单编号 --><a:bind value="workorder.wonum"/><itextbox id="locspec.classid"/>
+						 描述:<!-- 描述 --><a:bind value="workorder.description"/><itextbox id="workorder.description" cols="40"/>
+						</row>
+						<row>
+						状态:<!-- 状态 --><a:bind value="workorder.status"/><itextbox id="workorder.status"/>
+						状态时间:<!-- 状态时间 --><a:bind value="workorder.statusdate"/><idatebox id="workorder.statusdate"/>
+						</row>
+						<row>
+						位置:<!-- 位置 --><a:bind value="workorder.location"/><itextbox id="workorder.location"/>
+						设备:<!-- 设备 --><a:bind value="workorder.eqnum"/><itextbox id="workorder.eqnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口-->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

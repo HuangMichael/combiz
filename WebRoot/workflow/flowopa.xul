@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="wfaction" title="流程操作" resize="true" use="combiz.ui.workflow.WfactionlistWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="流程操作" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					<!-- 从这里开始修改搜索字段 -->
+					操作：<stextbox data="action"/>
+					类型：<scombobox data="actiontype"/>
+					操作值：<stextbox data="description"/>
+					
+					<!-- 修改搜索字段结束 -->
+					
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="action" label="操作" sort="auto" width="25%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="25%"/>
+						<resultlistheader data="actiontype" label="操作类型" sort="auto" width="25%"/>
+						<resultlistheader data="actionstring" label="操作值" sort="auto" width="25%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						操作：<a:bind value="wfactionlist.action"/><itextbox id="wfactionlist.action"/>
+						
+						描述：<a:bind value="wfactionlist.description"/><itextbox id="wfactionlist.description" cols="60"/>
+						</row>
+						<row spans="1,3">
+						绑定主表：<a:bind value="wfactionlist.tablename"/><ibandbox id="wfactionlist.tablename" lookup="ibstables"/>
+						</row>
+						<row spans="1,3">
+						操作类型：<a:bind value="wfactionlist.actiontype"/><icombobox id="wfactionlist.actiontype"/>
+						</row>
+						<row spans="1,3">
+						设置值字段：<a:bind value="wfactionlist.tablecol"/><ibandbox id="wfactionlist.tablecol" lookup="ibstablecols"/>
+						</row>
+						<row spans="1,3">
+						操作值：<a:bind value="wfactionlist.actionstring"/><ibandbox id="wfactionlist.actionstring" cols="80" lookup="ibslistvalue" checkdata="false"/>
+						<!--
+						状态值列表：<a:bind value="wfactionlist.statuslist"/><ibandbox id="wfactionlist.statuslist" lookup="ibslist"/>
+						-->
+						</row>
+						
+						<row spans="4">
+						<vbox>
+						<label value="操作类型说明："/>
+						<label value="更改状态：通过工作流程发送，自动将流程主表的状态字段设置成操作值。在操作值中填写要更改成的状态。"/>
+						<label value="自定义类：通过自定义类编写特殊的操作，如实现业务过程、数据效验、数据更新和删除等。操作值为全路径的类名。"/>
+						<label value="设置值1：设置流程主表中的指定字段的值为当前登录用户的labornum信息。操作值为空。"/>
+						<label value="设置值2：设置流程主表中的指定字段的值为当前操作时的日期时间。操作值为空。"/>
+						<label value="设置值3：设置流程主表中的指定字段的值为固定的字符串。字符串由操作值指定。"/>
+						<label value="设置值4：设置流程主表中的指定字段的值为固定的整数值。整数值由操作值指定。"/>
+						<label value="设置值5：设置流程主表中的指定字段的值为固定的小数值。小数值又操作值指定。"/>
+						</vbox>
+						</row>
+					
+						
+						
+					</rows>
+				</grid>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

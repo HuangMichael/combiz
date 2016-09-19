@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"wptool.jpnum","wptool.linecost"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 工具 -->
+ <groupbox><caption label="工具"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						任务编号<!-- 任务编号 -->:<a:bind value="wptool.tasknum"/><itextbox id="wptool.tasknum" />
+						工具数量<!-- 工具数量 -->：<a:bind value="wptool.toolqty"/><ilongbox id="wptool.toolqty"/>
+						<!-- 作业包编号:<a:bind value="wptool.jpnum"/><itextbox id="wptool.jpnum" /> -->
+						</row>
+						
+						<row>
+						工具编号<!-- 工具编号 -->:<a:bind value="wptool.toolnum"/><ibandbox id="wptool.toolnum" lookup="toolnum" />
+						描述<!-- 描述 -->：<a:bind value="tool.description"/><itextbox id="tool.description" cols="40" />
+						</row>
+						
+						<row>						
+						工具工时<!-- 工具工时 -->：<a:bind value="wptool.toolhrs"/><idoublebox id="wptool.toolhrs"/>
+						费率<!-- 费率 -->：<a:bind value="wptool.rate"/><idoublebox id="wptool.rate" />
+						</row>
+						<row>						
+						行总价<!-- 行总价 -->:<a:bind value="wptool.linecost"/><idoublebox id="wptool.linecost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

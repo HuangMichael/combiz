@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="供应商历史"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid ><!-- 供应商历史 -->
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						供应商:<!-- 供应商 --><a:bind value="invvendor.vendor"/><ibandbox id="invvendor.vendor" lookup="companies"/>
+						制造商:<!-- 制造商 --><a:bind value="invvendor.manufacturer"/><ibandbox id="inventory.manufacturer" lookup="companies2"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						供应商型号:<!-- 供应商型号 --><a:bind value="invvendor.modelnum"/><itextbox id="invvendor.modelnum"/>
+						税代码:<!-- 税代码 --><a:bind value="invvendor.taxcode"/><itextbox id="invvendor.taxcode"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						投标价格:<!-- 投标价格 --><a:bind value="invvendor.bidprice"/><idoublebox id="invvendor.bidprice"/>
+						投标日期:<!-- 投标日期 --><a:bind value="invvendor.biddate"/><idatebox id="invvendor.biddate"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						交货时间:<!--  交货时间--><a:bind value="invvendor.promtime"/><ilongbox id="invvendor.promtime"/>
+						上次采购价格:<!--  上次采购价格--><a:bind value="invvendor.lastcost"/><idoublebox id="invvendor.lastcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						上次采购:<!-- 上次采购 --><a:bind value="invvendor.lastdate"/><idatebox id="invvendor.lastdate"/>
+						定购单位:<!-- 定购单位 --><a:bind value="invvendor.orderunit"/><ibandbox id="invvendor.orderunit" lookup="measurement"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<row spans="1,3">
+						默认记录:<!-- 默认记录--><a:bind value="invvendor.isdefault"/><icheckbox id="invvendor.isdefault"/>
+						</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+
+</editwindow>

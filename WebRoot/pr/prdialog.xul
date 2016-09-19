@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly =
+		{"prline.prlinenum","prline.description","prline.stocktype","prline.polinenum","prline.ponum",
+		"prline.polinenum","prline.rfqnum","prline.rfqlinenum","prline.inspection","prline.linecost"
+		,"prline.enterdate","prline.enterby","pr.budnum","pr.buditem"};
+
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="采购申请行"><!-- 采购申请行 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<groupbox>
+			<caption label="行项目"></caption><!-- 行项目 -->
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						行<!-- 行 -->:
+						<a:bind value="prline.prlinenum" />
+						<ilongbox id="prline.prlinenum" />
+						库存项目<!-- 库存项目 -->:
+						<a:bind value="prline.itemnum" />
+						<ibandbox id="prline.itemnum" lookup="item" applink="item" />
+						描述<!-- 描述 -->:
+						<a:bind value="prline.description" />
+						<itextbox id="prline.description" cols="50" />
+					</row>
+					<row>
+						预算号:
+						<a:bind value="prline.budnum" />
+						<ibandbox id="prline.budnum" lookup= 'budnum'/>
+								
+						预算项目:
+						<a:bind value="prline.buditem" />
+						<ibandbox id="prline.buditem" lookup='budgetitem'/>
+					</row>
+					<row spans="1,1,1,1,1,4">
+						仓库<!-- 仓库 -->:
+						<a:bind value="prline.warehouse" />
+						<ibandbox id="prline.warehouse"
+							lookup="warehouse" />
+						型号<!-- 型号 -->:
+						<a:bind value="prline.modelnum" />
+						<itextbox id="prline.modelnum" />
+						备注<!-- 备注 -->:
+						<a:bind value="prline.remark" />
+						<itextbox id="prline.remark" cols="50" />
+					</row>
+					
+					<!-- 
+					制造商:
+						<a:bind value="prline.manufacturer" />
+						<ibandbox id="prline.manufacturer"
+							lookup="companies" />
+					
+					 -->
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="数量和成本"></caption><!-- 数量和成本 -->
+			<grid>
+				<rows>
+					<row>
+						订购数量<!-- 订购数量 -->:
+						<a:bind value="prline.orderqty" />
+						<idoublebox id="prline.orderqty" />
+						订购单位<!-- 订购单位 -->:
+						<a:bind value="prline.orderunit" />
+						<ibandbox id="prline.orderunit"
+							lookup="measurement" />
+						单价<!-- 单价 -->:
+						<a:bind value="prline.unitcost" />
+						<idoublebox id="prline.unitcost" format="0.00" />
+						行总价<!-- 行总价 -->:
+						<a:bind value="prline.linecost" />
+						<idoublebox id="prline.linecost" format="0.00"  cols="20"/>
+					</row>
+					<!-- 			<row>
+						转换系数:
+						<a:bind value="prline.conversion" />
+						<idoublebox id="prline.conversion" />
+						库存类型:
+						<a:bind value="prline.stocktype" />
+						<itextbox id="prline.stocktype" cols="10" />
+						
+						</row>
+					-->
+
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="其他相关信息"></caption><!-- 其他相关信息 -->
+			<grid>
+				<rows>
+					<row>
+						采购单<!-- 采购单 -->:
+						<a:bind value="prline.ponum" />
+						<itextbox id="prline.ponum" />
+						采购单行<!-- 采购单行 -->:
+						<a:bind value="prline.polinenum" />
+						<ilongbox id="prline.polinenum" />
+						要求日期<!-- 要求日期 -->:
+						<a:bind value="prline.reqdeliverydate" />
+						<idatebox id="prline.reqdeliverydate" />
+
+					</row>
+					<row>
+						询价单<!-- 询价单 -->:
+						<a:bind value="prline.rfqnum" />
+						<itextbox id="prline.rfqnum" />
+						询价单行<!-- 询价单行 -->:
+						<a:bind value="prline.rfqlinenum" />
+						<ilongbox id="prline.rfqlinenum" />
+						供应商交付日期<!-- 供应商交付日期 -->:
+						<a:bind value="prline.vendeliverydate" />
+						<idatebox id="prline.vendeliverydate" />
+
+
+					</row>
+					<row>
+						服务<!-- 服务 -->:
+						<a:bind value="prline.isservice" />
+						<icheckbox id="prline.isservice" />
+						分摊服务<!-- 分摊服务 -->:
+						<a:bind value="prline.prorateservice" />
+						<icheckbox id="prline.prorateservice"/>
+						申请人<!-- 申请人 -->:
+						<a:bind value="prline.requestedby" />
+						<ibandbox id="prline.requestedby"
+							lookup="labor" />
+
+					</row>
+					<row>
+						工单编号<!-- 工单编号 -->:
+						<a:bind value="prline.wonum" />
+						<ibandbox id="prline.wonum" lookup="wonum" />
+						设备<!-- 设备 -->:
+						<a:bind value="prline.eqnum" />
+						<ibandbox id="prline.eqnum" lookup="equipment" />
+						记帐位置<!-- 记帐位置 -->:
+						<a:bind value="prline.location" />
+						<ibandbox id="prline.location"
+							lookup="location" />
+
+						<!-- 	任务编号:
+							<a:bind value="prline.tasknum" />
+							<ibandbox id="prline.tasknum" checkdata="false"
+							lookup="" />
+						-->
+					</row>
+					<row>
+						需要检查<!-- 需要检查 -->:
+						<a:bind value="prline.inspection" />
+						<icheckbox id="prline.inspection"/>
+						载入的成本<!-- 载入的成本 -->:
+						<a:bind value="prline.loadedcost" />
+						<idoublebox id="prline.loadedcost" />
+						录入人<!-- 录入人 -->:
+						<a:bind value="prline.enterby" />
+						<ibandbox id="prline.enterby" lookup="labor" />
+					</row>
+					<row spans="1,3">
+						录入日期<!-- 录入日期 -->:
+						<a:bind value="prline.enterdate" />
+						<idatebox id="prline.enterdate" />
+					</row>
+
+					<!-- //////////////////////row//////////////// -->
+					<row spans="6,,,,," align="right" height="30">
+						<button label="关闭编辑窗口"
+							onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</groupbox>
+</editwindow>

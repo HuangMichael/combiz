@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="查询"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						查询名称：<a:bind value="ibsquery.queryname"/><itextbox id="ibsquery.queryname"/>
+						描述：<a:bind value="ibsquery.description"/><itextbox id="ibsquery.description" cols="35"/>										
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						查询条件：<a:bind value="ibsquery.querystring"/><itextbox id="ibsquery.querystring" cols="65" rows="4"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						是否默认？：<a:bind value="ibsquery.isdefault"/><icheckbox id="ibsquery.isdefault"/>
+						是否公用？：<a:bind value="ibsquery.ispublic"/><icheckbox id="ibsquery.ispublic"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

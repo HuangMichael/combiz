@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="GBK"?>
+<?taglib uri="/WEB-INF/lib/core.dsp.tld" prefix="c"?>
+<window title="工单成本" use="combiz.system.ui.CommonDialog" xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="500">
+	<groupbox>
+	 <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"workorder.estmatcost","workorder.actmatcost","workorder.esttoolcost","workorder.acttoolcost","workorder.estlabcost","workorder.actlabcost"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					预算物料费:
+					<a:bind value="workorder.estmatcost" />
+					<idoublebox id="workorder.estmatcost" format="0.00" />
+					实际物料费:
+					<a:bind value="workorder.actmatcost" />
+					<idoublebox id="workorder.actmatcost" format="0.00" />
+				</row>
+
+				<row>
+					预算工具费:
+					<a:bind value="workorder.esttoolcost" />
+					<idoublebox id="workorder.esttoolcost" format="0.00" />
+					实际工具费:
+					<a:bind value="workorder.acttoolcost" />
+					<idoublebox id="workorder.acttoolcost" format="0.00" />
+				</row>
+
+				<row>
+					预算人工费:
+					<a:bind value="workorder.estlabcost" />
+					<idoublebox id="workorder.estlabcost" format="0.00" />
+					实际人工费:
+					<a:bind value="workorder.actlabcost" />
+					<idoublebox id="workorder.actlabcost" format="0.00" />
+				</row>
+
+				<!-- //////////////////////row//////////////// -->
+				<row spans="6,,,,," align="right" height="10">
+					<button label="关闭编辑窗口"
+						onClick="mainWnd.cancel()" /><!-- 关闭编辑窗口 -->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+</window>

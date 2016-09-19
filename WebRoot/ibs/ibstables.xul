@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibstables" title="数据字典" resize="true" use="combiz.ui.ibs.IbstablesWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="数据字典" width="80px"/>
+			<tab id="indextab" label="索引管理" width="80px"/>
+			<tab id="ibsrelationtab" label="关联关系" width="80px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("changed,tablename");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar" searchpage="/ibs/ibstables_search.xul"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						表：<stextbox data="tablename" cols="15"/>
+						描述：<stextbox data="description" cols="15"/>
+						映射类：<stextbox data="classname" cols="15"/>
+						<button label="更多字段搜索" onClick="mainWnd.screenSearch(&quot;/ibs/ibstables_search.xul&quot;)"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表   -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="changed" label="锁" sort="auto" width="2%" preclass="combiz.ui.ibs.PreTblChanged"/>
+						<resultlistheader data="tablename" label="数据字典" sort="auto" width="20%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="25%"/>
+						<resultlistheader data="authlevel" label="授权级别" sort="auto" width="5%" style="color:red"/>
+						<resultlistheader data="servicename" label="业务对象" sort="auto" width="18%"/>
+						<resultlistheader data="classname" label="映射类" sort="auto" width="30%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstables.changed"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						
+						<row>
+						数据字典:<a:bind value="ibstables.tablename"/><itextbox id="ibstables.tablename"/>
+						描述：<a:bind value="ibstables.description"/><itextbox id="ibstables.description" cols="40"/>
+						
+						</row>
+						
+						<row>
+						授权级别：<a:bind value="ibstables.authlevel"/><icombobox id="ibstables.authlevel"/>
+						系统表？:<a:bind value="ibstables.issystem"/><icheckbox id="ibstables.issystem"/>
+						</row>
+						
+						
+						<row>
+						业务对象：<a:bind value="ibstables.servicename"/><itextbox id="ibstables.servicename" cols="40"/>
+						<!--
+						修改类型:<a:bind value="ibstables.changed"/><itextbox id="ibstables.changed" cols="2"/>
+						-->
+						主键ID值：<a:bind value="ibsidgen.idvalue"/><itextbox id="ibsidgen.idvalue" cols="10"/>
+						</row>
+						
+						<row>
+						映射类:<a:bind value="ibstables.classname"/><itextbox id="ibstables.classname" cols="40"/>
+						记录日志？:<a:bind value="ibstables.logenable"/><icheckbox id="ibstables.logenable"/>
+						</row>
+						<row spans="5,1">
+						写类的全路径；类名必须和表名保持一直，并且首字符大写，其他字符小写如:Ibstables
+						</row>
+						
+						
+					</rows>
+				</grid>
+
+				<listwindow id="ibstablecolsTable" title="数据字段信息" orderby="changed,colno"
+				use="combiz.ui.ibs.IbstablecolsList" dialog="/ibs/ibstablecolsdialog.xul">
+				<tablelist band="ibstablecolsTable" pageSize="10">		
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="changed" label="锁" sort="auto" width="2%" preclass="combiz.ui.ibs.PreColChanged"/>
+						<tablelistheader data="colname" label="字段名称" sort="auto" width="20%"/>
+						<tablelistheader data="title" label="字段标题" sort="auto" width="40%"/>
+						<tablelistheader data="dbtype" label="数据类型" sort="auto" width="8%"/>
+						<tablelistheader data="length" label="长度" sort="auto" width="5%" input="longbox"/>
+						<tablelistheader data="scale" label="小数" sort="auto" width="3%"/>
+						<tablelistheader data="notnull" label="不为空" sort="auto" width="5%"/>
+						<tablelistheader data="listname" label="值列表" sort="auto" width="10%" applink="ibslist"/>
+						<tablelistheader data="isvirtual" label="虚拟？" sort="auto" width="4%"/>
+						<tablelistheader data="primarykeyseq" label="主键" sort="auto" width="3%" input="longbox"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+<!-- ********************************** 索引管理数据窗口 ********************************** -->
+			<tabpanel>
+			<grid>
+			<rows>
+				<row>
+				数据字典:<a:bind value="ibstables.tablename"/><textbox/>
+				描述：<a:bind value="ibstables.description"/><textbox cols="40"/>
+				</row>
+				</rows>
+			</grid>
+			<!--
+			<button label="创建当前表的索引" onClick="mainWnd.createpk()"/><button label="创建所有表的索引" onClick="mainWnd.createallpk()"/>		
+			-->
+			<listwindow id="ibstabindex" title="表的索引管理" use="combiz.ui.ibs.IbstabindexList" dialog="/ibs/ibstabindexdialog.xul">
+				<tablelist band="ibstabindex" pageSize="10">				
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="idxname" label="索引" sort="auto" width="40%"/>
+						<tablelistheader data="description" label="索引描述" sort="auto" width="40%"/>
+						<tablelistheader data="isunique" label="唯一性？" sort="auto" width="10%"/>
+						<tablelistheader data="changed" label="修改标识" sort="auto" width="10%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+			</listwindow>
+			<listwindow id="ibstabindexkey" title="索引的键值" parentWnd="ibstabindex" use="combiz.ui.ibs.IbstabindexkeyList" dialog="/ibs/ibstabindexkeydialog.xul">
+				<tablelist band="ibstabindexkey" pageSize="10">				
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="colname" label="列名" sort="auto" width="30%"/>
+						<tablelistheader data="ibstablecols.title" label="列名称" sort="auto" width="40%"/>
+						<tablelistheader data="orderby" label="排序方式" sort="auto" width="10%"/>
+						<tablelistheader data="colseq" label="字段序号" sort="auto" width="10%"/>
+						<tablelistheader data="changed" label="修改标识" sort="auto" width="10%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+			</listwindow>
+			</tabpanel>
+<!-- ********************************** 索引管理数据窗口 ********************************** -->
+
+<!-- ********************************** 关联关系数据窗口 ********************************** -->
+			<tabpanel>
+			<grid>
+			<rows>
+				<row>
+				数据字典:<a:bind value="ibstables.tablename"/><textbox/>
+				描述：<a:bind value="ibstables.description"/><textbox cols="40"/>
+				</row>
+			</rows>
+			</grid>
+			<separator spacing="5px"/>
+			<tabbox width="100%">
+			<tabs>
+				<tab label="子表结果集" width="120px"/>
+				<tab label="外联数据关系" width="120px"/>
+			</tabs>
+			<tabpanels width="100%">
+				<tabpanel>
+				<listwindow id="ibsrelationTable" title="子表结果集关系" dialog="/ibs/ibsrelationchilddialog.xul">
+					<defaultvalue band="ibsrelationTable" value="parent={tablename};reltype=一对多;updelete=否"/>
+					<tablelist band="ibsrelationTable" pageSize="10">				
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="relname" label="关系名" sort="auto" width="20%"/>
+							<tablelistheader data="reltype" label="关系类型" sort="auto" width="20%"/>
+							<tablelistheader data="child" label="子表" sort="auto" width="20%"/>
+							<tablelistheader data="updelete" label="删除" sort="auto" width="10%"/>
+							<tablelistheader data="remark" label="说明" sort="auto" width="30%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+				<tabpanel>
+				<listwindow id="ibsrelationjoin" title="外联数据关系" dialog="/ibs/ibsrelationdialog.xul">
+					<defaultvalue band="ibsrelationjoin" value="parent={tablename};reltype=一对一;updelete=否"/>
+					<tablelist band="ibsrelationjoin" pageSize="10">				
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="relname" label="关系名" sort="auto" width="30%"/>
+							<tablelistheader data="reltype" label="关系类型" sort="auto" width="20%"/>
+							<tablelistheader data="child" label="子表" sort="auto" width="20%"/>
+							<tablelistheader data="remark" label="说明" sort="auto" width="30%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+			</tabpanels>
+			</tabbox>
+				
+		</tabpanel>
+<!-- ********************************** 关联关系数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

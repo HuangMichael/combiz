@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="备件使用"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!--  -->
+				<grid ><!--  -->
+					<rows>
+						<row>
+						使用的设备:<!--  --><a:bind value="eqsparepart.eqnum"/><ibandbox id="eqsparepart.eqnum" lookup="equipment"/>
+						设备描述:<!--  --><a:bind value="equipment.description"/><itextbox id="equipment.description" cols="60"/>
+						</row>
+						<row>
+						设备安装日期:<!--  --><a:bind value="equipment.installdate"/><itextbox id="equipment.installdate"/>
+						设备所属部门:<!--  --><a:bind value="equipment.deptnum"/><itextbox id="equipment.deptnum"/>
+						</row>
+						
+						<row>
+						备件数量:<!--  --><a:bind value="eqsparepart.quantity"/><idoublebox id="eqsparepart.quantity"/>
+						</row>
+
+						<row spans="4" align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!--  -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+
+</editwindow>

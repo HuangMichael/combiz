@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="调整物料余量" use="combiz.ui.inventory.AdjInvstockDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"invtrans.quantity"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invtrans.itemnum","invtrans.curbal","invtrans.warehouse","invtrans.oldcost","invtrans.physcnt"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						库存项目：<a:bind value="invtrans.itemnum"/><itextbox id="invtrans.itemnum"/>
+						描述：<a:bind value="itemnum.description"/><itextbox id="itemnum.description" cols="40"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						仓库：<a:bind value="invtrans.warehouse"/><ibandbox id="invtrans.warehouse" lookup="warehouse"/>
+						箱柜号：<a:bind value="invtrans.binnum"/><ibandbox id="invtrans.binnum" lookup="binnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						平均成本：<a:bind value="invtrans.oldcost"/><idoublebox id="invtrans.oldcost"/>
+						物理盘点：<a:bind value="invtrans.physcnt"/><idoublebox id="invtrans.physcnt"/>
+						</row>
+						<row>
+						当前余量：<a:bind value="invtrans.curbal"/><idoublebox id="invtrans.curbal" format="0.00"/>
+						调整后数量：<a:bind value="invtrans.quantity"/><idoublebox id="invtrans.quantity" format="0.00"/>
+						</row>
+						</rows>
+						<!-- //////////////////////row//////////////// -->
+				</grid>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.curbalnum();mainWnd.save();mainWnd.cancel()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

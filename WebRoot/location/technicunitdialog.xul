@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ 
+ </zscript>
+ <groupbox><caption label="添加计量单位"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						计量单位：<a:bind value="measureunit.measureunitid"/><itextbox id="measureunit.measureunitid"/>
+						描述：<a:bind value="measureunit.description"/><itextbox id="measureunit.description"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>
+</editwindow>

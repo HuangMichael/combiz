@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="RunningLog">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="s_starttime" type="0" pop="true" />
+<O t="S">2008-1-1 1:1:1</O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="e_endtime" type="0" pop="true" />
+<O t="S">2008-12-13</O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from RunningLog where recorddate between '[?s_starttime|2008-1-1 1:1:1?]' and '[?e_endtime|2008-12-13?]' order by orderby]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<PaperSize width="16.535984251968504" height="11.693" />
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,32.0,19.0,19.0,30.0,19.0,6.0,19.0,30.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[17.0,62.0,59.0,54.0,57.0,53.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<SpreadSheetAttributes startRepeatColumn="1" endRepeatColumn="1" />
+<CellElementList>
+<C c="1" r="0"><O t="S"></O><Expand dir="1" />
+</C>
+<C c="3" r="0"><O t="S"></O></C>
+<C c="4" r="0"><O t="S"></O></C>
+<C c="1" r="1"><O t="S"></O></C>
+<C c="2" r="1" cs="4" s="0"><O t="S">吉林长岭王子风电场一期工程机组运行记录</O></C>
+<C c="2" r="2" cs="4" s="1"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="RECORDDATE" />
+</O><Expand dir="1" />
+</C>
+<C c="1" r="3" s="2"><O t="S">时间</O></C>
+<C c="2" r="3" cs="4" s="3"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="CURRENTTIME" />
+</O><HighlightList><Highlight class="com.fr.report.highlight.DefaultHighlight"><Condition class="com.fr.data.condition.ObjectCondition">
+<Condition op="0">
+<O t="NULL" /></Condition>
+</Condition>
+<HighlightAction class="com.fr.report.highlight.ForegroundHighlightAction">
+<Foreground color="-65536" /></HighlightAction>
+<HighlightAction class="com.fr.report.highlight.ValueHighlightAction">
+<O t="S">当前日期段内没有运行记录数据！</O></HighlightAction>
+</Highlight></HighlightList><Expand dir="1" />
+</C>
+<C c="1" r="4" s="4"><O t="S">机组编号</O></C>
+<C c="2" r="4" s="5"><O t="S">瞬时风速</O></C>
+<C c="3" r="4" s="5"><O t="S">平均风速</O></C>
+<C c="4" r="4" s="5"><O t="S">瞬时功率(Kw)</O></C>
+<C c="5" r="4" s="6"><O t="S">气温 (℃)</O></C>
+<C c="1" r="5" s="4"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="NAME" />
+</O><HighlightList><Highlight class="com.fr.report.highlight.DefaultHighlight"><Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[=(ROW()-5)%8==0]]>
+</Formula>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[=(ROW())<30]]>
+</Formula>
+</Condition>
+</JoinCondition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="1">
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[=(ROW())==38]]>
+</Formula>
+</Condition>
+</JoinCondition>
+</Condition>
+<HighlightAction class="com.fr.report.highlight.BackgroundHighlightAction">
+<Background name="ImageBackground"
+ specifiedImageWidth="-1.0"
+ specifiedImageHeight="-1.0"
+ layout="2">
+<Image width="55" height="15">
+<![CDATA[mDAr6!!!E/+T%N!4ZmPf!!'en8S0%~
+
+]]>
+</Image>
+</Background>
+<Scope val="1" /></HighlightAction>
+</Highlight></HighlightList><Expand dir="0" />
+</C>
+<C c="2" r="5" s="5"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="INSSPEED" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="5" s="5"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="AVGSPEED" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="5" s="5"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="INSPOWER" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="5" s="6"><O t="DSColumn"><Attributes dsName="RunningLog" columnName="TEMPERATURE" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="6" cs="5" s="7"><O t="S"></O><Expand leftParentDefault="false" upParentDefault="false" />
+</C>
+<C c="2" r="7" cs="4" s="8"><O t="S"></O><Expand dir="0" />
+</C>
+<C c="2" r="8" cs="4" s="9"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[="第"+$$page_number+"页"+"   共"+$$totalPage_number+"页"]]>
+</Attributes>
+</O></C>
+<C c="1" r="10" cs="5"><O t="S"></O></C>
+</CellElementList>
+<WorkSheetAttr columnsToCopy="2" sc="1" maxRowOrColumn="25" />
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="16" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4">
+<Format class="java.text.SimpleDateFormat"><![CDATA[记录人：　　　　　日期：yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="2" /><Bottom style="1" /><Left style="2" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="2" /><Bottom style="1" /><Left style="1" /><Right style="2" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="2" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="2" /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="2" /></Border>
+</Style>
+<Style horizontal_alignment="4" rightIndent="50">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+</StyleList>
+</WorkBook>

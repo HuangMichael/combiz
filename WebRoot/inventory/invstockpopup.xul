@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="调整库存箱柜" use="combiz.ui.inventory.AdjInvstockDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"invrectrans.tobin"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invrectrans.itemnum","invrectrans.fromlot","invrectrans.description","invrectrans.fromwarehouse","invrectrans.curbal"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						库存项目：<a:bind value="invrectrans.itemnum"/><itextbox id="invrectrans.itemnum"/>
+						描述：<a:bind value="invrectrans.description"/><itextbox id="invrectrans.description" cols="40"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						原仓库：<a:bind value="invrectrans.fromwarehouse"/><itextbox id="invrectrans.fromwarehouse"/>
+						原箱柜号：<a:bind value="invrectrans.frombin"/><ibandbox id="invrectrans.frombin" lookup="binnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						目标仓库：<a:bind value="invrectrans.towarehouse"/><ibandbox id="invrectrans.towarehouse" lookup="warehouse"/>
+						目标箱柜：<a:bind value="invrectrans.tobin"/><ibandbox id="invrectrans.tobin" lookup="binnum" checkdata="false"/>
+						</row>
+						<row>
+						余量：<a:bind value="invrectrans.curbal"/><idoublebox id="invrectrans.curbal" format="0.00"/>
+						转移数量：<a:bind value="invrectrans.quantity"/><idoublebox id="invrectrans.quantity" format="0.00"/>
+						</row>
+						<row>
+						批次号：<a:bind value="invrectrans.fromlot"/><itextbox id="invrectrans.fromlot"/>
+						</row>
+						</rows>
+						<!-- //////////////////////row//////////////// -->
+				</grid>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.adjustbinnum();mainWnd.save();mainWnd.onClose()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="库存项目" width="650">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="classid in (select c.classid from Classification c where c.classtype = '资产')";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			<tab label="列表" width="70px"/>
+			<tab label="物资分类" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+					<groupbox id="searchBox">
+						<caption label="过滤器"/>
+							物资编码：<stextbox data="itemnum" cols="10"/>
+							描述：<stextbox data="description" cols="15"/>
+							规格型号：<stextbox data="modelnum" cols="20"/>
+						<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+					</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				
+				<!-- //////////////////数据列表区///////////////////////// -->		
+					<pagenavigator/>
+					<lookuplist pageSize="20">
+						<listhead>
+							<lookuplistheader data="itemnum" label="物资编码" sort="auto" width="15%"/>
+							<lookuplistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+							<lookuplistheader data="description" label="描述" sort="auto" width="25%"/>
+							<lookuplistheader data="modelnum" label="规格型号" sort="auto" width="50%"/>
+							<lookuplistheader data="rotating" label="周转件" sort="auto" width="10%"/>
+						</listhead>
+					</lookuplist>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+
+					<div align="center">
+					<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+					<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+					</div>
+			</tabpanel>
+			
+			<tabpanel>
+				<hbox spacing="0">
+					<groupbox><caption label="资产分类"/>
+						<tree use="combiz.ui.common.lookup.FindclassOfequipTree" width="200"/>
+					</groupbox>
+					
+						<listwindow id="classificationofitem" title="库存项目" searchable="false" autodata="false" tablename="item" 
+						use="combiz.system.ui.CommonListWindow" edittype="LISTONLY" width="100%">
+						<tablelist band="classificationofitem" pageSize="8">
+							<listhead>
+								<tablelistheader src="/images/img_listitem.gif"/>
+								<tablelistheader data="itemnum" label="物资编码" sort="auto" width="20%"/>
+								<tablelistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+								<tablelistheader data="description" label="描述" sort="auto" width="35%"/>
+								<tablelistheader data="modelnum" label="规格型号" sort="auto" width="45%"/>
+								<!-- 
+								<tablelistheader data="rotating" label="周转件" sort="auto" width="20%"/>
+								 -->
+							</listhead>
+						</tablelist>
+						</listwindow>
+				</hbox>
+						<div align="center">
+						<button label=" 确 定 " onClick="lookupWnd.classOfok(event)"/>
+						<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+						</div>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</lookupwindow>

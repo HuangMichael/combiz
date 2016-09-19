@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="posercont" title="服务采购合同" resize="true" wfenabled="true"
+	use="combiz.ui.po.PosercontWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="服务采购" width="70px" />
+		
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="potype='服务采购'";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("ponum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<!-- 从这里开始修改搜索字段 -->
+						采购执行：
+						<stextbox data="ponum" cols="10" />
+						描述:
+						<stextbox data="description" cols="20" />
+						供应商:
+						<sbandbox data="vendor" lookup="companies" />
+
+						<!-- 修改搜索字段结束 -->
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="ponum" label="采购执行"
+							sort="auto" width="10%" />
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="35%" />
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="10%" />
+						<resultlistheader data="statusdate" label="状态日期"
+							sort="auto" width="10%" />
+						<resultlistheader data="vendor" label="供应商"
+							sort="auto" width="30%" />
+						<resultlistheader data="TOTALCOST" label="合同总价(元)"
+							sort="auto" width="5%" />
+
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 操作票 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"po.vendor","po.totalcost"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"po.contact","po.ponum","po.receipts","po.statusdate","po.status","po.receipts","po.statusdate","po.changeby","po.changedate"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<groupbox>
+					<caption label="采购执行" />
+					<grid>
+						<rows>
+							<row>
+								采购执行:
+								<a:bind value="po.ponum" />
+								<itextbox id="po.ponum" cols="15" />
+								描述:
+								<a:bind value="po.description" />
+								<itextbox id="po.description" cols="40" />
+							</row>
+							<row>
+								流程状态:
+								<a:bind value="po.status" />
+								<itextbox id="po.status"/>
+								合同总价(元):
+								<a:bind value="po.totalcost" />
+								<idoublebox id="po.totalcost" format="0.00"/>
+							</row>
+							<row>
+								状态日期:
+								<a:bind value="po.statusdate" />
+								<idatebox id="po.statusdate" cols="15"/>
+								订购日期:
+								<a:bind value="po.orderdate" />
+								<idatebox id="po.orderdate" />
+							</row>
+							<row>
+								联系人:
+								<a:bind value="po.contact" />
+								<ibandbox id="po.contact"
+									lookup="labor" cols="15"/>
+								更改人:
+								<a:bind value="po.changeby" />
+								<ibandbox id="po.changeby"
+									lookup="labor" />
+							</row>
+							
+							<row>
+								供应商:
+								<a:bind value="po.vendor" />
+								<ibandbox id="po.vendor" lookup="companies" cols="15"/>
+								描述:
+								<a:bind value="companies.description" />
+								<itextbox id="companies.description" cols="40" />
+							</row>
+							
+							<!-- <row>
+								关联通知单:
+								<a:bind value="po.notifynum" />
+								<ibandbox id="po.notifynum" lookup="ponotifynum" cols="20"/>
+								主送领导:
+								<a:bind value="po.supervisor" />
+								<ibandbox id="po.supervisor"
+									lookup="mainlabor"/> 
+							</row>-->
+							<row spans="1,2,1">
+							确定供应商原因:
+							<a:bind value="po.poreason" />
+							<itextbox id="po.poreason" rows="5"
+								width="98%" inputTip="请输入确定供应商的原因" /> 
+							<attachment />
+						    </row>
+						</rows>
+						</grid>
+					</groupbox>
+				<listwindow id="poserdetail" title="服务采购结算明细" use="combiz.ui.po.PoservicedetailList" dialog="/po/poserdetaildialog.xul">
+				<tablelist band="poserdetail" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="labor" label="人员" sort="auto" width="20%"/>
+						<tablelistheader data="tecmoney" label="技术服务费单价" sort="auto" width="25%"/>
+						<tablelistheader data="realworktime" label="实际工作时间" sort="auto" width="25%"/>
+						<tablelistheader data="timeunit" label="单位" sort="auto" width="10%"/>
+						<tablelistheader data="totalmoney" label="费用结算金额(元)" sort="auto" width="20%" format="0.00"/>
+						
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

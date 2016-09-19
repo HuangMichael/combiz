@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="个人信息" use="combiz.system.ui.CommonDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="850">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"labor.labornum","labor.deptnum","labor.craft","labor.employeetype","labor.payrate","labor.enabled","labor.corpnum","labor.sitenum"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+ <hbox>
+ <groupbox><caption label="基本信息" />
+				<grid>
+					<rows>
+						<row>
+						人员：<a:bind value="labor.labornum"/><itextbox id="labor.labornum"/>
+						姓名：<a:bind value="labor.laborname"/><itextbox id="labor.laborname"/>
+						</row>
+						<row>
+						部门：<a:bind value="labor.deptnum"/><ibandbox id="labor.deptnum" lookup="department"/>
+						专业：<a:bind value="labor.craft"/><icombobox id="labor.craft"/>
+						</row>
+						<row>
+						家庭电话：<a:bind value="labor.homephone"/><itextbox id="labor.homephone"/>
+						出生日期：<a:bind value="labor.birthdate"/><idatebox id="labor.birthdate"/>
+						</row>
+						<row>
+						邮编：<a:bind value="labor.postnum"/><itextbox id="labor.postnum"/>
+						家庭住址：<a:bind value="labor.homeaddress"/><itextbox id="labor.homeaddress" cols="40"/>
+						</row>	
+						<row>
+						默认仓库：<a:bind value="labor.defaultstoreloc"/><ibandbox id="labor.defaultstoreloc" lookup="warehouse"/>
+						默认位置：<a:bind value="labor.defaultloc"/><ibandbox id="labor.defaultloc" lookup="location"/>
+						</row>					
+						<row>
+						办公电话：<a:bind value="labor.phonenum"/><itextbox id="labor.phonenum"/>
+						电子邮箱：<a:bind value="labor.email"/><itextbox id="labor.email" cols="35"/>
+						</row>						
+						<row>
+						移动电话：<a:bind value="labor.mphone"/><itextbox id="labor.mphone"/>
+						工作地址：<a:bind value="labor.wkaddress"/><itextbox id="labor.wkaddress" cols="40"/>
+						</row>			
+						<row>
+						主管人：<a:bind value="labor.supervisor"/><ibandbox id="labor.supervisor" lookup="labor"/>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<groupbox><caption label="照片" />
+				<attachimage label="照片(点击右键上传)" width="200" imgwidth="200" imgheight="160" horizontal="true" readOnly="false"/>
+			</groupbox>
+		</hbox>
+			<groupbox><caption label="系统配置信息" />	
+				<grid>
+					<rows>
+						<row>	
+						顶级授权部门：<a:bind value="labor.sitenum"/><ibandbox id="labor.sitenum" lookup="department"/>
+						显示流程提醒：<a:bind value="labor.showmind"/><icheckbox id="labor.showmind"/>
+						</row>	
+						<row>
+						委托开始时间：<a:bind value="labor.consigsdate"/><idatetimebox id="labor.consigsdate"/>
+						委托结束时间：<a:bind value="labor.consigedate"/><idatetimebox id="labor.consigedate"/>
+						</row>														
+						<row>
+						流程委托人：<a:bind value="labor.consign"/><ibandbox id="labor.consign" lookup="labor"/>
+						菜单模式：<a:bind value="labor.navmenutype"/><icombobox id="labor.navmenutype"/>
+						</row>
+						
+						<!-- 
+						<row>
+						费率：<a:bind value="labor.payrate"/><idoublebox id="labor.payrate"/>
+						有效：<a:bind value="labor.enabled"/><icheckbox id="labor.enabled"/>
+						</row>
+						<row>
+						加班系数：<a:bind value="labor.otscale"/><idoublebox id="labor.otscale"/>
+						外部：<a:bind value="labor.outside"/><icheckbox id="labor.outside"/>
+						</row>
+						
+						<row>
+						地点：<a:bind value="labor.sitenum"/><ibandbox id="labor.sitenum" lookup="corpsite"/>
+						组织机构：<a:bind value="labor.corpnum"/><itextbox id="labor.corpnum"/>
+						</row>
+						 -->				
+					</rows>
+				</grid>
+		</groupbox>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.confirm()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="tool" title="工具" resize="true" use="combiz.ui.tool.ToolWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+	<hbox spacing="0">
+		<!-- **********************************  结果树页面 ********************************** -->
+		<groupbox>
+			<caption label="工具分类" />
+			<tree use="combiz.ui.tool.ToolTree" width="180" />
+		</groupbox>
+
+		<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="工具" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<zscript><![CDATA[
+			 String[] required = {};
+			 mainWnd.setRequired(required);
+			 String[] readonly = {"classification.parent","classification.haschild"};
+			 mainWnd.setReadonly(readonly);
+			 mainWnd.setOrderby("orderby desc");
+			 ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+								分类:
+								<a:bind value="classification.classid" />
+								<itextbox id="classification.classid" />
+								描述：
+								<a:bind
+									value="classification.description" />
+								<itextbox
+									id="classification.description" cols="40" />								
+							</row>
+							<!-- //////////////////////row//////////////// -->
+							<row>
+							序号：<a:bind value="classification.orderby"/>
+									<itextbox id="classification.orderby" cols="5"/>								
+								有子级：
+								<a:bind value="classification.haschild" />
+								<icheckbox id="classification.haschild"
+									/>
+							</row>
+							<!-- <row spans="1,3">
+							父级分类:
+								<a:bind value="classification.parent" />
+								<itextbox id="classification.parent" />
+							</row> -->
+						<!-- //////////////////////row//////////////// -->						
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				
+				<!-- <div align="left">
+					<button label="发放预留工具" onClick="mainWnd.geninvuse()"/>
+					<button label="归还借出工具" onClick="mainWnd.verify()"/>
+				</div> -->
+				<separator spacing="2px" />
+				<listwindow id="toolclass" title="工具"
+						use="combiz.ui.tool.ToolTreeList"
+						dialog="/tool/tooldialog.xul">
+						<tablelist band="toolclass" pageSize="15">
+							<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="toolnum" label="工具编号" sort="auto" width="15%"/>
+						<tablelistheader data="description" label="描述" sort="auto" width="25%"/>
+						<tablelistheader data="qty" label="工具数量" sort="auto" width="15%"/>
+						<tablelistheader data="toolrate" label="费率" sort="auto" width="15%"/>
+						<tablelistheader data="outside" label="外部" sort="auto" width="15%"/>
+						<tablelistheader data="disabled" label="有效" sort="auto" width="15%"/>
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+					<tabbox width="100%">
+						<tabs>
+							<tab label="发放归还记录" width="120px" />
+							<tab label="技术参数" width="70px" />
+						</tabs>
+					<tabpanels>
+					<!-- ********************************** //工具技术参数 ********************************** -->
+					<tabpanel>
+				<listwindow id="toolTable" parentWnd="toolclass" title="发放归还" use="combiz.ui.tool.TooltransList" dialog="/tool/tooltransdialog.xul" edittype="readonly" orderby ="transdate desc" >
+					<tablelist band="toolTable" pageSize="8">	
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="toolqty" label="工具数量" sort="auto" width="12%"/>
+							<tablelistheader data="toolrate" label="费率" sort="auto" width="12%"/>
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="20%"/>
+							<tablelistheader data="transtype" label="交易类型" sort="auto" width="20%"/>
+							<tablelistheader data="toolhrs" label="工具工时" sort="auto" width="12%"/>
+							<tablelistheader data="outside" label="外部" sort="auto" width="12%"/>
+							<tablelistheader data="linecost" label="行成本" sort="auto" width="12%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+			</tabpanel>
+			
+			<!-- ********************************** 工具技术参数 ********************************** -->
+			<tabpanel>
+				<listwindow id="toolspectable" parentWnd="toolclass" title="技术参数" use="combiz.ui.tool.ToolspecList" dialog="/tool/toolspecdialog.xul"  orderby ="changedate desc" ><!-- edittype="readonly" -->
+					<tablelist band="toolspectable" pageSize="8">	
+						<listhead>
+							<tablelistheader data="classid" label="分类" sort="auto" width="20%"/>
+							<tablelistheader data="classattr" label="参数" sort="auto" width="40%"/>
+							<tablelistheader data="strvalue" label="参数值" sort="auto" width="30%"/>
+							<tablelistheader data="unitid" label="单位" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+			</tabpanel>
+			
+			</tabpanels>
+					</tabbox>
+				</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+	</hbox>
+</mainwindow>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="eqdowntime">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="eqnum" type="0" pop="true" />
+<O t="S">10000029</O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from eqdowntime where eqnum='[?eqnum|?]'
+]]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="equipment">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="eqnum" type="0" pop="true" />
+<O t="S">null</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select eqnum,description from equipment where eqnum='[?eqnum|null?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[72.0,140.0,52.0,35.0,41.0,46.0,65.0,72.0,41.0,40.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="2" r="0" cs="5" rs="2" s="0"><O t="S">设备停机分析</O></C>
+<C c="7" r="0"><O t="S"></O></C>
+<C c="7" r="1"><O t="S"></O></C>
+<C c="0" r="3" s="1"><O t="S">设备编号</O></C>
+<C c="1" r="3" s="2"><O t="S">描述</O></C>
+<C c="2" r="3" cs="2" s="1"><O t="S">开始时间</O></C>
+<C c="4" r="3" cs="2" s="1"><O t="S">结束时间</O></C>
+<C c="6" r="3" s="1"><O t="S">总计(小时)</O></C>
+<C c="7" r="3" s="1"><O t="S">汇报人</O></C>
+<C c="8" r="3" cs="2" s="1"><O t="S">汇报日期</O></C>
+<C c="0" r="4" s="3"><O t="DSColumn"><Attributes dsName="equipment" columnName="EQNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="4" s="4"><O t="DSColumn"><Attributes dsName="equipment" columnName="DESCRIPTION" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="4" cs="2" s="5"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="STARTTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="4" cs="2" s="5"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="ENDTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="4" s="5"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="DOWNTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="4" s="5"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="REPORTBY" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="4" cs="2" s="5"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="REPORTDATE" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="30" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

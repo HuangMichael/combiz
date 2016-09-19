@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="inbasis">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S"></O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT *
+FROM
+     dbo.WORKTICKET WORKTICKET
+where wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.运行">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a ,wosaferun b where a.wonum=b.wonum and a.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.检修">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a ,wosaferepair b where a.wonum=b.wonum and a.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.消防">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a ,wosafetyfighting b where a.wonum=b.wonum and a.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,21.0,10.0,31.0,25.0,27.0,23.0,29.0,25.0,22.0,22.0,22.0,22.0,24.0,22.0,22.0,22.0,30.0,19.0,37.0,32.0,32.0,29.0,25.0,29.0,30.0,29.0,29.0,28.0,46.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[80.0,37.0,84.0,73.0,62.0,57.0,72.0,97.0,73.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="1" r="2" cs="4" s="0"><O t="S">二级动火工作票</O></C>
+<C c="5" r="2" s="1"><O t="S"> 编号:</O></C>
+<C c="6" r="2" cs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis" columnName="TICKETNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="4" s="3"><O t="S">动火部门</O></C>
+<C c="1" r="4" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis" columnName="DEPTGROUP" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="4" s="4"><O t="S">班组</O></C>
+<C c="4" r="4" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis" columnName="DEPTGROUP1" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="4" s="3"><O t="S">动火负责人</O></C>
+<C c="7" r="4" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREPRINCIPAL" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="5" cs="2" s="5"><O t="S">动火地点及设备名称</O></C>
+<C c="2" r="5" cs="2" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="SITENUM" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="5" s="6"><O t="S">,</O><Expand dir="0" />
+</C>
+<C c="5" r="5" cs="3" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="EQNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="5" s="7"><O t="S"></O></C>
+<C c="0" r="6" cs="2" s="8"><O t="S">动火工作内容:</O></C>
+<C c="2" r="6"><O t="S"></O></C>
+<C c="3" r="6"><O t="S"></O></C>
+<C c="4" r="6"><O t="S"></O></C>
+<C c="5" r="6"><O t="S"></O></C>
+<C c="6" r="6"><O t="S"></O></C>
+<C c="7" r="6"><O t="S"></O></C>
+<C c="8" r="6" s="9"><O t="S"></O></C>
+<C c="0" r="7" cs="9" s="5"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREWORKCONTENT" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="8" s="5"><O t="S">申请动火时间</O></C>
+<C c="1" r="8" s="2"><O t="S">自</O></C>
+<C c="2" r="8" cs="3" s="10"><O t="DSColumn"><Attributes dsName="inbasis" columnName="APPLYFIRESTARTTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="8" s="2"><O t="S">开始至</O></C>
+<C c="6" r="8" cs="2" s="11"><O t="DSColumn"><Attributes dsName="inbasis" columnName="APPLYFIREENDTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="8" s="7"><O t="S">结束</O></C>
+<C c="0" r="9" cs="4" s="12"><O t="S">运行应采取的安全措施:</O></C>
+<C c="4" r="9" cs="5" s="13"><O t="S">检修应采取的安全措施:</O></C>
+<C c="0" r="10" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.运行" columnName="NAME" />
+</O><Expand dir="0" type="1" />
+</C>
+<C c="4" r="10" cs="5" s="14"><O t="DSColumn"><Attributes dsName="inbasis.检修" columnName="NAME" />
+</O><Expand dir="0" type="1" />
+</C>
+<C c="0" r="11" cs="4" s="5"><O t="S"></O></C>
+<C c="4" r="11" cs="5" s="5"><O t="S"></O></C>
+<C c="0" r="12" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="12" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="13" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="13" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="14" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="14" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="15" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="15" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="16" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="16" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="17" cs="4" s="3"><O t="S"></O></C>
+<C c="4" r="17" cs="5" s="3"><O t="S"></O></C>
+<C c="0" r="18" rs="2" s="12"><O t="S">审 批 人</O></C>
+<C c="1" r="18" cs="2" rs="2" s="12"><O t="S">安监部门人员</O></C>
+<C c="3" r="18" s="15"><O t="S">消防部门</O></C>
+<C c="4" r="18" cs="2" s="15"><O t="S">动火部门</O></C>
+<C c="6" r="18" rs="2" s="12"><O t="S">值   长</O></C>
+<C c="7" r="18" cs="2" s="15"><O t="S">动火工作票</O></C>
+<C c="3" r="19" s="12"><O t="S">人员</O></C>
+<C c="4" r="19" cs="2" s="12"><O t="S">负责人</O></C>
+<C c="7" r="19" cs="2" s="12"><O t="S">签发人</O></C>
+<C c="0" r="20" s="4"><O t="S"> 签章</O></C>
+<C c="1" r="20" cs="2" s="3"><O t="S"></O></C>
+<C c="3" r="20" s="3"><O t="S"></O></C>
+<C c="4" r="20" cs="2" s="3"><O t="S"></O></C>
+<C c="6" r="20" s="3"><O t="S"></O></C>
+<C c="7" r="20" cs="2" s="3"><O t="S"></O></C>
+<C c="0" r="21" cs="9" s="16"><O t="S">运行应采取的安全措施已做完:       检修应采取的安全措施已做完:     消防队应采取的安全措施已做完: </O></C>
+<C c="0" r="22" cs="2" s="17"><O t="S">运行许可人签字：</O></C>
+<C c="2" r="22" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIATUSER8" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="22" cs="2" s="6"><O t="S"> 工作负责人签字：</O></C>
+<C c="5" r="22" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="PRINCIPAL" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="22" cs="2" s="6"><O t="S"> 消防监护人签字：</O></C>
+<C c="8" r="22" s="7"><O t="DSColumn"><Attributes dsName="inbasis" columnName="GUARDIAN" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="23" cs="9" s="16"><O t="S">应配备的消防设施和采取的消防措施已符合要求。易燃易爆物含量测定合格。</O></C>
+<C c="0" r="24" s="17"><O t="S"></O></C>
+<C c="1" r="24" s="6"><O t="S"></O></C>
+<C c="2" r="24" s="6"><O t="S"></O></C>
+<C c="3" r="24" s="6"><O t="S"></O></C>
+<C c="4" r="24" s="6"><O t="S"></O></C>
+<C c="5" r="24" cs="2" s="6"><O t="S"> 消防监护人签字:</O></C>
+<C c="7" r="24" cs="2" s="7"><O t="DSColumn"><Attributes dsName="inbasis" columnName="GUARDIAN1" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="25" cs="2" s="8"><O t="S">允许动火时间:</O></C>
+<C c="2" r="25" s="1"><O t="S">自</O></C>
+<C c="3" r="25" cs="3" s="18"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREPERMITTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="25"><O t="S">开始</O></C>
+<C c="7" r="25"><O t="S"></O></C>
+<C c="8" r="25" s="9"><O t="S"></O></C>
+<C c="0" r="26" s="17"><O t="S"></O></C>
+<C c="1" r="26" s="6"><O t="S"></O></C>
+<C c="2" r="26" s="6"><O t="S">值长签字:</O></C>
+<C c="3" r="26" cs="2" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="SHIFTFOREMAN" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="26" cs="2" s="6"><O t="S">动火执行人签字:</O></C>
+<C c="7" r="26" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREOPERATOR" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="26" s="7"><O t="S"></O></C>
+<C c="0" r="27" cs="2" s="8"><O t="S">允许动火时间:</O></C>
+<C c="2" r="27" s="1"><O t="S">自</O></C>
+<C c="3" r="27" cs="3" s="18"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREENDTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="27"><O t="S">结束</O></C>
+<C c="7" r="27"><O t="S"></O></C>
+<C c="8" r="27" s="9"><O t="S"></O></C>
+<C c="0" r="28" cs="2" s="17"><O t="S">动火执行人签字:</O></C>
+<C c="2" r="28" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="FIREOPERATOR1" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="28" cs="2" s="6"><O t="S">消防监护人签字;</O></C>
+<C c="5" r="28" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="GUARDIAN2" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="28" s="6"><O t="S">值长签字：</O></C>
+<C c="7" r="28" s="6"><O t="DSColumn"><Attributes dsName="inbasis" columnName="SHIFTFOREMAN1" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="28" s="7"><O t="S"></O></C>
+<C c="0" r="29" s="8"><O t="S">备注:</O></C>
+<C c="1" r="29"><O t="S"></O></C>
+<C c="2" r="29"><O t="S"></O></C>
+<C c="3" r="29"><O t="S"></O></C>
+<C c="4" r="29"><O t="S"></O></C>
+<C c="5" r="29"><O t="S"></O></C>
+<C c="6" r="29"><O t="S"></O></C>
+<C c="7" r="29"><O t="S"></O></C>
+<C c="8" r="29" s="9"><O t="S"></O></C>
+<C c="0" r="30" cs="9" s="5"><O t="DSColumn"><Attributes dsName="inbasis" columnName="REMARK4" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="31" cs="3"><O t="S"></O></C>
+</CellElementList>
+<WorkSheetAttr sr="13" />
+</Report>
+<StyleList>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="18" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日h时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日h时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日h时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+</StyleList>
+</WorkBook>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"address.changeby","address.changedate"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="地址"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						地点:<a:bind value="corpsite.sitenum"/><ibandbox id="corpsite.sitenum" lookup="department" checkdata="false"/>
+						描述:<a:bind value="corpsite.description"/><itextbox id="corpsite.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>					
+						是否活动:<a:bind value="corpsite.active"/><icheckbox id="corpsite.active"/>
+						联系人:<a:bind value="corpsite.contact"/><ibandbox id="corpsite.contact" lookup="labor"/>						
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

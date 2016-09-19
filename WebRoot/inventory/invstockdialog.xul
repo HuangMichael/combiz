@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="余量"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 余量 -->
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						箱柜编号:<!-- 箱柜编号 --><a:bind value="invstock.binnum"/><itextbox id="invstock.binnum"/>
+						批次编号:<!-- 批次编号 --><a:bind value="invstock.lotnum"/><itextbox id="inventory.lotnum"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						当前余量:<!-- 当前余量 --><a:bind value="invstock.curbal"/><idoublebox id="invstock.curbal" format="0.00"/>
+						物理盘点:<!-- 物理盘点 --><a:bind value="invstock.physcnt"/><idoublebox id="invstock.physcnt" format="0.00"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						物理盘点日期:<!-- 物理盘点日期 --><a:bind value="invstock.physcntdate"/><idatebox id="invstock.physcntdate"/>
+						是否一致:<!-- 是否一致 --><a:bind value="invstock.reconciled"/><icheckbox id="invstock.reconciled"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+
+</editwindow>

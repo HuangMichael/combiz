@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ASSETSCARD" title="设备卡片" wfenabled="false"
+	resize="true" use="combiz.ui.assetscard.AssetscardWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+
+	<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="固定资产" />
+			<!-- <tab id="assetcodeTab" label="设备折旧明细" />  -->
+		</tabs>
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+				<!-- 查询过滤器 -->
+				<hbox width="100%">
+					<groupbox width="180">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						资产编号:
+						<stextbox data="assetcode" cols="10"/>
+							增减方式:
+						<stextbox data="changemethod"  cols="10"/>
+					</groupbox>
+				</hbox>
+
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+
+						<resultlistheader data="assetcode" label="资产编号"
+							sort="auto" width="20%" />
+						<resultlistheader data="assetname" label="资产名称"
+							sort="auto" width="10%" />
+						<resultlistheader data="daterecorded"
+							label="入账日期" sort="auto" width="10%" />
+						<resultlistheader data="depreciationsjt"
+							label="折旧科目" sort="auto" width="10%" />
+						<resultlistheader data="assetsubject"
+							label="资产科目" sort="auto" width="10%" />
+						<resultlistheader data="assetclasses"
+							label="资产类别" sort="auto" width="10%" />
+						<resultlistheader data="depreciationmethod"
+							label="折旧方式" sort="auto" width="10%" />
+						<resultlistheader data="usedate" label="使用日期"
+							sort="auto" width="10%" />
+					
+						<resultlistheader data="assetstatus"
+							label="资产状态" sort="auto" width="10%" />
+
+
+					</listhead>
+				</resultlist>
+			</tabpanel>
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript><![CDATA[
+ String[] required = {"assetscard.users","assetscard.usedepartment"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"assetscard.assetstatus","assetscard.assetname","assetscard.changemethod"
+ ,"assetscard.depreciationsjt","assetscard.assetsubject","assetscard.location","assetscard.daterecorded"
+ ,"assetscard.responsible","assetscard.status","assetscard.assetclasses","assetscard.depreciationmethod"
+ ,"assetscard.cost","assetscard.usedate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+							资产编号:
+							<a:bind value="assetscard.assetcode" />
+							<itextbox id="assetscard.assetcode" />
+							资产状态:
+							<a:bind value="assetscard.assetstatus" />
+							<itextbox id="assetscard.assetstatus" />
+							资产名称:
+							<a:bind value="assetscard.assetname" />
+							<itextbox id="assetscard.assetname" />
+						</row>
+						<row>
+							增减方式:
+							<a:bind value="assetscard.changemethod" />
+							<ibandbox id="assetscard.changemethod"
+								lookup="changemethod" />
+							折旧科目:
+							<a:bind value="assetscard.depreciationsjt" />
+							<itextbox id="assetscard.depreciationsjt" />
+							资产科目:
+							<a:bind value="assetscard.assetsubject" />
+							<itextbox id="assetscard.assetsubject" />
+						</row>
+						<row>
+							资产类别:
+							<a:bind value="assetscard.assetclasses" />
+							<itextbox id="assetscard.assetclasses" />
+							折旧方式:
+							<a:bind
+								value="assetscard.depreciationmethod" />
+							<icombobox
+								id="assetscard.depreciationmethod" />
+							原值:
+							<a:bind value="assetscard.cost" />
+							<idoublebox id="assetscard.cost" cols="20" />
+
+						</row>
+						<row>
+							存放地点:
+							<a:bind value="assetscard.location" />
+							<itextbox id="assetscard.location" />
+							使用日期:
+							<a:bind value="assetscard.usedate" />
+							<idatetimebox id="assetscard.usedate" />
+							入账日期:
+							<a:bind value="assetscard.daterecorded" />
+							<idatetimebox id="assetscard.daterecorded" />
+						</row>
+						<row>
+							使用人:
+							<a:bind value="assetscard.users" />
+							<itextbox id="assetscard.users" />
+							使用部门:
+							<a:bind value="assetscard.usedepartment" />
+							<itextbox id="assetscard.usedepartment" />
+							负责人:
+							<a:bind value="assetscard.responsible" />
+							<itextbox id="assetscard.responsible" />
+						</row>
+						<row>
+							摘要:
+							<a:bind value="assetscard.summary" />
+							<itextbox id="assetscard.summary"
+								cols="20" />
+							状态:
+							<a:bind value="assetscard.status" />
+							<itextbox id="assetscard.status" />
+							净值:
+							<a:bind value="assetscard.net_xn" />
+							<idoublebox id="assetscard..net_xn"  cols="20" />
+
+						</row>
+					</rows>
+				</grid>
+
+
+				<!-- *****************************设备折旧明细**************************** -->
+
+				<listwindow id="assetcodeTable" title="设备折旧明细"
+					use="combiz.ui.assetscard.Copyassetcode"
+					dialog="/assetscard/assetscard_assetcode.xul">
+					<tablelist band="assetcodeTable" pageSize="16">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+
+							<tablelistheader data="year" label="年"
+								sort="auto" width="10%" />
+							<tablelistheader data="mon" label="月"
+								sort="auto" width="10%" />
+							<tablelistheader data="status" label="状态"
+								sort="auto" width="10%" />
+							<tablelistheader data="quantity" label="数量"
+								sort="auto" width="10%" />
+							<tablelistheader data="manufacturers"
+								label="制造商" sort="auto" width="10%" />
+							<tablelistheader data="model" label="型号"
+								sort="auto" width="10%" />
+							<tablelistheader data="depreciationmonth"
+								label="已计提折旧月数" sort="auto" width="10%" />
+							<tablelistheader data="accdepreciation"
+								label="累计折旧" sort="auto" width="10%" />
+							<tablelistheader data="impairment"
+								label="减值准备" sort="auto" width="10%" />
+							<tablelistheader data="net" label="净额"
+								sort="auto" width="10%" />
+							<tablelistheader data="residualvalues"
+								label="残值率" sort="auto" width="10%" />
+							<tablelistheader data="residual" label="残值"
+								sort="auto" width="10%" />
+							<tablelistheader data="mthval" label="月折旧率"
+								sort="auto" width="10%" />
+							<tablelistheader data="cost" label="原值"
+								sort="auto" width="10%" />
+							<tablelistheader data="suppliers"
+								label="供应商" sort="auto" width="10%" />
+							<tablelistheader data="expectedmonth"
+								label="预计使用到月数" sort="auto" width="10%" />
+							<tablelistheader data="networth" label="净值"
+								sort="auto" width="10%" />
+							<tablelistheader data="mthamount"
+								label="月折旧额" sort="auto" width="10%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

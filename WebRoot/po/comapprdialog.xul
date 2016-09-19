@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; 
+		mainWnd.setRequired(required); 
+		
+		String[] readonly = {};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+
+	<groupbox>
+		<caption label="评价明细"><!-- 评价明细  -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<groupbox>
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+
+						信誉等级<!-- 信誉等级 -->:
+						<a:bind value="comappr.grade" />
+						<icombobox id="comappr.grade"  cols="5"/>
+						供应商资质<!-- 供应商资质 -->:
+						<a:bind value="comappr.aptitude" />
+						<icombobox id="comappr.aptitude"  cols="5"/>
+						总评分<!-- 总评分 -->:
+						<a:bind value="comappr.totalscore" />
+						<itextbox id="comappr.totalscore"  cols="5"/>
+
+					</row>
+					<row>
+						供货及时性<!-- 供货及时性 -->:
+						<a:bind value="comappr.bttimes" />
+						<itextbox id="comappr.bttimes" cols="5"/>
+						产品质量<!-- 产品质量 -->:
+						<a:bind value="comappr.quality" />
+						<itextbox id="comappr.quality" cols="5" />
+						产品合格率<!-- 产品合格率 -->:
+						<a:bind value="comappr.contentment" />
+						<itextbox id="comappr.contentment" cols="5" />
+					</row>
+					<row spans="1,5">
+					用户评价<!-- 用户评价 -->:
+					<a:bind value="comappr.appraise" />
+					<itextbox id="comappr.appraise" cols="80"  rows="4"/>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+	</groupbox>
+</editwindow>

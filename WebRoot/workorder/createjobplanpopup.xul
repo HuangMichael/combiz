@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" use="combiz.ui.workorder.CreatejobplanDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="500">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<!--  <row>
+						标准作业计划：<a:bind value="jobplan.jpnum"/><itextbox id="jobplan.jpnum"/>
+						</row>
+						-->
+						<row spans="1,3"><!-- 描述 -->
+						描述：<a:bind value="jobplan.description"/><itextbox id="jobplan.description" cols="40"/>
+						</row>
+						<row><!-- 持续时间: -->
+						持续时间：<a:bind value="jobplan.jpduration"/><idoublebox id="jobplan.jpduration"/>
+						</row>			
+						<!-- //////////////////////row//////////////// -->		
+					</rows>
+				</grid>
+	<div align="center">
+	<button label="确 定" onClick="mainWnd.reassend();mainWnd.cancel()"/><!-- 确 定 -->
+	<button label="取 消" onClick="mainWnd.cancel()"/>	<!-- 取 消 -->
+	</div>
+
+</window>

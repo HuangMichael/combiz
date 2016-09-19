@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="EQREJECT" title="资产报损报废申请" resize="true" wfenabled="true" use="combiz.ui.inventory.EqrejectWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="资产报废"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="rejecttype='资产报废'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("rejectnum desc");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						<label value="报废单号：" />
+						<stextbox data="rejectnum" />
+						<label value="报废备注：" />
+						<stextbox data="memo" />
+						<label value="流程状态：" />
+						<stextbox data="status" />
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="rejectnum" label="报废单号" sort="auto" width="10%"/>
+						<resultlistheader data="memo" label="描述" sort="auto" width="30%"/>
+						<resultlistheader data="requestby" label="申请人" sort="auto" width="10%"/>
+						<resultlistheader data="reqdept" label="申请部门" sort="auto" width="15%"/>
+						<resultlistheader data="informman" label="主送人" sort="auto" width="10%"/>
+						<resultlistheader data="status" label="单据状态" sort="auto" width="10%"/>
+						<resultlistheader data="statusdate" label="状态日期" sort="auto" width="15%"/>
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"reject.statusdate","reject.status","reject.reqdept"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							报废单号:
+							<a:bind value="reject.rejectnum" />
+							<itextbox id="reject.rejectnum" />
+							描述：
+							<a:bind value="reject.memo" />
+							<itextbox id="reject.memo" cols="60" inputTip="请输入领用申请的描述"/>
+
+						</row>
+						
+						<row>
+							单据状态:
+							<a:bind value="reject.status" />
+							<itextbox id="reject.status" />
+							状态日期：
+							<a:bind value="reject.statusdate" />
+							<idatetimebox id="reject.statusdate"/>
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							申请人：
+							<a:bind value="reject.requestby" />
+							<ibandbox id="reject.requestby" lookup="labor" />
+							申请部门:
+							<a:bind value="reject.reqdept" />
+							<itextbox id="reject.reqdept" />
+							
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							主送人：
+							<a:bind value="reject.informman" />
+							<ibandbox id="reject.informman" lookup="mainlabor" />
+							会签部门：
+							<a:bind value="reject.usedept" />
+							<ibandbox id="reject.usedept" lookup="department" checkdata="false" multiple="true" cols="60" />
+						</row>
+						<row>
+							申请日期：
+							<a:bind value="reject.rejectdate" />
+							<idatebox id="reject.rejectdate" />
+							<attachment />
+
+						</row>
+
+						<row spans="1,3">
+							报废原因:
+							<a:bind value="reject.reason" />
+							<itextbox id="reject.reason" rows="5"
+								cols="120" inputTip="请输入设备报废申请的原因" />
+						</row>
+
+						<!-- //////////////////////row//////////////// -->
+								<!-- ******************************************************************** -->
+								<!-- *************************在上面修改主界面界面字段*********************** -->
+								<!-- ********************************************************************-->
+</rows>
+				</grid>
+				<listwindow id="rejectitem" title="报废单明细" use="combiz.ui.inventory.RejecteqList" dialog="/inventory/rejecteqdialog.xul" orderby="rejlinenum">
+				<tablelist band="rejectitem" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="rejlinenum" label="行号" sort="auto" width="5%"/>
+						<tablelistheader data="eqnum" label="设备编号" sort="auto" width="15%"/>
+						<tablelistheader data="equipment.description" label="描述" sort="auto" width="20%"/>
+						<tablelistheader data="equipment.model" label="规格型号" sort="auto" width="15%"/>
+						<tablelistheader data="itemnum" label="库存编号" sort="auto" width="15%"/>
+						<tablelistheader data="deptnum" label="部门" sort="auto" width="15%"/>
+						<tablelistheader data="rejectqty" label="报废数量" sort="auto" width="10%"/>
+						<tablelistheader data="isreject" label="是否报废" sort="auto" width="5%"/>
+						
+						
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="loginMsgList" use="combiz.ui.smsg.MsgList" tablename="MSGRECEIVE" dialog="/webui/msgdialog.xul"
+edittype="LISTONLY" searchable="false">
+<zscript>
+	loginMsgList.setQueryString("RECEIVER=':{labor.labornum}' and hasread='否'");
+</zscript>
+<tablelist band="loginMsgList" pageSize="8">
+	<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="title" label="标题" sort="auto" width="30%"/>
+			<tablelistheader data="sender" label="发送人" sort="auto" width="20%"/>
+			<tablelistheader data="rectype" label="消息类型" sort="auto" width="15%"/>
+			<tablelistheader data="sddate" label="发送时间" sort="auto" width="15%"/>
+			<tablelistheader data="hasread" label="是否已读" sort="auto" width="20%"/>
+	</listhead>
+	<!-- tablelistfoot/ -->
+</tablelist>
+</listwindow>

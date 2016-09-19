@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="GBK"?>
+<window border="none">
+	<ichart id="kpichart" width="300px" height="260px" threeD="true" kptnum="bar" />
+</window>

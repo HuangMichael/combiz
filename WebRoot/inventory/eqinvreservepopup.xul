@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" width="700" title="设备发放" closable="true">
+<tabbox width="100%">
+	<tabs>
+	    <tab label="发放预留" width="70px" />
+		<tab label="预留信息" width="70px" />
+	</tabs>
+	<tabpanels width="100%">
+		
+
+		<tabpanel>
+			<listwindow id="invWnd" edittype="listonly"
+				tablename="invrectrans" multiple="true"
+				use="combiz.ui.inventory.Eqinvrecline" width="100%">
+				<tablelist band="invWnd" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="eqnum" label="资产编号"
+							sort="auto" width="20%" />
+						<tablelistheader data="itemnum" label="库存项目"
+							sort="auto" width="10%" />
+						<tablelistheader data="item.description"
+							label="描述" sort="auto" width="40%" />
+						<tablelistheader data="towarehouse" label="仓库"
+							sort="auto" width="10%" />
+						<tablelistheader data="tolot" label="批次号"
+							sort="auto" width="20%" />
+					</listhead>
+				</tablelist>
+				<div align="center">
+					<button label=" 确 定 " onClick="invWnd.geninvuse();mainWnd.onClose()" />
+					<button label=" 取 消 " onClick="mainWnd.onClose()" />
+				</div>
+			</listwindow>
+		</tabpanel>
+		
+		
+		<tabpanel>
+			<listwindow id="reseWnd" edittype="listonly"
+				tablename="invreserve" 
+				use="combiz.ui.inventory.Mrinvreserveline" 
+				width="100%">
+				<tablelist band="reseWnd" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="itemnum" label="库存项目"
+							sort="auto" width="10%" />
+						<tablelistheader data="item.description"
+							label="描述" sort="auto" width="25%" />
+						<tablelistheader data="warehouse" label="仓库"
+							sort="auto" width="10%" />
+						<tablelistheader data="reservedqty" label="未发放的预留数量"
+							sort="auto" width="17%" />
+						<tablelistheader data="location" label="发放至位置"
+							sort="auto" width="10%" />
+						<tablelistheader data="issuetolabor" label="发放至人员"
+							sort="auto" width="10%" />
+						<tablelistheader data="issuedeptnum" label="发放至部门"
+							sort="auto" width="18%" /> 
+					</listhead>
+				</tablelist>
+			</listwindow>
+		</tabpanel>
+
+
+	</tabpanels>
+</tabbox>
+</window>

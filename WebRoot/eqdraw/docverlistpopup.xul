@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="docverList" title="选择要复制的版本" use="combiz.system.eqdraw.SelectDocverList" 
+tablename="docversion" edittype="LISTONLY" searchable="false" width="600">
+	<tablelist band="docverList" pageSize="10">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="VERSION" label="版本号" sort="auto" width="5%" />
+			<tablelistheader data="DESCRIPTION" label="版本描述" sort="auto" width="35%" />
+			<tablelistheader data="filename" label="文件名" sort="auto" width="30%" />
+			<tablelistheader data="CREATOR" label="创建人" sort="auto" width="15%" />
+			<tablelistheader data="CREATEDATE" label="创建时间" sort="auto" width="15%" />
+		</listhead>
+	</tablelist>
+	<div>
+	<button label="复制选择的文件" onClick="docverList.copydocver()"/>
+	<button label="取  消" onClick="docverList.onClose()"/>
+	</div>
+</listwindow>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="fieldslistWnd" title="请选择数据" edittype="listonly" 
+	tablename="ibstablecolscfg" multiple="true"
+	use="combiz.system.ui.CommonListWindow" closable="true" width="900">
+	<tablelist band="fieldslistWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="colname" label="字段名称" sort="auto" width="25%"/>
+			<tablelistheader data="title" label="字段标题" sort="auto" width="40%"/>
+			<tablelistheader data="dbtype" label="数据类型" sort="auto" width="10%"/>
+			<tablelistheader data="length" label="长度" sort="auto" width="5%"/>
+			<tablelistheader data="notnull" label="不为空" sort="auto" width="5%"/>
+			<tablelistheader data="listname" label="值列表" sort="auto" width="10%"/>
+			<tablelistheader data="isvirtual" label="虚拟？" sort="auto" width="5%"/>
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<button label="确 定" onClick="fieldslistWnd.confirm()" />
+		<button label="取 消" onClick="fieldslistWnd.cancel()" />
+	</div>
+</listwindow>

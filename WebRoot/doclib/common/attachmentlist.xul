@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="attachmentWnd" title="附件" width="700" closable="true">
+	<listwindow id="attachment" tablename="document" 
+	use="combiz.system.doclib.AttachmentList" dialog="/doclib/common/attachmentdialog.xul">
+		<tablelist band="attachment">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif" />
+				<tablelistheader data="docnum" label="文档编号" sort="auto" width="20%" />
+				<tablelistheader data="description" label="描述" sort="auto" width="40%" />
+				<tablelistheader data="status" label="上传状态" sort="auto" width="10%" />
+				<tablelistheader data="creator" label="创建人" sort="auto" width="10%" />
+				<tablelistheader data="createdate" label="创建时间" sort="auto" width="20%" />
+			</listhead>
+		</tablelist>
+	</listwindow>
+	<div align="center">
+		<button label="保存记录" onClick="attachment.save()" />
+		<button label="上传附件" onClick="attachment.uploadDoc()" />
+		<button label="查看附件" onClick="attachment.downloadDoc()" />
+		<button label="关闭窗口" onClick="attachmentWnd.onClose()" />
+	</div>
+</window>

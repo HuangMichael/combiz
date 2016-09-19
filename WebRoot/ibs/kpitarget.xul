@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="kpitarget" title="KPI值表" resize="true" use="combiz.ui.ibs.KpitargetWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="KPI列表" width="70px"/>
+			<tab id="main" label="KPI值表" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					<label value="KPI指标编号"/><stextbox data="kpinum"/>
+					<label value="KPI指标SQL"/><stextbox data="kpisql"/>
+					<label value="描述"/><stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="kpinum" label="KPI指标编号" sort="auto" width="20%"/>
+						<resultlistheader data="kpisql" label="KPI指标值" sort="auto" width="40%"/>
+						<resultlistheader data="kpitype" label="指标值类型" sort="auto" width="10%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="30%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			<grid><!--
+					<columns>
+					<column label="ddd"/><column label="deeee"/>
+					</columns>
+				--><rows>
+					<row>
+						KPI指标编号:<a:bind value="kpitarget.kpinum"/><itextbox id="kpitarget.kpinum"/>
+					</row>
+					<row>	
+						指标值类型:<a:bind value="kpitarget.kpitype"/><icombobox id="kpitarget.kpitype"/>
+					</row>
+					<row>	
+						KPI指标值:<a:bind value="kpitarget.kpisql"/><itextbox id="kpitarget.kpisql" cols="80" rows="5"/>
+					</row>
+					<row>	
+						描述:<a:bind value="kpitarget.description"/><itextbox id="kpitarget.description" cols="80"/>
+					</row>
+				</rows>
+			</grid>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="调整库存箱柜" use="combiz.ui.inventory.AdjInventoryDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"inventory.warehouse"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"inventory.itemnum","inventory.orderunit","inventory.stocktype","inventory.modelnum","inventory.issueunit"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						库存项目：<a:bind value="inventory.itemnum"/><itextbox id="inventory.itemnum"/>
+						仓库：<a:bind value="inventory.warehouse"/><ibandbox id="inventory.warehouse" lookup="warehouse"/>
+						订购单位：<a:bind value="inventory.orderunit"/><ibandbox id="inventory.orderunit" lookup="measurement"/>
+						</row>
+						
+						<row>
+						库存类型：<a:bind value="inventory.stocktype"/><itextbox id="inventory.stocktype"/>
+						型号：<a:bind value="inventory.modelnum"/><itextbox id="inventory.modelnum"/>
+						发放单位：<a:bind value="inventory.issueunit"/><ibandbox id="inventory.issueunit" lookup="measurement"/>
+						</row>
+						
+						<row>
+						默认货柜：<a:bind value="inventory.binnum"/><itextbox id="inventory.binnum"/>
+						ABC类型：<a:bind value="inventory.abctype"/><itextbox id="inventory.abctype"/>
+						转换系数：<a:bind value="inventory.conversion"/><idoublebox id="inventory.conversion" cols="4"/>
+						</row>
+						
+						<!-- ******************************************************************** -->
+						<row>
+						最低库存：<a:bind value="inventory.minlevel"/><idoublebox id="inventory.minlevel" format="0.00"/>
+						安全库存：<a:bind value="inventory.maxlevel"/><idoublebox id="inventory.maxlevel" format="0.00"/>
+						经济订购：<a:bind value="inventory.orderqty"/><idoublebox id="inventory.orderqty" format="0.00"/>
+						</row>
+						<!-- ********************************************************************-->						
+						
+						<!-- ******************************************************************** -->
+						<row>
+						标准成本：<a:bind value="inventory.stdcost"/><idoublebox id="inventory.stdcost" format="0.00"/>
+						平均成本：<a:bind value="inventory.avgcost"/><idoublebox id="inventory.avgcost" format="0.00"/>
+						上次成本：<a:bind value="inventory.lastcost"/><idoublebox id="inventory.lastcost" format="0.00"/>
+						</row>
+						<!-- ********************************************************************-->						
+						
+						<row>
+						供应商：<a:bind value="inventory.vendor"/><ibandbox id="inventory.vendor" lookup="companies"/>
+						供应商地址：<a:bind value="vendor.address"/><itextbox id="vendor.address"/>
+						制造商：<a:bind value="inventory.manufacturer"/><ibandbox id="inventory.manufacturer" lookup="companies2"/>
+						</row>	
+						
+						<row>
+						当前余量：<a:bind value="inventory.invcurbal"/><idoublebox id="inventory.invcurbal" format="0.00" />
+						物理盘点：<a:bind value="inventory.invphycnt"/><idoublebox id="inventory.invphycnt" format="0.00"/>
+						盘点日期：<a:bind value="inventory.invphydate"/><idatebox id="inventory.invphydate" />
+						</row>	
+					</rows>
+				</grid>	
+					
+						<!-- //////////////////////row//////////////// -->
+				
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.createinventory();mainWnd.save();mainWnd.cancel()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

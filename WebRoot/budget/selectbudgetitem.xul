@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog id="budgetItemWnd" title="选择预算项目" width="350px" border="normal" 
+closable="true" use="combiz.ui.budget.SelectItemWnd">
+		<groupbox>
+			<caption label="预算项目" />
+			<!--  预算版本：<listbox use="combiz.ui.budget.BudgetItemVersion"/>-->
+			<tree use="combiz.ui.budget.SelectBudgetItemTree" height="400px"/>
+		</groupbox>
+	<div align="center">
+		<button label="生成预算行" onClick="budgetItemWnd.genBudgetLine()" />
+		<button label="取消" onClick="budgetItemWnd.onClose()" />
+	</div>
+</commondialog>

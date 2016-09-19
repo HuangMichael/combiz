@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="stateWnd" title="打印装备标签" onClose="true" width="500"
+use="combiz.PrintEquipcard"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<div align="center">
+正在打印装备标签......
+</div>
+
+<iframe id="printPage" width="500" height="500"/>
+
+<div align="center">
+<button label="关闭打印窗口" onClick="stateWnd.onClose()"/>
+</div>
+
+</window>

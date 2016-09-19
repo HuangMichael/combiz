@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="日历" use="combiz.system.ui.CommonDialog" width="800" closable="true"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						日历:<a:bind value="calendar.calnum"/><itextbox id="calendar.calnum"/>
+						描述：<a:bind value="calendar.description"/><itextbox id="calendar.description" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						开始日期：<a:bind value="calendar.startdate"/><idatebox id="calendar.startdate"/>
+						结束日期:<a:bind value="calendar.enddate"/><idatebox id="calendar.enddate"/>
+						</row>
+
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+
+					</rows>
+				</grid>
+				<div align="center">
+				<button label="保    存" onClick="mainWnd.confirm();"/>
+				<button label="关    闭" onClick="mainWnd.cancel()"/>
+				</div>
+ </groupbox>				
+</window>

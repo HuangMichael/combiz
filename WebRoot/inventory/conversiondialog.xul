@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="维护单位转换系数"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						订购单位：<a:bind value="conversion.orderunit"/><ibandbox id="conversion.orderunit" lookup="measurement"/>
+						发放单位：<a:bind value="conversion.issueunit"/><ibandbox id="conversion.issueunit" lookup="measurement"/>
+						</row>
+						<row>
+						转换系数：<a:bind value="conversion.conversion"/><itextbox id="conversion.conversion"/>
+						</row>
+						<row>
+						物资编码：<a:bind value="conversion.itemnum"/><ibandbox id="conversion.itemnum" lookup="item"/>
+						描述：<a:bind value="item.description"/><itextbox id="item.description"/>
+						</row>
+
+						
+					</rows>
+				</grid>
+ </groupbox>
+</editwindow>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<commonlistwindow id="locstructWnd" title="修改位置结构和系统" use="combiz.ui.location.ChgLocstructList"
+ dialog="/location/locstructdialog.xul" tablename="locstruct" closable="true" width="800" 
+ showmultiple="false" showfilter="false" searchable="false">
+ <defaultvalue band="locstructWnd" value="location={location};haschild=否;orderby=0"/>
+	<tablelist band="locstructWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="systemid" label="系统" sort="auto" width="20%"/>
+			<tablelistheader data="locsystem.description" label="系统描述" sort="auto" width="40%"/>
+			<tablelistheader data="parent" label="父级位置" sort="auto" width="20%"/>
+			<tablelistheader data="haschild" label="有子集" sort="auto" width="10%"/>
+			<tablelistheader data="orderby" label="排序" sort="auto" width="10%"/>
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<button label="保存数据" onClick="locstructWnd.save();" />
+		<button label="关闭窗口" onClick="locstructWnd.cancel()" />
+	</div>
+</commonlistwindow>

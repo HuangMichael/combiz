@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="docViewWnd" use="combiz.system.ui.StateWindow" title="文档预览窗口"
+ closable="true" width="70%" height="520">
+<iframe id="docview" width="100%" height="92%"/>
+<div>
+<button label="关闭预览窗口" onClick="docViewWnd.onClose()"/>
+</div>
+</window>

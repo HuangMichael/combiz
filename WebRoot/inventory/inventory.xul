@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="库存" app="inventory"  resize="true" use="combiz.ui.inventory.InventoryWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!--列表  -->
+			<tab id="main" label="库存管理" width="70px"/><!-- 库存管理 -->
+			<tab id="invvendortab" label="供应商历史" width="90px"/><!-- 供应商历史 -->
+			<tab id="invtranstab" label="库存交易" width="70px"/><!-- 库存交易 -->
+			<tab id="invreservetab" label="预留" width="70px"/><!-- 预留 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!--高级查询  -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!--过滤器  -->
+						物资编码:<!-- 物资编码 --><stextbox data="itemnum"/>
+						描述:<!-- 描述 --><stextbox data="itemdesc"/>
+						上次采购价格:<!-- 上次采购价格 --><stextbox data="lastcost"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="itemnum" label="物资编码" sort="auto" width="20%"/><!-- 物资编码 -->
+						<resultlistheader data="item.description" label="描述" sort="auto" width="35%"/><!-- 描述 -->
+						<resultlistheader data="warehouse" label="仓库" sort="auto" width="10%"/><!-- 仓库 -->
+						<resultlistheader data="binnum" label="默认货位" sort="auto" width="10%"/><!-- 默认货位 -->
+						<resultlistheader data="orderunit" label="定购单位" sort="auto" width="5%"/><!-- 定购单位 -->
+						<resultlistheader data="avgcost" label="平均价格" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="lastcost" label="上次采购价格" sort="auto" width="10%"/><!-- 上次采购价格 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"inventory.stdcost","inventory.avgcost","inventory.lastcost","inventory.lastissuedate","inventory.sumcurbal","inventory.sumreadyqty","inventory.sumpoorderqty","inventory.sumresqty",
+ "inventory.issueytd"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			
+			
+				<groupbox><caption label="基本信息" /><!-- 基本信息 -->
+					<grid>
+						<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<row spans="1,1,1,3">
+						库存项目:<!-- 库存项目 --><a:bind value="inventory.itemnum"/><itextbox id="inventory.itemnum"/>
+						描述:<!-- 描述 --><a:bind value="item.description"/><itextbox id="item.description"/>
+						</row>
+						<row>
+						仓库:<!-- 仓库 --><a:bind value="inventory.warehouse"/><ibandbox id="inventory.warehouse" lookup="warehouse"/>
+						订购单位:<!--  订购单位--><a:bind value="inventory.orderunit"/><ibandbox id="inventory.orderunit" lookup="measurement"/>
+						发放单位:<!-- 发放单位 --><a:bind value="inventory.issueunit"/><ibandbox id="inventory.issueunit" lookup="measurement"/>
+						</row>
+						<row>
+						库存类型:<!-- 库存类型 --><a:bind value="inventory.stocktype"/><icombobox id="inventory.stocktype"/>
+						型号:<!-- 型号 --><a:bind value="inventory.modelnum"/><itextbox id="inventory.modelnum"/>
+						转换系数:<!-- 转换系数 --><a:bind value="inventory.conversion"/><idoublebox id="inventory.conversion" cols="4"/>
+						</row>
+						
+						<row>
+						默认货柜:<!-- 默认货柜 --><a:bind value="inventory.binnum"/><itextbox id="inventory.binnum"/>
+						ABC类型:<!-- ABC类型 --><a:bind value="inventory.abctype"/><icombobox id="inventory.abctype"/>
+						
+						</row>
+						
+						<!--  安全库存：<a:bind value="inventory.sstock"/><idoublebox id="inventory.sstock" format="0.00"/>-->
+						
+						<!-- ********************************************************************-->						
+						</rows>
+					</grid>
+				</groupbox>
+				
+			<hbox width="100%">
+				<groupbox><caption label="库存参数" /><!-- 库存参数 -->
+					<grid>
+						<rows>
+						<!-- ******************************************************************** -->
+						<row>
+						最低库存:<!-- 最低库存 --><a:bind value="inventory.minlevel"/><idoublebox id="inventory.minlevel" format="0.00"/>
+						</row>
+						<row>
+						安全库存:<!--安全库存  --><a:bind value="inventory.maxlevel"/><idoublebox id="inventory.maxlevel" format="0.00"/>
+						</row>
+						<row>
+						经济订购:<!-- 经济订购 --><a:bind value="inventory.orderqty"/><idoublebox id="inventory.orderqty" format="0.00"/>
+						</row>
+						<!-- ********************************************************************-->						
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox><caption label="订购成本" /><!-- 订购成本 -->
+					<grid>
+						<rows>
+						<!-- ******************************************************************** -->
+						<row>
+						标准成本:<!-- 标准成本 --><a:bind value="inventory.stdcost"/><idoublebox id="inventory.stdcost" format="0.00"/>
+						</row>
+						<row>
+						平均成本:<!-- 平均成本 --><a:bind value="inventory.avgcost"/><idoublebox id="inventory.avgcost" format="0.00"/>
+						</row>
+						<row>
+						上次成本:<!--上次成本  --><a:bind value="inventory.lastcost"/><idoublebox id="inventory.lastcost" format="0.00"/>
+						</row>
+						<!-- ********************************************************************-->						
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox><caption label="供应商信息" /><!-- 供应商信息 -->
+					<grid>
+						<rows>
+
+						<row>
+						供应商:<!-- 供应商 --><a:bind value="inventory.vendor"/><ibandbox id="inventory.vendor" lookup="companies"/>
+						</row>
+						<row>
+						供应商地址:<!-- 供应商地址 --><a:bind value="vendor.address"/><itextbox id="vendor.address"/>
+						</row>
+						
+						<row>
+						制造商:<!-- 制造商 --><a:bind value="inventory.manufacturer"/><ibandbox id="inventory.manufacturer" lookup="companies2"/>
+						</row>						
+						</rows>
+					</grid>
+				</groupbox>
+				</hbox>
+				
+				<groupbox><caption label="其他信息" /><!-- 其他信息 -->
+					<grid>
+						<rows>
+	
+						
+						<row>
+						库存余量:<!-- 库存余量 --><a:bind value="inventory.sumcurbal"/><idoublebox id="inventory.sumcurbal" format="0.00"/>
+						可用余量:<!-- 可用余量--><a:bind value="inventory.sumreadyqty"/><idoublebox id="inventory.sumreadyqty" format="0.00"/>
+						</row>	
+						<row>
+						在订采购数量:<!-- 在订采购数量 --><a:bind value="inventory.sumpoorderqty"/><idoublebox id="inventory.sumpoorderqty" format="0.00"/>
+						预留数量:<!--预留数量  --><a:bind value="inventory.sumresqty"/><idoublebox id="inventory.sumresqty" format="0.00"/>
+						</row>
+						<row>
+						上次发放日期:<!-- 上次发放日期 --><a:bind value="inventory.lastissuedate"/><idatetimebox id="inventory.lastissuedate"/>
+						年累计发放数量:<!-- 年累计发放数量 --><a:bind value="inventory.issueytd"/><idoublebox id="inventory.issueytd" format="0.00"/>
+						</row>				
+												
+						</rows>
+					</grid>
+				</groupbox>
+				
+
+
+<!-- **********************************  批次余量 ********************************** -->	
+			
+			<tabbox width="100%">
+					<tabs>
+						<tab label="余量" width="70px"/><!-- 余量 -->
+						<tab label="批次" width="70px"/><!-- 批次 -->
+					</tabs>
+			<tabpanels width="100%">
+			<tabpanel>			
+				<listwindow id="invstock" title="余量" use="combiz.ui.inventory.InvstockList" dialog="/inventory/invstockdialog.xul" edittype="READONLY">
+					<tablelist band="invstock" pageSize="8"><!-- 余量 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="binnum" label="箱柜编号" sort="auto" width="20%"/><!-- 箱柜编号 -->
+							<tablelistheader data="lotnum" label="批次编号" sort="auto" width="20%"/><!-- 批次编号 -->
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="15%"/><!-- 当前余量 -->
+							<tablelistheader data="physcnt" label="物理盘点" sort="auto" width="15%"/><!-- 物理盘点 -->
+							<tablelistheader data="physcntdate" label="物理盘点日期" sort="auto" width="20%"/><!-- 物理盘点日期 -->
+							<tablelistheader data="reconciled" label="是否一致" sort="auto" width="10%"/><!-- 是否一致 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<tabpanel>			
+				<listwindow id="invlot" title="批次" use="combiz.ui.inventory.InvlotList" 	dialog="/inventory/invlotdialog.xul" edittype="READONLY">
+					<tablelist band="invlot" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="lotnum" label="批次编号" sort="auto" width="10%"/><!-- 批次编号 -->
+							<tablelistheader data="lotcost" label="批次单价" sort="auto" width="10%"/><!-- 批次单价 -->
+							<tablelistheader data="lotlinecost" label="行成本" sort="auto" width="15%"/><!-- 行成本 -->
+							<tablelistheader data="shelflife" label="有效期" sort="auto" width="15%"/><!-- 有效期 -->
+							<tablelistheader data="usebydate" label="使用日期" sort="auto" width="10%"/><!-- 使用日期 -->
+							<tablelistheader data="vendor" label="供应商" sort="auto" width="20%"/><!-- 供应商 -->
+							<tablelistheader data="manufacturer" label="制造商" sort="auto" width="20%"/><!-- 制造商 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>	
+		</tabpanels>	
+		</tabbox>
+		
+<!-- **********************************  //批次余量  ********************************** -->	
+
+
+
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+<!-- **********************************  供应商历史 ********************************** -->	
+			<tabpanel>			
+				<listwindow id="invvendor" title="供应商历史" use="combiz.ui.inventory.InvvendorList" dialog="/inventory/invvendordialog.xul" edittype="readonly">
+					<tablelist band="invvendor" pageSize="8"><!-- 供应商历史 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="vendor" label="供应商" sort="auto" width="10%"/><!--供应商  -->
+							<tablelistheader data="manufacturer" label="制造商" sort="auto" width="10%"/><!-- 制造商 -->
+							<tablelistheader data="modelnum" label="供应商型号" sort="auto" width="5%"/><!-- 供应商型号 -->
+							<tablelistheader data="taxcode" label="税代码" sort="auto" width="5%"/><!-- 税代码 -->
+
+							<tablelistheader data="bidprice" label="投标价格" sort="auto" width="10%"/><!-- 投标价格 -->
+							<tablelistheader data="biddate" label="投标日期" sort="auto" width="10%"/><!-- 投标日期 -->
+							<tablelistheader data="promtime" label="交货时间" sort="auto" width="10%"/><!-- 交货时间 -->
+							<tablelistheader data="lastcost" label="上次采购价格" sort="auto" width="10%"/><!-- 上次采购价格 -->
+
+							<tablelistheader data="lastdate" label="上次采购" sort="auto" width="10%"/><!-- 上次采购 -->
+							<tablelistheader data="orderunit" label="定购单位" sort="auto" width="10%"/><!-- 定购单位 -->
+							<tablelistheader data="isdefault" label="默认记录" sort="auto" width="10%"/><!-- 默认记录 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>			
+<!-- **********************************  //供应商历史  ********************************** -->	
+
+<!-- **********************************  库存交易 ********************************** -->	
+			<tabpanel>
+			<tabbox width="100%">
+					<tabs>
+						<tab label="物料事物处理" width="120px"/><!-- 物料事物处理 -->
+						<tab label="物料接收事物处理" width="140px"/><!-- 物料接收事物处理 -->
+						<tab label="物料发放事物处理" width="140px"/><!-- 物料发放事物处理 -->
+						<tab label="物料报废事物处理" width="140px"/><!-- 物料报废事物处理 -->
+					</tabs>
+			<tabpanels width="100%">
+			<tabpanel>			
+				<listwindow id="invtrans" title="物料事物处理" edittype="readonly" use="combiz.ui.inventory.InvtransList" dialog="/inventory/invtransdialog.xul" >
+					<tablelist band="invtrans" pageSize="8"><!-- 物料事物处理 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="10%"/><!-- 交易日期 -->
+							<tablelistheader data="transtype" label="交易类型" sort="auto" width="10%"/><!-- 交易类型 -->
+							<tablelistheader data="quantity" label="交易数量" sort="auto" width="10%"/><!-- 交易数量 -->
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="10%"/><!-- 当前余量 -->
+
+							<tablelistheader data="physcnt" label="盘点数量" sort="auto" width="10%"/><!-- 盘点数量 -->
+							<tablelistheader data="oldcost" label="调整前单价" sort="auto" width="10%"/><!-- 调整前单价 -->
+							<tablelistheader data="newcost" label="新单价" sort="auto" width="10%"/><!-- 新单价 -->
+
+							<tablelistheader data="linecost" label="行总价" sort="auto" width="10%"/><!-- 行总价 -->
+							<tablelistheader data="conversion" label="转换系数" sort="auto" width="10%"/><!-- 转换系数 -->
+							<tablelistheader data="enterby" label="录入人" sort="auto" width="10%"/><!--录入人 -->
+<!--
+							<tablelistheader data="memo" label="备忘" sort="auto" width="25%"/>
+							<tablelistheader data="binnum" label="箱柜编号" sort="auto" width="20%"/>
+							<tablelistheader data="lotnum" label="批次编号" sort="auto" width="20%"/>
+-->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>	
+			
+			<tabpanel>			
+				<listwindow id="invrectrans" title="物料接收事物处理" edittype="readonly" use="combiz.ui.inventory.InvrectransList" dialog="/inventory/invrectransdialog.xul">
+					<tablelist band="invrectrans" pageSize="8"><!-- 物料接收事物处理 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="15%"/><!-- 交易日期 -->
+							<tablelistheader data="quantity" label="交易数量" sort="auto" width="10%"/><!--交易数量  -->
+							<tablelistheader data="rejectqty" label="拒收数量" sort="auto" width="10%"/><!-- 拒收数量 -->
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="10%"/><!-- 当前余量 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="15%"/><!-- 单价 -->
+							<tablelistheader data="linecost" label="行总价" sort="auto" width="15%"/><!-- 行总价 -->
+							<tablelistheader data="conversion" label="转换系数" sort="auto" width="10%"/><!-- 转换系数 -->
+							<tablelistheader data="changeby" label="修改人" sort="auto" width="15%"/><!-- 修改人 -->
+							
+							
+							<!-- 
+							<tablelistheader data="actualdate" label="实际日期" sort="auto" width="10%"/>
+							<tablelistheader data="actualcost" label="实际单价" sort="auto" width="10%"/>
+							<tablelistheader data="loadedcost" label="载入的成本" sort="auto" width="10%"/>
+							 -->
+
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>	
+			
+			<tabpanel>			
+				<listwindow id="invusetrans" title="物料发放事物处理" edittype="readonly" use="combiz.ui.inventory.InvusetransList" dialog="/inventory/invusetransdialog.xul">
+					<tablelist band="invusetrans" pageSize="8"><!-- 物料发放事物处理 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							
+							<tablelistheader data="issuetype" label="发放类型" sort="auto" width="10%"/><!-- 发放类型 -->
+							<tablelistheader data="quantity" label="交易数量" sort="auto" width="15%"/><!-- 交易数量 -->
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="15%"/><!-- 当前余量 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="10%"/><!-- 单价 -->
+							<tablelistheader data="linecost" label="发放总价" sort="auto" width="10%"/><!--发放总价  -->
+							<tablelistheader data="conversion" label="转换系数" sort="auto" width="10%"/><!-- 转换系数 -->
+							<tablelistheader data="enterby" label="录入人" sort="auto" width="15%"/><!-- 录入人 -->
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="15%"/><!-- 交易日期 -->
+							<!-- 
+							<tablelistheader data="actualdate" label="实际日期" sort="auto" width="10%"/>
+							<tablelistheader data="physcnt" label="实际盘点数量" sort="auto" width="10%"/>
+							<tablelistheader data="actualcost" label="实际单价" sort="auto" width="10%"/>
+							 -->
+
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>	
+			
+			<tabpanel>			
+				<listwindow id="invrejecttrans" title="物料报废事物处理" edittype="readonly" use="combiz.ui.inventory.InvrectransList" dialog="/inventory/invrejecttransdialog.xul">
+					<tablelist band="invrejecttrans" pageSize="8"><!-- 物料报废事物处理 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="rectype" label="接收类型" sort="auto" width="10%"/><!-- 接收类型 -->
+							<tablelistheader data="quantity" label="报废数量" sort="auto" width="10%"/><!-- 报废数量 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="15%"/><!-- 单价 -->
+							<tablelistheader data="linecost" label="行总价" sort="auto" width="25%"/><!-- 行总价 -->
+							<tablelistheader data="conversion" label="转换系数" sort="auto" width="10%"/><!-- 转换系数 -->
+							<tablelistheader data="changeby" label="修改人" sort="auto" width="20%"/><!-- 修改人 -->
+							<tablelistheader data="transdate" label="报废日期" sort="auto" width="20%"/><!-- 报废日期 -->
+							
+							<!-- 
+							<tablelistheader data="actualdate" label="实际日期" sort="auto" width="10%"/>
+							<tablelistheader data="actualcost" label="实际单价" sort="auto" width="10%"/>
+							<tablelistheader data="rejectqty" label="拒收数量" sort="auto" width="5%"/>
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="10%"/>
+							<tablelistheader data="loadedcost" label="载入的成本" sort="auto" width="10%"/>
+							 -->
+
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>	
+			
+
+		</tabpanels>	
+		</tabbox>
+		</tabpanel>	
+<!-- **********************************  //库存交易  ********************************** -->	
+
+<!-- **********************************  预留 ********************************** -->	
+			<tabpanel>			
+				<listwindow id="invreserve" title="预留" use="combiz.ui.inventory.InvreserveList" dialog="/inventory/invreservedialog.xul" edittype="readonly">
+					<tablelist band="invreserve" pageSize="8"><!-- 预留 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="wonum" label="工单编号" sort="auto" width="15%"/><!-- 工单编号 -->
+							<tablelistheader data="reqnum" label="申请编号" sort="auto" width="15%"/><!-- 申请编号 -->
+							<tablelistheader data="actualqty" label="实际发放的数量" sort="auto" width="15%"/><!-- 实际发放的数量 -->
+							<tablelistheader data="reservedqty" label="预留数量" sort="auto" width="10%"/><!-- 预留数量 -->
+							<tablelistheader data="directreq" label="直接申请？" sort="auto" width="10%"/><!-- 直接申请？ -->
+
+							<tablelistheader data="reqby" label="申请人" sort="auto" width="15%"/><!--申请人  -->
+							<tablelistheader data="reqdate" label="申请的时间" sort="auto" width="10%"/><!-- 申请的时间 -->
+							<tablelistheader data="requireddate" label="需求日期" sort="auto" width="10%"/><!-- 需求日期 -->
+							<tablelistheader data="ponum" label="预留的采购单" sort="auto" width="15%"/><!-- 预留的采购单 -->
+<!--
+							<tablelistheader data="polinenum" label="预留的采购单行" sort="auto" width="10%"/>
+							<tablelistheader data="location" label="位置" sort="auto" width="10%"/>
+							<tablelistheader data="eqnum" label="设备编号" sort="auto" width="10%"/>
+							<tablelistheader data="issuetolabor" label="发放到员工" sort="auto" width="10%"/>
+-->							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>			
+<!-- **********************************  //预留  ********************************** -->	
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

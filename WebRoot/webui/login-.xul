@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="GBK"?>
+<?page id="topPage"?>
+<window id="loginWnd" use="combiz.system.ui.LoginWnd">
+<zscript><![CDATA[
+String copyrights = loginWnd.getCopyrights();
+String version = loginWnd.getVersion();
+String imagePath = loginWnd.getImagePath();
+String prodName = loginWnd.getProductName();
+]]></zscript>
+<html>
+<attribute name="content">
+<![CDATA[
+<script type="text/javascript">
+window.document.title="${prodName}";
+</script>
+<table border="0" cellpadding="0" cellspacing="0" width="1006" align="center">
+
+  <tr>
+   <td style="text-align: center;">
+	<img alt="" src="${imagePath}/blue/login_bg.jpg" width="969" height="385" style="float: right"></td>
+
+  </tr>
+  <tr>
+   <td>
+   
+   
+   <table style="width: 100%">
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 300px">
+
+]]>
+</attribute>
+</html>
+ 
+	<vbox>
+		
+		<hbox>
+			
+			<vbox height="84px">
+				<label value="用户名："/>
+				<label value="密  码："/>
+				<label value="导航菜单："/>
+			</vbox>
+			<vbox>
+				<hbox>
+				<iusernamebox value="admin"/><image id="selectUser" style="cursor:hand" onClick="loginWnd.selectUser()" src="/images/node_image_dept.gif"/>
+				</hbox>
+				<hbox>
+				<ipasswordbox value="admin"/>
+				
+				</hbox>
+				<hbox>
+				<combobox id="navtype" width="80px" value="默认">
+						<comboitem label="菜单" description="单个菜单导航模式"/>
+						<comboitem label="树形" description="树形菜单导航模式"/>
+						<comboitem label="横向" description="横向菜单导航模式"/>
+				</combobox>
+				<button id="loginAction" label=" 登     录 " style="cursor:hand" onClick="loginWnd.onLogin()"/>
+				</hbox>
+			</vbox>
+		</hbox>
+		<label id="uiMessage"/>
+	</vbox>
+	
+<html>	
+<attribute name="content">	
+<![CDATA[
+
+</td>
+	</tr>
+	</table>
+	
+	
+	</td>
+  </tr>
+  <tr>
+   <td>
+   
+   <table style="width: 100%">
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 300px">
+		
+		<img alt="" src="${imagePath}/blue/login_bg_cpr.gif" width="235" height="31"></td>
+	</tr>
+	</table>
+	
+	
+	</td>
+   
+  </tr>
+</table>
+
+
+]]>
+</attribute>
+</html>
+
+</window>

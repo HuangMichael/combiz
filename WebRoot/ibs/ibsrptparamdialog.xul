@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="报表参数配置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						参数名-英文:<a:bind value="ibsrptparam.paramname"/><itextbox id="ibsrptparam.paramname"/>
+						参数描述-中文:<a:bind value="ibsrptparam.description"/><itextbox id="ibsrptparam.description" cols="40"/>
+						</row>
+						<row spans="4">
+						备注：参数名是传递给报表的参数的名称，必须与报表中的参数名相同；中文描述会显示在参数传递页面上。
+						</row>
+						<row>
+						参数字段：<a:bind value="ibsrptparam.paramfield"/><ibandbox id="ibsrptparam.paramfield" lookup="ibstablecols"/>
+						默认值：<a:bind value="ibsrptparam.paramvalue"/><itextbox id="ibsrptparam.paramvalue"/>
+						</row>
+						<row spans="1,1,2">
+						自动获取值？:	<a:bind value="ibsrptparam.autodata"/><icheckbox id="ibsrptparam.autodata"/>是否可以从报表所在的主对象中获取值？
+						</row>
+						<row>
+						查找类型：<a:bind value="ibsrptparam.lookuptype"/><icombobox id="ibsrptparam.lookuptype"/>
+						参数排列：<a:bind value="ibsrptparam.parampos"/><ilongbox id="ibsrptparam.parampos"/>
+						</row>
+						
+						<row spans="1,3">
+						查找值列表：<a:bind value="ibsrptparam.lookuplist"/><ibandbox id="ibsrptparam.lookuplist" lookup="ibslist"/>
+						</row>
+						
+						<row spans="1,3">
+						查找页面：<a:bind value="ibsrptparam.lookupfile"/><itextbox id="ibsrptparam.lookupfile" cols="40"/>
+						</row>
+						
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

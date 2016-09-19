@@ -1,0 +1,129 @@
+#################################################################
+# ORACLE数据库连接配置
+#################################################################
+######数据库
+dialect = org.hibernate.dialect.Oracle9Dialect
+######数据库连接驱动
+driver = oracle.jdbc.driver.OracleDriver
+######数据库连接URL串
+##服务器数据库#####
+url = jdbc:oracle:thin:@192.168.1.100:1521:std
+######数据库连接用户
+username = inbasis
+######数据库连接密码 
+password = ___007a00200068006e001700bc0058
+######密码是否加密
+pwdencrypt=true
+######是否在后台打印SQL语句
+showsql=false
+######初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3
+initialPoolSize = 10
+######连接池中保留的最小连接数。
+minPoolSize = 5
+######连接池中保留的最大连接数。Default: 15
+maxPoolSize = 30
+######当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3
+acquireIncrement = 5
+
+
+
+
+#################################################################
+# MS SQLServer数据库连接配置
+#################################################################
+######数据库
+dialect = org.hibernate.dialect.SQLServerDialect
+######数据库连接驱动
+driver = com.microsoft.sqlserver.jdbc.SQLServerDriver
+######数据库连接URL串
+url = jdbc:sqlserver://localhost:1433;databaseName=sbiz
+######数据库连接用户
+username = sa
+######数据库连接密码
+password = sa
+##___0060002f
+######密码是否加密
+pwdencrypt=false
+######是否在后台打印SQL语句
+showsql=false
+######初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3
+initialPoolSize = 5
+######连接池中保留的最小连接数。
+minPoolSize = 5
+######连接池中保留的最大连接数。Default: 15
+maxPoolSize = 50
+######当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3
+acquireIncrement = 5
+
+
+
+#################################################################
+# MSSQLServer 2000 数据库连接驱动程序 
+# 使用新的报表引擎，请使用下面微软提供的驱动，如果使用net.sourceforge.jtds.jdbc.Driver会出现select语句报错。
+#################################################################
+com.microsoft.jdbc.sqlserver.SQLServerDriver
+jdbc:sqlserver://localhost:1433;databaseName=sbiz
+
+#################################################################
+# MSSQLServer 2005 数据库连接驱动程序
+# 使用新的报表引擎，请使用下面微软提供的驱动，如果使用net.sourceforge.jtds.jdbc.Driver会出现select语句报错。
+#################################################################
+com.microsoft.sqlserver.jdbc.SQLServerDriver
+jdbc:sqlserver://localhost:1433;databaseName=sbiz
+
+
+
+
+#################################################################
+# Derby数据库连接配置
+#################################################################
+######数据库
+dialect = org.hibernate.dialect.DerbyDialect
+######数据库连接驱动
+driver = org.apache.derby.jdbc.EmbeddedDriver
+######数据库连接URL串
+##服务器数据库#####
+url = jdbc:derby:D:\\std
+######数据库连接用户
+username = inbasis
+######数据库连接密码 
+password = inbasis
+######密码是否加密
+pwdencrypt=false
+######是否在后台打印SQL语句
+showsql=false
+######初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3
+initialPoolSize = 10
+######连接池中保留的最小连接数。
+minPoolSize = 5
+######连接池中保留的最大连接数。Default: 15
+maxPoolSize = 30
+######当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3
+acquireIncrement = 5
+
+
+
+**********************************************************
+报表数据库连接配置--oracle：
+**********************************************************
+<JDBCDatabaseAttr url="jdbc:oracle:thin:@localhost:1521:std" driver="oracle.jdbc.driver.OracleDriver" user="inbasis" password="___007a00200068006e001700bc0058"
+ encryptPassword="true" />
+
+
+**********************************************************
+报表数据库连接配置--MS SQLserver：
+**********************************************************
+<JDBCDatabaseAttr url="jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=std0612" driver="com.microsoft.jdbc.sqlserver.SQLServerDriver" user="sa" password="___0060002f"
+ encryptPassword="true" />
+
+<JDBCDatabaseAttr url="jdbc:jtds:sqlserver://localhost:1433/std0612" driver="net.sourceforge.jtds.jdbc.Driver" user="sa" password="___0060002f"
+ encryptPassword="true" />
+ 
+
+
+
+**********************************************************
+报表数据库连接配置--derby：
+**********************************************************
+<JDBCDatabaseAttr url="jdbc:derby://localhost:1527/std" driver="org.apache.derby.jdbc.ClientDriver" user="inbasis" password="___007a00200068006e001700bc0058"
+ encryptPassword="true" />

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<mainwindow app="department" title="部门" resize="true" use="combiz.ui.corp.DepartmentWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="部门"/>
+<tree use="combiz.ui.corp.DepartmentTree" width="180"/>
+</groupbox>
+<!--
+<splitter collapse="before"/>
+-->
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="部门" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"department.parent","department.haschild"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						部门:<a:bind value="department.deptnum"/><itextbox id="department.deptnum"/>
+						描述:<a:bind value="department.description"/><itextbox id="department.description" cols="60"/>
+						</row>
+						<row>
+						上级部门:<a:bind value="department.parent"/><itextbox id="department.parent"/>
+						有子部门：<a:bind value="department.haschild"/><icheckbox id="department.haschild"/>
+						</row>
+						<row>
+						负责人:<a:bind value="department.supervisor"/><ibandbox id="department.supervisor" lookup="labor"/>
+						排序：<a:bind value="department.orderby"/><ilongbox id="department.orderby" cols="5"/>
+						</row>
+						
+						<!--<row>
+						类型：<a:bind value="department.craft"/><icombobox id="department.craft"/>
+						有效：<a:bind value="department.enabled"/><icheckbox id="department.enabled"/>
+						</row>
+						-->
+						
+					</rows>
+				</grid>
+
+				 <listwindow id="deptlaborTable" edittype="readonly" applink="labor" title="人员信息" dialog="/corp/deptlabordialog.xul">
+					<tablelist band="deptlaborTable" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="labornum" label="人员" sort="auto" width="20%"/>
+							<tablelistheader data="laborname" label="姓名" sort="auto" width="20%"/>
+							<tablelistheader data="deptnum" label="部门" sort="auto" width="20%"/>
+							<tablelistheader data="craft" label="专业" sort="auto" width="20%"/>
+							<tablelistheader data="jobcode" label="职务" sort="auto" width="20%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

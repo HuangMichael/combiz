@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="cable">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select 
+	wk.WORKDEPT,wk.TICKETNUM,wk.PRINCIPAL,wk.DEPTGROUP,
+	wk.WORKUSER,wk.REMARK3,wk.STARTDATE,wk.ENDDATE,
+	wt.ADDRESS,wt.WORKCONTENT,
+	wa.name,wa.ISEXECUTE,
+	wf.name as name22,wf.ISEXECUTE as ISEXECUTE22,
+	wha.ELENAME,wha.NOTICE as 注意事项,
+	wk.SIGNATORY,wk.INCEPTDATE,wk.INCEPTMAN,
+	wk.FIATDATE as 在变电所许可时间,
+	wk.FIATUSER1,wk.PRINCIPAL1,
+	wk.ADDPEOPLE as 新增人姓名,
+	wk.ADDTIME as 新增人时间,
+	wk.WORKADDPEOPLE as 新增人负责人,
+	wk.AWAYPEOPLE as 离去人员姓名,
+	wk.AWAYTIME as 离去时间,
+	wk.WORKSTEERPEOPLE as 离去负责人,
+	wk.PRINCIPAL3 as 原来负责人,
+	wk.NEWPRINCIPAL as 新负责人,
+	wk.CHANGEDATE as 变更时间,
+	wk.SIGNATORY1 as 签发人,
+	wd.NEWDATE as 有效期,
+	wd.PRINCIPAL as 工作负责人,
+	wd.FIATUSER as 值班负责人,
+	wtime.FINALTIME as 收工时间,
+	wtime.PRINCIPAL1 as 收工负责人,
+	wtime.FIATUSER1 as 收工许可人,
+	wtime.STARTTIME as 开工时间,
+	wtime.PRINCIPAL2 as 开工负责人,
+	wtime.FIATUSER2 as 开工许可人,
+	wosa.WARDSTATION as 监护地点,
+	wosa.WARDUSER as 监护人,
+	wosa.WORKCONTENT as 具体工作内容,
+	wk.FINALTIME as 结束日期,
+	wk.PRINCIPAL5 as 结束负责人,
+	wk.FIATUSER4 as 结束许可人
+from
+	WORKTICKET wk
+	left join WOWORKTASK wt on wt.wonum = wk.wonum
+	left join WOSAFETY wa on wa.wonum = wk.wonum
+	left join WOSAFETYLINE wf on wf.wonum = wk.wonum
+	left join WOHAVEELE wha on wha.wonum = wk.wonum
+	left join WORKDEFER wd on wd.wonum = wk.wonum
+	left join WOSTARTENDTIME wtime on wtime.wonum = wk.wonum
+	left join WOSAFECONTROL wosa on wosa.wonum = wk.wonum
+where wk.wonum = '[?wonum|?]' ]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,19.0,19.0,37.0,20.0,19.0,19.0,19.0,19.0,19.0,20.0,19.0,19.0,34.0,19.0,19.0,30.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,33.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,22.5,22.5,19.0,19.0,20.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="0" cs="9" rs="4" s="0"><O t="S">电力电缆第一种工作票</O></C>
+<C c="0" r="4" s="1"><O t="S">单位:</O></C>
+<C c="1" r="4" cs="5" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="WORKDEPT" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="4" s="1"><O t="S">编号</O></C>
+<C c="7" r="4" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="TICKETNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="5" cs="2" s="2"><O t="S">1.工作负责人  （监护人）：</O></C>
+<C c="2" r="5" cs="4" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="PRINCIPAL" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="5" s="1"><O t="S">班组：</O></C>
+<C c="7" r="5" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="DEPTGROUP" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="6" cs="9" s="1"><O t="S">2.工作班人员：</O></C>
+<C c="0" r="7" cs="9" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="WORKUSER" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="8" cs="7" s="3"><O t="S">共</O></C>
+<C c="7" r="8" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="REMARK3" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="8" s="1"><O t="S">人</O></C>
+<C c="0" r="9" cs="9" s="1"><O t="S">3.工作地点（地段）和内容：</O></C>
+<C c="0" r="10" cs="4" s="1"><O t="S">工作地点</O></C>
+<C c="4" r="10" cs="5" s="1"><O t="S">内容:</O></C>
+<C c="0" r="11" cs="4" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ADDRESS" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="11" cs="5" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ENDDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="12" cs="2" s="1"><O t="S">4.计划工作时间    自</O></C>
+<C c="2" r="12" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="STARTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="12" s="1"><O t="S">至</O></C>
+<C c="6" r="12" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="STARTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="13" cs="9" s="1"><O t="S">5.安全措施：</O></C>
+<C c="0" r="14" cs="9" s="1"><O t="S">⑴变电部分</O></C>
+<C c="0" r="15" cs="6" s="2"><O t="S">下列由工作票签发人填写</O></C>
+<C c="6" r="15" cs="3" s="2"><O t="S">下列由工作许可人（变电值班员） 填写</O></C>
+<C c="0" r="16" cs="6" s="2"><O t="S">应拉开关和刀闸，包括填写前已 拉开关和刀闸注明编号 </O></C>
+<C c="6" r="16" cs="3" s="2"><O t="S">已拉开关和刀闸（注明编号）</O></C>
+<C c="0" r="17" cs="6" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="name" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="17" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ISEXECUTE" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="18" cs="6" s="2"><O t="S">应装接地线（注明确实地点）</O></C>
+<C c="6" r="18" cs="3" s="2"><O t="S">已装接地线    （注明接地线编号和装设地点）</O></C>
+<C c="0" r="19" cs="6" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="name22" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="19" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ISEXECUTE22" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="20" cs="6" s="2"><O t="S">应设遮栏、应挂标示牌：</O></C>
+<C c="6" r="20" cs="3" s="2"><O t="S">已设遮栏、已挂标示牌（注明地点）</O></C>
+<C c="0" r="21" cs="6" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="name33" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="21" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ISEXECUTE333" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="22" cs="9" s="1"><O t="S">⑵线路部分</O></C>
+<C c="0" r="23" cs="9" s="1"><O t="S">应拉开的开关（断路器）、刀闸（隔离开关）：</O></C>
+<C c="0" r="24" cs="9" s="1"><O t="S"></O></C>
+<C c="0" r="25" cs="9" s="1"><O t="S">应挂接地线：</O></C>
+<C c="0" r="26" cs="2" s="2"><O t="S">线路名称及杆号</O></C>
+<C c="2" r="26" cs="2" s="2"><O t="S">接地线编号</O></C>
+<C c="4" r="26" cs="2" s="2"><O t="S">线路名称及杆号</O></C>
+<C c="6" r="26" cs="3" s="2"><O t="S">接地线编号</O></C>
+<C c="0" r="27" cs="2" s="1"><O t="S"></O></C>
+<C c="2" r="27" cs="2" s="1"><O t="S"></O></C>
+<C c="4" r="27" cs="2" s="1"><O t="S"></O></C>
+<C c="6" r="27" cs="3" s="1"><O t="S"></O></C>
+<C c="0" r="28" cs="9" s="1"><O t="S">⑶工作地点临近保留带电部分：</O></C>
+<C c="0" r="29" cs="9" rs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="ELENAME" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="32" cs="9" s="1"><O t="S">⑷补充安全措施（或注意事项）：</O></C>
+<C c="0" r="33" cs="9" rs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="注意事项" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="36" cs="9" s="1"><O t="S">⑸画图说明（红色为带电部分）：</O></C>
+<C c="0" r="37" cs="9" rs="8" s="1"><O t="S"></O></C>
+<C c="0" r="45" cs="2" s="1"><O t="S">工作票签发人签名：</O></C>
+<C c="2" r="45" cs="7" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="SIGNATORY" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="46" cs="3" s="1"><O t="S">6.变电所收到工作票时间： </O></C>
+<C c="3" r="46" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="INCEPTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="46" cs="2" s="1"><O t="S">值班负责人签名：</O></C>
+<C c="8" r="46" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="INCEPTMAN" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="47" cs="2" s="1"><O t="S">7.会签  值班员姓名：</O></C>
+<C c="2" r="47" cs="2" s="1"><O t="S"></O></C>
+<C c="4" r="47" s="1"><O t="S">会签时间：</O></C>
+<C c="5" r="47" cs="4" s="2"><O t="S"></O></C>
+<C c="0" r="48" cs="9" s="1"><O t="S">8.许可工作：</O></C>
+<C c="0" r="49" cs="4" s="1"><O t="S">⑴在变电所内的电缆工作许可开始时间：</O></C>
+<C c="4" r="49" cs="5" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="FIATDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="50" cs="2" s="1"><O t="S">工作许可人签名：</O></C>
+<C c="2" r="50" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="FIATUSER1" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="50" cs="2" s="1"><O t="S">工作负责人签名：</O></C>
+<C c="6" r="50" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="PRINCIPAL1" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="51" cs="4" s="1"><O t="S">⑵在线路上的电缆工作许可工作开始时间：</O></C>
+<C c="4" r="51" cs="5" s="2"><O t="S"></O></C>
+<C c="0" r="52" s="1"><O t="S">许可方式</O></C>
+<C c="1" r="52" cs="2" s="1"><O t="S"></O></C>
+<C c="3" r="52" s="1"><O t="S">许可人签名</O></C>
+<C c="4" r="52" cs="5" s="1"><O t="S"></O></C>
+<C c="0" r="53" cs="2" s="1"><O t="S">工作负责人签名</O></C>
+<C c="2" r="53" cs="2" s="1"><O t="S"></O></C>
+<C c="4" r="53" cs="2" s="1"><O t="S">⑶开始工作时间：</O></C>
+<C c="6" r="53" cs="3" s="1"><O t="S"></O></C>
+<C c="0" r="54" cs="9" s="1"><O t="S">9．⑴工作班人员变动</O></C>
+<C c="0" r="55" s="2"><O t="S">增添人员 姓名:</O></C>
+<C c="1" r="55" cs="2" s="2"><O t="S">添加时间</O></C>
+<C c="3" r="55" s="2"><O t="S">工作负责人签名</O></C>
+<C c="4" r="55" s="2"><O t="S">离去人员 姓名</O></C>
+<C c="5" r="55" cs="2" s="2"><O t="S">离去时间</O></C>
+<C c="7" r="55" cs="2" s="2"><O t="S">工作负责人签名</O></C>
+<C c="0" r="56" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="新增人姓名" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="56" cs="2" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="新增人时间" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="56" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="新增人负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="56" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="离去人员姓名" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="56" cs="2" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="离去时间" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="56" cs="2" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="离去负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="57" cs="9" s="1"><O t="S">⑵工作负责人变动：</O></C>
+<C c="0" r="58" cs="2" s="2"><O t="S">原工作负责人</O></C>
+<C c="2" r="58" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="原来负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="58" s="2"><O t="S">离去、变更</O></C>
+<C c="5" r="58" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="新负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="58" cs="2" s="2"><O t="S">为工作负责人。</O></C>
+<C c="0" r="59" s="2"><O t="S">变动时间</O></C>
+<C c="1" r="59" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="变更时间" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="59" cs="2" s="1"><O t="S">工作票签发人签名：</O></C>
+<C c="5" r="59" cs="4" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="签发人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="60" cs="9" s="1"><O t="S">10.工作票改期：</O></C>
+<C c="0" r="61" cs="2" s="2"><O t="S">工作票有效期改到:</O></C>
+<C c="2" r="61" cs="2" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="有效期" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="61" cs="2" s="2"><O t="S">工作负责人签名：</O></C>
+<C c="6" r="61" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="工作负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="62" cs="2" s="2"><O t="S">值班负责人签名：</O></C>
+<C c="2" r="62" cs="7" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="值班负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="63" cs="9" s="1"><O t="S">11.每日开工和收工时间（使用一天的工作票不必填写）：</O></C>
+<C c="0" r="64" cs="4" rs="2" s="1"><O t="S">工作人员退出，材料工具清理完毕，工作票交回。</O></C>
+<C c="4" r="64" s="4"><O t="S"></O></C>
+<C c="5" r="64" cs="4" rs="2" s="1"><O t="S">安全措施已做好，许可工作。</O></C>
+<C c="4" r="65" s="5"><O t="S"></O></C>
+<C c="0" r="66" cs="2" rs="2" s="2"><O t="S">收 工 时 间</O></C>
+<C c="2" r="66" rs="2" s="2"><O t="S">工作负责人签名 </O></C>
+<C c="3" r="66" rs="2" s="2"><O t="S">工作许可人签名</O></C>
+<C c="4" r="66" s="5"><O t="S"></O></C>
+<C c="5" r="66" cs="2" rs="2" s="2"><O t="S">开 工 时 间</O></C>
+<C c="7" r="66" rs="2" s="2"><O t="S">工作负责人签名 </O></C>
+<C c="8" r="66" rs="2" s="2"><O t="S">工作许可人签名</O></C>
+<C c="4" r="67" s="5"><O t="S"></O></C>
+<C c="0" r="68" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="收工时间" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="68" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="收工负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="68" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="收工许可人" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="68" s="6"><O t="S"></O></C>
+<C c="5" r="68" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="开工时间" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="68" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="开工负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="68" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="开工许可人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="69" cs="9" s="1"><O t="S">12.本次作业危险点：</O></C>
+<C c="0" r="70" s="2"><O t="S">序号</O></C>
+<C c="1" r="70" cs="4" s="2"><O t="S">危 险 点 内 容</O></C>
+<C c="5" r="70" cs="4" s="2"><O t="S">危 险 点 控 制 措 施</O></C>
+<C c="0" r="71" s="1"><O t="S"></O></C>
+<C c="1" r="71" cs="4" s="2"><O t="DSColumn"><Attributes dsName="cable" columnName="具体工作内容" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="71" cs="4" s="1"><O t="S"></O></C>
+<C c="0" r="72" cs="9" rs="2" s="1"><O t="S">13．交工作任务、交安全措施： 本人对工作负责人交待工作项目的安全措施已明确无误，所有安全措施能够确保我的工作安全。 </O></C>
+<C c="0" r="74" cs="2" s="1"><O t="S"> 工作班成员签名</O></C>
+<C c="2" r="74" s="1"><O t="S"></O></C>
+<C c="3" r="74" s="1"><O t="S"></O></C>
+<C c="4" r="74" s="1"><O t="S"></O></C>
+<C c="5" r="74" s="1"><O t="S"></O></C>
+<C c="6" r="74" s="1"><O t="S"></O></C>
+<C c="7" r="74" s="1"><O t="S"></O></C>
+<C c="8" r="74" s="1"><O t="S"></O></C>
+<C c="0" r="75" s="1"><O t="S"></O></C>
+<C c="1" r="75" s="1"><O t="S"></O></C>
+<C c="2" r="75" s="1"><O t="S"></O></C>
+<C c="3" r="75" s="1"><O t="S"></O></C>
+<C c="4" r="75" s="1"><O t="S"></O></C>
+<C c="5" r="75" s="1"><O t="S"></O></C>
+<C c="6" r="75" s="1"><O t="S"></O></C>
+<C c="7" r="75" s="1"><O t="S"></O></C>
+<C c="8" r="75" s="1"><O t="S"></O></C>
+<C c="0" r="76" s="1"><O t="S"></O></C>
+<C c="1" r="76" s="1"><O t="S"></O></C>
+<C c="2" r="76" s="1"><O t="S"></O></C>
+<C c="3" r="76" s="1"><O t="S"></O></C>
+<C c="4" r="76" s="1"><O t="S"></O></C>
+<C c="5" r="76" s="1"><O t="S"></O></C>
+<C c="6" r="76" s="1"><O t="S"></O></C>
+<C c="7" r="76" s="1"><O t="S"></O></C>
+<C c="8" r="76" s="1"><O t="S"></O></C>
+<C c="0" r="77" s="1"><O t="S"></O></C>
+<C c="1" r="77" s="1"><O t="S"></O></C>
+<C c="2" r="77" s="1"><O t="S"></O></C>
+<C c="3" r="77" s="1"><O t="S"></O></C>
+<C c="4" r="77" s="1"><O t="S"></O></C>
+<C c="5" r="77" s="1"><O t="S"></O></C>
+<C c="6" r="77" s="1"><O t="S"></O></C>
+<C c="7" r="77" s="1"><O t="S"></O></C>
+<C c="8" r="77" s="1"><O t="S"></O></C>
+<C c="0" r="78" s="1"><O t="S"></O></C>
+<C c="1" r="78" s="1"><O t="S"></O></C>
+<C c="2" r="78" s="1"><O t="S"></O></C>
+<C c="3" r="78" s="1"><O t="S"></O></C>
+<C c="4" r="78" s="1"><O t="S"></O></C>
+<C c="5" r="78" s="1"><O t="S"></O></C>
+<C c="6" r="78" s="1"><O t="S"></O></C>
+<C c="7" r="78" s="1"><O t="S"></O></C>
+<C c="8" r="78" s="1"><O t="S"></O></C>
+<C c="0" r="79" s="1"><O t="S"></O></C>
+<C c="1" r="79" s="1"><O t="S"></O></C>
+<C c="2" r="79" s="1"><O t="S"></O></C>
+<C c="3" r="79" s="1"><O t="S"></O></C>
+<C c="4" r="79" s="1"><O t="S"></O></C>
+<C c="5" r="79" s="1"><O t="S"></O></C>
+<C c="6" r="79" s="1"><O t="S"></O></C>
+<C c="7" r="79" s="1"><O t="S"></O></C>
+<C c="8" r="79" s="1"><O t="S"></O></C>
+<C c="0" r="80" cs="9" s="1"><O t="S">14．工作终结：</O></C>
+<C c="0" r="81" cs="3" s="1"><O t="S">⑴变电所内的电缆工作于</O></C>
+<C c="3" r="81" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="结束日期" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="81" cs="4" s="1"><O t="S">结束。工作班人员已全部撤离，现场已清理完毕。</O></C>
+<C c="0" r="82" cs="2" s="1"><O t="S">工作负责人签名：</O></C>
+<C c="2" r="82" cs="2" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="结束负责人" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="82" cs="2" s="1"><O t="S">变电所工作许可人签名：</O></C>
+<C c="6" r="82" cs="3" s="1"><O t="DSColumn"><Attributes dsName="cable" columnName="结束许可人" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="83" cs="2" s="1"><O t="S">变电所内接地线共</O></C>
+<C c="2" r="83" s="1"><O t="S"></O></C>
+<C c="3" r="83" cs="2" s="1"><O t="S">组、接地刀闸共</O></C>
+<C c="5" r="83" s="1"><O t="S"></O></C>
+<C c="6" r="83" s="1"><O t="S">组,于</O></C>
+<C c="7" r="83" cs="2" s="1"><O t="S"></O></C>
+<C c="0" r="84" cs="3" s="1"><O t="S">已拆除接地线  组，接地刀闸</O></C>
+<C c="3" r="84" s="1"><O t="S"></O></C>
+<C c="4" r="84" s="1"><O t="S">组</O></C>
+<C c="5" r="84" s="1"><O t="S"></O></C>
+<C c="6" r="84" s="1"><O t="S"></O></C>
+<C c="7" r="84" s="1"><O t="S"></O></C>
+<C c="8" r="84" s="1"><O t="S"></O></C>
+<C c="0" r="85" cs="2" s="1"><O t="S">工作许可人签名：</O></C>
+<C c="2" r="85" s="1"><O t="S"></O></C>
+<C c="3" r="85" cs="2" s="1"><O t="S">值班负责人签名：</O></C>
+<C c="5" r="85" s="1"><O t="S"></O></C>
+<C c="6" r="85" s="1"><O t="S"></O></C>
+<C c="7" r="85" s="1"><O t="S"></O></C>
+<C c="8" r="85" s="1"><O t="S"></O></C>
+<C c="0" r="86" cs="4" s="1"><O t="S">⑵线路上的电缆工作终结人报告：报告时间</O></C>
+<C c="4" r="86" s="1"><O t="S"></O></C>
+<C c="5" r="86" s="1"><O t="S">报告方式</O></C>
+<C c="6" r="86" s="1"><O t="S"></O></C>
+<C c="7" r="86" s="1"><O t="S">许可人签名</O></C>
+<C c="8" r="86" s="1"><O t="S"></O></C>
+<C c="0" r="87" cs="2" s="2"><O t="S">工作负责人签名:</O></C>
+<C c="2" r="87" cs="7" s="1"><O t="S"></O></C>
+<C c="0" r="88" cs="9" s="1"><O t="S">15．备注：</O></C>
+<C c="0" r="89" cs="9" rs="5" s="1"><O t="S"></O></C>
+<C c="0" r="94" cs="9" s="1"><O t="S">16．工作票检查：</O></C>
+<C c="0" r="95" cs="2" s="3"><O t="S">本工作票已于</O></C>
+<C c="2" r="95" cs="2" s="1"><O t="S"></O></C>
+<C c="4" r="95" s="1"><O t="S">检查，合格</O></C>
+<C c="5" r="95" s="2"><O t="S">(   )</O></C>
+<C c="6" r="95" s="1"><O t="S">不合格</O></C>
+<C c="7" r="95" s="2"><O t="S">(   )</O></C>
+<C c="8" r="95" s="1"><O t="S"></O></C>
+<C c="0" r="96" cs="2" s="1"><O t="S">检查人签名：</O></C>
+<C c="2" r="96" cs="7" s="1"><O t="S"></O></C>
+<C c="0" r="97" cs="2" s="1"><O t="S">存在问题：</O></C>
+<C c="2" r="97" cs="7" s="1"><O t="S"></O></C>
+<C c="0" r="98" cs="9" rs="4" s="1"><O t="S"></O></C>
+<C c="0" r="102"><O t="S"></O></C>
+<C c="1" r="102"><O t="S"></O></C>
+<C c="2" r="102"><O t="S"></O></C>
+<C c="3" r="102"><O t="S"></O></C>
+<C c="4" r="102"><O t="S"></O></C>
+<C c="5" r="102"><O t="S"></O></C>
+<C c="6" r="102"><O t="S"></O></C>
+<C c="7" r="102"><O t="S"></O></C>
+<C c="8" r="102"><O t="S"></O></C>
+<C c="0" r="103"><O t="S"></O></C>
+<C c="1" r="103"><O t="S"></O></C>
+<C c="2" r="103"><O t="S"></O></C>
+<C c="3" r="103"><O t="S"></O></C>
+<C c="4" r="103"><O t="S"></O></C>
+<C c="5" r="103"><O t="S"></O></C>
+<C c="6" r="103"><O t="S"></O></C>
+<C c="7" r="103"><O t="S"></O></C>
+<C c="8" r="103"><O t="S"></O></C>
+<C c="0" r="104"><O t="S"></O></C>
+<C c="1" r="104"><O t="S"></O></C>
+<C c="2" r="104"><O t="S"></O></C>
+<C c="3" r="104"><O t="S"></O></C>
+<C c="4" r="104"><O t="S"></O></C>
+<C c="5" r="104"><O t="S"></O></C>
+<C c="6" r="104"><O t="S"></O></C>
+<C c="7" r="104"><O t="S"></O></C>
+<C c="8" r="104"><O t="S"></O></C>
+<C c="0" r="105"><O t="S"></O></C>
+<C c="1" r="105"><O t="S"></O></C>
+<C c="2" r="105"><O t="S"></O></C>
+<C c="3" r="105"><O t="S"></O></C>
+<C c="4" r="105"><O t="S"></O></C>
+<C c="5" r="105"><O t="S"></O></C>
+<C c="6" r="105"><O t="S"></O></C>
+<C c="7" r="105"><O t="S"></O></C>
+<C c="8" r="105"><O t="S"></O></C>
+<C c="0" r="106"><O t="S"></O></C>
+<C c="1" r="106"><O t="S"></O></C>
+<C c="2" r="106"><O t="S"></O></C>
+<C c="3" r="106"><O t="S"></O></C>
+<C c="4" r="106"><O t="S"></O></C>
+<C c="5" r="106"><O t="S"></O></C>
+<C c="6" r="106"><O t="S"></O></C>
+<C c="7" r="106"><O t="S"></O></C>
+<C c="8" r="106"><O t="S"></O></C>
+<C c="0" r="107"><O t="S"></O></C>
+<C c="1" r="107"><O t="S"></O></C>
+<C c="2" r="107"><O t="S"></O></C>
+<C c="3" r="107"><O t="S"></O></C>
+<C c="4" r="107"><O t="S"></O></C>
+<C c="5" r="107" cs="4" s="7"><O t="S">华科软</O><BarcodeAttr type="1" /></C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="42" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+</StyleList>
+</WorkBook>

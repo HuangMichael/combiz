@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DatasourceManager xmlVersion="20091224"><ConnectionMap><Connection name="inbasis" class="com.fr.data.impl.JDBCDatabaseConnection"><DatabaseAttr/><JDBCDatabaseAttr url="jdbc:oracle:thin:@localhost:1521:com" driver="oracle.jdbc.driver.OracleDriver" user="combiz" password="___007000210067006d000d00af" encryptPassword="true"><DBCPAttr/></JDBCDatabaseAttr></Connection></ConnectionMap></DatasourceManager>

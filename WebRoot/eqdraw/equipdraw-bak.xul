@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="GBK"?>
+<tmainwindow app="equipdraw" title="图形设备" resize="true" use="combiz.system.eqdraw.EquipdrawWindow"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- **********************************  结果树页面 ********************************** -->
+	<hbox>
+		<groupbox>
+			<caption label="图形设备目录" />
+			<tree use="combiz.system.eqdraw.EquipdrawLibTree" width="180" />
+		</groupbox>
+		<!-- ********************************** //结果树页面 ********************************** -->
+		<vbox width="99%">
+			<listwindow id="document" title="设备图" use="combiz.system.eqdraw.DocumentList" 
+			dialog="/eqdraw/documentdialog.xul">
+				<tablelist band="document" pageSize="10">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="docnum" label="文档编号" sort="auto" width="10%" />
+						<tablelistheader data="description" label="描述" sort="auto" width="60%" />
+						<tablelistheader data="creator" label="创建人" sort="auto" width="10%" />
+						<tablelistheader data="createdate" label="创建日期" sort="auto" width="20%" />
+					</listhead>
+					<tablelistfoot />
+				</tablelist>
+			</listwindow>
+			<div align="left">
+				<iframe id="hiddenIframe" visible="false"/>
+				<button label="编 辑 设 备 图" onClick="mainWnd.redraw()"/><space/>
+				提示：编辑图形设备需要客户端安装JRE1.5以上版本，如果不能显示图形编辑器，
+				<label value="请点击此处下载JRE安装文件。" style="color: green; font-weight: bold;cursor:hand" onClick="mainWnd.downloadJRE()"/>
+				</div>
+			<!-- 子表 -->
+			<tabbox width="100%">
+				<tabs>
+					<tab label="版本列表"></tab>
+					<tab label="访问权限"></tab>
+				</tabs>
+				<tabpanels width="100%">
+					<tabpanel>
+						<listwindow id="docversion" title="文档版本列表" parentWnd="document" orderby="createdate desc" 
+						use="combiz.system.eqdraw.DocversionList" dialog="/eqdraw/docversiondialog.xul">
+							<tablelist band="docversion" pageSize="10">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif" />
+									<tablelistheader data="VERSION" label="版本号" sort="auto" width="10%" />
+									<tablelistheader data="DESCRIPTION" label="版本描述" sort="auto" width="30%" />
+									<tablelistheader data="status" label="是否上传" sort="auto" width="10%" />
+									<tablelistheader data="filename" label="文件名" sort="auto" width="20%" />
+									<tablelistheader data="CREATOR" label="创建人" sort="auto" width="15%" />
+									<tablelistheader data="CREATEDATE" label="创建时间" sort="auto" width="15%" />
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+					</tabpanel>
+					<tabpanel>
+						<listwindow id="docauth" title="文档权限" parentWnd="document" use="combiz.system.eqdraw.DocauthList"
+						 dialog="/eqdraw/docauthdialog.xul">
+							<tablelist band="docauth" pageSize="10">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif" />
+									<tablelistheader data="DOCNUM" label="文档编号" sort="auto" width="20%" />
+									<tablelistheader data="GRPNAME" label="用户组名称" sort="auto" width="20%" />
+									<tablelistheader data="DOCREAD" label="是否可读" sort="auto" width="20%" />
+									<tablelistheader data="DOCEDIT" label="是否可写" sort="auto" width="20%" />
+									<tablelistheader data="MEMO" label="备注" sort="auto" width="20%" />
+								</listhead>
+								<tablelistfoot />
+							</tablelist>
+						</listwindow>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<!-- 子表 -->
+		</vbox>
+	</hbox>
+</tmainwindow>

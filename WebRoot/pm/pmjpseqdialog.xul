@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="预防性维护历史表"><!-- 预防性维护历史表 -->
+ 			<toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						序列<!-- 序列 -->：<a:bind value="pmjpseq.sequence"/><ilongbox id="pmjpseq.sequence" cols="20"/>
+						标准作业计划<!-- 标准作业计划 -->：<a:bind value="pmjpseq.jpnum"/><ibandbox id="pmjpseq.jpnum" lookup="jobplan"/>
+						</row>			
+						<!-- //////////////////////row//////////////// -->		
+						
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

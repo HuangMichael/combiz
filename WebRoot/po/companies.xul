@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="GBK"?><!--  title="供应商" -->
+<mainwindow app="companies" title="供应商" resize="true" use="combiz.ui.company.CompaniesWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="公司" width="70px"/><!-- 公司 -->
+			<tab id="contacttab" label="联系人" width="70px"/><!-- 联系人 -->
+			<tab id="pohistory" label="采购记录" width="70px"/><!-- 采购记录 -->
+			<tab id="invhistory" label="物资供应" width="70px"/><!-- 物资供应 -->
+			<tab id="check" label="评价" width="70px"/><!-- 评价 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+					<!-- 从这里开始修改搜索字段 -->
+					公司名<!-- 公司名 -->：<stextbox data="company"/>
+					父级公司<!-- 父级公司 -->：<stextbox data="parent"/>
+					<!-- 修改搜索字段结束 -->
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="company" label="公司名称" sort="auto" width="25%"/><!-- 公司名称 -->
+						<resultlistheader data="parent" label="父级公司" sort="auto" width="25%"/><!-- 父级公司 -->
+						<resultlistheader data="type" label="类型" sort="auto" width="10%"/><!-- 类型 -->
+						<resultlistheader data="regfund" label="注册资金" sort="auto" width="10%"/><!-- 注册资金 -->
+						<resultlistheader data="delegate" label="法定代表人" sort="auto" width="10%"/><!-- 法定代表人 -->
+						<resultlistheader data="homepage" label="公司主页" sort="auto" width="30%"/><!-- 公司主页 -->
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						公司名称<!-- 公司名称 -->:<a:bind value="companies.company"/><itextbox id="companies.company"/>
+						描述<!-- 描述 -->：<a:bind value="companies.description"/><itextbox id="companies.description" cols="40"/>
+						
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						类型<!-- 类型 -->：<a:bind value="companies.type"/><icombobox id="companies.type"/>
+						注册资金<!-- 注册资金 -->：<a:bind value="companies.regfund"/><itextbox id="companies.regfund"/>
+						
+						</row>						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						公司类型<!-- 公司类型 -->:<a:bind value="companies.comptype"/><icombobox id="companies.comptype"/>
+						法定代表人<!-- 法定代表人 -->：<a:bind value="companies.delegate"/><itextbox id="companies.delegate"/>
+						</row>						
+						<!-- //////////////////////row//////////////// -->		
+						<row>
+						企业注册号<!-- 企业注册号 -->：<a:bind value="companies.regnum"/><itextbox id="companies.regnum" cols="30"/>
+						税号<!-- 税号 -->:<a:bind value="companies.taxnum"/><itextbox id="companies.taxnum"/>
+						</row>						
+						<!-- //////////////////////row//////////////// -->	
+						<row>
+						公司地址<!-- 公司地址 -->：<a:bind value="companies.address"/><itextbox id="companies.address" cols="40"/>
+						邮政编码<!-- 邮政编码 -->:<a:bind value="companies.postnum"/><itextbox id="companies.postnum"/>
+						</row>						
+						<!-- //////////////////////row//////////////// -->	
+						<row>
+						省<!-- 省 -->：<a:bind value="companies.province"/><itextbox id="companies.province"/>
+						市<!-- 市 -->:<a:bind value="companies.city"/><itextbox id="companies.city"/>
+						</row>			
+						<!-- //////////////////////row//////////////// -->																	
+						<row>
+						联系人<!-- 联系人 -->：<a:bind value="companies.contact"/><itextbox id="companies.contact"/>
+						联系电话<!-- 联系电话 -->:<a:bind value="companies.phone"/><itextbox id="companies.phone"/>
+						</row>		
+						<!-- //////////////////////row//////////////// -->																	
+						<row>
+						父级公司<!-- 父级公司 -->：<a:bind value="companies.parent"/><itextbox id="companies.parent"/>
+						是否取消<!-- 是否取消 -->：<a:bind value="companies.disabled"/><icheckbox id="companies.disabled"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						联系人Email<!-- 联系人Email -->：<a:bind value="companies.contactmail"/><itextbox id="companies.contactmail"/>
+						离岸价格<!-- 离岸价格 -->：<a:bind value="companies.fob"/><itextbox id="companies.fob"/>
+						</row>									
+						<!-- //////////////////////row//////////////// -->		
+						<row>
+						运输条款<!-- 运输条款 -->：<a:bind value="companies.freightterms"/><itextbox id="companies.freightterms"/>
+						运输方式<!-- 运输方式 -->:<a:bind value="companies.shipvia"/><itextbox id="companies.shipvia"/>
+						</row>											
+						<!-- //////////////////////row//////////////// -->																											
+						<row>
+						支付条款<!-- 支付条款 -->：<a:bind value="companies.paymentterms"/><itextbox id="companies.paymentterms"/>
+						电子商务客户编号<!-- 电子商务客户编号 -->:<a:bind value="companies.ebsnum"/><itextbox id="companies.ebsnum"/>
+						</row>
+
+						<!-- //////////////////////row//////////////// -->																						
+						<row>
+						银行<!-- 银行 -->：<a:bind value="companies.bankname"/><itextbox id="companies.bankname"/>
+						银行卡号<!-- 银行卡号 -->:<a:bind value="companies.bankaccount"/><itextbox id="companies.bankaccount"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						支付代码<!-- 支付代码 -->：<a:bind value="companies.payvendor"/><itextbox id="companies.payvendor"/>
+						汇款地址<!-- 汇款地址 -->:<a:bind value="companies.remitaddr"/><itextbox id="companies.remitaddr"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						汇款人邮编<!-- 汇款人邮编 -->：<a:bind value="companies.remitpostnum"/><itextbox id="companies.remitpostnum"/>
+						收款人联系电话<!-- 收款人联系电话 -->:<a:bind value="companies.remitphone"/><itextbox id="companies.remitphone"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						汇款人<!-- 汇款人 -->：<a:bind value="companies.remitto"/><itextbox id="companies.remitto"/>
+						公司主页<!-- 公司主页 -->:<a:bind value="companies.homepage"/><itextbox id="companies.homepage" cols="40"/>
+						</row>
+						<row>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				
+			</tabpanel>
+	<!-- ********************************** //主数据窗口 ********************************** -->	
+	<!-- ********************************** //联系人 ********************************** -->	
+			<tabpanel>
+			<listwindow id="compContactTable" title="联系人资料" use="combiz.ui.company.CompcontactList" dialog="/po/compcontactdialog.xul">
+					<tablelist band="compContactTable" pageSize="8"><!-- 联系人资料 -->	
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+						
+							<tablelistheader data="contact" label="联系人名" sort="auto" width="15%"/><!-- 联系人名 -->
+							<tablelistheader data="position" label="联系人职位" sort="auto" width="15%"/><!-- 联系人职位 -->
+							<tablelistheader data="faxphone" label="联系人传真" sort="auto" width="15%"/><!-- 联系人传真 -->
+							<tablelistheader data="email" label="联系人Email" sort="auto" width="15%"/><!-- 联系人Email -->
+							<tablelistheader data="homephone" label="联系人住宅电话" sort="auto" width="15%"/><!-- 联系人住宅电话 -->
+							<tablelistheader data="officephone" label="办公电话" sort="auto" width="15%"/><!-- 办公电话 -->
+							<tablelistheader data="mobilephone" label="手机" sort="auto" width="15%"/><!-- 手机 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+	<!-- ********************************** //采购记录 ********************************** -->	
+			<tabpanel>
+				<listwindow id="poline" title="采购单行"
+					use="combiz.ui.po.PolineList" dialog="/po/podialog.xul" edittype="readonly">
+					<tablelist band="poline" pageSize="8"><!-- 采购单行 -->
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum"
+								label="库存项目编号" sort="auto" width="20%" /><!-- 库存项目编号 -->
+							<tablelistheader data="polinenum"
+								label="行编号" sort="auto" width="5%" /><!-- 行编号 -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="30%" /><!-- 描述 -->
+							<tablelistheader data="orderqty"
+								label="订购数量" sort="auto" width="10%" /><!-- 订购数量 -->
+							<tablelistheader data="orderunit"
+								label="订购单位" sort="auto" width="5%" /><!--订购单位  -->
+							<tablelistheader data="unitcost" label="单价"
+								sort="auto" width="10%" /><!-- 单价 -->
+							<tablelistheader data="linecost" label="行总价"
+								sort="auto" width="10%" /><!-- 行总价 -->
+							<tablelistheader data="enterby" label="录入人"
+								sort="auto" width="10%" /><!-- 录入人 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+	<!-- ********************************** //物资供应 ********************************** -->	
+			<!-- <tabpanel>
+				<listwindow id="poline" title="采购单行"
+					use="combiz.ui.po.PolineList" dialog="/po/podialog.xul">
+					<tablelist band="poline" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum"
+								label="库存项目编号" sort="auto" width="20%" />
+							<tablelistheader data="polinenum"
+								label="行编号" sort="auto" width="5%" />
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="30%" />
+							<tablelistheader data="orderqty"
+								label="订购数量" sort="auto" width="10%" />
+							<tablelistheader data="orderunit"
+								label="订购单位" sort="auto" width="5%" />
+							<tablelistheader data="unitcost" label="单价"
+								sort="auto" width="10%" />
+							<tablelistheader data="linecost" label="行总价"
+								sort="auto" width="10%" />
+							<tablelistheader data="enterby" label="录入人"
+								sort="auto" width="10%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel> -->
+			<tabpanel>
+				<listwindow id="invrectrans" title="物料接收" use="combiz.ui.inventory.InvrectransList2" dialog="/inventory/invrectransdialog2.xul" edittype="readonly">
+					<tablelist band="invrectrans" pageSize="8"><!-- 物料接收 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="status" label="状态" sort="auto" width="8%"/><!-- 状态 -->
+							<tablelistheader data="towarehouse" label="接收仓库" sort="auto" width="11%"/><!-- 接收仓库 -->
+							<tablelistheader data="itemnum" label="库存项目" sort="auto" width="8%"/><!-- 库存项目 -->
+							<tablelistheader data="description" label="描述" sort="auto" width="30%"/><!-- 描述 -->
+							<tablelistheader data="transdate" label="接收日期" sort="auto" width="20%"/><!-- 接收日期 -->
+							<tablelistheader data="actualdate" label="实际日期" sort="auto" width="10%"/><!-- 实际日期 -->
+							<tablelistheader data="quantity" label="接收数量" sort="auto" width="5%"/><!-- 接收数量 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="8%"/><!-- 单价 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+	<!-- ********************************** //评价 ********************************** -->	
+			<tabpanel>
+				<listwindow id="comappr" title="评价行" use="combiz.ui.company.ComapprList" dialog="/po/comapprdialog.xul" edittype="EDIT">
+					<tablelist band="comappr" pageSize="8"><!-- 评价行 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="grade" label="信誉等级" sort="auto" width="6%"/><!-- 信誉等级 -->
+							<tablelistheader data="quality" label="产品质量" sort="auto" width="5%"/><!-- 产品质量 -->
+							<tablelistheader data="totalscore" label="总评分" sort="auto" width="5%"/><!-- 总评分 -->
+							<tablelistheader data="bttimes" label="供货及时性" sort="auto" width="8%"/><!-- 供货及时性 -->
+							<tablelistheader data="aptitude" label="供应商资质" sort="auto" width="6%"/><!-- 供应商资质 -->
+							<tablelistheader data="contentment" label="产品合格率" sort="auto" width="5%"/><!-- 产品合格率 -->
+							<tablelistheader data="appraise" label="用户评价" sort="auto" width="60%"/><!-- 用户评价 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

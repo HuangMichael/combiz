@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="DEPRECIATION" resize="true" use="combiz.ui.equipment.DepreciationWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="折旧单"/><!-- 折旧单 -->
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						折旧员:<!-- 折旧员 --><stextbox data="labornum" cols="10"/>
+						固资折旧法:<!-- 固资折旧法 --><stextbox data="depfaction" cols="15"/>
+				</groupbox>
+			</hbox>
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+						<resultlistheader data="depfaction" label="固资折旧法" sort="auto" width="20%"/><!-- 固资折旧法 -->
+						<resultlistheader data="scraprate" label="残值率" sort="auto" width="7%"/><!-- 残值率 -->
+						<resultlistheader data="labornum" label="折旧员" sort="auto" width="13%"/><!-- 折旧员 -->
+						<resultlistheader data="depdate" label="折旧时间" sort="auto" width="20%"/><!-- 折旧时间 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"depreciation.depfaction","depreciation.scraprate","depreciation.classid"};
+ mainWnd.setRequired(required);
+ String[] readonly = {""};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						折旧单编码:<!-- 折旧单编码 --><a:bind value="depreciation.depnum"/><itextbox id="depreciation.depnum"/>
+						描述:<!-- 描述 --><a:bind value="depreciation.description"/><itextbox id="depreciation.description" cols="40" />
+						</row>
+						<row>
+						设备分类:<!-- 设备分类 --><a:bind value="depreciation.classid"/><ibandbox id="depreciation.classid" lookup="classificationeq" />
+						描述:<!-- 描述 --><a:bind value="classification.description" /><itextbox id="classification.description" cols="40" />
+						</row>
+						<row>
+						固资折旧法:<!-- 固资折旧法 --><a:bind value="depreciation.depfaction"/><icombobox id="depreciation.depfaction"/>
+						开始时间:<!-- 开始时间 --><a:bind value="depreciation.begintime"/><idatetimebox id="depreciation.begintime"/>
+						</row>
+						<row>
+						残值率:<!-- 残值率 --><a:bind value="depreciation.scraprate"/><idoublebox id="depreciation.scraprate"/>
+						结束时间:<!-- 结束时间 --><a:bind value="depreciation.endtime"/><idatetimebox id="depreciation.endtime"/>
+						</row>
+						<row>
+						折旧员:<!-- 折旧员 --><a:bind value="depreciation.labornum"/><ibandbox id="depreciation.labornum" lookup="labor"/>
+						折旧时间:<!-- 折旧时间 --><a:bind value="depreciation.depdate"/><idatetimebox id="depreciation.depdate"/>
+						</row>
+						<!-- 
+						<row>
+						流程状态:<a:bind value="depreciation.status"/><itextbox id="depreciation.status"/>
+						流程日期:<a:bind value="depreciation.statusdate"/><idatetimebox id="depreciation.statusdate"/>
+						</row>
+						 -->
+						<row spans="6,1">
+						以设备台帐中设备的安装时间作为时间依据,设置开始和结束时间来过滤设备信息。
+						</row>
+						 <row spans="6,1">
+						"红色球"标识未折旧，"绿色球"标识已折旧。
+						</row>
+					</rows>
+				</grid>
+<!-- *****************************折旧单明细**************************** -->
+				<listwindow id="equipdep" title="折旧单明细" use="combiz.ui.equipment.EquipdepList" dialog="/equipment/equipdepdialog.xul">
+				<tablelist band="equipdep" pageSize="16"><!-- 折旧单明细-->
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="status" label="状态" sort="auto" width="3%" preclass="combiz.ui.equipment.Equipdepstatus"/><!-- 状态 -->
+						<tablelistheader data="equipment.description" label="设备描述" sort="auto" width="47%"/><!-- 设备描述 -->
+						<tablelistheader data="nowcost" label="当前值" sort="auto" width="10%"/><!-- 当前值 -->
+						<tablelistheader data="deprate" label="折旧率" sort="auto" width="10%"/><!-- 折旧率 -->
+						<tablelistheader data="depcost" label="折旧额" sort="auto" width="10%"/><!-- 折旧额 -->
+						<tablelistheader data="planyears" label="预计使用年限(年)" sort="auto" width="10%"/><!-- 预计使用年限(年) -->
+						<tablelistheader data="usedyears" label="已使用年限(年)" sort="auto" width="10%"/><!-- 已使用年限(年) -->
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

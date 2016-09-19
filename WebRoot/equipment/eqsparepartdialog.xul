@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"eqsparepart.eqnum","eqsparepart.culbar","eqsparepart.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	<groupbox>
+		<caption label="备件">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption><!-- 关闭 -->
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+				备件
+				<div>
+					<a:bind
+						value="eqsparepart.itemnum" />
+					<ibandbox
+						id="eqsparepart.itemnum" cols="10"
+						lookup="item" />
+					<a:bind
+						value="eqsparepart.description" />
+					<itextbox
+						id="eqsparepart.description" cols="20" />
+				</div>
+				</row>
+
+				<row>
+					数量
+					<a:bind value="eqsparepart.quantity" />
+					<idoublebox id="eqsparepart.quantity" format="0.00" />
+					<!-- 库存余量
+					<a:bind value="eqsparepart.culbar" />
+					<idoublebox id="eqsparepart.culbar" format="0.00" /> -->
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口-->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+</editwindow>

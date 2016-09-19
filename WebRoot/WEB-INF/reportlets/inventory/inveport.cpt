@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.GroupReport">
+<Version>6.1</Version>
+<ReportSettings orientation="1" shrinkToFit="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="false" delayPlaying="false" windowPosition="0" userDefineWindow="false" />
+<WorkSheet>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+</CellElementList>
+</WorkSheet>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<Header reportPageType="0">
+<Background name="NullBackground" />
+<LeftList>
+</LeftList>
+<CenterList>
+</CenterList>
+<RightList>
+</RightList>
+</Header>
+<RowHeight defaultValue="19.0">
+<![CDATA[37.0,25.0,19.0,19.0,25.0,24.0,19.0,23.0,23.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[45.0,101.0,89.0,70.0,55.0,80.0,55.0,80.0,55.0,80.0,55.0,80.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="invreport.warehouse" type="0" pop="true" />
+<O t="S">仓库一</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="invreport.thisdate" type="0" pop="true" />
+<O t="S"></O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="invreport.orderdesc" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select t.sitenum,t.thisdate,t.itemnum,t.warehouse,t.modelnum,t.curbal,t.linecost,
+t.invrecqty,t.invrecvcost,t.lastmonqty,t.lastmoncost,t.invuseqty,t.invusecost,
+t.classid ,t.description as itemdesc,c.description as classdesc from invreport t
+
+left join classification c on c.classid=t.classid 
+
+where substr(to_char(t.thisdate,'yyyy-mm-dd'),1,7) = '[?invreport.thisdate?]'||'-'||'[?invreport.orderdesc?]' and t.warehouse='[?invreport.warehouse|?]']]></Query>
+</TableData>
+<GroupColumnIndices><![CDATA[13]]></GroupColumnIndices>
+<SortOrders><![CDATA[0]]></SortOrders>
+<SummaryColumnIndices><![CDATA[6,8,10,12]]></SummaryColumnIndices>
+<GroupPages><![CDATA[0]]></GroupPages>
+<Header>
+<CellElementRow>
+<C c="0" r="0" cs="12" s="0"><O t="S">仓  库  结  算  报  表</O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="1"><O t="S">单位：</O></C>
+<C c="1" r="1" cs="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SITENUM]]>
+</Attributes>
+</O></C>
+<C c="6" r="1"><O t="S"></O></C>
+<C c="7" r="1"><O t="S"></O></C>
+<C c="8" r="1"><O t="S"></O></C>
+<C c="9" r="1" s="1"><O t="S">结算日期：</O></C>
+<C c="10" r="1" cs="2"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=THISDATE]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="2" cs="2" rs="2" s="2"><O t="S">物料名称</O></C>
+<C c="2" r="2" rs="2" s="2"><O t="S">规  格</O></C>
+<C c="3" r="2" rs="2" s="2"><O t="S">仓  库</O></C>
+<C c="4" r="2" cs="2" s="2"><O t="S">上月库存</O></C>
+<C c="6" r="2" cs="2" s="2"><O t="S">本月发放</O></C>
+<C c="8" r="2" cs="2" s="2"><O t="S">本月收入</O></C>
+<C c="10" r="2" cs="2" s="2"><O t="S">本月结余</O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="4" r="3" s="2"><O t="S">数 量</O></C>
+<C c="5" r="3" s="2"><O t="S">总金额</O></C>
+<C c="6" r="3" s="2"><O t="S">数 量</O></C>
+<C c="7" r="3" s="2"><O t="S">总金额</O></C>
+<C c="8" r="3" s="2"><O t="S">数 量</O></C>
+<C c="9" r="3" s="2"><O t="S">总金额</O></C>
+<C c="10" r="3" s="2"><O t="S">数 量</O></C>
+<C c="11" r="3" s="2"><O t="S">总金额</O></C>
+</CellElementRow>
+</Header>
+<GroupHeader columnIndex="13">
+<CellElementRow>
+<C c="0" r="4" cs="2" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=CLASSDESC]]>
+</Attributes>
+</O></C>
+<C c="2" r="4" s="3"><O t="S"></O></C>
+<C c="3" r="4" s="3"><O t="S"></O></C>
+<C c="4" r="4" s="3"><O t="S"></O></C>
+<C c="5" r="4" s="3"><O t="S"></O></C>
+<C c="6" r="4" s="3"><O t="S"></O></C>
+<C c="7" r="4" s="3"><O t="S"></O></C>
+<C c="8" r="4" s="3"><O t="S"></O></C>
+<C c="9" r="4" s="3"><O t="S"></O></C>
+<C c="10" r="4" s="3"><O t="S"></O></C>
+<C c="11" r="4" s="3"><O t="S"></O></C>
+</CellElementRow>
+</GroupHeader>
+<Detail>
+<CellElementRow>
+<C c="0" r="5" cs="2" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ITEMDESC]]>
+</Attributes>
+</O></C>
+<C c="2" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=MODELNUM]]>
+</Attributes>
+</O></C>
+<C c="3" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=WAREHOUSE]]>
+</Attributes>
+</O></C>
+<C c="4" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LASTMONQTY]]>
+</Attributes>
+</O></C>
+<C c="5" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LASTMONCOST]]>
+</Attributes>
+</O></C>
+<C c="6" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=INVUSEQTY]]>
+</Attributes>
+</O></C>
+<C c="7" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=INVUSECOST]]>
+</Attributes>
+</O></C>
+<C c="8" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=INVRECQTY]]>
+</Attributes>
+</O></C>
+<C c="9" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=INVRECVCOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=CURBAL]]>
+</Attributes>
+</O></C>
+<C c="11" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LINECOST]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</Detail>
+<GroupFooter columnIndex="13">
+<CellElementRow>
+<C c="0" r="6" cs="2" s="3"><O t="S">小计：</O></C>
+<C c="2" r="6" s="3"><O t="S"></O></C>
+<C c="3" r="6" s="3"><O t="S"></O></C>
+<C c="4" r="6" s="3"><O t="S"></O></C>
+<C c="5" r="6" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLASTMONCOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+<C c="6" r="6" s="3"><O t="S"></O></C>
+<C c="7" r="6" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfINVUSECOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+<C c="8" r="6" s="3"><O t="S"></O></C>
+<C c="9" r="6" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfINVRECVCOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+<C c="10" r="6" s="3"><O t="S"></O></C>
+<C c="11" r="6" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</GroupFooter>
+<GrandFooter>
+<CellElementRow>
+<C c="0" r="7" cs="2" s="3"><O t="S">合计：</O></C>
+<C c="2" r="7" s="3"><O t="S"></O></C>
+<C c="3" r="7" s="3"><O t="S"></O></C>
+<C c="4" r="7" s="3"><O t="S"></O></C>
+<C c="5" r="7" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLASTMONCOST]]>
+</Attributes>
+</O></C>
+<C c="6" r="7" s="3"><O t="S"></O></C>
+<C c="7" r="7" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfINVUSECOST]]>
+</Attributes>
+</O></C>
+<C c="8" r="7" s="3"><O t="S"></O></C>
+<C c="9" r="7" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfINVRECVCOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="7" s="3"><O t="S"></O></C>
+<C c="11" r="7" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</GrandFooter>
+<GroupReportAttr cache="false" />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="20" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</Report>

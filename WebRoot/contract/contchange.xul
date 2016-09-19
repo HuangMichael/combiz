@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="contchange" title="合同变更审批" resize="true"
+	wfenabled="true" use="combiz.ui.contract.ContchangeWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="合同列表" width="70px" />
+			<tab id="main" label="合同变更审批" width="100px" />
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<!-- 从这里开始修改搜索字段 -->
+						合同编号：
+						<stextbox data="cntnum" cols="20" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="cntnum" label="合同编号"
+							sort="auto" width="30%" />
+						<resultlistheader data="cntversion" label="合同版本"
+							sort="auto" width="20%" />
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="20%" />
+						<resultlistheader data="changeby" label="变更人"
+							sort="auto" width="30%" />
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 操作票 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<groupbox>
+					<caption label="合同" />
+					<grid>
+						<rows>
+							<row>
+								合同编号:
+								<a:bind value="contchange.cntnum" />
+								<ibandbox id="contchange.cntnum"
+									lookup="cntnum" />
+
+								合同版本:
+								<a:bind value="contchange.cntversion" />
+								<itextbox id="contchange.cntversion" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+
+				<groupbox>
+					<caption label="合同变更信息" />
+					<grid>
+						<rows>
+							<row>
+								状态:
+								<a:bind value="contchange.status" />
+								<itextbox id="contchange.status" />
+								状态时间:
+								<a:bind value="contchange.statusdate" />
+								<idatebox id="contchange.statusdate" />
+							</row>
+							<row>
+								变更人:
+								<a:bind value="contchange.changeby" />
+								<ibandbox id="contchange.changeby"
+									lookup="labor" />
+								变更日期:
+								<a:bind value="contchange.changedate" />
+								<idatebox id="contchange.changedate" />
+							</row>
+							<row spans="1,4">
+								变更理由:
+								<a:bind value="contchange.chgcause" />
+								<itextbox id="contchange.chgcause"
+									rows="4" width="100%" />
+							</row>
+							<row spans="1,4">
+								变更内容:
+								<a:bind value="contchange.chgcontent" />
+								<itextbox id="contchange.chgcontent"
+									rows="4" width="100%" />
+							</row>
+							<row spans="1,4">
+								变更备注:
+								<a:bind value="contchange.remark" />
+								<itextbox id="contchange.remark"
+									rows="4" width="100%" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

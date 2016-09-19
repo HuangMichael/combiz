@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="更新设备父节点" use="combiz.ui.location.UpdateLocPopupDialog"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation" border="normal"
+	closable="true" width="550"><!-- title:更新设备父节点 -->
+
+	<!-- ********************************** 主数据窗口 ********************************** -->
+	<!-- 初始化设置字段的必输和只读 -->
+	<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"locations.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	<groupbox>
+		<caption label="基本信息" /><!-- 基本信息 -->
+		<grid>
+			<rows>
+				<row>
+					更改节点:<!-- 更改节点 -->
+					<a:bind value="locations.location" />
+					<itextbox id="locations.location" />
+				</row>
+				<row>
+					更改节点描述:<!-- 更改节点描述 -->
+					<a:bind value="locations.description" />
+					<itextbox id="locations.description" />
+				</row>
+				<row>
+					目标节点:<!-- 目标节点 -->
+					<a:bind value="locations.parent" />
+					<ibandbox id="locations.parent" lookup="location" />
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<!-- ********************************** //主数据窗口 ********************************** -->
+	<div align="center">
+		<button label="生 成" onClick="mainWnd.confirm()" /><!--  生 成  -->
+		<button label="取 消" onClick="mainWnd.cancel()" /><!--  取 消  -->
+	</div>
+
+</window>

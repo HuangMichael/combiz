@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 预防措施 -->
+ <groupbox><caption label="预防措施"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预防措施<!-- 预防措施 -->:<a:bind value="hazardprec.hazardprec"/><itextbox id="hazardprec.hazardprec" cols="30"/>
+						描述<!-- 描述 -->:<a:bind value="hazardprec.description"/><itextbox id="hazardprec.description" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

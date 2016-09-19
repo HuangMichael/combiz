@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog title="调整部门" width="600" use="combiz.ui.corp.DeptChanged"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"department.description"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="调整部门"/>
+				<grid>
+					<rows>
+						<row>
+						部门:<a:bind value="department.deptnum"/><itextbox id="department.deptnum"/>
+						</row>
+						<row>
+						描述:<a:bind value="department.description"/><itextbox id="department.description" cols="60"/>
+						</row>
+						<row>
+						父级部门:<a:bind value="department.parent"/><ibandbox id="department.parent" lookup="department"/>
+						</row>
+					</rows>
+				</grid>
+				<div align="center">
+					<button label="确定" onClick="mainWnd.confirm()"/>
+					<button label="取消" onClick="mainWnd.cancel()"/>
+				</div>	
+ </groupbox>				
+</commondialog>

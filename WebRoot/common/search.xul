@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--  -->
+<searchdialog>
+<vbox width="100%">
+	<groupbox>
+		<caption label="选择组合过滤器"/>
+		字段：<searchfield/>
+		计算：<combobox id="compute" cols="6">
+				<comboitem label="like" description="类似"/>
+				<comboitem label="=" description="等于"/>
+				<comboitem label="is null" description="为空"/>
+				<comboitem label="is not null" description="不为空"/>
+				<comboitem label="&gt;" description="大于"/>
+				<comboitem label="&lt;" description="小于"/>
+				<comboitem label="&gt;=" description="大于等于"/>
+				<comboitem label="&lt;=" description="小于等于"/>
+				<comboitem label="!=" description="不等于"/>
+				<comboitem label="&lt;&gt;" description="不等于"/>
+		</combobox>
+		<textbox id="fieldword"/><separator spacing="5px"/>
+		组合：<combobox id="combotype" cols="8">
+				<comboitem label="or" description="或者"/>
+				<comboitem label="and" description="并且"/>
+			</combobox>
+		<button label="添加" src="/images/search.gif" style="cursor:hand" onClick="searchWnd.add()"/>
+	</groupbox>
+	<groupbox>
+	<caption label="选择组合过滤器"/>
+	<div align="center">
+	<textbox id="searchStr" rows="7" cols="70"/>
+	</div>
+	</groupbox>
+	<div align="center">
+	<button label=" 确 定 " onClick="searchWnd.confirm()"/>
+	<button label=" 取 消 " onClick="searchWnd.cancel()"/>
+	</div>
+
+</vbox>
+</searchdialog>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly =
+		{"wpmaterial.jpnum","wpmaterial.unitcost","wpmaterial.vendor","wpmaterial.manufacturer","wpmaterial.orderunit","wpmaterial.description","wpmaterial.linecost","wpmaterial.budnum"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="工单计划物料"><!-- 工单计划物料 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					物资编码<!-- 物资编码 -->
+					:
+					<a:bind value="wpmaterial.itemnum" />
+					<ibandbox id="wpmaterial.itemnum" lookup="itemwo"
+						applink="item" />
+					描述<!-- 描述 -->
+					:
+					<a:bind value="wpmaterial.description" />
+					<itextbox id="wpmaterial.description" cols="40" />
+				</row>
+				<row>
+					预算号:
+					<a:bind value="wpmaterial.budnum" />
+					<ibandbox id="wpmaterial.budnum" lookup='budnum' />
+
+					预算项目:
+					<a:bind value="wpmaterial.buditem" />
+					<ibandbox id="wpmaterial.buditem"
+						lookup='budgetitem' />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,3">
+					作业包编号<!-- 作业包编号 -->
+					:
+					<a:bind value="wpmaterial.jpnum" />
+					<itextbox id="wpmaterial.jpnum" />
+				</row>
+				<row>
+					仓库<!-- 仓库 -->
+					:
+					<a:bind value="wpmaterial.warehouse" />
+					<ibandbox id="wpmaterial.warehouse"
+						lookup="warehouse" />
+					数量<!-- 数量 -->
+					:
+					<a:bind value="wpmaterial.itemqty" />
+					<idoublebox id="wpmaterial.itemqty"
+						format="#,##0.00" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					供应商<!-- 供应商 -->
+					:
+					<a:bind value="wpmaterial.vendor" />
+					<ibandbox id="wpmaterial.vendor" lookup="companies" />
+					规格型号<!-- 规格型号 -->
+					:
+					<a:bind value="wpmaterial.modelnum" />
+					<itextbox id="wpmaterial.modelnum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,3">
+					<!-- 任务编号:
+						<a:bind value="wpmaterial.tasknum" />
+						<ibandbox id="wpmaterial.tasknum"
+						lookup="wptasklookup" /> -->
+					定购单位<!-- 定购单位 -->
+					:
+					<a:bind value="wpmaterial.orderunit" />
+					<itextbox id="wpmaterial.orderunit" />
+				</row>
+				<row>
+					采购申请<!-- 采购申请 -->
+					:
+					<a:bind value="wpmaterial.prnum" />
+					<itextbox id="wpmaterial.prnum" />
+					采购申请行<!-- 采购申请行 -->
+					:
+					<a:bind value="wpmaterial.prlinenum" />
+					<ilongbox id="wpmaterial.prlinenum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					申请人<!-- 申请人 -->
+					:
+					<a:bind value="wpmaterial.requestby" />
+					<itextbox id="wpmaterial.requestby" />
+					申请时间<!-- 申请时间 -->
+					:
+					<a:bind value="wpmaterial.requiredate" />
+					<idatebox id="wpmaterial.requiredate" />
+				</row>
+				<row>
+					制造商<!-- 制造商 -->
+					:
+					<a:bind value="wpmaterial.manufacturer" />
+					<itextbox id="wpmaterial.manufacturer" />
+					发放到<!-- 发放到 -->
+					:
+					<a:bind value="wpmaterial.issueto" />
+					<itextbox id="wpmaterial.issueto" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					单价<!-- 单价 -->
+					:
+					<a:bind value="wpmaterial.unitcost" />
+					<idoublebox id="wpmaterial.unitcost"
+						format="#,##0.00" />
+					行总价<!-- 行总价 -->
+					:
+					<a:bind value="wpmaterial.linecost" />
+					<idoublebox id="wpmaterial.linecost"
+						format="#,##0.00" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="failclass" title="故障代码" resize="true"
+	use="combiz.ui.failure.FailurecodeWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation"><!-- title:故障代码 -->
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+	<hbox spacing="0">
+		<!-- **********************************  结果树页面 ********************************** -->
+		<groupbox>
+			<caption label="故障代码" /><!-- 故障代码 -->
+			<tree use="combiz.ui.failure.FailurecodeTree" width="180" />
+		</groupbox>
+
+		<!-- ********************************** //结果树页面 ********************************** -->
+		<!-- ********************************** //顶级标签 ********************************** -->
+		<tabbox id="appTabbox" width="100%"
+			onSelect="mainWnd.selectTab()">
+			<tabs>
+				<tab id="main" label="故障代码"  width="90px" /><!-- 故障代码 -->
+			</tabs>
+			<!-- ********************************** //顶级标签 ********************************** -->
+			<tabpanels width="100%">
+				<!-- ********************************** 主数据窗口 ********************************** -->
+				<!-- 初始化设置字段的必输和只读 -->
+				<zscript>
+					<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.parent","classification.haschild"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+				</zscript>
+				<tabpanel>
+					<grid>
+						<rows>
+							<!-- ******************************************************************** -->
+							<!-- *************************在下面修改主界面字段**************************** -->
+							<!-- ********************************************************************-->
+							<!-- //////////////////////row//////////////// -->
+							<row spans="1,1,1,3">
+								分类:<!-- 分类 -->
+								<a:bind value="classification.classid" />
+								<itextbox id="classification.classid" />
+								描述:<!-- 描述 -->
+								<a:bind
+									value="classification.description" />
+								<itextbox
+									id="classification.description" cols="40" />
+							</row>
+							<!-- //////////////////////row//////////////// -->
+							<row>
+								父级分类:<!-- 父级分类 -->
+								<a:bind value="classification.parent" />
+								<itextbox id="classification.parent" />
+								有子级:<!-- 有子级 -->
+								<a:bind value="classification.haschild" />
+								<icheckbox id="classification.haschild"
+									/>
+							</row>
+							<row spans="1,3">
+						序号:<!-- 序号 --><a:bind value="classification.orderby"/><ilongbox id="classification.orderby" cols="5"/>
+						</row>
+							<!-- //////////////////////row//////////////// -->
+
+						</rows>
+					</grid>
+					
+					<listwindow id="failclass" title="故障代码"
+						use="combiz.ui.failure.FailurecodeTreeList"
+						dialog="/failure/failurecodedialog.xul"><!-- title:故障代码 -->
+						<tablelist band="failclass" pageSize="15">
+							<listhead>
+								<tablelistheader
+									src="/images/img_listitem.gif" />
+								<tablelistheader data="failurecode"
+									label="故障代码" sort="auto" width="50%" /><!-- 故障代码 -->
+								<tablelistheader data="description"
+									label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+
+					<listwindow id="failcode" parentWnd="failclass"
+						title="故障问题及现象" use="combiz.ui.failure.FailureproblemList"
+						dialog="/failure/failureproblemdialog.xul"><!-- title:故障问题及现象 -->
+						<tablelist band="failcode" pageSize="15">
+							<listhead>
+								<tablelistheader
+									src="/images/img_listitem.gif" />
+								<tablelistheader data="failureproblem"
+									label="故障问题" sort="auto" width="30%" /><!-- 故障问题 -->
+								<tablelistheader data="rank"
+									label="问题等级" sort="auto" width="30%" /><!-- 问题等级 -->
+								<tablelistheader data="description"
+									label="描述" sort="auto" width="40%" /><!-- 描述 -->
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+
+					<listwindow id="failproblem" parentWnd="failcode"
+						title="故障原因" use="combiz.ui.failure.FailurecauseList"
+						dialog="/failure/failurecausedialog.xul"><!-- title:故障原因 -->
+						<tablelist band="failproblem" pageSize="15">
+							<listhead>
+								<tablelistheader
+									src="/images/img_listitem.gif" />
+								<tablelistheader data="failurecause"
+									label="原因代码" sort="auto" width="50%" /><!-- 原因代码 -->
+								<tablelistheader data="description"
+									label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+
+					<listwindow id="failcause" parentWnd="failproblem" title="故障措施" use="combiz.ui.failure.FailuredealList"
+						dialog="/failure/failuredealdialog.xul"><!-- title:故障措施 -->
+						<tablelist band="failcause" pageSize="15">
+							<listhead>
+								<tablelistheader
+									src="/images/img_listitem.gif" />
+								<tablelistheader data="failuredeal"
+									label="故障措施" sort="auto" width="50%" /><!-- 故障措施 -->
+								<tablelistheader data="description"
+									label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+					<space />
+
+
+				</tabpanel>
+				<!-- ********************************** //主数据窗口 ********************************** -->
+
+			</tabpanels>
+		</tabbox>
+	</hbox>
+</mainwindow>

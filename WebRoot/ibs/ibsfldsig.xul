@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="fieldsig" title="字段授权" resize="true" use="combiz.ui.ibs.IbsfldsigWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="字段授权" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						标识：<stextbox data="fldsig"/>
+						描述：<stextbox data="description"/>
+						应用程序：<stextbox data="app"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="fldsig" label="标识" sort="auto" width="10%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="30%"/>
+						<resultlistheader data="app" label="应用程序" sort="auto" width="10%"/>
+						<resultlistheader data="condition" label="判断条件" sort="auto" width="40%"/>
+						<resultlistheader data="sigtype" label="类型" sort="auto" width="10%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						标识：<a:bind value="ibsfldsig.fldsig"/><itextbox id="ibsfldsig.fldsig"/>
+						描述：<a:bind value="ibsfldsig.description"/><itextbox id="ibsfldsig.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						应用程序：<a:bind value="ibsfldsig.app"/><ibandbox id="ibsfldsig.app" lookup="ibsapps"/>
+						条件类型：<a:bind value="ibsfldsig.sigtype"/><icombobox id="ibsfldsig.sigtype"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						判断条件：<a:bind value="ibsfldsig.condition"/><itextbox id="ibsfldsig.condition" cols="80" rows="2"/>
+						</row>
+						<row spans="4">
+						1、（推荐使用）如果条件类型选择了“主对象值”则条件的格式如下：字段=值,字段=值（逗号表示或的关系）（不要有引号） 。
+						</row>
+						<row spans="4">
+						2、如果条件类型选择了“条件语句”则条件的格式就是标准的SQL语句。
+						</row>
+						<row spans="4">
+						3、如果条件类型选择了“条件类”则条件的值是完整的类名：inbasis.business.ibs.Xxxx。
+						</row>
+					</rows>
+				</grid>
+				<tabbox width="99%">
+					<tabs>
+						<tab label="主屏幕字段" width="90px"/>
+						<tab label="子表授权" width="90px"/>
+					</tabs>
+					<tabpanels width="100%">
+					<tabpanel>
+					<listwindow id="siglineTable" title="主屏幕字段" use="combiz.ui.ibs.IbsfldsigList" dialog="/ibs/ibsfldsiglinedialog.xul">
+						<tablelist band="siglineTable" pageSize="18">	
+							<listhead>
+								<tablelistheader src="/images/img_listitem.gif"/>
+								<tablelistheader data="fieldid" label="界面字段ID" sort="auto" width="40%"/>
+								<tablelistheader data="readonly" label="是否只读" sort="auto" width="30%"/>
+								<tablelistheader data="required" label="是否必需" sort="auto" width="30%"/>
+							</listhead>
+							<tablelistfoot/>
+						</tablelist>
+					</listwindow>
+					</tabpanel>
+					<tabpanel>
+					<listwindow id="siglistTable" title="子表授权" use="combiz.ui.ibs.IbsfldsiglistList" dialog="/ibs/ibsfldsiglistdialog.xul">
+						<tablelist band="siglistTable" pageSize="18">	
+							<listhead>
+								<tablelistheader src="/images/img_listitem.gif"/>
+								<tablelistheader data="relname" label="子表ID" sort="auto" width="70%"/>
+								<tablelistheader data="readonly" label="是否只读" sort="auto" width="30%"/>
+							</listhead>
+							<tablelistfoot/>
+						</tablelist>
+					</listwindow>
+					</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

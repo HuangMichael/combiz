@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<window border="none">
+	<hbox>
+		<commonlistwindow id="barchartwnd" tablename="kpilink" edittype="listonly" width="98%"
+		searchable="false" export="false" pagenav="true" showfilter="false" defselect="false" showmultiple="false">
+			<zscript>barchartwnd.setQueryString("kptnum='bar'");</zscript>
+			<tablelist band="barchartwnd" pageSize="20">
+				<listhead>
+					<tablelistheader data="XPOINT" label="指标值(X轴)" sort="auto" width="25%" />
+					<tablelistheader data="SERIES" label="分组" sort="auto" width="25%" />
+					<tablelistheader data="KPINUM" label="指标(Y轴)" sort="auto" width="25%" />
+					<tablelistheader data="YPOINT" label="指标值(Y轴)" sort="auto" width="25%" />
+				</listhead>
+			</tablelist>
+		</commonlistwindow>
+		<ichart id="kpichart" width="240px" height="260px" threeD="true" kptnum="bar" />
+	</hbox>
+</window>

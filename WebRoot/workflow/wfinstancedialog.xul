@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="流程实例表"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						字段OWNERTABLE:<a:bind value="wfinstance.ownertable"/><itextbox id="wfinstance.ownertable"/>
+</row>
+						<row>
+						字段WFREVISION:<a:bind value="wfinstance.wfrevision"/><ilongbox id="wfinstance.wfrevision"/></row>
+						<row>
+						当前节点ID:<a:bind value="wfinstance.curnodeid"/><ilongbox id="wfinstance.curnodeid"/></row>
+						<row>
+						字段OWNERID:<a:bind value="wfinstance.ownerid"/><ilongbox id="wfinstance.ownerid"/></row>
+						<row>
+						字段WFNAME:<a:bind value="wfinstance.wfname"/><itextbox id="wfinstance.wfname"/>
+</row>
+						<row>
+						字段STARTOR:<a:bind value="wfinstance.startor"/><itextbox id="wfinstance.startor"/>
+</row>
+						<row>
+						字段STARTTIME:<a:bind value="wfinstance.starttime"/><idatebox id="wfinstance.starttime"/></row>
+						<row>
+						字段ACTIVE:<a:bind value="wfinstance.active"/><itextbox id="wfinstance.active"/>
+</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

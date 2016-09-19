@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="分类" width="600">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			<tab label="树型" width="70px"/>
+			<tab label="列表" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+		
+					<tabpanel>
+						<groupbox><caption label="分类"/>		
+							<tree use="combiz.ui.common.lookup.FindClassificationTree"/>
+						</groupbox>
+									
+				<div align="center">
+					<button label=" 确 定 " onClick="lookupWnd.treeok(event)"/>
+					<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+				</div>
+					
+			</tabpanel>
+		
+		<tabpanel>
+         <!-- //////////////////查询过滤条件///////////////////////// -->
+	     <groupbox id="searchBox">  
+		<caption label="过滤器"/>
+		分类：<stextbox data="classid"/>
+		描述：<stextbox data="description"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="classid" label="分类" sort="auto" width="20%"/>
+			<lookuplistheader data="description" label="描述" sort="auto" width="40%"/>
+			<lookuplistheader data="classtype" label="类型" sort="auto" width="20%"/>
+			<lookuplistheader data="parent" label="父级分类" sort="auto" width="20%"/>
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->	
+
+
+	<div align="center">
+	<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+	<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+	</div>
+	</tabpanel>
+	
+		</tabpanels>
+	</tabbox>
+</lookupwindow>

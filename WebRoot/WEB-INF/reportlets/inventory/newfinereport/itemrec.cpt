@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.GroupReport">
+<Version>6.1</Version>
+<ReportSettings orientation="1" shrinkToFit="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="false" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+<WorkSheet>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+</CellElementList>
+</WorkSheet>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<Header reportPageType="0">
+<Background name="NullBackground" />
+<LeftList>
+</LeftList>
+<CenterList>
+</CenterList>
+<RightList>
+<HFElement className="DateHFElement">
+<FRFont name="SimSun" style="1" size="12" isShadow="true" isSuperscript="true" />
+<![CDATA[2009-08-14]]>
+</HFElement>
+<HFElement className="TimeHFElement">
+<FRFont name="SimSun" style="1" size="12" isShadow="true" isSuperscript="true" />
+<![CDATA[10:03:09]]>
+</HFElement>
+</RightList>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground" />
+<LeftList>
+</LeftList>
+<CenterList>
+<HFElement className="NumberOfPageHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[100]]>
+</HFElement>
+<HFElement className="TextHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[/]]>
+</HFElement>
+<HFElement className="NumberOfPageHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[100]]>
+</HFElement>
+</CenterList>
+<RightList>
+</RightList>
+</Footer>
+<RowHeight defaultValue="19.0">
+<![CDATA[48.0,27.0,25.0,23.0,21.0,24.0,25.0,25.0,31.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[84.0,107.0,60.0,96.0,82.0,81.0,72.0,58.0,72.0,85.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="warehouse" type="0" pop="true" />
+<O t="S"></O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="astatedate" type="0" pop="true" />
+<O t="S"></O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="benddate" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT c.classid,c.classtype,i.description AS itemdesc,i.modelnum,t.itemnum,t.towarehouse,t.tobin,t.quantity,t.unitcost,t.linecost,t.recunit,t.transdate,t.statuschangeby
+      
+FROM classification c
+LEFT JOIN item i ON i.classid = c.classid
+LEFT JOIN invrectrans t ON t.itemnum = i.itemnum
+WHERE t.towarehouse='[?warehouse|?]' AND t.transdate BETWEEN to_date('[?astatedate|?]','YYYY-MM-DD') AND to_date('[?benddate|?]','YYYY-MM-DD') AND c.classtype in('资产','工具','物资') 
+CONNECT BY PRIOR c.classid = c.parent
+START WITH c.parent is null
+]]></Query>
+</TableData>
+<GroupColumnIndices><![CDATA[0]]></GroupColumnIndices>
+<SortOrders><![CDATA[2]]></SortOrders>
+<SummaryColumnIndices><![CDATA[9]]></SummaryColumnIndices>
+<GroupPages><![CDATA[0]]></GroupPages>
+<Title>
+<CellElementRow>
+<C c="1" r="0" cs="11" s="0"><O t="S">物 资 入 库 单</O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="1" s="1"><O t="S">单位：</O></C>
+<C c="1" r="1" cs="8"><O t="S"></O></C>
+<C c="9" r="1" s="2"><O t="S">打印日期：</O></C>
+<C c="10" r="1" cs="2"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=TODAY()]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</Title>
+<Header>
+<CellElementRow>
+<C c="0" r="2" s="3"><O t="S">物资编码</O></C>
+<C c="1" r="2" s="3"><O t="S">描述</O></C>
+<C c="2" r="2" s="3"><O t="S">类型</O></C>
+<C c="3" r="2" s="3"><O t="S">规格型号</O></C>
+<C c="4" r="2" s="3"><O t="S">仓库</O></C>
+<C c="5" r="2" s="3"><O t="S">箱柜</O></C>
+<C c="6" r="2" s="3"><O t="S">接收数量</O></C>
+<C c="7" r="2" s="3"><O t="S">单位</O></C>
+<C c="8" r="2" s="3"><O t="S">单价</O></C>
+<C c="9" r="2" s="3"><O t="S">总价</O></C>
+<C c="10" r="2" s="3"><O t="S">接收人</O></C>
+<C c="11" r="2" s="3"><O t="S">接收日期</O></C>
+</CellElementRow>
+</Header>
+<GroupHeader columnIndex="0">
+<CellElementRow>
+<C c="0" r="3" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=CLASSID]]>
+</Attributes>
+</O></C>
+<C c="1" r="3" cs="11" s="4"><O t="S"></O></C>
+</CellElementRow>
+</GroupHeader>
+<Detail>
+<CellElementRow>
+<C c="0" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ITEMNUM]]>
+</Attributes>
+</O></C>
+<C c="1" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ITEMDESC]]>
+</Attributes>
+</O></C>
+<C c="2" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=CLASSTYPE]]>
+</Attributes>
+</O></C>
+<C c="3" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=MODELNUM]]>
+</Attributes>
+</O></C>
+<C c="4" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=TOWAREHOUSE]]>
+</Attributes>
+</O></C>
+<C c="5" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=TOBIN]]>
+</Attributes>
+</O></C>
+<C c="6" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=QUANTITY]]>
+</Attributes>
+</O></C>
+<C c="7" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=RECUNIT]]>
+</Attributes>
+</O></C>
+<C c="8" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=UNITCOST]]>
+</Attributes>
+</O></C>
+<C c="9" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LINECOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=STATUSCHANGEBY]]>
+</Attributes>
+</O></C>
+<C c="11" r="4" s="5"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=TRANSDATE]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</Detail>
+<GroupFooter columnIndex="0">
+<CellElementRow>
+<C c="0" r="5" s="4"><O t="S">小计：</O></C>
+<C c="1" r="5" cs="8" s="4"><O t="S"></O></C>
+<C c="9" r="5" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+<C c="10" r="5" cs="2" s="4"><O t="S"></O></C>
+</CellElementRow>
+</GroupFooter>
+<GrandFooter>
+<CellElementRow>
+<C c="0" r="6" s="4"><O t="S">总计：</O></C>
+<C c="1" r="6" cs="8" s="4"><O t="S"></O></C>
+<C c="9" r="6" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="6" cs="2" s="4"><O t="S"></O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="0" s="6"><O t="Image"><Image width="51" height="10">
+<![CDATA[eW`?jPYi"4Qb%;'?r2LhD@i$=Kd%e<?kO_o-tnI,AJ&NgJVXqp<+o_lY*V;96q*uP.+*dD_3
+PlNOsQ66Z,;<Mfg-mYKKKCdrWYk
+V2[_\?@!LT'B&:c0s"j77`&/8>bOLGs)&jZafQ-r2+q6+
+UZGl3so6#3HD0bqQGi[&rOt8.:lFsk/3?J0pZa942DGKr@`)HK:Z6I
+cH1\,:$;EiEV;VS\>B
+pk>*=!8[/"b0q5SslZ]bhe2-Sb($aNKRRHUuJAVQ;AtT%N?SZ"rLk55M+2Z4a.Lt%0qLu(Mf
+S&(VsO*G
+!A^X%.BA6Xm&aG\Kp"eO(IZh:o1;%7G^J.atN]ngXIJT.4OO(Cj15PjA&dCmc]H3
+rhH<dMPHrQ;mCt74M(h'fCE_Kqpd@0YTr%h
+<E4(alW#%Fj.6SWS9nc?S3F#\6USO"#ptIUGK
+HUa>K*.\^c9hd[@pp*PLZSakL1KI5-0-m7oFDKe1WiRO"E?d"s\G;Y]Gg8E_k!
+%OJekKqONk
+:VEXL=OdDtYoEsL>p1.e#N,f^e_2T:=l`_qMUpjj31uIrI_[#qC2OuRl%\Hi"e`mKSL'=1-&
+V&I&-Lbkp+U<[Ji"
+Z'VR>BDuS7!^>?t;[m^l4:;J88o40.T[M+3_u0/ElmW%c>Pl_Y:Uh]lK
+el;>fgh)NQm-0.W1G`,1CTd?>MY3Ds+`nZB!r0)UnD3
+Pls<`6LC;a`E_GZ1eiXe;'H5@Y#&)
+806:(CbOAkYAm;:0I,[llD38!f=L["[7d<FZ[@2gP3Z1m9/uM!k5;\04&K.[=PtGG$h;<c
+H4
+XE)X"P%23,ia+ApX:qs5[iO<\sAU2kA2Gr.&?dTMP/eOTRaIIJ0%!-ru(`0e>1D'FT%O+9*[
+?KtQI3!^>oZK`'ft:k$.4E?@
+>l!oNKc3daa;Ejp<K/7:D@m"f0?>9NE'HOAUAC32Eu8`lX`P
+,0Uogo,4.:SNITYeUM!i#=oM$81lnQG$A42r&Dca4_Wf;_RRuRf
+sUu,9*2mTAu8?N`jqY3IT
+$pK`qW0bWG98GtGFYk3giNEeE[b~
+
+]]>
+</Image>
+</O><HyperlinkMap>
+<NameHyperlink name="http://www.inbasis.com">
+<Hyperlink class="com.fr.report.hyperlink.WebHyperlink"><URL><![CDATA[http://www.inbasis.com]]></URL>
+</Hyperlink>
+</NameHyperlink>
+</HyperlinkMap>
+</C>
+<C c="1" r="0" s="1"><O t="S"></O></C>
+<C c="2" r="0" s="1"><O t="S"></O></C>
+<C c="3" r="0" s="1"><O t="S"></O></C>
+<C c="4" r="0" s="1"><O t="S"></O></C>
+<C c="5" r="0" s="1"><O t="S"></O></C>
+<C c="6" r="0" s="1"><O t="S"></O></C>
+<C c="7" r="7" cs="2" s="7"><O t="S">部门签字：</O></C>
+<C c="8" r="0" s="1"><O t="S"></O></C>
+<C c="9" r="7" cs="3" s="1"><O t="S"></O></C>
+<C c="10" r="0" s="1"><O t="S"></O></C>
+<C c="11" r="0" s="1"><O t="S"></O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="0" s="1"><O t="S"></O></C>
+<C c="1" r="0" s="1"><O t="S"></O></C>
+<C c="2" r="0" s="1"><O t="S"></O></C>
+<C c="3" r="0" s="1"><O t="S"></O></C>
+<C c="4" r="0" s="1"><O t="S"></O></C>
+<C c="5" r="0" s="1"><O t="S"></O></C>
+<C c="6" r="0" s="1"><O t="S"></O></C>
+<C c="7" r="8" cs="2" s="7"><O t="S">领导签字：</O></C>
+<C c="8" r="0" s="1"><O t="S"></O></C>
+<C c="9" r="8" cs="3" s="8"><O t="S"></O></C>
+<C c="10" r="0" s="1"><O t="S"></O></C>
+<C c="11" r="0" s="1"><O t="S"></O></C>
+</CellElementRow>
+</GrandFooter>
+<GroupReportAttr cache="false" />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="21" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" foreground="-16776961" underline="1" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4" vertical_alignment="3">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+</StyleList>
+</Report>

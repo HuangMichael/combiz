@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {"failuredeal.failurecause"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="措施代码"><!-- 措施代码 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<!-- <row>
+					原因代码:
+					<a:bind value="failuredeal.failurecause" />
+					<itextbox id="failuredeal.failurecause" />
+				</row> -->
+				<row>
+					措施代码:<!-- 措施代码 -->
+					<a:bind value="failuredeal.failuredeal" />
+					<itextbox id="failuredeal.failuredeal" />
+				</row>
+				<row>
+					描述:<!-- 描述 -->
+					<a:bind value="failuredeal.description" />
+					<itextbox id="failuredeal.description" />
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

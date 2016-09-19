@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<window 
+	title="管理员重设密码" use="combiz.ui.user.ModifyPwDialog" width="350" closable="true"
+ 	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibsusers.password"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	
+<div align="center">
+	旧 密 码：<a:bind value="ibsusers.password"/><itextbox id="ibsusers.password" cols="40" type="password"/> <!-- type="password"  --><separator></separator>
+	新 密 码：<ipasswordbox id="newpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	确认密码：<ipasswordbox id="cnewpassword" cols="40"/><html><attribute name="content"><![CDATA[<br>]]></attribute></html>
+	         <button label="确定" onClick="mainWnd.resetpw()"></button><button label="取消" onClick="mainWnd.cancel();"></button>
+</div>
+
+</window>

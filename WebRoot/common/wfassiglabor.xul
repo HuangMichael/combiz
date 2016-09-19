@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<window  border="normal" title="请手工选择流程下一步接收者" width="700"
+use="combiz.system.workflow.WFAssignLaborDialog">
+<vbox width="100%">
+	<groupbox>手工选择流程接收者：通过选择任务节点的接收角色（该角色中的人员已经经过地点和相关的条件过滤），指定发送至的选中的人员审批。</groupbox>
+	
+	<listwindow id="wflaborlistWnd" title="请选择接收人员" use="combiz.system.workflow.WFAssignLaborListWindow"
+	 tablename="labor" edittype="LISTONLY" searchable="false" autodata="false">
+	<tablelist band="wflaborlistWnd" pageSize="8">
+		<listhead>
+				<tablelistheader src="/images/img_listitem.gif"/>
+				<tablelistheader data="labornum" label="员工编号" sort="auto" width="30%"/>
+				<tablelistheader data="laborname" label="姓名" sort="auto" width="40%"/>
+				<tablelistheader data="deptnum" label="所在部门" sort="auto" width="30%"/>
+		</listhead>
+	</tablelist>
+	</listwindow>
+
+
+<separator spacing="4px"/>
+	<div align="center">
+	<button label=" 确 定 " onClick="wfAssignLaborWnd.confirm()"/>
+	<button label=" 取 消 " onClick="wfAssignLaborWnd.cancel()"/>
+	</div>
+
+</vbox>
+</window>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="图元库及画图模板管理" use="combiz.system.eqdraw.DrawLibPopup" width="400" height="150" closable="true">
+<groupbox><caption label="选择要删除的图元及模板文件"/>	
+	<groupbox><caption label="图元库"/>
+		<combobox id="drawliblist"/>
+		<button label="删除图元库" onClick="drawlibWnd.dellib()"/>
+	</groupbox>
+	<groupbox><caption label="模板库"/>
+		<combobox id="drawtmplist"/>
+		<button label="删除模板库" onClick="drawlibWnd.deltmp()"/>
+	</groupbox>
+</groupbox>	
+<div align="right">
+	<button label="关闭窗口" onClick="drawlibWnd.onClose()"/>
+</div>
+</window>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="库存报废" app="REJECT"  resize="true" use="combiz.ui.inventory.RejectWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="库存报废"/><!-- 库存报废 -->
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						<label value="报废单号" /><!-- 报废单号 -->
+						<stextbox data="rejectnum" />
+						<label value="报废备注" /><!-- 报废备注 -->
+						<stextbox data="memo" />
+						<label value="流程状态" /><!-- 流程状态 -->
+						<stextbox data="status" />
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="rejectnum" label="报废单号" sort="auto" width="15%"/><!-- 报废单号 -->
+						<resultlistheader data="memo" label="报废备注" sort="auto" width="25%"/><!-- 报废备注 -->
+						<resultlistheader data="rejectdate" label="报废日期" sort="auto" width="15%"/><!-- 报废日期 -->
+						<resultlistheader data="requestby" label="申请人" sort="auto" width="10%"/><!-- 申请人 -->
+						<resultlistheader data="informman" label="负责人" sort="auto" width="10%"/><!-- 负责人 -->
+						<resultlistheader data="status" label="流程状态" sort="auto" width="10%"/><!--流程状态  -->
+						<resultlistheader data="statusdate" label="流程日期" sort="auto" width="15%"/><!-- 流程日期 -->
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"reject.statusdate","reject.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row spans="1,1,1,3">
+							报废单号:<!-- 报废单号 -->
+							<a:bind value="reject.rejectnum" />
+							<itextbox id="reject.rejectnum" />
+							备注:<!-- 备注 -->
+							<a:bind value="reject.memo" />
+							<itextbox id="reject.memo" width="80%"/>
+						</row>
+						<row>
+							报废日期:<!-- 报废日期 -->
+							<a:bind value="reject.rejectdate" />
+							<idatebox id="reject.rejectdate" />
+							申请人:<!-- 申请人 -->
+							<a:bind value="reject.requestby" />
+							<ibandbox id="reject.requestby"
+								lookup="labor" />
+							负责人:<!-- 负责人 -->
+							<a:bind value="reject.informman" />
+							<ibandbox id="reject.informman"
+								lookup="labor" />
+						</row>
+						<row>
+						    流程日期:<!--流程日期  -->
+							<a:bind value="reject.statusdate" />
+							<idatebox id="reject.statusdate" />
+							流程状态:<!-- 流程状态 -->
+							<a:bind value="reject.status" />
+							<itextbox id="reject.status" />
+						   
+							
+						</row>
+						
+					</rows>
+				</grid>
+				<listwindow id="rejectitem" title="报废单明细" use="combiz.ui.inventory.RejectitemList" dialog="/inventory/rejectitemdialog.xul" orderby="rejlinenum asc">
+				<tablelist band="rejectitem" pageSize="16"><!-- 报废单明细 -->
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="rejlinenum" label="行号" sort="auto" width="5%"/><!-- 行号 -->
+						<tablelistheader data="itemnum" label="库存编号" sort="auto" width="10%"/><!-- 库存编号 -->
+						<tablelistheader data="eqnum" label="资产编号" sort="auto" width="20%"/>
+						<tablelistheader data="item.description" label="描述" sort="auto" width="20%"/><!--描述 -->
+						<tablelistheader data="warehouse" label="库房" sort="auto" width="15%"/><!-- 库房 -->
+						<!-- <tablelistheader data="binnum" label="箱柜" sort="auto" width="15%"/> -->
+						<tablelistheader data="lotnum" label="批次号" sort="auto" width="15%"/><!-- 批次号 -->
+						<tablelistheader data="rejectqty" label="报废数量" sort="auto" width="15%"/><!-- 报废数量 -->
+						
+						
+						
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		
+		</tabpanels>
+	</tabbox>
+</mainwindow>

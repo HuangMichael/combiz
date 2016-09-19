@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="修改默认顶级授权" use="combiz.system.ui.CommonDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="550">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"labor.labornum","labor.deptnum","labor.laborname","labor.craft"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+ <groupbox><caption label="基本信息" />
+				<grid>
+					<rows>
+						<row>
+						人员：<a:bind value="labor.labornum"/><itextbox id="labor.labornum"/>
+						姓名：<a:bind value="labor.laborname"/><itextbox id="labor.laborname"/>
+						</row>
+						<row>
+						部门：<a:bind value="labor.deptnum"/><ibandbox id="labor.deptnum" lookup="department"/>
+						顶级授权部门：<a:bind value="labor.sitenum"/><ibandbox id="labor.sitenum" lookup="department"/>
+						</row>
+					</rows>
+				</grid>
+</groupbox>
+			
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.confirm()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="equipment">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="eqnum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from equipment where eqnum='[?eqnum?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings orientation="1" shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+<Submiter class="BuiltInSQLSubmiter">
+<Attributes dsName="inbasis" tableName="EQUIPMENT" />
+<Column isKey="true" name="EQNUM">
+<ColumnRow column="1" row="3"/>
+</Column>
+<Column isKey="false" name="DESCRIPTION">
+<ColumnRow column="3" row="3"/>
+</Column>
+<Column isKey="false" name="LOCATION">
+<ColumnRow column="5" row="3"/>
+</Column>
+<Column isKey="false" name="PURPRICE">
+<ColumnRow column="7" row="3"/>
+</Column>
+<Column isKey="false" name="REPLACECOST">
+<ColumnRow column="1" row="4"/>
+</Column>
+<Column isKey="false" name="TOTALCOST">
+<ColumnRow column="3" row="4"/>
+</Column>
+<Column isKey="false" name="YTDCOST">
+<ColumnRow column="5" row="4"/>
+</Column>
+<Column isKey="false" name="BUDGETCOST">
+<ColumnRow column="7" row="4"/>
+</Column>
+<Column isKey="false" name="ISRUNNING">
+<ColumnRow column="1" row="5"/>
+</Column>
+<Column isKey="false" name="TOTDOWNTIME">
+<ColumnRow column="3" row="5"/>
+</Column>
+<Column isKey="false" name="CHANGEDATE">
+<ColumnRow column="5" row="5"/>
+</Column>
+<Column isKey="false" name="INVCOST">
+<ColumnRow column="1" row="6"/>
+</Column>
+<Column isKey="false" name="CORPNUM">
+<O t="S">INBASIS</O></Column>
+<Column isKey="false" name="SITENUM">
+<O t="S">英贝思软件科技</O></Column>
+</Submiter>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,18.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[72.0,122.0,72.0,138.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="0" cs="9" rs="2" s="0"><O t="S">****公司资产卡片信息</O></C>
+<C c="0" r="3" s="1"><O t="S">资产编号</O></C>
+<C c="1" r="3" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="EQNUM" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Regexp><![CDATA[^[a-z]+\d+$]]></Regexp><Attr allowBlank="false" /></CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="2" r="3" s="1"><O t="S">描述</O></C>
+<C c="3" r="3" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="DESCRIPTION" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Regexp><![CDATA[^[a-z]+\d+$]]></Regexp><Attr allowBlank="false" /></CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="4" r="3" s="1"><O t="S">位置</O></C>
+<C c="5" r="3" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="LOCATION" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.ComboBoxCellEditorDef"></CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /><Map class="com.fr.data.impl.DBMap">
+<DBMapAttr tableName="LOCATIONS" keyColumnIndex="3" valueColumnIndex="2"/>
+<Database class="com.fr.data.impl.JDBCDatabase">
+<DatabaseAttr name="inbasis" />
+<JDBCDatabaseAttr url="jdbc:oracle:thin:@192.168.1.100:1521:std" driver="oracle.jdbc.driver.OracleDriver" user="inbasis" password="___007a00200068006e001700bc0058"
+ encryptPassword="true" />
+</Database>
+</Map>
+</C>
+<C c="6" r="3" s="1"><O t="S">价格</O></C>
+<C c="7" r="3" s="1"><O t="S"></O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="8" r="3" s="1"><O t="S"></O></C>
+<C c="0" r="4" s="1"><O t="S">安置价格</O></C>
+<C c="1" r="4" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="REPLACECOST" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="2" r="4" s="1"><O t="S">总成本</O></C>
+<C c="3" r="4" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="TOTALCOST" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="4" r="4" s="1"><O t="S">年折旧</O></C>
+<C c="5" r="4" s="1"><O t="S"></O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="6" r="4" s="1"><O t="S">预算价格</O></C>
+<C c="7" r="4" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="BUDGETCOST" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="8" r="4" s="1"><O t="S"></O></C>
+<C c="0" r="5" s="1"><O t="S">是否运行</O></C>
+<C c="1" r="5" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="ISRUNNING" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.ComboBoxCellEditorDef"></CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /><Map class="com.fr.data.impl.CustomMap">
+<CustomMapAttr>
+<CustomMap key="y" value="是"/>
+<CustomMap key="n" value="否"/>
+</CustomMapAttr>
+</Map>
+</C>
+<C c="2" r="5" s="1"><O t="S">停机时间</O></C>
+<C c="3" r="5" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="RUNDATE" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="4" r="5" s="1"><O t="S">修改日期</O></C>
+<C c="5" r="5" s="2"><O t="S"></O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.DateCellEditorDef"><Attribute format="MM/dd/yyyy" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="6" r="5" s="1"><O t="S">修改人</O></C>
+<C c="7" r="5" s="1"><O t="S"></O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Regexp><![CDATA[^[a-z]+\d+$]]></Regexp><Attr allowBlank="false" /></CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="8" r="5" s="1"><O t="S"></O></C>
+<C c="0" r="6" s="1"><O t="S">成本</O></C>
+<C c="1" r="6" s="1"><O t="DSColumn"><Attributes dsName="equipment" columnName="INVCOST" />
+</O><CellGUIAttr><CellEditorDef class="com.fr.report.cellElement.NumberCellEditorDef"><Attribute maxIntegerLength="32" maxDecimalLength="16" allowDecimals="true" allowNegative="true" minValue="-1.7976931348623157E308" maxValue="1.7976931348623157E308" />
+</CellEditorDef></CellGUIAttr><Expand dir="0" />
+<CellWriteAttr /></C>
+<C c="2" r="6" s="1"><O t="S">组织机构</O></C>
+<C c="3" r="6" s="1"><O t="S"></O><Expand dir="0" />
+</C>
+<C c="4" r="6" s="1"><O t="S">地点</O></C>
+<C c="5" r="6" s="1"><O t="S"></O><Expand dir="0" />
+</C>
+<C c="6" r="6" s="1"><O t="S"></O></C>
+<C c="7" r="6" s="1"><O t="S"></O><Expand dir="0" />
+</C>
+<C c="8" r="6" s="1"><O t="S"></O></C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="19" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[MM/dd/yyyy]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

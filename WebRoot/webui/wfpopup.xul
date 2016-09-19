@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="popupWnd" use="combiz.system.common.MessPopupWnd" title="待办任务提醒" border="normal" width="300" closable="true">
+
+您有[<label id="wfinboxcount"/>]条新的待办任务，请及时处理！
+
+	<div align="center">
+		<button label="查看待办任务" onClick="popupWnd.openWFInbox()"/>
+		<button label="不再提醒" onClick="popupWnd.nextNotify()"/>
+		<button label="我知道了" onClick="popupWnd.onClose()"/>
+	</div>
+</window>

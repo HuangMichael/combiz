@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="IBSSECURITY" title="IP安全访问配置" resize="true" use="combiz.ui.ibs.IbssecurityWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="IP安全访问配置"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="sectype" label="限制类型" sort="auto" width="20%"/>
+						<resultlistheader data="ipseg1" label="开始" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg2" label="IP2" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg3" label="IP3" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg4" label="IP4" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg21" label="结束" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg22" label="IP2" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg23" label="IP3" sort="auto" width="10%"/>
+						<resultlistheader data="ipseg24" label="IP4" sort="auto" width="10%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibssecurity.grpname","ibssecurity.secgrade"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						
+						<row>
+						限制类型:<a:bind value="ibssecurity.sectype"/><icombobox id="ibssecurity.sectype" cols="5"/>
+						*执行规则：“拒绝”类型优先。
+						</row>
+						<row spans="1,2">
+						限制IP段配置：
+						<div>
+						开始IP:<a:bind value="ibssecurity.ipseg1"/><itextbox id="ibssecurity.ipseg1" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg2"/><itextbox id="ibssecurity.ipseg2" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg3"/><itextbox id="ibssecurity.ipseg3" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg4"/><itextbox id="ibssecurity.ipseg4" cols="4"/>
+						~~~~结束IP:<a:bind value="ibssecurity.ipseg21"/><itextbox id="ibssecurity.ipseg21" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg22"/><itextbox id="ibssecurity.ipseg22" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg23"/><itextbox id="ibssecurity.ipseg23" cols="4"/>
+						.<a:bind value="ibssecurity.ipseg24"/><itextbox id="ibssecurity.ipseg24" cols="4"/>
+						</div>
+						</row>
+						
+						<row spans="1,2">
+						备注:<a:bind value="ibssecurity.remark"/><itextbox id="ibssecurity.remark" cols="60" rows="3"/>
+						</row>
+
+					</rows>
+				</grid>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

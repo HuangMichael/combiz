@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="borrowequ" title="设备借用申请" resize="true" wfenabled="true" use="combiz.ui.inventory.BorrowequWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="设备借用申请单" width="110px"/>
+			<tab id="issue" label="实际借用/归还" width="110px"/>
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="reqtype='设备借用申请'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("matreqnum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器： -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" />
+						<menubar use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<label value="申请编号：" />
+						<stextbox data="matreqnum" />
+						<label value="描述：" />
+						<stextbox data="description" />
+						<label value="申请人：" />
+						<stextbox data="requestby" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif" />
+						<resultlistheader data="matreqnum" label="申请编号" sort="auto" width="15%" />
+						<resultlistheader data="description" label="描述" sort="auto" width="40%" />
+						<resultlistheader data="status" label="状态" sort="auto" width="10%" />
+						<resultlistheader data="requestby" label="申请人" sort="auto" width="10%" />
+						<resultlistheader data="reqdept" label="申请部门" sort="auto" width="10%" />
+						<resultlistheader data="requestdate" label="申请时间" format="yyyy-MM-dd" sort="auto" width="15%" />
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"matreq.usedate"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"matreq.status","matreq.matreqnum","matreq.statusdate","matreq.requestby","matreq.reqdept"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							申请编号:
+							<a:bind value="matreq.matreqnum" />
+							<itextbox id="matreq.matreqnum" />
+							描述：
+							<a:bind value="matreq.description" />
+							<itextbox id="matreq.description" cols="60" />
+						</row>					
+						<row>
+							申请状态:
+							<a:bind value="matreq.status" />
+							<itextbox id="matreq.status" />
+							状态时间：
+							<a:bind value="matreq.statusdate" />
+							<idatetimebox id="matreq.statusdate"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->					
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							借用日期：
+							<a:bind value="matreq.requireddate" />
+							<idatebox id="matreq.requireddate" />
+							归还日期:
+							<a:bind value="matreq.usedate" />
+							<idatebox id="matreq.usedate" />
+						</row>
+						<!-- //////////////////////row//////////////// -->						
+						<row>
+							借用人：
+							<a:bind value="matreq.requestby" />
+							<ibandbox id="matreq.requestby" lookup="labor" />
+							借用部门:
+							<a:bind value="matreq.reqdept" />
+							<ibandbox id="matreq.reqdept" lookup="department" />
+							
+						</row>
+						<row>
+							申请日期：
+							<a:bind value="matreq.requestdate" />
+							<idatebox id="matreq.requestdate" />
+							<!-- 主送人：
+							<a:bind value="matreq.supervisor" />
+							<ibandbox id="matreq.supervisor" lookup="labor" />			 -->			
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				<listwindow id="wpmaterial" title="设备借用明细" use="combiz.ui.inventory.BorrowequLineList"
+				dialog="/inventory/borrowequlinedialog.xul" >
+					<tablelist band="wpmaterial" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="设备" sort="auto" width="15%" />
+							<tablelistheader data="description" label="描述" sort="auto" width="35%" />
+							<tablelistheader data="modelnum" label="规格型号" sort="auto" width="30%" />
+							<tablelistheader data="orderunit" label="借用单位" sort="auto" width="10%"/>
+							<tablelistheader data="itemqty" label="借用数量" sort="auto" width="10%"/>				
+						</listhead>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+			<tabpanel>
+				<listwindow id="invusetrans" title="实际设备发放" edittype="readonly" use="combiz.ui.inventory.IssueMrInvuseList"
+				 dialog="/inventory/issuemrinvusedialog.xul">
+					<tablelist band="invusetrans" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="itemnum" label="库存项目" sort="auto" width="20%"/>
+							<tablelistheader data="issuetype" label="发放类型" sort="auto" width="15%"/>
+							<tablelistheader data="actualdate" label="交易日期" sort="auto" width="20%"/>
+							<tablelistheader data="quantity" label="发放数量" sort="auto" width="15%"/>
+							<tablelistheader data="issuetolabor" label="发放至员工" sort="auto" width="15%"/>
+							<tablelistheader data="enterby" label="录入人" sort="auto" width="15%"/>
+						</listhead>
+
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

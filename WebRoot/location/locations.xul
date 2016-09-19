@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="locations" title="组装结构" resize="true" use="combiz.ui.location.LocationsWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="设备位置结构"/>
+<hbox width="220px">
+<label value="系统:"/>
+<listbox use="combiz.ui.location.LocsystemListbox" width="170"/>
+</hbox>
+<separator spacing="1"/>
+<tree use="combiz.ui.location.LocationsTree"/>
+</groupbox>
+<splitter collapse="before"/>
+<!-- ********************************** 顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="位置" width="70px"/>
+			<tab id="locspectab" label="技术参数" width="70px"/>
+			<tab id="workordertab" label="工单" width="70px"/>
+			<tab id="premainttab" label="预防性维护" width="90px"/>
+			<tab id="eqhistorytab" label="设备历史" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"locations.changeby","locations.changedate","locations.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row spans="1,3">
+						位置:
+						<groupbox>
+						<a:bind value="locations.location"/><itextbox id="locations.location"/>
+						<a:bind value="locations.description"/><itextbox id="locations.description" cols="40"/>
+						</groupbox>
+						</row>
+						<row spans="1,3">
+						父级:
+						<groupbox>
+						<a:bind value="locstruct.parent"/><itextbox id="locstruct.parent"/>
+						<a:bind value="parent.description"/><itextbox id="parent.description" cols="40"/>
+						</groupbox>
+						</row>
+						<row>
+						状态:<a:bind value="locations.status"/><icombobox id="locations.status"/>
+						类型:<a:bind value="locations.type"/><icombobox id="locations.type"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						所属部门:<a:bind value="locations.deptnum"/><ibandbox id="locations.deptnum" lookup="department"/>
+						所属专业:<a:bind value="locations.craft"/><icombobox id="locations.craft"/>
+						</row>
+						<row>
+						分类:<a:bind value="locations.classid"/><ibandbox id="locations.classid" lookup="classificationeq"/>
+						排序号:<a:bind value="locstruct.orderby"/><itextbox id="locstruct.orderby" cols="4"/>
+						</row>
+						<!--<row>
+						修改人: 修改人 <a:bind value="locations.changeby"/><itextbox id="locations.changeby"/>
+						修改时间: 修改时间 <a:bind value="locations.changedate"/><idatebox id="locations.changedate"/>
+						</row>
+						-->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<attachimage label="位置图片(点击右键上传图片)" width="99%" imgwidth="100" imgheight="100" horizontal="true" readOnly="false"/>
+				<separator spacing="2px"/>
+				
+				<groupbox><caption label="位置上的设备相关信息"/>
+				<listwindow id="equipment" title="位置上的设备" editpopup="true" applink="equipment" edittype="READONLY" 
+				use="combiz.ui.location.EquipmentList" dialog="/location/equipmentdialog.xul">
+					<tablelist band="equipment" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="eqnum" label="设备" sort="auto" width="20%"/><!--  -->
+							<tablelistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="50%"/><!--  -->
+							<tablelistheader data="status" label="状态" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="labornum" label="负责人" sort="auto" width="10%" applink="labor"/>
+							<tablelistheader data="deptnum" label="负责部门 " sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+				<tabbox width="100%">
+				<tabs>
+					<tab label="设备参数" width="70px"/>
+					<tab label="设备备件" width="70px"/>
+					<tab label="部件及附属" width="90px"/>
+					<tab label="维修工单" width="70px"/>
+				</tabs>
+				
+				<tabpanels width="100%">
+				<tabpanel>
+				<listwindow id="eqspec" title="设备技术参数" parentWnd="equipment"  editpopup="true" use="combiz.ui.equipment.EqspecList"
+					dialog="/equipment/eqspecdialog.xul">
+					<tablelist band="eqspec" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="classid"
+								label="分类" sort="auto" width="20%" /><!-- 分类 -->
+							<tablelistheader data="classattr"
+								label="参数" sort="auto" width="40%" /><!-- 参数 -->
+							<tablelistheader data="strvalue"
+								label="参数值" sort="auto" width="30%" /><!-- 参数值 -->
+							<tablelistheader data="unitid"
+								label="单位" sort="auto" width="10%" /><!-- 单位 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+				<tabpanel>
+				<listwindow id="eqsparepart" parentWnd="equipment" title="设备备件" edittype="listonly">
+					<tablelist band="eqsparepart" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif" />
+							<tablelistheader data="description" label="描述 " sort="auto" width="50%" />
+							<tablelistheader data="itemnum" label="备件编号" sort="auto" width="20%" applink="item"/>
+							<tablelistheader data="quantity" label="数量" sort="auto" width="15%"  format="0.00"/>
+							<tablelistheader data="culbar"
+								label="库存余量" sort="auto" width="15%" format="0.00"/><!-- 当前库存余量 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+				<tabpanel>
+				<listwindow id="appertain" title="附属设备(部件)"  parentWnd="equipment" applink="equipment" editpopup="true" use="combiz.ui.equipment.AppertainList"
+				 dialog="/equipment/equdialog.xul">
+					<tablelist band="appertain" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="eqnum" label="设备" sort="auto" width="20%" /><!--  -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							<tablelistheader data="location"
+								label="位置" sort="auto" width="15%" /><!-- 位置 -->
+							<tablelistheader data="status"
+								label="状态" sort="auto" width="15%" /><!-- 状态 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+<!-- ********************************** // ********************************** -->
+			<tabpanel>
+				<listwindow id="workorder" title="工单" parentWnd="equipment" edittype="READONLY" use="combiz.ui.location.WorkorderList" dialog="/location/workorderdialog.xul">
+					<tablelist band="workorder" pageSize="8"><!-- title:工单 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="wonum" label="工单编号" sort="auto" width="20%"/><!-- 工单编号 -->
+							<tablelistheader data="description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+							<tablelistheader data="status" label="状态" sort="auto" width="10%"/><!-- 状态 -->
+							<tablelistheader data="statusdate" label="状态时间" sort="auto" width="15%"/><!-- 状态时间 -->
+							<tablelistheader data="eqnum" label="设备" sort="auto" width="15%"/><!-- 设备 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** // ********************************** -->
+				</tabpanels>
+				</tabbox>
+				</groupbox>
+				
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+<!-- ********************************** // ********************************** -->
+			<!--
+			<tabpanel>	
+				<listwindow id="childLoctionsTable" title="子表" edittype="READONLY" use="combiz.ui.location.ChildLocationList" dialog="/location/childlocationdialog.xul">
+					<tablelist band="childLoctionsTable" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="location" label="子位置" sort="auto" width="20%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="50%"/>
+							<tablelistheader data="status" label="状态" sort="auto" width="10%"/>
+							<tablelistheader data="systemid" label="系统" sort="auto" width="10%"/>
+							<tablelistheader data="deptnum" label="所属部门" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			-->
+<!-- ********************************** // ********************************** -->
+<!-- ********************************** // ********************************** -->
+			<tabpanel>
+				<listwindow id="locspec" title="技术参数" use="combiz.ui.location.LocspecList" dialog="/location/locspecdialog.xul">
+					<tablelist band="locspec" pageSize="25"><!-- title:技术参数 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="classid" label="分类" sort="auto" width="20%"/><!-- 分类 -->
+							<tablelistheader data="classattr" label="参数" sort="auto" width="40%"/><!-- 参数 -->
+							<tablelistheader data="strvalue" label="参数值" sort="auto" width="30%"/><!-- 参数值 -->
+							<tablelistheader data="unitid" label="单位" sort="auto" width="10%"/><!-- 单位 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** // ********************************** -->
+<!-- ********************************** // ********************************** -->
+			<tabpanel>
+				<listwindow id="worder"  title="工单" edittype="READONLY" use="combiz.ui.location.WorkorderList" dialog="/location/workorderdialog.xul">
+					<tablelist band="worder" pageSize="8"><!-- title:工单 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="wonum" label="工单编号" sort="auto" width="20%"/><!-- 工单编号 -->
+							<tablelistheader data="description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+							<tablelistheader data="status" label="状态" sort="auto" width="10%"/><!-- 状态 -->
+							<tablelistheader data="statusdate" label="状态时间" sort="auto" width="15%"/><!-- 状态时间 -->
+							<tablelistheader data="eqnum" label="设备" sort="auto" width="15%"/><!-- 设备 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** // ********************************** -->
+		
+<!-- ********************************** //预防性维护 ********************************** -->
+			<tabpanel>	
+				<listwindow id="premaint" title="预防性维护"  edittype="READONLY" use="combiz.ui.location.PremaintList" dialog="/location/premaintdialog.xul">
+					<tablelist band="premaint" pageSize="8"><!-- title:预防性维护 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="pmnum" label="预防性维护" sort="auto" width="20%"/><!-- 预防性维护 -->
+							<tablelistheader data="eqnum" label="设备编号" sort="auto" width="20%"/><!-- 设备编号 -->
+							<tablelistheader data="usefrequency" label="使用频率" sort="auto" width="10%"/><!-- 使用频率 -->
+							<tablelistheader data="frequency" label="频率" sort="auto" width="10%"/><!-- 频率 -->
+							<tablelistheader data="firstdate" label="第一次启动日期" sort="auto" width="40%"/><!-- 第一次启动日期 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>	
+			</tabpanel>
+<!-- ********************************** //设备历史 ********************************** -->
+			<tabpanel>	
+				<listwindow id="eqtrans" title="设备历史" edittype="LISTONLY"><!-- title:设备历史 -->
+					<tablelist band="eqtrans" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="datemoved" label="移动日期" sort="auto" width="10%"/><!-- 移动日期 -->
+							<tablelistheader data="fromparent" label="父级移自" sort="auto" width="10%"/><!-- 父级移自 -->
+							<tablelistheader data="toparent" label="父级移至" sort="auto" width="10%"/><!-- 父级移至 -->
+							<tablelistheader data="fromloc" label="位置移自" sort="auto" width="10%"/><!-- 位置移自 -->
+							<tablelistheader data="toloc" label="位置移至" sort="auto" width="10%"/><!-- 位置移至 -->
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="10%"/><!-- 交易日期 -->
+							<tablelistheader data="moveby" label="录入人" sort="auto" width="10%"/><!-- 录入人  -->
+							<tablelistheader data="memo" label="备忘" sort="auto" width="20%"/><!-- 备忘 -->
+<!--							<tablelistheader data="wonum" label="工单" sort="auto" width="15%"/>
+							<tablelistheader data="ponum" label="采购单" sort="auto" width="15%"/>
+-->							<tablelistheader data="readingdate" label="读数日期" sort="auto" width="10%"/><!-- 读数日期 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>	
+			</tabpanel>	
+		
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

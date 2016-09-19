@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstabindexkey.changed"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+<groupbox><caption label="索引键值"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						字段名:<a:bind value="ibstabindexkey.colname"/><ibandbox id="ibstabindexkey.colname" lookup="ibstablecols"/>
+						描述：<a:bind value="ibstablecols.title"/><itextbox id="ibstablecols.title" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						排序方式：<a:bind value="ibstabindexkey.orderby"/><icombobox id="ibstabindexkey.orderby" cols="4"/>
+						字段序号:	<a:bind value="ibstabindexkey.colseq"/><ilongbox id="ibstabindexkey.colseq" cols="4"/>
+						
+						</row>
+						
+
+						<!-- //////////////////////row//////////////// -->
+						<row spans="4,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+</groupbox>
+		
+</editwindow>

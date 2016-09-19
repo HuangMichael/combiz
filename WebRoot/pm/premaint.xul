@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="premaint" title="预防性维护" resize="true"
+	use="combiz.ui.pm.PremaintWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation"><!-- title="预防性维护" -->
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="预防性维护" width="110px" /><!-- 预防性维护 -->
+			<tab id="oldpmlisttab" label="维护历史表" width="110px" /><!-- 维护历史表 -->
+			<tab id="pmjpseqtab" label="维护序列表" width="110px" /><!-- 维护序列表 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			String[] readonly = {"workorder.status","workorder.laststartdate","location.description","equipment.description","jobplan.description"};
+ 			mainWnd.setReadonly(readonly);
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						<!-- 从这里开始修改搜索字段 -->
+						预防性维护<!-- 预防性维护 -->：
+						<stextbox data="pmnum" />
+						描述<!-- 描述 -->：
+						<stextbox data="description" />
+
+						<!-- 修改搜索字段结束 -->
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="pmnum" label="预防性维护"
+							sort="auto" width="8%" /><!-- 预防性维护 -->
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="25%" /><!-- 描述 -->
+						<resultlistheader data="locations.description"
+							label="位置" sort="auto" width="15%" /><!-- 位置 -->
+						<resultlistheader data="equipment.description"
+							label="设备" sort="auto" width="15%" /><!-- 设备 -->
+						<resultlistheader data="worktype" label="类型"
+							sort="auto" width="5%" /><!-- 类型 -->
+						<resultlistheader
+							data="jobplantable.description" label="标准作业计划" sort="auto"
+							width="25%" /><!-- 标准作业计划 -->
+						<resultlistheader data="frequency" label="频率"
+							sort="auto" width="5%" /><!-- 频率 -->
+						<resultlistheader data="frequnit" label="单位"
+							sort="auto" width="2%" /><!-- 单位 -->
+
+
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+			<!-- ********************************** 预防性维护 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"premaint.firstdate","premaint.crewid","premaint.worktype","premaint.autowf"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"premaint.adjnextdue","premaint.pmcounter","premaint.lastcompdate","premaint.laststartdate"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							预防性维护<!-- 预防性维护 -->:
+							<a:bind value="premaint.pmnum" />
+							<itextbox id="premaint.pmnum" />
+							描述<!-- 描述 -->：
+							<a:bind value="premaint.description" />
+							<itextbox id="premaint.description"
+								cols="40" />
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							位置<!-- 位置 -->：
+							<a:bind value="premaint.location" />
+							<ibandbox id="premaint.location"
+								lookup="location" />
+							位置描述<!-- 位置描述 -->:
+							<a:bind value="locations.description" />
+							<itextbox id="locations.description"
+								cols="40" />
+						</row>
+						<row spans="1,1,1,3">
+							设备编号<!-- 设备编号 -->:
+							<a:bind value="premaint.eqnum" />
+							<ibandbox id="premaint.eqnum"
+								lookup="equipment" />
+							设备描述<!-- 设备描述 -->：
+							<a:bind value="equipment.description" />
+							<itextbox id="equipment.description" cols="40" />
+						</row>
+						<row>
+							频率<!-- 频率 -->:
+							<a:bind value="premaint.frequency" />
+							<ilongbox id="premaint.frequency" />
+							使用频率?<!-- 使用频率? -->：
+							<a:bind value="premaint.usefrequency" />
+							<icheckbox id="premaint.usefrequency" />
+							分类<!-- 分类 -->:
+							<a:bind value="premaint.classid" />
+							<ibandbox id="premaint.classid" lookup="classificationpm" />
+
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							频率单位<!-- 频率单位 -->:
+							<a:bind value="premaint.frequnit" />
+							<icombobox id="premaint.frequnit" cols="4" />
+							使用作业序列？<!-- 使用作业序列？ -->：
+							<a:bind value="premaint.usejpseq" />
+							<icheckbox id="premaint.usejpseq" />
+							是否启用工作流<!-- 是否启用工作流 -->：
+							<a:bind value="premaint.autowf" />
+							<icheckbox id="premaint.autowf" />
+
+
+						</row>
+
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							工单类型<!-- 工单类型 -->:
+							<a:bind value="premaint.worktype" />
+							<icombobox id="premaint.worktype" />
+							标准作业计划<!-- 标准作业计划： -->:
+							<a:bind value="premaint.jpnum" />
+							<ibandbox id="premaint.jpnum"
+								lookup="jobplan" applink="jobplan" />
+								需要停机?<!-- 需要停机? -->：
+							<a:bind value="premaint.eqdown" />
+							<icheckbox id="premaint.eqdown" />
+							
+
+						</row>
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							第一次启动日期<!-- 第一次启动日期 -->:
+							<a:bind value="premaint.firstdate" />
+							<idatebox id="premaint.firstdate" />
+							下一个到期日<!-- 下一个到期日 -->：
+							<a:bind value="premaint.nextdate" />
+							<idatebox id="premaint.nextdate" />
+							工单状态<!-- 工单状态 -->:
+							<a:bind value="premaint.wostatus" />
+							<ibandbox id="premaint.wostatus"
+								lookup="ibslistvalue" />
+							
+
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							负责班组<!-- 负责班组 -->:
+							<a:bind value="premaint.crewid" />
+							<ibandbox id="premaint.crewid"
+								lookup="department" />
+							工作负责人<!-- 工作负责人 -->：
+							<a:bind value="premaint.supervisor" />
+							<ibandbox id="premaint.supervisor"
+								lookup="labor" />
+								最近一次完成日期<!-- 最近一次完成日期 -->：
+							<a:bind value="premaint.lastcompdate" />
+							<idatebox id="premaint.lastcompdate" />
+							
+
+							<!-- 仓库:
+								<a:bind value="premaint.warehouse" />
+								<ibandbox id="premaint.warehouse"
+								lookup="warehouse" />
+							-->
+
+
+						</row>
+						<row>
+
+							<!--  	提前期：
+								<a:bind value="premaint.leadtime" />
+								<ilongbox id="premaint.leadtime" cols="4" />
+							-->
+
+							父级<!-- 父级 -->:
+							<a:bind value="premaint.parent" />
+							<ibandbox id="premaint.parent"
+								lookup="premaint" />
+							上次开始日期<!-- 上次开始日期 -->：
+							<a:bind value="premaint.laststartdate" />
+							<idatebox id="premaint.laststartdate" />
+							维护次数<!-- 维护次数 -->:
+							<a:bind value="premaint.pmcounter" />
+							<ilongbox id="premaint.pmcounter" cols="4" />
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<!--					<row>
+							
+							有子级？:
+							<a:bind value="premaint.haschild" />
+							<icombobox id="premaint.haschild" cols="6" />
+							
+							
+							</row>  -->
+						<!-- //////////////////////row//////////////// -->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+
+				</grid>
+				<!-- //////////////////////标准维修操作步骤//////////////// -->
+				<listwindow id="jobtasktable" title="标准作业计划明细"
+					use="combiz.ui.stdplan.JobtaskList"
+					dialog="/stdplan/jobtaskdialog.xul" edittype="readonly"><!-- 标准作业计划明细 -->
+					<tablelist band="jobtasktable" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<!-- <tablelistheader data="TASKNUM" label="任务编号" sort="auto" width="5%"/> -->
+							
+							<tablelistheader data="location" label="内容"
+								sort="auto" width="40%" /><!-- 内容 -->
+							<tablelistheader data="DESCRIPTION"
+								label="要求" sort="auto" width="50%" /><!-- 要求 -->
+							<tablelistheader data="TASKDURATION"
+								label="任务持续时间" sort="auto" width="10%" /><!-- 任务持续时间 -->
+							<!-- 
+							<tablelistheader data="jtwz" label="位置"
+								sort="auto" width="15%" />
+								<tablelistheader data="LOCATION" label="位置" sort="auto" width="10%"/>
+								<tablelistheader data="EQNUM" label="设备" sort="auto" width="10%"/>
+								<tablelistheader data="POINTNUM" label="测点" sort="auto" width="10%"/>   -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ***********************************维护历史表*********************************-->
+			<tabpanel>
+				<listwindow id="oldpmlist" title="预防性维护历史"
+					use="combiz.ui.pm.PmgenhistoryList"
+					dialog="/pm/pmgenhistorydialog.xul" edittype="READONLY"><!-- 预防性维护历史 -->
+					<tablelist band="oldpmlist" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="pmnum" label="预防性维护"
+								sort="auto" width="20%" /><!-- 预防性维护 -->
+							<tablelistheader data="performdate"
+								label="上一次生成日期" sort="auto" width="15%" /><!-- 上一次生成日期 -->
+							<tablelistheader data="wonum" label="工单编号"
+								sort="auto" width="15%" /><!-- 工单编号 -->
+							<tablelistheader data="startdate"
+								label="开始日期" sort="auto" width="15%" /><!-- 开始日期 -->
+							<tablelistheader data="jpnum" label="标准作业计划"
+								sort="auto" width="15%" /><!-- 标准作业计划 -->
+							<tablelistheader data="nextstartdate"
+								label="下次执行日期" sort="auto" width="15%" /><!-- 下次执行日期 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ***********************************维护序列表*********************************-->
+			<tabpanel>
+				<listwindow id="pmjpseq" title="预防性维护作业序列"
+					use="combiz.ui.pm.PmjpseqList" dialog="/pm/pmjpseqdialog.xul"><!-- 预防性维护作业序列 -->
+					<tablelist band="pmjpseq" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="pmnum" label="预防性维护"
+								sort="auto" width="30%" /><!-- 预防性维护 -->
+							<tablelistheader data="sequence" label="序列"
+								sort="auto" width="40%" /><!-- 序列 -->
+							<tablelistheader data="jpnum" label="标准作业计划"
+								sort="auto" width="30%" /><!-- 标准作业计划 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

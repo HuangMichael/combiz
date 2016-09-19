@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="wfreturnWnd" title="请管理员选择回退的工作流节点和操作" width="820" closable="true"
+use="combiz.system.workflow.WFReturnDialog">
+
+<vbox width="100%"><!-- 必须要有这个vbox，要不操作子表的数据刷新不出来 -->
+	<commonlistwindow id="wfnodeTransWnd" edittype="listonly" 
+		tablename="wfnode" showmultiple="false" autodata="false">
+		<tablelist band="wfnodeTransWnd" pageSize="16">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif" />
+				<tablelistheader data="title" label="回退节点" sort="auto" width="20%" />
+				<tablelistheader data="description" label="节点描述" sort="auto" width="30%" />
+				<tablelistheader data="wfname" label="工作流" sort="auto" width="20%" />
+				<tablelistheader data="wfrevision" label="版本" sort="auto" width="10%" />
+				<tablelistheader data="nodetype" label="节点类型" sort="auto" width="20%" />
+			</listhead>
+		</tablelist>
+	</commonlistwindow>
+
+	<listwindow id="wfendaction" parentWnd="wfnodeTransWnd" showmultiple="false"
+	title="选择回退节点时执行的流程操作" edittype="listonly">
+		<tablelist band="wfendaction" pageSize="16">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif"/>
+				<tablelistheader data="action" label="回退操作" sort="auto" width="30%"/>
+				<tablelistheader data="description" label="操作描述" sort="auto" width="50%"/>
+				<tablelistheader data="defaultsel" label="默认操作？" sort="auto" width="10%"/>
+				<tablelistheader data="actorderby" label="排序号" sort="auto" width="10%"/>
+			</listhead>
+		</tablelist>
+	</listwindow>
+</vbox>
+	<div align="center">
+		<button label="回退到选择的流程节点" onClick="wfreturnWnd.returnwf()" />
+		初始化流程状态：<textbox id="wfstartstatus"/>
+		<button label="回退到流程未启动状态" onClick="wfreturnWnd.returnwfstart()" />
+		<button label=" 关闭窗口 " onClick="wfreturnWnd.onClose()" />
+	</div>
+	<window use="combiz.system.workflow.ViewWFImageDialog" showinfo="true">
+		<grid id="wfimagemap" height="300"/>
+	</window>
+
+</window>

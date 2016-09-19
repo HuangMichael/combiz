@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"assetscard.eqnum","assetscard.parent"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="资产卡片"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						资产编号:<a:bind value="assetscard.eqnum"/><ibandbox id="assetscard.eqnum" lookup="equipment"/>		
+						资产名称:<a:bind value="assetscard.assetname"/><itextbox id="assetscard.assetname" cols="40"/>				
+						</row>
+						<row>
+						父级:<a:bind value="assetscard.parent"/><ibandbox id="assetscard.parent" lookup="equipment"/>
+						资产科目:<a:bind value="assetscard.assetsubject"/><itextbox id="assetscard.assetsubject"/>					
+						</row>
+						<row>
+						资产类别:<a:bind value="assetscard.assetclasses"/><ibandbox id="assetscard.assetclasses" lookup="classification"/>
+						增减方式:<a:bind value="assetscard.changemethod"/><ibandbox id="assetscard.changemethod" lookup="changemethod"/>						
+						</row>
+						<row>
+						资产状态:<a:bind value="assetscard.assetstatus"/><itextbox id="assetscard.assetstatus"/>
+						原值:<a:bind value="assetscard.cost"/><idoublebox id="assetscard.cost"/>	
+						</row>
+						<row>					
+						折旧方式:<a:bind value="assetscard.depreciationmethod"/><itextbox id="assetscard.depreciationmethod"/>
+						折旧科目:<a:bind value="assetscard.depreciationsjt"/><itextbox id="assetscard.depreciationsjt"/>
+						</row>						
+						<row>
+						使用日期:<a:bind value="assetscard.usedate"/><idatetimebox id="assetscard.usedate"/>	
+						入账日期:<a:bind value="assetscard.daterecorded"/><idatetimebox id="assetscard.daterecorded"/>						
+						</row>
+						<row>
+						使用部门:<a:bind value="assetscard.usedepartment"/><ibandbox id="assetscard.usedepartment" lookup="department"/>
+						存放地点:<a:bind value="assetscard.location"/><itextbox id="assetscard.location"/>						
+						</row>
+						<row>
+						使用人:<a:bind value="assetscard.users"/><ibandbox id="assetscard.users" lookup="labor"/>
+						负责人:<a:bind value="assetscard.responsible"/><ibandbox id="assetscard.responsible" lookup="labor"/>
+						</row>
+						<row spans ="1,3">
+						摘要:<a:bind value="assetscard.summary"/><itextbox id="assetscard.summary" rows = "4" cols="100"/>						
+						</row>
+						<!--  
+						<row>
+						状态:<a:bind value="assetscard.status"/><itextbox id="assetscard.status"/>						
+						</row>
+						<row>
+						资产编号:<a:bind value="assetscard.assetcode"/><itextbox id="assetscard.assetcode"/>					
+						</row>
+						-->
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

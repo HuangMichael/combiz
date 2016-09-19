@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="calshiftdayWnd" title="倒班模式定义" width="500" closable="true">
+
+<listwindow id="calshiftday" tablename="calshiftday" closable="true"
+	edittype="editonly" use="combiz.ui.cal.CalshiftdayList" dialog="/cal/calshiftdaydialog.xul">
+			<tablelist band="calshiftday">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="workday" label="工作日" sort="auto" width="20%"/>
+							<tablelistheader data="starttime" label="开始时间" sort="auto" width="30%"/>
+							<tablelistheader data="endtime" label="结束时间" sort="auto" width="30%"/>
+							<tablelistheader data="workhours" label="工作时长" sort="auto" width="20%"/>
+						</listhead>
+			</tablelist>
+</listwindow>
+		<div align="center">
+			<button label="保存修改" onClick="calshiftday.save()"/>
+			<button label="生成工作排程表" onClick="calshiftday.calwp();calshiftdayWnd.onClose()"/>
+			<button label="关闭窗口" onClick="calshiftdayWnd.onClose()"/>
+		</div>
+</window>

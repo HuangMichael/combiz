@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="资产分类" app="assetclass" resize="true" use="combiz.ui.location.AssetClassWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation"><!-- title:资产分类 -->
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="资产分类"/>
+<tree use="combiz.ui.location.AssetClassTree" width="180"/>
+</groupbox>
+<splitter collapse="before"/>
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="分类及技术规范" width="120px"/><!-- 分类及技术规范 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.classtype","classification.parent"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						设备分类:<!-- 设备分类 --><a:bind value="classification.classid"/><itextbox id="classification.classid"/>
+						描述:<!-- 描述 --><a:bind value="classification.description"/><itextbox id="classification.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						父级分类:<!-- 父级分类 --><a:bind value="classification.parent"/><itextbox id="classification.parent"/>
+						有子级:<!-- 有子级 --><a:bind value="classification.haschild"/><icheckbox id="classification.haschild"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						类别:<!-- 类别 --><a:bind value="classification.classtype"/><itextbox id="classification.classtype"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+		
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				 <listwindow id="assetclassspecTable" title="技术参数" use="combiz.ui.location.AssetClassSepcList" dialog="/location/assetclassspecdialog.xul">
+					<tablelist band="assetclassspecTable" pageSize="8"><!-- title:技术参数 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="classattr" label="属性名称" sort="auto" width="30%"/><!-- 属性名称 -->
+							<tablelistheader data="unitid" label="单位" sort="auto" width="50%"/><!-- 单位 -->
+							<tablelistheader data="defaultstrvalue" label="默认值" sort="auto" width="20%"/><!-- 默认值 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

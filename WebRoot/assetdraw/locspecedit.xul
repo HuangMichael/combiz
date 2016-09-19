@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<window use="combiz.system.assetdraw.EditDialog" tablename="locspec"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<hbox>
+<menubar id="menubar" width="2px">
+		<menuitem id="menuSave" label="保存记录" image="/images/menus/menu_icon_save.gif" onClick="mainWnd.save()"/>
+		<menuitem id="menuCloseThis" label="关闭编辑界面" image="/images/menus/menu_icon_add.gif" onClick="mainWnd.cancel()"/>
+</menubar>
+<messagebar/>
+</hbox>
+
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"locspec.location"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+<grid>
+					<rows>
+						<row>
+						位置:<a:bind value="locspec.location"/><itextbox id="locspec.location"/>
+						</row>
+						<row>
+						参数:<a:bind value="locspec.classattr"/><itextbox id="locspec.classattr"/>
+						</row>
+						<row>
+						值:<a:bind value="locspec.strvalue"/><itextbox id="locspec.strvalue" cols="40"/>
+						</row>
+						<row>
+						单位:<a:bind value="locspec.unitid"/><ibandbox id="locspec.unitid" lookup="measurement"/>
+						</row>
+						<row>
+						备注:<a:bind value="locspec.remark"/><itextbox id="locspec.remark" cols="40"/>
+						</row>
+					</rows>
+				</grid>
+
+	
+</window>

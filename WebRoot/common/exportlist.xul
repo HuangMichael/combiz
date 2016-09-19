@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="exportlistWnd" title="数据导入导出程序" width="700" closable="true" use="combiz.system.common.ExportListDialog">
+<tabbox id="myExportsTab" width="100%">
+	<tabs>
+		<tab label="导出数据" width="90px"/>
+		<tab label="我的导出设置" width="120px"/>
+		<tab label="导入数据" width="90px"/>
+	</tabs>
+	<tabpanels width="100%">
+	<tabpanel>
+		<hbox>
+		<listwindow id="exportlist" tablename="ibstablecols" use="combiz.system.ui.CommonListWindow"
+		edittype="listonly" searchable="false" autodata="false" showfilter="false" export="false" width="520">
+			<tablelist band="exportlist" pageSize="22">
+				<listhead>
+					<tablelistheader src="/images/img_listitem.gif"/>
+					<tablelistheader data="title" label="名称" sort="auto" width="70%"/>
+					<tablelistheader data="colname" label="字段" sort="auto" width="30%"/>
+				</listhead>
+			</tablelist>
+		</listwindow>
+			<groupbox><caption label="我的导出设置"/>
+				输入导出设置名称，点添加。
+				<textbox id="myexportname" cols="18"/>
+				默认：<checkbox id="myexportisdefault"/>
+				共享：<checkbox id="myexportisshare"/>
+				<button label="添加到我的设置" onClick="exportlistWnd.addMyexport()"/>
+				<separator spacing="5px" />
+				<menubar use="combiz.system.common.ExportMenuBar"/>	
+			</groupbox>
+		</hbox>
+		<iframe id="exportIframe" visible="false"/>
+		<div align="center">
+			<hbox>
+				<button label="导出EXCEL" onClick="exportlistWnd.exportExcel()"/>
+				<button label="导出WebService" onClick="exportlistWnd.exportXML()"/>
+				<button label="关闭窗口" onClick="exportlistWnd.onClose()"/>
+			</hbox>
+		</div>
+	</tabpanel>
+	<tabpanel>
+		<listwindow id="ibsexportsList" tablename="ibsexports" use="combiz.system.ui.CommonListWindow"
+		searchable="false" showfilter="false" export="false" autodata="false" showmultiple="true" defselect="true" addshow="false" 
+		dialog="/common/exportsdialog.xul">
+			<defaultvalue band="ibsexportsList" value="userid={ibsusers.userid}"/>
+			<tablelist band="ibsexportsList">
+				<listhead>
+					<tablelistheader src="/images/img_listitem.gif"/>
+					<tablelistheader data="expname" label="名称" sort="auto" width="50%"/>
+					<tablelistheader data="userid" label="用户" sort="auto" width="30%"/>
+					<tablelistheader data="ownertable" label="绑定表" sort="auto" width="30%"/>
+					<tablelistheader data="isshare" label="是否共享" sort="auto" width="10%"/>
+					<tablelistheader data="isdefault" label="是否默认" sort="auto" width="10%"/>
+				</listhead>
+			</tablelist>
+		</listwindow>
+	
+		导出数据列及排序：
+		<listwindow id="ibsexpcols" tablename="ibsexpcols" parentWnd="ibsexportsList" use="combiz.system.ui.CommonListWindow"
+		addshow="false" searchable="false" autodata="false" showfilter="false" export="false" showmultiple="true" defselect="false"
+		orderby="position">
+			<tablelist band="ibsexpcols" pageSize="15">
+				<listhead>
+					<tablelistheader src="/images/img_listitem.gif"/>
+					<tablelistheader data="ibstablecolscfg.title" label="导出字段" sort="auto" width="50%"/>
+					<tablelistheader data="colname" label="字段" sort="auto" width="40%"/>
+					<tablelistheader data="position" input="longbox" label="位置排序" sort="auto" width="10%"/>
+				</listhead>
+			</tablelist>
+		</listwindow>
+		<div align="center">
+			<hbox>
+				<button label="保存修改" onClick="exportlistWnd.saveMyexports()"/>
+				<button label="导出EXCEL" onClick="exportlistWnd.exportExcelByset()"/>
+				<button label="导出WebService" onClick="exportlistWnd.exportXMLByset()"/>
+				<button label="关闭窗口" onClick="exportlistWnd.onClose()"/>
+			</hbox>
+		</div>
+	</tabpanel>
+	<tabpanel>
+		<groupbox>
+		<caption label="导入数据"/>
+		<space/>
+		<div align="center">
+			第一步：<button label="下载导入数据模板" onClick="exportlistWnd.excelTemplate()"/><space/><space/><space/>
+			第二步：<button label="执行导入数据" onClick="exportlistWnd.importData()"/>
+		</div>
+		<space/>
+		</groupbox>
+		<space/>
+		<div align="center">
+			<button label="关闭窗口" onClick="exportlistWnd.onClose()"/>
+		</div>
+	</tabpanel>
+	</tabpanels>
+</tabbox>
+</window>

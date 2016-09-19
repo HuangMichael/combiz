@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="报表预览窗口" use="combiz.system.rpt.ReportViewDialog" closable="true">
+<iframe id="reportView" width="100%" height="94%"/>
+<div align="right">
+<button label="关闭预览窗口" onClick="reportWnd.onClose()"/>
+</div>
+</window>

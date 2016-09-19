@@ -1,0 +1,21 @@
+<commonlistwindow id="allDocuments" width="850" tablename="document" multiple="true" autodata="true"
+title="文档列表信息" edittype="listonly" orderby="urlpath" closable="true" filter="true">
+	<tablelist band="allDocuments" pageSize="12">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="docnum" label="文档编号" sort="auto" width="10%" />
+			<tablelistheader data="description" label="描述" sort="auto" width="10%" />
+			<tablelistheader data="libnum" label="目录" sort="auto" width="10%" />
+			<tablelistheader data="urlpath" label="文档路径" sort="auto" width="30%" />
+			<tablelistheader data="ownertable" label="关联表" sort="auto" width="10%" />
+			<tablelistheader data="creator" label="创建人" sort="auto" width="10%" />
+			<tablelistheader data="ownerdept" label="部门" sort="auto" width="10%" />
+			<tablelistheader data="createdate" label="创建日期" sort="auto" width="10%" />
+		</listhead>
+		<tablelistfoot />
+	</tablelist>
+	<div align="center">
+		<button label="添加选择的文档" onClick="allDocuments.confirm()" />
+		<button label="关闭窗口" onClick="allDocuments.cancel()" />
+	</div>
+</commonlistwindow>

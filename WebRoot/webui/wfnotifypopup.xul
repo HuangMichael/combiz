@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="wfnotifyPopupWnd" use="combiz.system.common.MessPopupWnd" title="抄送任务提醒" 
+border="normal" width="300" closable="true">
+
+您有[<label id="wfinboxcount"/>]条新的抄送任务通知，请及时查看！
+	
+	<div align="center">
+		<button label="查看抄送任务" onClick="wfnotifyPopupWnd.openWFNotifyInbox()"/>
+		<button label="不再提醒" onClick="popupWnd.nextNotify()"/>
+		<button label="我知道了" onClick="wfnotifyPopupWnd.onClose()"/>
+	</div>
+</window>

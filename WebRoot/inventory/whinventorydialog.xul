@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="仓库库存"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 仓库库存 -->
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						物资编码:<!-- 物资编码 --><a:bind value="inventory.itemnum"/><ibandbox id="inventory.itemnum" lookup="item"/>
+						货位号:<!-- 货位号 --><a:bind value="inventory.binnum"/><itextbox id="inventory.binnum"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						最低库存:<!--  最低库存--><a:bind value="inventory.minlevel"/><idoublebox id="inventory.minlevel"/>
+						安全库存:<!-- 安全库存 --><a:bind value="inventory.maxlevel"/><idoublebox id="inventory.maxlevel"/>
+						</row>
+						
+						<row>
+						库存类型:<!-- 库存类型 --><a:bind value="inventory.stocktype"/><itextbox id="inventory.stocktype"/>
+						型号:<!-- 型号 --><a:bind value="inventory.modelnum"/><itextbox id="inventory.modelnum"/>
+						
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						安全库存:<!-- 安全库存 --><a:bind value="inventory.sstock"/><idoublebox id="inventory.sstock" format="0.00" cols="20"/>
+						 转换系数:<!-- 转换系数 --><a:bind value="inventory.conversion"/><idoublebox id="inventory.conversion"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						订购单位:<!-- 订购单位 --><a:bind value="inventory.orderunit"/><itextbox id="inventory.orderunit"/>
+						发放单位:<!-- 发放单位 --><a:bind value="inventory.issueunit"/><itextbox id="inventory.issueunit"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						ABC类型:<!-- ABC类型 --><a:bind value="inventory.abctype"/><itextbox id="inventory.abctype"/>
+						经济订购数量:<!-- 经济订购数量 --><a:bind value="inventory.orderqty"/><idoublebox id="inventory.orderqty" format="0.00"/>
+						
+						</row>
+						<row>
+						制造商:<!-- 制造商 --><a:bind value="inventory.manufacturer"/><ibandbox id="inventory.manufacturer" lookup="companies2"/>
+						供应商:<!-- 供应商 --><a:bind value="inventory.vendor"/><ibandbox id="inventory.vendor" lookup="companies"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						平均成本:<!-- 平均成本 --><a:bind value="inventory.avgcost"/><idoublebox id="inventory.avgcost"/>
+						上次成本:<!-- 上次成本 --><a:bind value="inventory.lastcost"/><idoublebox id="inventory.lastcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						标准成本:<!-- 标准成本 --><a:bind value="inventory.stdcost"/><idoublebox id="inventory.stdcost"/>
+						</row>
+					</rows>
+				</grid>
+				<div align="right">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+				</div>
+ </groupbox>
+</editwindow>

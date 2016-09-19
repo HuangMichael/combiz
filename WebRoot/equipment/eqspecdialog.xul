@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"eqspec.classid"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="技术参数"><!-- 技术参数 --><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						分类:<!-- 分类 --><a:bind value="eqspec.classid"/><itextbox id="eqspec.classid"/>
+						属性:<!-- 属性 --><a:bind value="eqspec.classattr"/><itextbox id="eqspec.classattr"/>
+						</row>
+						<row spans="1,3">
+						参数值:<!-- 参数值 --><a:bind value="eqspec.strvalue"/><itextbox id="eqspec.strvalue" cols="40"/>
+						</row>
+						<row>
+						单位:<!-- 单位--><a:bind value="eqspec.unitid"/><ibandbox id="eqspec.unitid" cols="5" lookup="measurement"/>
+						是否必需:<!-- 是否必需 --><a:bind value="eqspec.ismustbe"/><icheckbox id="eqspec.ismustbe"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						备注:<!-- 备注 --><a:bind value="eqspec.remark"/><itextbox id="eqspec.remark" cols="40"/>
+						</row>
+						
+						<row spans="6,,,,," align="right" height="30">
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口-->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

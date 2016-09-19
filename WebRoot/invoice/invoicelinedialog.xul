@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"invoiceline.description"}; 
+ 
+ mainWnd.setReadonly(readonly);
+ </zscript><!--  -->
+ <groupbox><caption label="发票行"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid>
+					<rows>
+					<row>
+					发票行<!--  -->:<a:bind value="invoiceline.invoicelinenum"/><ilongbox id="invoiceline.invoicelinenum"/>		
+					合同付款类型<!--  -->:<a:bind value="invoiceline.paytype"/><icombobox id="invoiceline.paytype"/>		
+					</row>
+					<row>
+					含税单价<!--  -->:<a:bind value="invoiceline.taxunitcost"/><idoublebox id="invoiceline.taxunitcost" format="0.0000"/>		
+					含税总价<!--  -->:<a:bind value="invoiceline.taxlinecost"/><idoublebox id="invoiceline.taxlinecost" format="0.0000"/>		
+					</row>
+					<row>
+					库存项目<!--  -->:<a:bind value="invoiceline.itemnum"/><ibandbox id="invoiceline.itemnum" lookup="item"/>		
+					库存项目描述<!--  -->:<a:bind value="invoiceline.description"/><itextbox id="invoiceline.description" cols="40"/>		
+					</row>
+					<row>
+					发票数量<!--  -->:<a:bind value="invoiceline.invoiceqty"/><idoublebox id="invoiceline.invoiceqty" format="0.00"/>		
+					单位<!--  -->:<a:bind value="invoiceline.invoiceunit"/><itextbox id="invoiceline.invoiceunit"/>		
+					</row>
+					<row>
+					采购单<!--  -->:<a:bind value="invoiceline.ponum"/><ibandbox id="invoiceline.ponum" lookup="ponum"/>		
+					采购单行<!--  -->:<a:bind value="invoiceline.polinenum"/><ilongbox id="invoiceline.polinenum"/>		
+					</row>
+					
+					<row>
+					转换系数<!--  -->:<a:bind value="invoiceline.conversion"/><idoublebox id="invoiceline.conversion" format="0.00"/>		
+					税代码<!--  -->:<a:bind value="invoiceline.taxcode"/><itextbox id="invoiceline.taxcode"/>		
+					</row>
+					<row>
+					录入人<!--  -->:<a:bind value="invoiceline.enterby"/><ibandbox id="invoiceline.enterby" lookup="labor"/>		
+					输入日期<!--  -->:<a:bind value="invoiceline.enterdate"/><idatebox id="invoiceline.enterdate"/>
+					</row>
+						
+					
+					
+					<!-- 
+					不含税单价:<a:bind value="invoiceline.unitcost"/><idoublebox id="invoiceline.unitcost" format="0.00"/>
+					税率:<a:bind value="invoiceline.taxrate"/><idoublebox id="invoiceline.taxrate" format="0.00"/>		
+					税额:<a:bind value="invoiceline.tax"/><idoublebox id="invoiceline.tax" format="0.00"/>		
+					供应商:<a:bind value="invoiceline.vendor"/><itextbox id="invoiceline.vendor"/>	
+					已分摊:<a:bind value="invoiceline.prorated"/><icombobox id="invoiceline.prorated" cols="4"/>		
+					已分摊的服务成本:<a:bind value="invoiceline.proratecost"/><idoublebox id="invoiceline.proratecost" format="0.00"/>		
+					匹配接收:<a:bind value="invoiceline.receiptreqd"/><icombobox id="invoiceline.receiptreqd" cols="4"/>				
+					服务:<a:bind value="invoiceline.service"/><icombobox id="invoiceline.service" cols="4"/>		
+					载入成本:<a:bind value="invoiceline.loadedcost"/><idoublebox id="invoiceline.loadedcost" cols="4" format="0.00"/>		
+					摊入物资成本:<a:bind value="invoiceline.proratetoinv"/><icombobox id="invoiceline.proratetoinv" cols="4"/>	
+					行总价:<a:bind value="invoiceline.linecost"/><idoublebox id="invoiceline.linecost" format="0.00"/>	
+					 -->
+					</rows>
+					</grid>	
+ </groupbox>				
+</editwindow>

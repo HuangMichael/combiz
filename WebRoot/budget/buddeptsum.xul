@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="buddeptsum" title="部门预算对比" resize="true" 
+use="combiz.ui.budget.BudgetitemWindow">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+
+	<hbox spacing="0">
+		<!-- **********************************  结果树页面 ********************************** -->
+		<vbox>
+		<groupbox>
+			<caption label="预算项目树" />
+			预算版本：<listbox use="combiz.ui.budget.BudgetItemVersion"/>
+			<tree use="combiz.ui.budget.BudgetItemTree" width="200" openchild="true"/>
+		</groupbox>
+		</vbox>
+
+		<!-- ********************************** //顶级标签 ********************************** -->
+		<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+			<tabs>
+				<tab id="main" label="部门预算对比" width="130px" />
+			</tabs>
+
+			<tabpanels width="100%">
+				<!-- ********************************** 主数据窗口 ********************************** -->
+				<!-- 初始化设置字段的必输和只读 -->
+				<zscript>
+					<![CDATA[
+				 String[] required = {};
+				 mainWnd.setRequired(required);
+				 String[] readonly = {};
+				 mainWnd.setReadonly(readonly);
+				 ]]>
+				</zscript>
+				<tabpanel>
+				<listwindow id="budgetline" edittype="listonly" title="部门预算对比" orderby="changedate desc">
+					<tablelist band="budgetline" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="buddept" label="预算部门" sort="auto" width="10%"/>
+							<tablelistheader data="description" label="预算说明" sort="auto" width="20%"/>
+							<tablelistheader data="budget" label="预算合计" sort="auto" width="10%" style="color:red" align="right"/>
+							<tablelistheader data="budfeed" label="实际费用" sort="auto" width="10%" style="color:red" align="right"/>
+							<tablelistheader data="enabled" label="启用？" sort="auto" width="5%"/>
+							<tablelistheader data="budclass" label="预算类型" sort="auto" width="10%"/>
+							<tablelistheader data="budtype" label="核算类型" sort="auto" width="10%"/>
+							<tablelistheader data="changeby" label="编制人" sort="auto" width="10%"/>
+							<tablelistheader data="changedate" label="编制时间" sort="auto" width="15%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				</tabpanel>
+
+			</tabpanels>
+		</tabbox>
+	</hbox>
+</mainwindow>

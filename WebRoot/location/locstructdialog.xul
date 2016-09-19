@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"locstruct.location"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="位置系统信息"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						位置:<a:bind value="locstruct.location"/><itextbox id="locstruct.location"/>
+						描述:<a:bind value="locations.description"/><itextbox id="locations.description" cols="60"/>
+						</row>
+						<row>
+						系统:<a:bind value="locstruct.systemid"/><ibandbox id="locstruct.systemid" lookup="locsystem"/>
+						描述:<a:bind value="locsystem.description"/><itextbox id="locsystem.description" cols="60"/>
+						</row>
+						<row>
+						父级：<a:bind value="locstruct.parent"/><ibandbox id="locstruct.parent" lookup="location"/>
+						描述:<a:bind value="parent.description"/><itextbox id="parent.description" cols="60"/>
+						</row>
+						<row spans="1,3">
+						排序：<a:bind value="locstruct.orderby"/><ilongbox id="locstruct.orderby" cols="3"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

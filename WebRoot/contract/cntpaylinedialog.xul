@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"contpay.payline"}; 
+ 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="合同付款行"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							付款行:<a:bind value="contpay.payline"/><itextbox id="contpay.payline"/>		
+						</row>
+						<row>
+						     付款类型:<a:bind value="contpay.paytype"/><icombobox id="contpay.paytype"/>		
+							付款比例:<a:bind value="contpay.payrate"/><itextbox id="contpay.payrate" />		
+						</row>
+						<row>	
+							已付款额:<a:bind value="contpay.payamount"/><idoublebox id="contpay.payamount"/>		
+							已付款:<a:bind value="contpay.haspay"/><icheckbox id="contpay.haspay"/>		
+						</row>
+						<row>	
+							申请人:<a:bind value="contpay.requestby"/><ibandbox id="contpay.requestby" lookup="labor"/>		
+							申请支付日期:<a:bind value="contpay.requestdate"/><idatebox id="contpay.requestdate" />		
+						</row>
+						<row>
+							支付日期:<a:bind value="contpay.paydate"/><idatebox id="contpay.paydate" />		
+							付款备注<a:bind value="contpay.memo"/><itextbox id="contpay.memo" />		
+						</row>
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

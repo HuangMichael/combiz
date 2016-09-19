@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibsmodules" title="应用程序模块" resize="true" use="combiz.ui.ibs.IbsmodulesWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="模块" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="menutype='MODULE' and elementtype in('MODULE','CHDMOD')";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("elementtype desc,position");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						模块：<stextbox data="moduleapp"/>
+						描述：<stextbox data="header"/>
+				</groupbox>
+			</hbox>
+			
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="moduleapp" label="模块" sort="auto" width="20%"/>
+						<resultlistheader data="header" label="描述" sort="auto" width="40%"/>
+						<resultlistheader data="parentmod" label="父级" sort="auto" width="20%"/>
+						<resultlistheader data="elementtype" label="类型" sort="auto" width="15%"/>
+						<resultlistheader data="position" label="排序" sort="auto" width="5%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						模块:<a:bind value="ibsmenus.moduleapp"/><itextbox id="ibsmenus.moduleapp"/>
+						描述：<a:bind value="ibsmenus.header"/><itextbox id="ibsmenus.header" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						父级：<a:bind value="ibsmenus.parentmod"/><ibandbox id="ibsmenus.parentmod" lookup="ibsmodules"/>
+						类型：<a:bind value="ibsmenus.elementtype"/><icombobox id="ibsmenus.elementtype" cols="10"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						排序：<a:bind value="ibsmenus.position"/><ilongbox id="ibsmenus.position" cols="4"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+				
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<listwindow id="ibsmoduleapp" title="子模块及应用" orderby="position"
+				use="combiz.ui.ibs.IbsmodulemenusList" dialog="/ibs/ibsmodulemenusdialog.xul">
+						<tablelist band="ibsmoduleapp" pageSize="16">				
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="KEYVALUE" label="应用" sort="auto" width="30%"/>
+									<tablelistheader data="HEADER" label="名称" sort="auto" width="40%"/>
+									<tablelistheader data="ELEMENTTYPE" label="子模块/菜单" sort="auto" width="10%"/>
+									<tablelistheader data="position" label="排序" sort="auto" width="10%"/>
+									<tablelistheader data="VISIBLE" label="显示？" sort="auto" width="10%"/>
+								</listhead>
+								<tablelistfoot/>
+						</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

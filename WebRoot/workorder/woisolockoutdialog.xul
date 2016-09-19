@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 隔离装置步骤、状态 -->
+ <groupbox><caption label="隔离装置步骤、状态"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						编号:<a:bind value="woisolockoutdialog.isolockid"/><itextbox id="woisolockout.isolockid" cols="40"/>
+						描述<!-- 描述 -->:<a:bind value="woisolockout.description"/><itextbox id="woisolockout.description" cols="40"/>
+						</row>
+						<row>
+						位置<!-- 位置 -->:<a:bind value="woisolockout.location"/><ibandbox id="woisolockout.location" lookup="location"/>
+						设备<!-- 设备 -->:<a:bind value="woisolockout.eqnum"/><ibandbox id="woisolockout.eqnum" lookup="equipment"/>
+						</row>
+						<row>
+						设备隔离状态描述<!-- 设备隔离状态描述 -->:<a:bind value="woisolockout.eqdescriptioin"/><itextbox id="woisolockout.eqdescriptioin" cols="40"/>
+						需求日期<!-- 需求日期 -->:<a:bind value="woisolockout.state"/><itextbox id="woisolockout.state" cols="40"/>
+						</row>
+						<row>
+						执行序列:<a:bind value="woisolockoutdialog.aplyseq"/><ilongbox id="woisolockout.aplyseq" cols="40"/>
+						执行操作:<a:bind value="woisolockoutdialog.perform"/><itextbox id="woisolockout.perform" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

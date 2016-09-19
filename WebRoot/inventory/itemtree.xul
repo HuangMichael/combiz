@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="itemtree" title="物资编码管理" resize="true" use="combiz.ui.inventory.ItemClassWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="物资分类"/><!-- -->
+<tree use="combiz.ui.basedata.ClassTree" width="180"/>
+</groupbox>
+
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="物资编码" width="90px"/><!--  -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						物资分类:<a:bind value="classification.classid"/><itextbox id="classification.classid"/><!--  -->
+						描述:<a:bind value="classification.description"/><itextbox id="classification.description" cols="40"/><!--  -->
+						</row>
+					</rows>
+				</grid>
+				<!-- 物资列表 -->
+				<listwindow id="itemclass" title="物资编码" use="combiz.ui.inventory.ItemTreeList" dialog="/inventory/itemtreedialog.xul">
+					<tablelist band="itemclass" pageSize="15"><!--  -->					
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="itemnum" label="物料" sort="auto" width="10%"/><!--  -->
+							<tablelistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="35%"/><!--  -->
+							<tablelistheader data="classid" label="库存分类" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="curbal" label="库存余量" sort="auto" width="10%" format="#0.00"/>
+							<tablelistheader data="modelnum" label="箱柜" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="orderunit" label="订购单位" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="lottype" label="批次管理" sort="auto" width="15%"/><!--  -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				<space/>
+				<!-- 物资其他信息 -->
+				<tabbox width="100%">
+				<tabs>
+					<tab label="仓库库存" width="90px"/>
+					<tab label="备件BOM" />
+					<tab label="技术参数" width="90px"/>
+					<tab label="关联设备" width="90px"/>
+					<tab label="备件使用" width="90px"/>
+				</tabs>
+					<tabpanels width="100%">
+						<tabpanel>
+							<listwindow id="inventoryTable" parentWnd="itemclass" title="仓库库存" use="combiz.ui.inventory.ItemInventoryList"	dialog="/inventory/iteminventorydialog.xul" edittype="READONLY">
+								<tablelist band="inventoryTable" pageSize="8"><!--  -->				
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif"/>
+										<tablelistheader data="warehouse" label="仓库" sort="auto" width="15%"/><!--  -->
+										<tablelistheader data="warehouse.description" label="描述" sort="auto" width="40%"/><!--  -->
+										<tablelistheader data="binnum" label="货位" sort="auto" width="10%"/><!--  -->
+										<tablelistheader data="sumcurbal" label="余量" sort="auto" width="8%" /><!--  -->
+										<tablelistheader data="orderunit" label="定购单位" sort="auto" width="9%"/><!--  -->
+										<tablelistheader data="stocktype" label="库存类型" sort="auto" width="10%"/><!--  -->
+										<tablelistheader data="avgcost" label="平均价格" sort="auto" width="9%"/><!--  -->
+										<tablelistheader data="lastcost" label="上次采购价格" sort="auto" width="9%"/><!--  -->
+										
+									</listhead>
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<tabpanel>
+						<listwindow id="itemparet" parentWnd="itemclass" title="备件BOM" use="combiz.ui.inventory.ItemeqbomList" dialog="/inventory/itemeqbomdialog.xul">
+							<tablelist band="itemparet" pageSize="8"><!--  -->
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="itemnum" label="备件编码" sort="auto" width="15%" /><!--  -->
+									<tablelistheader data="quanity" label="数量" sort="auto" width="15%" /><!--  -->
+									<tablelistheader data="remark" label="备注" sort="auto" width="70%" /><!--  -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel>
+						<tabpanel>
+						<listwindow id="itemspec" parentWnd="itemclass" title="技术参数" use="combiz.ui.inventory.ItemspecList" dialog="/inventory/itemspecdialog.xul">
+							<tablelist band="itemspec" pageSize="8"><!--  -->
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="classid" label="分类" sort="auto" width="20%"/><!--  -->
+									<tablelistheader data="classattr" label="参数" sort="auto" width="40%"/><!--  -->
+									<tablelistheader data="strvalue" label="参数值" sort="auto" width="30%"/><!--  -->
+									<tablelistheader data="unitid" label="单位" sort="auto" width="10%"/><!--  -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel>
+						<!-- **********************************  关联设备 ********************************** -->
+						<tabpanel>
+							<listwindow id="itemequipment" parentWnd="itemclass" title="关联设备列表" use="combiz.ui.equipment.EqClassList" dialog="/equipment/eqclassdialog.xul" edittype="readonly">
+								<tablelist band="itemequipment" pageSize="8"><!--  -->
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif" />
+										<tablelistheader data="eqnum" label="设备" sort="auto" width="20%"/><!--  -->
+										<tablelistheader data="description" label="描述" sort="auto" width="50%"/><!--  -->
+										<tablelistheader data="location" label="位置" sort="auto" width="15%"/><!--  -->
+										<tablelistheader data="status" label="状态" sort="auto" width="15%"/><!--  -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<!-- **********************************  //关联设备  ********************************** -->
+						<!-- **********************************  用于何处 ********************************** -->
+						<tabpanel>
+							<listwindow id="sparepart" parentWnd="itemclass" title="备件使用情况" use="combiz.ui.inventory.EqsparepartList" dialog="/inventory/eqsparepartdialog.xul">
+								<tablelist band="sparepart" pageSize="8"><!--  -->
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif" />
+										<tablelistheader data="eqnum" label="设备" sort="auto" width="20%" /><!--  -->
+										<tablelistheader data="equipment.description" label="设备描述" sort="auto" width="60%" /><!--  -->
+										<tablelistheader data="equipment.deptnum" label="所属部门" sort="auto" width="10%" /><!--  -->
+										<tablelistheader data="equipment.installdate" label="安装日期" sort="auto" width="10%" /><!--  -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<!-- **********************************  //用于何处  ********************************** -->
+					</tabpanels>
+				</tabbox>
+				<!-- ////////物资其他信息 -->
+	
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; 
+		mainWnd.setRequired(required); 
+		
+		String[] readonly = {};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+
+
+	<groupbox><!-- 采购行明细 -->
+		<caption label="采购行明细">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+				<groupbox>
+					<caption label="采购单" /><!-- 采购单 -->
+					<grid>
+						<rows>
+							<row>
+								采购单<!-- 采购单 -->:
+								<a:bind value="po.ponum" />
+								<itextbox id="po.ponum" cols="20" />
+								状 态<!-- 状 态 -->:
+								<a:bind value="po.status" />
+								<itextbox id="po.status" />
+								描述<!-- 描述 -->:
+								<a:bind value="po.description" />
+								<itextbox id="po.description" cols="50" />
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+					<groupbox>
+						<caption label="基本信息" /><!-- 基本信息 -->
+						<grid>
+							<rows>
+								<row>
+									接收的行项目<!-- 接收的行项目 -->:
+									<a:bind value="po.receipts" />
+									<itextbox id="po.receipts"
+										cols="23" />
+								
+								更改人<!-- 更改人 -->	:
+									<a:bind value="po.changeby" />
+									<ibandbox id="po.changeby"
+										lookup="labor" cols="15" />
+								
+									以电子方式发送<!-- 以电子方式发送 -->:
+									<a:bind value="po.ebssent" />
+									<icheckbox id="po.ebssent"/>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+					<groupbox>
+						<caption label="成本" /><!-- 成本 -->
+						<grid>
+							<rows>
+								<row>
+									总价<!-- 总价 -->:
+									<a:bind value="po.totalcost" />
+									<idoublebox id="po.totalcost"
+										cols="10" />
+								
+									汇率<!-- 汇率 -->:
+									<a:bind value="po.exchangerate" />
+									<idoublebox id="po.exchangerate"
+										cols="10" />
+								
+									税总额<!-- 税总额 -->:
+									<a:bind value="po.totaltax" />
+									<idoublebox id="po.totaltax"
+										cols="10" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+				
+
+					<groupbox>
+						<caption label="日期" /><!-- 日期 -->
+						<grid>
+							<rows>
+								<row>
+									状态日期<!-- 状态日期 -->:
+									<a:bind value="po.statusdate" />
+									<idatebox id="po.statusdate"
+										cols="20" />
+								
+									定购日期<!-- 定购日期 -->:
+									<a:bind value="po.orderdate" />
+									<idatebox id="po.orderdate"
+										cols="20" />
+								
+									需求日期<!-- 需求日期 -->:
+									<a:bind value="po.requireddate" />
+									<idatebox id="po.requireddate"
+										cols="20" />
+								</row>
+								<row>
+									汇率日期<!-- 汇率日期 -->:
+									<a:bind value="po.exchangedate" />
+									<idatebox id="po.exchangedate"
+										cols="20" />
+								
+									起始日期<!-- 起始日期 -->:
+									<a:bind value="po.startdate" />
+									<idatebox id="po.startdate"
+										cols="20" />
+								
+									结束日期<!-- 结束日期 -->:
+									<a:bind value="po.enddate" />
+									<idatebox id="po.enddate" cols="20" />
+								</row>
+								<row>
+									更改日期<!-- 更改日期 -->:
+									<a:bind value="po.changedate" />
+									<idatebox id="po.changedate"
+										cols="20" />
+								
+									供应商发送日期<!-- 供应商发送日期 -->:
+									<a:bind value="po.vendeliverydate" />
+									<idatebox id="po.vendeliverydate"
+										cols="20" />
+								
+									电子商务状态日期<!-- 电子商务状态日期 -->:
+									<a:bind value="po.ebsstatusdate" />
+									<idatebox id="po.ebsstatusdate"
+										cols="20" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox>
+						<caption label="运输信息" /><!-- 运输信息 -->
+						<grid>
+							<rows>
+								<row>
+									运输条款<!-- 运输条款 -->:
+									<a:bind value="po.freightterms" />
+									<icombobox id="po.freightterms"
+										cols="10" />
+								
+									支付条款<!-- 支付条款 -->:
+									<a:bind value="po.paymentterms" />
+									<icombobox id="po.paymentterms"
+										cols="10" />
+								
+									运输方式<!-- 运输方式 -->:
+									<a:bind value="po.shipvia" />
+									<icombobox id="po.shipvia"
+										cols="10" />
+								</row>
+								<row>
+									收货人<!-- 收货人 -->:
+									<a:bind value="po.shiptolabor" />
+									<ibandbox id="po.shiptolabor"
+										lookup="labor" cols="8" />
+								
+									收货地址<!-- 收货地址 -->:
+									<a:bind value="po.shiptoaddr" />
+									<itextbox id="po.shiptoaddr"
+										cols="50" />
+
+								
+									收票人<!-- 收票人 -->:
+									<a:bind value="po.billtolabor" />
+									<ibandbox id="po.billtolabor"
+										lookup="labor" cols="8" />
+								</row>
+								<row span="0,3">
+									收票地址<!-- 收票地址 -->:
+									<a:bind value="po.billtoaddr" />
+									<itextbox id="po.billtoaddr"
+										cols="50" />
+
+								</row>
+
+							</rows>
+						</grid>
+					</groupbox>
+	</groupbox>
+</editwindow>

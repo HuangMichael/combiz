@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="matreq">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="matreqnum" type="0" pop="true" />
+<O t="S">MR100094</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT m.matreqnum,m.description,m.status,m.requestby,m.reqdept,m.requestdate,m.supervisor,m.requireddate,m.usedept,m.usedate,m.issuedate,m.wonum,m.projnum 
+FROM matreq m  
+WHERE m.status='已批准' AND m.matreqnum = '[?matreqnum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="invusetrans">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="matreqnum" type="0" pop="true" />
+<O t="S">MR100094</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT u.itemnum,u.warehouse,u.binnum,u.issuetype,u.transdate,u.actualdate,u.quantity,u.reqqty,u.linecost 
+FROM invusetrans u 
+WHERE u.matreqnum = '[?matreqnum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="item">
+<TableData class="com.fr.data.impl.DBTableData">
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT i.itemnum,i.description AS itemdesc  FROM item i
+]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings orientation="1" shrinkToFit="true" isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="false" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+<WorkSheet>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+</CellElementList>
+</WorkSheet>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,36.0,19.0,24.0,26.0,26.0,19.0,22.0,22.0,25.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[72.0,108.0,79.0,72.0,57.0,76.0,70.0,58.0,90.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<SpreadSheetAttributes startRepeatRow="8" endRepeatRow="8" />
+<CellElementList>
+<C c="0" r="1" cs="9" s="0"><O t="S">领  用  申  请  单</O></C>
+<C c="0" r="3" s="1"><O t="S">申请部门:</O></C>
+<C c="1" r="3" cs="2"><O t="DSColumn"><Attributes dsName="matreq" columnName="REQDEPT" />
+</O></C>
+<C c="6" r="3" s="2"><O t="S">发放日期:</O></C>
+<C c="7" r="3" cs="2"><O t="DSColumn"><Attributes dsName="matreq" columnName="ISSUEDATE" />
+</O></C>
+<C c="0" r="4" s="3"><O t="S">申请编号:</O></C>
+<C c="1" r="4" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="MATREQNUM" />
+</O></C>
+<C c="2" r="4" s="3"><O t="S">申请人:</O></C>
+<C c="3" r="4" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="REQUESTBY" />
+</O></C>
+<C c="4" r="4" s="3"><O t="S">状态:</O></C>
+<C c="5" r="4" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="STATUS" />
+</O></C>
+<C c="6" r="4" s="3"><O t="S">描述:</O></C>
+<C c="7" r="4" cs="2" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="DESCRIPTION" />
+</O></C>
+<C c="0" r="5" s="3"><O t="S">使用部门:</O></C>
+<C c="1" r="5" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="USEDEPT" />
+</O></C>
+<C c="2" r="5" s="3"><O t="S">部门负责人:</O></C>
+<C c="3" r="5" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="SUPERVISOR" />
+</O></C>
+<C c="4" r="5" s="3"><O t="S">工单:</O></C>
+<C c="5" r="5" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="WONUM" />
+</O></C>
+<C c="6" r="5" s="3"><O t="S">需用日期:</O></C>
+<C c="7" r="5" cs="2" s="4"><O t="DSColumn"><Attributes dsName="matreq" columnName="REQUIREDDATE" />
+</O></C>
+<C c="0" r="7" cs="9" s="5"><O t="S">物 料 发 放 详 细</O></C>
+<C c="0" r="8" s="3"><O t="S">库存项目</O></C>
+<C c="1" r="8" s="3"><O t="S">描述</O></C>
+<C c="2" r="8" s="3"><O t="S">仓库</O></C>
+<C c="3" r="8" s="3"><O t="S">箱柜编号</O></C>
+<C c="4" r="8" s="3"><O t="S">发放类型</O></C>
+<C c="5" r="8" s="3"><O t="S">交易日期</O></C>
+<C c="6" r="8" s="3"><O t="S">交易数量</O></C>
+<C c="7" r="8" s="3"><O t="S">申请数量</O></C>
+<C c="8" r="8" s="3"><O t="S">发放总价</O></C>
+<C c="0" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="ITEMNUM" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="9" s="4"><O t="DSColumn"><Attributes dsName="item" columnName="ITEMDESC" />
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="ITEMNUM" />
+<Condition op="0">
+<ColumnRow column="0" row="9"/>
+</Condition>
+</Condition>
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="WAREHOUSE" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="BINNUM" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="ISSUETYPE" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="TRANSDATE" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="QUANTITY" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="REQQTY" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="9" s="4"><O t="DSColumn"><Attributes dsName="invusetrans" columnName="LINECOST" />
+<Complex type="2" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="19" />
+<Background name="ColorBackground"
+ color="-3355393">
+</Background>
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="15" />
+<Background name="ColorBackground"
+ color="-16711681">
+</Background>
+<Border></Border>
+</Style>
+</StyleList>
+</WorkBook>

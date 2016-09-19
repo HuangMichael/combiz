@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="设备" width="650" use="combiz.ui.common.lookup.LookupEquipmentWindow">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			
+			<tab label="按位置" width="70px"/>
+			<tab label="列表" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">		
+			<tabpanel>
+				<hbox spacing="0">
+					<groupbox><caption label="位置树"/>
+						<listbox use="combiz.ui.location.LocsystemListbox" width="160"/>
+						<tree use="combiz.ui.common.lookup.FindEquipmentOfLocationsTree" width="200"/>
+					</groupbox>
+					
+						<commonlistwindow id="equipmentOfLocations" title="设备列表" searchable="false" autodata="false" tablename="equipment" 
+							edittype="LISTONLY" width="100%">
+						<tablelist band="equipmentOfLocations" pageSize="8">
+							<listhead>
+									<tablelistheader src="/images/img_listitem.gif" width="10%"/>
+									<tablelistheader data="EQNUM" label="设备" sort="auto" width="20%"/>
+									<tablelistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+									<tablelistheader data="DESCRIPTION" label="描述" sort="auto" width="30%"/>
+									<tablelistheader data="LOCATION" label="位置" sort="auto" width="20%"/>
+									<tablelistheader data="location.description" label="位置描述" sort="auto" width="30%"/>
+							</listhead>
+						</tablelist>
+						</commonlistwindow>
+				</hbox>
+						<div align="center">
+						<button label="确 定" onClick="lookupWnd.locationOfok(event)"/>
+						<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+						</div>
+			</tabpanel>
+			
+			<tabpanel>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+					<groupbox id="searchBox">
+						<caption label="过滤器"/><!-- 过滤器 -->
+						编号:<!-- 编号： --><stextbox data="eqnum"/>
+						描述:<!-- 描述： --><stextbox data="description" cols="15"/>
+						位置:<!-- 位置： --><stextbox data="location"/>
+						<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+					</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				
+				<!-- //////////////////数据列表区///////////////////////// -->		
+					<pagenavigator/>
+					<lookuplist pageSize="20">
+						<listhead>
+							<lookuplistheader data="EQNUM" label="设备" sort="auto" width="20%"/>
+							<lookuplistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+							<lookuplistheader data="DESCRIPTION" label="描述" sort="auto" width="30%"/>
+							<lookuplistheader data="LOCATION" label="位置" sort="auto" width="20%"/>
+							<lookuplistheader data="location.description" label="位置描述" sort="auto" width="30%"/>
+						</listhead>
+					</lookuplist>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+
+					<div align="center">
+					<button label="确 定" onClick="lookupWnd.ok(event)"/>
+					<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+					</div>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</lookupwindow>

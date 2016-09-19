@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--  -->
+<searchmoredialog title="高级查询功能" width="600">
+	<tabbox width="100%" id="advsearch">
+		<tabs>
+			<tab label="高级查询" width="100px"/>
+			<tab label="已保存的查询" width="100px"/>
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+			<vbox width="100%">
+				<groupbox>
+					<caption label="选择组合过滤器"/>
+					字段：<searchmorefield/>
+					计算：<combobox id="compute" cols="10">
+							<comboitem label="like" description="类似"/>
+							<comboitem label="=" description="等于"/>
+							<comboitem label="is null" description="为空"/>
+							<comboitem label="is not null" description="不为空"/>
+							<comboitem label="&gt;" description="大于"/>
+							<comboitem label="&lt;" description="小于"/>
+							<comboitem label="&gt;=" description="大于等于"/>
+							<comboitem label="&lt;=" description="小于等于"/>
+							<comboitem label="!=" description="不等于"/>
+							<comboitem label="&lt;&gt;" description="不等于"/>
+					</combobox>
+					<textbox id="fieldword"/><separator spacing="5px"/>
+					组合：<combobox id="combotype" cols="8">
+							<comboitem label="or" description="或者"/>
+							<comboitem label="and" description="并且"/>
+						</combobox>
+					<button label="添加" src="/images/search.gif" style="cursor:hand" onClick="searchWnd.add()"/>
+				</groupbox>
+				<groupbox>
+				<caption label="选择组合过滤器"/>
+				<hbox>
+					<textbox id="searchStr" rows="8" cols="60"/>
+					<vbox>
+						<checkbox id="ispublic"/>公用的？
+						<checkbox id="isdefault"/>默认查询？
+						<button label="保存当前查询" style="cursor:hand" onClick="searchWnd.saveToIbsquery()"/>
+					</vbox>
+				</hbox>
+				</groupbox>
+				<div align="center">
+				<button label=" 执行查询 " onClick="searchWnd.confirm()"/>
+				<button label=" 清除查询 " onClick="searchWnd.clearquery()"/>
+				<button label=" 关   闭 " onClick="searchWnd.cancel()"/>
+				</div>
+			</vbox>
+			</tabpanel>
+			<!-- //////////////////////////////保存的查询 -->
+			<tabpanel>
+			<listwindow id="savequeryWnd" tablename="ibsquery" use="combiz.ui.ibs.IbsqueryList" dialog="/common/searchquerydialog.xul">
+				<tablelist band="savequeryWnd" pageSize="8">
+					<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="queryname" label="查询名称" sort="auto" width="30%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="50%"/>
+							<tablelistheader data="isdefault" label="默认的？" sort="auto" width="10%"/>
+							<tablelistheader data="ispublic" label="公用的？" sort="auto" width="10%"/>
+					</listhead>
+				</tablelist>
+			</listwindow>
+			<div align="center">
+				<button label="保存数据" onClick="searchWnd.ibsquerySave()"/>
+				<button label="关闭窗口" onClick="searchWnd.cancel()"/>
+			</div>
+			</tabpanel>
+			<!-- //////////////////////////////保存的查询 -->
+		</tabpanels>
+	</tabbox>
+</searchmoredialog>

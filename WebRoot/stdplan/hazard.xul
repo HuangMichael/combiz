@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="GBK"?><!-- title="危险" -->
+<mainwindow title="危险" app="hazard"  resize="true" use="combiz.ui.stdplan.HazardWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="危险" width="70px"/><!-- 危险 -->
+			<tab id="hazardtagtab" label="安全隔离" width="70px"/><!-- 安全隔离 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+					<label value="危险标识"/><stextbox data="hazardid"/><!-- 危险标识 -->
+					<label value="描述"/><stextbox data="description"/><!-- 描述 -->
+					
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<!----> <resultlistheader data="hazardid" label="危险标识" sort="auto" width="15%"/><!-- 危险标识 -->
+						<resultlistheader data="description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+						<resultlistheader data="hazprec" label="预防措施启用状态" sort="auto" width="10%"/><!-- 预防措施启用状态 -->
+						<resultlistheader data="hazmat" label="危险物料启用状态" sort="auto" width="10%"/><!-- 危险物料启用状态 -->
+						<resultlistheader data="msdsnum" label="MSDS编号" sort="auto" width="10%"/><!-- MSDS编号 -->
+						<resultlistheader data="health" label="健康等级" sort="auto" width="15%"/><!-- 健康等级 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+					<!-- ******************************************************************** -->
+					<!-- *************************在下面修改主界面字段**************************** -->
+					<!-- ********************************************************************-->					
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						危险标识<!-- 危险标识 -->:<a:bind value="hazard.hazardid"/><itextbox id="hazard.hazardid"/>
+						描述<!-- 描述 -->：<a:bind value="hazard.description"/><itextbox id="hazard.description" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预防措施启用状态<!-- 预防措施启用状态 -->:<a:bind value="hazard.hazprec"/><icheckbox id="hazard.hazprec"/>
+						危险物料启用状态<!-- 危险物料启用状态 -->：<a:bind value="hazard.hazmat"/><icheckbox id="hazard.hazmat"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						安全隔离<!-- 安全隔离 -->：<a:bind value="hazard.haztagout"/><icombobox id="hazard.haztagout" cols="1"/>
+						MSDS编号<!-- MSDS编号 -->：<a:bind value="hazard.msdsnum"/><itextbox id="hazard.msdsnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						健康等级<!-- 健康等级 -->:<a:bind value="hazard.health"/><ilongbox id="hazard.health"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				
+				<!-- //////////////////////危险及预防措施//////////////// --><!-- 预防措施 -->
+				<listwindow id="hazprecTable" title="预防措施" use="combiz.ui.stdplan.HazprecList" dialog="/stdplan/hazprecdialog.xul">
+					<tablelist band="hazprecTable" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="HAZARDPREC" label="任务编号" sort="auto" width="20%"/><!-- 任务编号 -->
+							<tablelistheader data="DESCRIPTION" label="描述" sort="auto" width="80%"/><!-- 描述 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>				
+			</tabpanel>
+			<tabpanel>
+				<!-- //////////////////////安全隔离//////////////// -->
+				<listwindow id="hazardtagTable" title="安全隔离" use="combiz.ui.stdplan.HazardtagList" dialog="/stdplan/hazardtagdialog.xul">
+					<tablelist band="hazardtagTable" pageSize="10"><!-- 安全隔离 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="ISOTAGID" label="安全标记标识" sort="auto" width="10%"/><!-- 安全标记标识 -->
+							<tablelistheader data="hazisotag.description" label="描述" sort="auto" width="20%"/><!-- 描述 -->
+							<tablelistheader data="hazisotag.location" label="位置" sort="auto" width="20%"/><!-- 位置 -->
+							<tablelistheader data="hazisotag.eqnum" label="设备" sort="auto" width="20%"/><!-- 设备 -->
+							<tablelistheader data="hazisotag.aplyseq" label="操作顺序" sort="auto" width="15%"/><!-- 操作顺序 -->
+							<tablelistheader data="hazisotag.state" label="需求日期" sort="auto" width="15%"/><!-- 需求日期 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>				
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

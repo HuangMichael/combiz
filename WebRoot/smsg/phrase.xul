@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="常用短语" app="phrase" resize="true" use="combiz.ui.smsg.PhraseWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!--列表-->
+			<tab id="sortsaytab" label="短语" width="70px"/><!--短语-->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+					短语编号<!-- 短语编号 -->：<stextbox data="phrasenum"/>
+					短语描述<!-- 短语描述 -->：<stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="phrasenum" label="常用短语编号" sort="auto" width="20%"/><!-- 常用短语编号 -->
+						<resultlistheader data="type" label="类型" sort="auto" width="20%"/><!-- 类型 -->
+						<resultlistheader data="description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+						<resultlistheader data="ownertable" label="所属表" sort="auto" width="20%"/><!-- 所属表 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+		<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"phrase.phrasenum"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row  spans="1,3">
+						常用短语编号<!-- 常用短语编号 -->：<a:bind value="phrase.phrasenum"/><itextbox id="phrase.phrasenum" cols="40"/>
+						</row>
+						<row>
+						类型<!-- 类型 -->：<a:bind value="phrase.type"/><itextbox id="phrase.type" cols="30"/>
+						所属表<!-- 所属表 -->：<a:bind value="phrase.ownertable"/><ibandbox id="phrase.ownertable" lookup="ibstables"/>
+						</row>
+						<row  spans="1,3">
+						描述<!-- 描述 -->：<a:bind value="phrase.description"/><itextbox id="phrase.description" width="100%" rows="5"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {"poservicedetail.enterdate"}; mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="服务采购结算明细">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<row>
+					技术服务费单价:
+					<a:bind value="poservicedetail.tecmoney" />
+					<itextbox id="poservicedetail.tecmoney"  cols = "30"/>
+					录入日期:
+					<a:bind value="poservicedetail.enterdate" />
+					<idatetimebox id="poservicedetail.enterdate"/>
+				</row>
+				
+				<row>
+				    实际工作时间:
+					<a:bind value="poservicedetail.realworktime" />
+					<idoublebox id="poservicedetail.realworktime" />
+					单位:
+					<a:bind value="poservicedetail.timeunit" />
+					<itextbox id="poservicedetail.timeunit" />
+				</row>
+				
+				
+				<row>
+					费用结算金额(元):
+					<a:bind value="poservicedetail.totalmoney" />
+					<idoublebox id="poservicedetail.totalmoney" format="0.00" />
+					人员:
+					<a:bind value="poservicedetail.labor" />
+					<ibandbox id="poservicedetail.labor" lookup="labor" checkdata="false"/>
+				</row>				
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口"
+						onClick="mainWnd.closeWnd()" />
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+</editwindow>

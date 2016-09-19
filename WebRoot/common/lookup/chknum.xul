@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="供应商资格审查列表" width="600">
+	<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+	<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器" />
+		审查表编号：
+		<stextbox data="chknum" cols="10" />
+		<image src="/images/button/search.gif" style="cursor:hand" onClick="lookupWnd.search()" />
+	</groupbox>
+	<!-- //////////////////查询过滤条件///////////////////////// -->
+
+	<!-- //////////////////数据列表区///////////////////////// -->
+	<pagenavigator />
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="chknum" label="审查表编号" sort="auto" width="10%" />
+			<lookuplistheader data="prjtype" label="项目类别" sort="auto" width="10%" />
+			<lookuplistheader data="cntnum" label="合同编号" sort="auto" width="10%" />
+			<lookuplistheader data="bidnum" label="招标编号" sort="auto" width="10%" />
+			<lookuplistheader data="requestby" label="申请人" sort="auto" width="10%" />
+			<lookuplistheader data="requestdate" label="申请时间" sort="auto" width="20%" />
+			<lookuplistheader data="deptnum" label="推荐部门" sort="auto" width="20%" />
+			<lookuplistheader data="deptlead" label="部门负责人" sort="auto" width="10%" />
+		</listhead>
+	</lookuplist>
+	<!-- //////////////////数据列表区///////////////////////// -->
+
+	<div align="center">
+		<button label=" 确 定 " onClick="lookupWnd.ok(event)" />
+		<button label=" 取 消 " onClick="lookupWnd.cancel(event)" />
+	</div>
+
+</lookupwindow>

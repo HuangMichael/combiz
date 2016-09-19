@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="GBK"?>
+<window use="combiz.system.assetdraw.EditDialog" tablename="equipment"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<tabbox id="appTabbox" width="100%">
+		<tabs>
+			<tab id="main" label="详细信息" width="80px"/>
+			<tab id="eqspectab" label="技术参数" width="80px"/>
+			<!--<tab id="pmtab" label="预防性维护" width="100px"/>
+			<tab id="workordertab" label="维修工单" width="100px"/>
+		-->
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+			<hbox>
+			<menubar id="menubar" width="2px">
+				<menuitem id="menuSave" label="保存记录" image="/images/menus/menu_icon_save.gif" onClick="mainWnd.save()"/>
+				<menuitem id="menuCloseThis" label="关闭编辑界面" image="/images/menus/menu_icon_add.gif" onClick="mainWnd.cancel()"/>
+				<!--<menu label="选择操作" image="/images/menus/menu_icon_action.gif">
+					<menupopup>
+						<menuitem label="新建记录" onClick="alert(self.label)"/>
+						<menuitem label="保存记录" onClick="alert(self.label)"/>
+						<menuitem label="清除屏幕记录" onClick="alert(self.label)"/>
+						<menuseparator/>
+						<menuitem label="拷贝作业计划"/>
+					</menupopup>
+				</menu>-->
+			</menubar>
+			<messagebar/>
+			</hbox>
+			<zscript>
+				 String[] required = {}; 
+				 mainWnd.setRequired(required);
+				 String[] readonly = {}; 
+				 mainWnd.setReadonly(readonly);
+			</zscript>
+			
+			<vbox width="100%">
+			  <groupbox><caption label="设备信息" />
+					<grid>
+					<rows>
+						<row>
+						设备:<a:bind value="equipment.eqnum"/><itextbox id="equipment.eqnum"/>
+						设备描述：<a:bind value="equipment.description"/><itextbox id="equipment.description" cols="40"/>
+						</row>
+						<row>
+						位置：<a:bind value="equipment.location"/><ibandbox id="equipment.location" lookup="location"/>
+						位置描述:<a:bind value="location.description"/><itextbox id="location.description" cols="40"/>
+						</row>
+						<row>
+						周转件：<a:bind value="equipment.itemnum" /><ibandbox id="equipment.itemnum" lookup="item" />
+						描述：<a:bind value="item.description" /><itextbox id="item.description" cols="40" />
+						</row>
+					</rows>
+					</grid>
+				</groupbox>
+				
+				<hbox  width="100%">
+				<groupbox><caption label="基本信息" />
+					<grid>
+						<rows>
+						<row>
+						设备分类：<a:bind value="equipment.classid"/><ibandbox id="equipment.classid" lookup="classification"/>
+						</row>
+						<row>
+						固定资产编号：<a:bind value="equipment.assetnum"/><itextbox id="equipment.assetnum" cols="20"/>
+						</row>
+						<row>
+						负责部门：<a:bind value="equipment.deptnum"/><ibandbox id="equipment.deptnum" lookup="department"/>
+						</row>
+						<row>
+						父级设备：<a:bind value="equipment.parent"/><ibandbox id="equipment.parent" lookup="equipment"/>
+						</row>
+						<row>
+						出厂日期：<a:bind value="equipment.lfdate"/><idatebox id="equipment.lfdate" cols="20"/>
+						</row>
+						<row>
+						安装时间：<a:bind value="equipment.installdate"/><idatebox id="equipment.installdate"/>
+						</row>
+						<row>
+						型号规格：<a:bind value="equipment.model"/><itextbox id="equipment.model" cols="20"/>
+						</row>
+						<row>
+						生产厂家：<a:bind value="equipment.manufacturer"/><ibandbox id="equipment.manufacturer" lookup="companies"/>
+						</row>
+						<row>
+						出厂编号：<a:bind value="equipment.lfnumber"/><itextbox id="equipment.lfnumber" cols="20"/>
+						</row>
+						<row>
+						序列号：<a:bind value="equipment.serialnum"/><itextbox id="equipment.serialnum" cols="20"/>
+						</row>
+					</rows>
+					</grid>
+				</groupbox>
+				
+				<groupbox><caption label="其他信息" />
+				<grid>
+					<rows>
+						<row>
+						采购价格：<a:bind value="equipment.purprice"/><idoublebox id="equipment.purprice"/>
+						</row>
+						<row>
+						保修日期至：<a:bind value="equipment.warrantyexpdate"/><idatebox id="equipment.warrantyexpdate"/>
+						</row>
+						<row>
+						设备是否运行：<a:bind value="equipment.isrunning"/><icombobox id="equipment.isrunning" cols="1"/>
+						</row>
+						<row>
+						总成本：<a:bind value="equipment.totalcost"/><ilongbox id="equipment.totalcost"/>
+						</row>
+						<row>
+						预算成本：<a:bind value="equipment.budgetcost"/><ilongbox id="equipment.budgetcost"/>
+						</row>
+						<row>
+						库存成本：<a:bind value="equipment.stockcost"/><ilongbox id="equipment.stockcost"/>
+						</row>
+					</rows>
+				</grid>
+				</groupbox>
+				</hbox>
+			</vbox>
+			</tabpanel>
+			<tabpanel>
+				<window id="eqspec" use="combiz.assetdraw.ui.EqspecList" tablename="eqspec"
+				 dialog="/assetdraw/eqspecedit.xul">
+					<tablelist band="eqspec" pageSize="20">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="classattr" label="参数" sort="auto" width="30%"/>
+							<tablelistheader data="strvalue" label="参数值" sort="auto" width="50%"/>
+							<tablelistheader data="unitid" label="单位" sort="auto" width="10%"/>
+							<tablelistheader data="remark" label="备注" sort="auto" width="20%"/>
+						</listhead>
+					</tablelist>
+				</window>
+			</tabpanel>
+			<tabpanel>
+			
+			</tabpanel>
+	</tabpanels>
+	</tabbox>
+</window>

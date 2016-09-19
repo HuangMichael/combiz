@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="位置系统" width="600">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器"/><!--  -->
+		系统：<stextbox data="sytemid"/>
+		描述：<stextbox data="description"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="systemid" label="系统" sort="auto" width="30%"/>
+			<lookuplistheader data="description" label="描述" sort="auto" width="60%"/>
+			<lookuplistheader data="isdefault" label="默认" sort="auto" width="10%"/>
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->	
+
+
+	<div align="center">
+	<button label="确 定" onClick="lookupWnd.ok(event)"/>
+	<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+	</div>
+	
+</lookupwindow>

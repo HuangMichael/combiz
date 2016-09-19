@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+			<groupbox><caption label="申请单状态" />
+				<grid>
+					<rows>
+						<row>
+						申请单状态:<a:bind value="equipadd.status"/><itextbox id="equipadd.status" cols="20"/>		
+						状态日期:<a:bind value="equipadd.statusdate"/><idatetimebox id="equipadd.statusdate" cols="15"/>	
+						</row>
+					</rows>
+				</grid>	
+			</groupbox>
+			  <groupbox><caption label="设备添加基本信息" />
+					<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						申请编号:<!-- 申请编号 --><a:bind value="equipadd.requestnum"/><itextbox id="equipadd.requestnum"/>
+						设备名称：<a:bind value="equipadd.eqname"/><itextbox id="equipadd.eqname" />
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						申请单位：<a:bind value="equipadd.requestcom"/><itextbox id="equipadd.requestcom"/>
+						申请日期:<a:bind value="equipadd.requestdate"/><idatetimebox id="equipadd.requestdate"/>
+						</row>
+
+						<row>
+						新设备所在厂站：<a:bind value="equipadd.factorysite"/><itextbox id="equipadd.factorysite"/>
+						申请投入运行的日期:<a:bind value="equipadd.rundate"/><idatetimebox id="equipadd.rundate"/>
+						</row>
+
+						<row>
+						申请单位负责人：<a:bind value="equipadd.reqcompman"/><ibandbox id="equipadd.reqcompman" lookup="labor"/>
+						申请人：<a:bind value="equipadd.requestman"/><itextbox id="equipadd.requestman"/>
+						</row>
+
+						<row>
+						现场操作联系人：<a:bind value="equipadd.conlabor"/><ibandbox id="equipadd.conlabor" lookup="labor"/>
+						通电投运时间：<a:bind value="equipadd.powerruntime"/><idatetimebox id="equipadd.powerruntime"/>
+						</row>
+								
+						<row>
+						一次设备电气接线图及三相相位图：<div><a:bind value="equipadd.threemap"/><itextbox id="equipadd.threemap"/>份</div>
+						控制盘的排列及盘面布置图：<div><a:bind value="equipadd.traymap"/><itextbox id="equipadd.traymap"/>份</div>
+						</row>
+						
+						<row>
+						室内室外设备平面布置图：<div><a:bind value="equipadd.outdoormap"/><itextbox id="equipadd.outdoormap"/>份</div>
+						继电保护及安全自动装置原理接线图（展开图）：<div><a:bind value="equipadd.automap"/><itextbox id="equipadd.automap"/>份</div>
+						</row>
+						
+						<row>
+						调度自动化、通信装置配备：<div><a:bind value="equipadd.autocomm"/><itextbox id="equipadd.autocomm"/>份</div>
+						主要设备规范、特性、实测参数质料、运行规程：<div><a:bind value="equipadd.runrule"/><itextbox id="equipadd.runrule"/>份</div>
+						</row>
+						
+						<row spans="1,3">
+						接受调度指令的人员名单：<a:bind value="equipadd.labors"/><itextbox id="equipadd.labors" rows="2" cols="120"/>
+						</row>
+						
+						<row spans="1,3">
+						通实电验时项需目进及行进程：<a:bind value="equipadd.protenor"/><itextbox id="equipadd.protenor" rows="2" cols="120"/>
+						</row>
+						
+						<row spans="1,3">
+						备 注：<a:bind value="equipadd.rundeptremark"/><itextbox id="equipadd.rundeptremark" rows="2" cols="120"/>
+						</row>
+						</rows>
+					</grid>
+				</groupbox>
+					
+				 <groupbox><caption label="批复联" />
+					<grid>
+					<rows>
+						
+						<row spans="1,3">
+						用电管理部门意见：<a:bind value="equipadd.powerdeptopinion"/><itextbox id="equipadd.powerdeptopinion" rows="2" cols="120"/>
+						</row>
+
+						<row spans="1,3">
+						生技部意见：<a:bind value="equipadd.prodtdeptopinion"/><itextbox id="equipadd.prodtdeptopinion" rows="2" cols="120"/>
+						</row>
+
+						<row spans="1,3">
+						调度所意见[方式]：<a:bind value="equipadd.modeopinion"/><itextbox id="equipadd.modeopinion" rows="2" cols="120"/>
+						</row>
+						
+						<row spans="1,3">
+						调度所意见[保护]：<a:bind value="equipadd.safeguardopinion"/><itextbox id="equipadd.safeguardopinion" rows="2" cols="120"/>
+						</row>
+
+						<row spans="1,3">
+						调度所意见[通信]：<a:bind value="equipadd.commopinion"/><itextbox id="equipadd.commopinion" rows="2" cols="120"/>
+						</row>
+						
+						<row spans="1,3">
+						调度所意见[自动化]：<a:bind value="equipadd.autoopinion"/><itextbox id="equipadd.autoopinion" rows="2" cols="120"/>
+						</row>
+
+						<row spans="1,3">
+						调度所意见[主任]：<a:bind value="equipadd.directoropinion"/><itextbox id="equipadd.directoropinion" rows="2" cols="120"/>
+						</row>
+						
+
+						<row spans="1,3">
+						总工程师意见：<a:bind value="equipadd.engineeropinion"/><itextbox id="equipadd.engineeropinion" rows="2" cols="120"/>
+						</row>
+
+						<row spans="1,3">
+						备 注：<a:bind value="equipadd.dptdeptremark"/><itextbox id="equipadd.dptdeptremark" rows="2" cols="120"/>
+						</row>
+
+						<!--  <row spans="1,3">
+						通电情况及存在问题：<a:bind value="equipadd.powercondition"/><itextbox id="equipadd.powercondition" rows="3" cols="80"/>
+						</row>
+
+						<row spans="1,3">
+						备 注[通电后由调度员及保存申请书单位分别填写]：<a:bind value="equipadd.remark"/><itextbox id="equipadd.remark" rows="3" cols="80"/>
+						</row>
+						-->
+						<!-- ******************************************************************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+					</grid>
+			</groupbox>				
+</editwindow>

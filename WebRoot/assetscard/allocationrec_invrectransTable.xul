@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly =
+		{"invrectrans.fromlot","invrectrans.fromwarehouse","invrectrans.tolot","invrectrans.loadedcost","invrectrans.modelnum","invrectrans.manufacturer","invrectrans.status","invrectrans.transdate","invrectrans.quantity","invrectrans.linecost","invrectrans.recunit","invrectrans.frombin","invrectrans.polinenum","invrectrans.itemnum","invrectrans.rectype","invrectrans.polinenum","invrectrans.eqnum"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="接收明细表">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					接收类型:
+					<a:bind value="invrectrans.rectype" />
+					<itextbox id="invrectrans.rectype" />
+					接收单位:
+					<a:bind value="invrectrans.recunit" />
+					<itextbox id="invrectrans.recunit" />
+					接收仓库:
+					<a:bind value="invrectrans.towarehouse" />
+					<ibandbox id="invrectrans.towarehouse"
+						lookup="warehouse" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					库存项目:
+					<a:bind value="invrectrans.itemnum" />
+					<ibandbox id="invrectrans.itemnum" lookup="item" />
+					库存项目描述:
+					<a:bind value="item.description" />
+					<itextbox id="item.description" />
+					接收箱柜:
+					<a:bind value="invrectrans.tobin" />
+					<itextbox id="invrectrans.tobin" />
+				</row>
+				<row>
+					交易日期:
+					<a:bind value="invrectrans.transdate" />
+					<idatebox id="invrectrans.transdate" />
+					交易数量:
+					<a:bind value="invrectrans.quantity" />
+					<idoublebox id="invrectrans.quantity" format="0.00" />
+					行总价:
+					<a:bind value="invrectrans.linecost" />
+					<idoublebox id="invrectrans.linecost" />
+				</row>
+
+
+			</rows>
+		</grid>
+	</groupbox>
+
+	<groupbox>
+		<caption label="其它信息" /><!-- 其它信息 -->
+		<grid>
+			<rows>
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					调拨单行:
+					<a:bind value="invrectrans.polinenum" />
+					<ilongbox id="invrectrans.polinenum" />
+					设备编号:
+					<a:bind value="invrectrans.eqnum" />
+					<itextbox id="invrectrans.eqnum" />
+					源批次:
+					<a:bind value="invrectrans.fromlot" />
+					<itextbox id="invrectrans.fromlot" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<!-- 
+					<row>
+					转换系数:
+					<a:bind value="invrectrans.conversion" />
+					<idoublebox id="invrectrans.conversion" />
+					当前余量:
+					<a:bind value="invrectrans.curbal" />
+					<idoublebox id="invrectrans.curbal" format="0.00" />
+					
+					</row>
+				-->
+
+				<!-- //////////////////////row//////////////// -->
+
+				<row>
+					制造商:
+					<a:bind value="invrectrans.manufacturer" />
+					<ibandbox id="invrectrans.manufacturer"
+						lookup="companies2" />
+					型号:
+					<a:bind value="invrectrans.modelnum" />
+					<itextbox id="invrectrans.modelnum" />
+					到批次:
+					<a:bind value="invrectrans.tolot" />
+					<itextbox id="invrectrans.tolot" />
+					
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					来自仓库:
+					<a:bind value="invrectrans.fromwarehouse" />
+					<itextbox id="invrectrans.fromwarehouse" />
+					来自箱柜:
+					<a:bind value="invrectrans.frombin" />
+					<itextbox id="invrectrans.frombin" />
+					载入的成本:
+					<a:bind value="invrectrans.loadedcost" />
+					<idoublebox id="invrectrans.loadedcost"
+						format="0.0000" />
+				</row>
+
+				<row spans="1,1,1,3">
+					接收状态:
+					<a:bind value="invrectrans.status" />
+					<itextbox id="invrectrans.status" />
+					备注:
+					<a:bind value="invrectrans.remark" />
+					<itextbox id="invrectrans.remark" cols="70"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+</editwindow>

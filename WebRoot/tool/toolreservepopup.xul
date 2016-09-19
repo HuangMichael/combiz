@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="thisWnd" title="请选择数据"  use="combiz.ui.tool.TLsendDialog" 
+width="600" closable="true">
+	<listwindow id="tlsendcountList" multiple="true" tablename="toolreserve" use="combiz.system.ui.CommonListWindow" autodata="false">
+		<tablelist band="tlsendcountList" pageSize="8">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif" />
+				<tablelistheader data="reqnum" label="申请单编号" sort="auto" width="15%" />
+				<tablelistheader data="toolnum" label="工具编号" sort="auto" width="15%" />
+				<tablelistheader data="reqlabor" label="申请人" sort="auto" width="15%" />
+				<tablelistheader data="reservedqty" label="预留数量" sort="auto" width="10%" />
+				<tablelistheader data="reqdate" label="申请时间" sort="auto" width="25%" />
+				<tablelistheader data="waretool.qty" label="库存数量" sort="auto" width="10%" />
+				<tablelistheader data="sendcount" label="发放数量" sort="auto" width="10%" input="longbox"/>
+			</listhead>
+		</tablelist>
+	</listwindow>
+		<div align="center">
+			<button label="确定" onClick="thisWnd.reassend();thisWnd.onClose()"/>
+			<button label="取消" onClick="thisWnd.onClose()"/>
+		</div>
+</window>

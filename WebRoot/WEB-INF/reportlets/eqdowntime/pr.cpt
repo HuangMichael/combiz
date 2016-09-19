@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="inbasis.pr">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="shiptolabor" type="0" pop="true" />
+<O t="S">ADMIN</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="prnum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[Select * from pr where  shiptolabor='[?shiptolabor?]' or prnum='[?prnum?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[32.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="3" r="0" cs="4" rs="2" s="0"><O t="S">采购计划申请单</O></C>
+<C c="1" r="3" s="1"><O t="S">采购单编号:</O></C>
+<C c="2" r="3" cs="2" s="1"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="PRNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="3" s="2"><O t="S">描述:</O></C>
+<C c="5" r="3" cs="4" rs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="DESCRIPTION" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="4" cs="4" s="4"></C>
+<C c="1" r="5" s="5"><O t="S">申请人:</O></C>
+<C c="2" r="5" cs="2" s="5"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="REQUESTEDBY" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="5" s="5"><O t="S">供应商:</O></C>
+<C c="6" r="5" cs="3" s="5"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="VENDOR" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="6" s="3"><O t="S">需求部门:</O></C>
+<C c="2" r="6" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="REQUESTDEPT" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="6" s="3"><O t="S">联系人:</O></C>
+<C c="6" r="6" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="CONTACT" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="7" s="3"><O t="S">主管人:</O></C>
+<C c="2" r="7" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="SUPERVISOR" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="7" s="5"><O t="S">离岸价格:</O></C>
+<C c="6" r="7" cs="3" s="5"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="FOBPRICE" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="8" s="3"><O t="S">修改人:</O></C>
+<C c="2" r="8" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="CHANGEBY" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="8" s="3"><O t="S">总成本:</O></C>
+<C c="6" r="8" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="TOTALCOST" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="9" s="3"><O t="S">客户编号:</O></C>
+<C c="2" r="9" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="CUSTOMERNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="9" s="3"><O t="S">税总额: </O></C>
+<C c="6" r="9" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="TOTALTAX" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="10" rs="3" s="3"><O t="S">运输条款: </O></C>
+<C c="2" r="10" cs="7" rs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="FREIGHTTERMS" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="13" s="6"><O t="S">运输方式:</O></C>
+<C c="2" r="13" cs="7" s="6"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="SHIPVIA" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="14" rs="3" s="3"><O t="S">支付条款: </O></C>
+<C c="2" r="14" cs="7" rs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="PAYMENTTERMS" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="17" s="3"><O t="S">收货人:</O></C>
+<C c="2" r="17" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="SHIPTOLABOR" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="17" s="3"><O t="S">申请日期: </O></C>
+<C c="6" r="17" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="REQUESTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="18" s="7"><O t="S">收货地址:</O></C>
+<C c="2" r="18" cs="7" s="7"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="SHIPTOADDR" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="19" s="3"><O t="S">收票人: </O></C>
+<C c="2" r="19" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="BILLTOLABOR" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="19" s="3"><O t="S">汇率: </O></C>
+<C c="4" r="19" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="EXCHANGERATE" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="19" s="3"><O t="S">汇率日期:</O></C>
+<C c="6" r="19" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="EXCHANGEDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="20" s="3"><O t="S">收票地址: </O></C>
+<C c="2" r="20" cs="7" s="3"><O t="DSColumn"><Attributes dsName="inbasis.pr" columnName="BILLTOADDR" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="28" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

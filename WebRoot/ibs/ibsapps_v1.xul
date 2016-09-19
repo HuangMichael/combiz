@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibsapps" title="应用程序配置" resize="true" use="combiz.ui.ibs.IbsappsWindow" closable="true"
+actionlink="action1:操作菜单1;antion2:操作菜单2" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="应用程序"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					应用程序：<stextbox data="app" cols="10"/>
+					描述：<stextbox data="description" cols="10"/>
+					类型：<scombobox data="apptype" cols="10"/>
+					主表：<sbandbox data="maintbname" lookup="ibstables" cols="10"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="app" label="应用程序" sort="auto" width="20%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="50%"/>
+						<resultlistheader data="apptype" label="应用程序类型" sort="auto" width="15%"/>
+						<resultlistheader data="maintbname" label="主表" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstables.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						应用程序:<a:bind value="ibsapps.app"/><itextbox id="ibsapps.app"/>
+						描述：<a:bind value="ibsapps.description"/><itextbox id="ibsapps.description" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						应用程序类型：<a:bind value="ibsapps.apptype"/><icombobox id="ibsapps.apptype"/>
+						主表:<a:bind value="ibsapps.maintbname"/>
+						<ibandbox id="ibsapps.maintbname" lookup="ibstables" checkdata="true" multiple="false" applink="ibstables;ibsapps" actionlink="viewpo:查看绑定值列表;viewqty:查看字段统计信息"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						图标位置：<a:bind value="ibsapps.image"/><itextbox id="ibsapps.image" cols="40"/>
+						主表描述：<a:bind value="ibstables.description"/><itextbox id="ibstables.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						链接：<a:bind value="ibsapps.href"/><itextbox id="ibsapps.href" cols="40"/>
+						页面地址：<a:bind value="ibsapps.page"/><itextbox id="ibsapps.page" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<listwindow id="ibsmenusTable" title="应用程序菜单" orderby="menutype,position"
+				use="combiz.ui.ibs.IbsmenusList" dialog="/ibs/ibsmenusdialog.xul">
+					<tablelist band="ibsmenusTable" pageSize="16">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="KEYVALUE" label="菜单项" sort="auto" width="20%"/>
+							<tablelistheader data="HEADER" label="菜单标题" sort="auto" width="40%"/>
+							<tablelistheader data="parentmod" label="父级菜单" sort="auto" width="10%"/>
+							<tablelistheader data="MENUTYPE" label="工具栏/菜单" sort="auto" width="10%"/>
+							<tablelistheader data="position" label="排序" sort="auto" width="10%"/>
+							<tablelistheader data="ELEMENTTYPE" label="菜单类型" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

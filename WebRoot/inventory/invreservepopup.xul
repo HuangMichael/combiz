@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="testWnd" title="请选择数据" edittype="listonly" 
+	tablename="invreserve" multiple="true"
+	use="combiz.ui.inventory.Invreserveline" closable="true" width="700">
+	<tablelist band="testWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="itemnum" label="库存项目" sort="auto" width="20%" />
+			<tablelistheader data="item.description" label="描述" sort="auto" width="50%" />
+			<tablelistheader data="warehouse" label="仓库" sort="auto" width="15%" />
+			<tablelistheader data="reservedqty" label="预留数量" sort="auto" width="15%" />
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<button label=" 确 定 " onClick="testWnd.confirm()" />
+		<button label=" 取 消 " onClick="testWnd.cancel()" />
+	</div>
+</listwindow>

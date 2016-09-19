@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="corp" title="组织机构" resize="true" use="combiz.ui.corp.CorporationWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="组织机构" width="70px"/>
+			<tab id="deptauthtab" label="数据授权" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					组织机构：<stextbox data="corpnum"/>
+					描述：<stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="corpnum" label="组织机构" sort="auto" width="20%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="50%"/>
+						<resultlistheader data="CONTACT" label="联系人" sort="auto" width="30%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"location.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						组织机构:<a:bind value="corporation.corpnum"/><itextbox id="corporation.corpnum"/>
+						名称：<a:bind value="corporation.description"/><itextbox id="corporation.description" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						联系人：<a:bind value="corporation.contact"/><ibandbox id="corporation.contact" cols="40"/><!--
+						上级组织:<a:bind value="corporation.parent"/><ibandbox id="corporation.parent" lookup="corporation"/>
+						
+						-->
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<listwindow id="addressTable" title="地址" use="combiz.ui.corp.AddressList" dialog="/corp/addressdialog.xul">
+					<tablelist band="addressTable" pageSize="8">	
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="address" label="地址" sort="auto" width="20%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="30%"/>
+							<tablelistheader data="province" label="省" sort="auto" width="10%"/>
+							<tablelistheader data="city" label="市" sort="auto" width="10%"/>
+							<tablelistheader data="postnum" label="邮编" sort="auto" width="10%"/>
+							<tablelistheader data="changeby" label="修改人" sort="auto" width="10%"/>
+							<tablelistheader data="changedate" label="修改时间" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+			<tabpanel>
+			<grid>
+				<rows>
+				<row>
+					组织机构:<a:bind value="corporation.corpnum"/><textbox/>
+					名称：<a:bind value="corporation.description"/><textbox cols="40"/>
+				</row>
+				</rows>
+			</grid>
+				
+				<hbox>
+					<groupbox><caption label="需要赋予权限的部门及人员列表"/>
+					<tree use="combiz.ui.corp.DeptAuthTree" width="200px"/>
+					</groupbox>
+					
+					<vbox width="98%">
+					
+					<hbox>
+						<vbox>
+						<groupbox><caption label="所有部门列表"/>
+						<tree use="combiz.ui.corp.DeptAuthCustTree" width="220"/>
+						</groupbox>
+						</vbox>
+					<vbox>
+					<groupbox><caption label="当前授于的可访问部门列表"/>
+						<button label="添加到授权列表" onClick="mainWnd.addAuthDept()"/>
+						<button label="从授权列表中删除" onClick="mainWnd.delAuthDept()"/>
+						<button label="修改默认顶级授权" onClick="mainWnd.chgDefaultAuth()"/>
+						<listbox id="authdeptlist_listbox">
+						<listitem label="（默认授权）" style="color:red"/>
+						</listbox>
+					</groupbox>
+					
+					<groupbox><caption label="授权所有访问"/>
+						<button id="authalldepartment_button" label="授权访问所有部门" onClick="mainWnd.authall()"/>
+						<button id="authalldepartment_cancelbutton" label="取消授权访问所有部门" onClick="mainWnd.cancelauthall()"/>
+					</groupbox>
+					<commonlistwindow  title="人员列表" id="deptlabortable" tablename="labor" edittype="listonly" autodata="false">
+							<tablelist band="deptlabortable" pageSize="20">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="labornum" label="人员" sort="auto" width="40%"/>
+									<tablelistheader data="laborname" label="姓名" sort="auto" width="40%"/>
+									<tablelistheader data="authalldept" label="是否授权访问所有数据" sort="auto" width="20%" style="color:red"/>
+								</listhead>
+							</tablelist>
+					</commonlistwindow>
+					</vbox>
+					</hbox>
+					
+					<!--<groupbox><caption label="数据授权说明："/>
+						<grid>
+						<rows>
+						<row>
+						默认情况下属于某部门的人员有权限访问该部门及下属部门的所有数据。
+						</row>
+						<row>
+						特殊权限：
+						</row>
+						<row>
+						如果需要使某个部门下的所有人员能访问该组织机构下面的所有数据（不受部门限制），请选中部门，点击“授权访问所有部门数据”按钮。
+						</row>
+						<row>
+						如果需要使某个人员能访问该组织机构下面的所有数据（不受部门限制），请选中人员，点击“授权访问所有部门数据”按钮。
+						</row>
+						</rows>
+						</grid>
+					</groupbox>
+					-->
+					</vbox>
+				</hbox>
+			</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

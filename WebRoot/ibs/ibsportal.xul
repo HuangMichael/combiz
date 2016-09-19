@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="IBSPORTAL" title="门户定义" resize="true" use="combiz.ui.ibs.IbsportalWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="门户定义" width="70px"/>
+			<tab id="portalauth" label="门户授权" width="70px"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						门户：<stextbox data="portal" cols="10"/>
+						描述：<stextbox data="description" cols="20"/>
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="portal" label="门户名称" sort="auto" width="40%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="60%"/>
+						<resultlistheader data="roworcol" label="列坐标" sort="auto" width="5%"/>
+						<!--<resultlistheader data="portcols" label="列数" sort="auto" width="5%"/>
+					--></listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {""};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						门户名称:<a:bind value="ibsportal.portal"/><itextbox id="ibsportal.portal"/>
+						
+						描述:<a:bind value="ibsportal.description"/><itextbox id="ibsportal.description"  cols="50"/>
+						</row>
+						<row spans="1,1,2">
+						是否列坐标？<a:bind value="ibsportal.roworcol"/><icheckbox id="ibsportal.roworcol"/>
+						帮助：是否按照列坐标排列门户窗口，默认以行排列门户窗口。
+						</row>
+						
+					</rows>
+				</grid>
+				
+				<listwindow id="ibsportlets" title="门户窗口定义" use="combiz.ui.ibs.IbsportletsList"
+				 dialog="/ibs/ibsportletsdialog.xul">
+				<tablelist band="ibsportlets" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="portlet" label="名称" sort="auto" width="10%"/>
+						<tablelistheader data="pltitle" label="标题" sort="auto" width="25%"/>
+						<tablelistheader data="portlettype" label="类型" sort="auto" width="5%"/>
+						<tablelistheader data="pagepath" label="页面地址" sort="auto" width="35%"/>
+						<tablelistheader data="rowpos" label="行坐标" sort="auto" width="5%"/>
+						<tablelistheader data="colpos" label="列坐标" sort="auto" width="5%"/>
+						<tablelistheader data="plwidth" label="宽" sort="auto" width="5%"/>
+						<tablelistheader data="ispercent" label="百分比" sort="auto" width="5%"/>
+						<tablelistheader data="plheight" label="高" sort="auto" width="5%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+				
+				<!-- 展示 -->
+				<label value="门户布局预览" />
+				<window use="combiz.system.ui.portal.PortalConfig"/>
+				
+			</tabpanel>
+			
+			
+<!-- ********************************** 门户授权 ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+						门户名称:<a:bind value="ibsportal.portal"/><textbox/>
+						描述:<a:bind value="ibsportal.description"/><textbox/>
+						</row>
+					</rows>
+				</grid>
+				<listwindow id="ibsgroups" title="门户授予权限组" dialog="/ibs/ibsportal_ibsportalauth.xul">
+				 <defaultvalue band="ibsgroups" value="portal={portal};position=0"/>
+				<tablelist band="ibsgroups" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif" />
+						<tablelistheader data="grpname" label="权限组" sort="auto" width="40%"/>
+						<tablelistheader data="ibsgroups.description" label="名称" sort="auto" width="60%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

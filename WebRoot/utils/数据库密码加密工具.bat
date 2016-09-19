@@ -1,0 +1,1 @@
+"%JAVA_HOME%/bin/java" -cp ../WEB-INF/classes;../WEB-INF/lib/inbasis_bc.jar;../WEB-INF/lib/log4j-1.2.14.jar combiz.system.util.EncryptPassword

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"wpmaterial.orderunit","wpmaterial.modelnum","wpmaterial.description","wpmaterial.warehouse"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"wpmaterial.prnum","wpmaterial.prlinenum","wpmaterial.linecost","wpmaterial.requestby","wpmaterial.requiredate","wpmaterial.budnum"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="领用计划物料"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 领用计划物料 -->
+					<rows>
+					
+						<row>
+						物资编码:<!-- 物资编码 --><a:bind value="wpmaterial.itemnum"/><ibandbox id="wpmaterial.itemnum" lookup="itemeq" applink="item"/>
+						描述:<!-- 描述 --><a:bind value="wpmaterial.description"/><itextbox id="wpmaterial.description" cols="40"/>
+						</row>
+						<row>
+									预算号:
+									<a:bind value="wpmaterial.budnum" />
+									<ibandbox id="wpmaterial.budnum" lookup= 'budnum'/>
+								
+									预算项目:
+									<a:bind value="wpmaterial.buditem" />
+									<ibandbox id="wpmaterial.buditem" lookup='budgetitem'/>
+						</row>
+						<row>
+						分类:<a:bind value="wpmaterial.classid"/><ibandbox id="wpmaterial.classid" lookup="classificationeq"/><!-- 分类 -->
+						规格型号:<!-- 规格型号 --><a:bind value="wpmaterial.modelnum"/><itextbox id="wpmaterial.modelnum"/>
+						</row>
+						
+						<row>
+						数量:<!-- 数量 --><a:bind value="wpmaterial.itemqty"/><idoublebox id="wpmaterial.itemqty" format="#,##0.00"/>
+						仓库:<!-- 仓库 --><a:bind value="wpmaterial.warehouse"/><ibandbox id="wpmaterial.warehouse" lookup="warehouse"  checkdata="false" />
+						</row>
+						<row>
+						单价:<!-- 单价 --><a:bind value="wpmaterial.unitcost"/><idoublebox id="wpmaterial.unitcost" format="#,##0.00"/>						
+						行总价:<!-- 行总价 --><a:bind value="wpmaterial.linecost"/><idoublebox id="wpmaterial.linecost" format="#,##0.00"/>
+						</row>
+						<row>
+						定购单位:<!-- 定购单位 --><a:bind value="wpmaterial.orderunit"/><ibandbox id="wpmaterial.orderunit" lookup="measurement"/>
+						发放到:<!-- 发放到 --><a:bind value="wpmaterial.issueto"/><ibandbox id="wpmaterial.issueto" lookup="labor"/>
+						</row>
+						
+						<row spans="1,3">
+						备注<!-- 备注 -->:<a:bind value="wpmaterial.remark"/><itextbox id="wpmaterial.remark" cols="120"/>
+						</row>
+						
+						<row>
+						采购申请:<!--  采购申请--><a:bind value="wpmaterial.prnum"/><itextbox id="wpmaterial.prnum"/>
+						采购申请行:<!-- 采购申请行 --><a:bind value="wpmaterial.prlinenum"/><ilongbox id="wpmaterial.prlinenum"/>
+						</row>
+						
+						<row>
+						申请人:<!-- 申请人 --><a:bind value="wpmaterial.requestby"/>	<ibandbox id="wpmaterial.requestby" lookup="labor"/>
+						申请时间:<!-- 申请时间 --><a:bind value="wpmaterial.requiredate"/>	<idatetimebox id="wpmaterial.requiredate"/>
+						</row>
+						<row spans="1,3">
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>
+		
+</editwindow>

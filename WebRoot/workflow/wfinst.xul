@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="wfinst" title="流程监控" resize="true" use="combiz.ui.workflow.WfinstanceWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="流程实例" width="70px"/>
+			<tab id="wftranstab" label="审批历史" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+	<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";//"active='是'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("active desc,ownertable,wfrevision desc");
+			]]>
+			</zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					<!-- 从这里开始修改搜索字段 -->
+					流程：<stextbox data="wfname"/>
+					描述：<stextbox data="description" cols="40"/>
+					主表：<stextbox data="ownertable" cols="10"/>
+					启动者：<stextbox data="startor" cols="10"/>
+					
+					<!-- 修改搜索字段结束 -->
+				</groupbox>
+			</hbox>				
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="wfname" label="流程" sort="auto" width="15%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="20%"/>
+						<resultlistheader data="wfrevision" label="版本" sort="auto" width="5%"/>
+						<resultlistheader data="ownertable" label="主表" sort="auto" width="10%" applink="ibstables" linkstring="tablename=':{ownertable}'" linkreadonly="true"/>
+						<resultlistheader data="active" label="是否活动" sort="auto" width="5%"  preclass="combiz.ui.workflow.IsWFActive"/>
+						<resultlistheader data="startlabor.laborname" label="启动者" sort="auto" width="10%" applink="labor" linkstring="labornum=':{startor}'"/>
+						<resultlistheader data="starttime" label="启动时间" sort="auto" width="15%"/>
+						<resultlistheader data="wfnode.title" label="当前节点名称" sort="auto" width="20%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"wfinstance.wfname","wfinstance.description","wfinstance.wfrevision","wfinstance.ownertable","wfinstance.ownerid","wfinstance.active","wfinstance.startor","wfinstance.starttime","wfnode.title"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+						名称：<a:bind value="wfinstance.wfname"/><itextbox id="wfinstance.wfname"/>
+						版本:<a:bind value="wfinstance.wfrevision"/><itextbox id="wfinstance.wfrevision"/>
+						</row>
+						<row spans="1,3">
+						实例描述：<a:bind value="wfinstance.description"/><itextbox id="wfinstance.description" cols="90" rows="2"/>
+						</row>
+						<row>
+						主表：<a:bind value="wfinstance.ownertable"/><itextbox id="wfinstance.ownertable"/>
+						主表ID:<a:bind value="wfinstance.ownerid"/><itextbox id="wfinstance.ownerid"/>
+						</row>
+						<row>
+						是否活动流程：<a:bind value="wfinstance.active"/><itextbox id="wfinstance.active"/>
+						启动者：<a:bind value="startlabor.laborname"/><itextbox id="startlabor.laborname"/>
+						</row>
+						<row>
+						启动时间：<a:bind value="wfinstance.starttime"/><itextbox id="wfinstance.starttime"/>
+						当前节点名称：<a:bind value="wfnode.title"/><itextbox id="wfnode.title"/>
+						</row>
+					</rows>
+				</grid>
+				
+				<div align="left">
+				<button label="流程任务催办" onClick="mainWnd.wfpressto();"/>
+				</div>
+				
+				<listwindow id="wfassignment" title="当前任务分配" edittype="LISTONLY" searchable="true">
+					<tablelist band="wfassignment" pageSize="8">	
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="assigncode" label="分配代码" sort="auto" width="10%"/>
+							<tablelistheader data="assignlabor.laborname" label="分配人" sort="auto" width="10%"/>
+							<tablelistheader data="app.description" label="分配应用" sort="auto" width="20%"/>
+							<tablelistheader data="description" label="分配描述" sort="auto" width="30%"/>
+							<tablelistheader data="startdate" label="开始日期" sort="auto" width="10%"/>
+							<tablelistheader data="emailnotify" label="邮件通知" sort="auto" width="10%"/>
+							<tablelistheader data="assignstatus" label="分配状态" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+			<tabpanel>
+				<listwindow id="wftrans" title="流程审批历史" edittype="LISTONLY" searchable="true">
+					<tablelist band="wftrans" pageSize="8">	
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="transtype" label="事务类型" sort="auto" width="10%"/>
+							<tablelistheader data="transdate" label="事务日期" sort="auto" width="20%"/>
+							<tablelistheader data="memo" label="备忘录" sort="auto" width="35%"/>
+							<tablelistheader data="nodetype" label="节点类型" sort="auto" width="10%"/>
+							<tablelistheader data="assigncode" label="分配代码" sort="auto" width="10%"/>
+							<tablelistheader data="assignlabor.laborname" label="分配人" sort="auto" width="15%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

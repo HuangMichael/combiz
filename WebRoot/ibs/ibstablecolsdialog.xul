@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"ibstablecolscfg.title"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstablecolscfg.hbtype","ibstablecolscfg.changed"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+<groupbox><caption label="数据字典字段信息配置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						序号:<a:bind value="ibstablecolscfg.colno"/><ilongbox id="ibstablecolscfg.colno" cols="4"/>
+						字段名：<a:bind value="ibstablecolscfg.colname"/><itextbox id="ibstablecolscfg.colname"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						数据库层数据类型：<a:bind value="ibstablecolscfg.dbtype"/><icombobox id="ibstablecolscfg.dbtype"/>
+						标题:	<a:bind value="ibstablecolscfg.title"/><itextbox id="ibstablecolscfg.title" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						底层数据类型：<a:bind value="ibstablecolscfg.hbtype"/><itextbox id="ibstablecolscfg.hbtype"/>
+						表现层数据类型：<a:bind value="ibstablecolscfg.ibsdatatype"/><icombobox id="ibstablecolscfg.ibsdatatype"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						长度：<a:bind value="ibstablecolscfg.length"/><ilongbox id="ibstablecolscfg.length" cols="10"/>
+						小数位：<a:bind value="ibstablecolscfg.scale"/><ilongbox id="ibstablecolscfg.scale" cols="10"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						必需的：<a:bind value="ibstablecolscfg.notnull"/><icheckbox id="ibstablecolscfg.notnull"/>
+						正数：<a:bind value="ibstablecolscfg.ispositive"/><icheckbox id="ibstablecolscfg.ispositive"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						自动编号：<a:bind value="ibstablecolscfg.inskey"/><ibandbox id="ibstablecolscfg.inskey" lookup="ibsinskey" applink="ibsinskey"/>
+						母表：<a:bind value="ibstablecolscfg.sameastable"/><ibandbox id="ibstablecolscfg.sameastable" lookup="ibstables" applink="ibstables"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						值列表：<a:bind value="ibstablecolscfg.listname"/><ibandbox id="ibstablecolscfg.listname" lookup="ibslist" applink="ibslist"/>
+						母表字段：<a:bind value="ibstablecolscfg.sameascolumn"/><ibandbox id="ibstablecolscfg.sameascolumn" lookup="ibstablecols"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						主键序列：<a:bind value="ibstablecolscfg.primarykeyseq"/><ilongbox id="ibstablecolscfg.primarykeyseq"/>
+						修改：<a:bind value="ibstablecolscfg.changed"/><icombobox id="ibstablecolscfg.changed" cols="2"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						虚拟字段？：<a:bind value="ibstablecolscfg.isvirtual"/><icheckbox id="ibstablecolscfg.isvirtual"/>
+						可搜索？：<a:bind value="ibstablecolscfg.searchable"/><icheckbox id="ibstablecolscfg.searchable"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,5">
+						字段类：<a:bind value="ibstablecolscfg.classname"/><itextbox id="ibstablecolscfg.classname" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,5">
+						备注：<a:bind value="ibstablecolscfg.remarks"/><itextbox id="ibstablecolscfg.remarks" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+</groupbox>
+		
+</editwindow>

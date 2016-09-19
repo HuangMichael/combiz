@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"document.creator","document.createdate","document.ownertable",
+ "document.ownerid","document.author","document.changedate","document.changeby","document.libnum",
+ "document.status","document.urltype","document.urlpath","document.authordate","document.ownerdept"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="文档列表"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						图形编号:<a:bind value="document.docnum"/><itextbox id="document.docnum"/>		
+						图形描述:<a:bind value="document.description"/><itextbox id="document.description" cols="40"/>		
+						</row>
+						<row>
+						创建人:<a:bind value="document.creator"/><itextbox id="document.creator"/>		
+						创建时间:<a:bind value="document.createdate"/><idatebox id="document.createdate"/>		
+						</row>
+						<row>
+						存储路径类型:<a:bind value="document.urltype"/><icombobox id="document.urltype"/>		
+						存储路径:<a:bind value="document.urlpath"/><itextbox id="document.urlpath" cols="40"/>		
+						</row>
+						<row>
+						文档状态:<a:bind value="document.status"/><icombobox id="document.status"/>		
+						作者:<a:bind value="document.author"/><itextbox id="document.author"/>		
+						</row>
+						<row>
+						最近一次修改时间:<a:bind value="document.changedate"/><idatebox id="document.changedate"/>		
+						修改人:<a:bind value="document.changeby"/><itextbox id="document.changeby"/>		
+						</row>
+						<row>
+						画图时间:<a:bind value="document.authordate"/><idatebox id="document.authordate"/>		
+						所属部门:<a:bind value="document.ownerdept"/><itextbox id="document.ownerdept"/>		
+						</row>
+						<row>
+						所属目录:<a:bind value="document.libnum"/><itextbox id="document.libnum"/>
+						<!--		
+						所属地点:<a:bind value="document.sitenum"/><ibandbox id="document.sitenum" lookup="corpsite"/>
+						-->
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

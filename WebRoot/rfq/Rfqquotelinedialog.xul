@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"rfqquoteline.unitcost"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"rfqquoteline.rfqnum","rfqquoteline.rfqlinenum","rfqquoteline.itemnum","rfqquoteline.description","rfqquoteline.linecost",
+ "rfqquoteline.orderqty","rfqquoteline.orderunit","rfqquoteline.enterby","rfqquoteline.enterdate","rfqquoteline.isservice"}; 
+ 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="报价单行"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>		
+						询价单:<a:bind value="rfqquoteline.rfqnum"/><itextbox id="rfqquoteline.rfqnum"/>		
+						询价单行:<a:bind value="rfqquoteline.rfqlinenum"/><ilongbox id="rfqquoteline.rfqlinenum" cols="2"/>
+						</row>
+						<row>		
+						库存项目:<a:bind value="rfqquoteline.itemnum"/><itextbox id="rfqquoteline.itemnum"/>
+						描述:<a:bind value="rfqquoteline.description"/><itextbox id="rfqquoteline.description" cols="40"/>		
+						</row>
+						<row>
+						订购数量:<a:bind value="rfqquoteline.orderqty"/><idoublebox id="rfqquoteline.orderqty" format="0.00" cols="8"/>
+						订购单位:<a:bind value="rfqquoteline.orderunit"/><itextbox id="rfqquoteline.orderunit" cols="8"/>	
+						</row>
+						<row>
+						单价:<a:bind value="rfqquoteline.unitcost"/><idoublebox id="rfqquoteline.unitcost" format="0.00"/>
+						行总价:<a:bind value="rfqquoteline.linecost"/><idoublebox id="rfqquoteline.linecost" format="0.00"/>	
+						</row>
+						<row>
+						授予:<a:bind value="rfqquoteline.isawarded"/><icheckbox id="rfqquoteline.isawarded"/>
+						备忘:<a:bind value="rfqquoteline.remark"/><itextbox id="rfqquoteline.remark" cols="40"/>
+						</row>
+
+						<row>
+						制造商:<a:bind value="rfqquoteline.manufacturer"/><itextbox id="rfqquoteline.manufacturer"/>
+						供应商型号:<a:bind value="rfqquoteline.modelnum"/><itextbox id="rfqquoteline.modelnum"/>		
+						</row>
+						<row>
+						报价起始日:<a:bind value="rfqquoteline.quotestartdate"/><idatebox id="rfqquoteline.quotestartdate"/>		
+						报价终止日:<a:bind value="rfqquoteline.quoteenddate"/><idatebox id="rfqquoteline.quoteenddate"/>					
+						</row>
+						<row>
+						转换系数:<a:bind value="rfqquoteline.conversion"/><idoublebox id="rfqquoteline.conversion" format="0.00"/>
+						交货时间:<a:bind value="rfqquoteline.deliverydate"/><idatebox id="rfqquoteline.deliverydate"/>	
+						</row>
+						<row>
+						录入人:<a:bind value="rfqquoteline.enterby"/><itextbox id="rfqquoteline.enterby"/>
+						录入日期:<a:bind value="rfqquoteline.enterdate"/><idatebox id="rfqquoteline.enterdate"/>		
+						</row>
+
+						<row>
+						税代码:<a:bind value="rfqquoteline.taxcode"/><itextbox id="rfqquoteline.taxcode" cols="4"/>		
+						税额:<a:bind value="rfqquoteline.tax"/><idoublebox id="rfqquoteline.tax"/>		
+						</row>
+						<row>
+						服务:<a:bind value="rfqquoteline.isservice"/><icheckbox id="rfqquoteline.isservice" />	
+						</row>
+											
+						<!-- //////////////////////row//////////////// -->
+						<row spans="4" align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

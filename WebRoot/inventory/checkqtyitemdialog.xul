@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"checkqtyitem.itemnum","checkqtyitem.lotnum","checkqtyitem.itemdesc","checkqtyitem.warehouse","checkqtyitem.warehouse","checkqtyitem.binnum","checkqtyitem.accountqty"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="盘点明细表"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 盘点明细表 -->
+					<rows>
+					    <row>
+					        库存项目:<!--  库存项目 -->
+							<a:bind value="checkqtyitem.itemnum" />
+							<itextbox id="checkqtyitem.itemnum" />
+							描述:<!-- 描述 -->
+							<a:bind value="checkqtyitem.itemdesc" />
+							<itextbox id="checkqtyitem.itemdesc" />
+						</row>
+					    <row>
+							库房名称:<!-- 库房名称 -->
+							<a:bind value="checkqtyitem.warehouse" />
+							<itextbox id="checkqtyitem.warehouse" />
+							箱柜:<!-- 箱柜 -->
+							<a:bind value="checkqtyitem.binnum" />
+							<itextbox id="checkqtyitem.binnum" />
+						</row>
+						
+						
+						<row>
+							账上数量:<!-- 账上数量 -->
+							<a:bind value="checkqtyitem.accountqty" />
+							<idoublebox id="checkqtyitem.accountqty" />
+							盘点数量:<!-- 盘点数量 -->
+							<a:bind value="checkqtyitem.actualqty" />
+							<idoublebox id="checkqtyitem.actualqty" />
+						</row>
+						
+						
+						<row>
+							批次:<!-- 批次 -->
+							<a:bind value="checkqtyitem.lotnum" />
+							<itextbox id="checkqtyitem.lotnum" />
+						</row>
+						
+						<row spans="1,3">
+							备注:<!-- 备注 -->
+							<a:bind value="checkqtyitem.memo" />
+							<itextbox id="checkqtyitem.memo" width="90%"/>
+						</row>
+						
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"equipment.eqnum","location.description","equipment.changeby","equipment.changedate",
+ "equipment.ytdcost","equipment.budgetcost","equipment.totalcost"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<vbox width="100%">
+ 				<groupbox><caption label="设备位置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/><!--  --></caption>
+					<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备:<!--  --><a:bind value="equipment.eqnum"/><itextbox id="equipment.eqnum"/>
+						设备描述<!--  -->:<a:bind value="equipment.description"/><itextbox id="equipment.description" cols="40"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						位置<!--  -->:<a:bind value="equipment.location"/><ibandbox id="equipment.location" lookup="location"/>
+						位置描述<!--  -->:<a:bind value="location.description"/><itextbox id="location.description" cols="40"/>
+						</row>
+						
+						<!-- <row>
+						变电站：<a:bind value="equipment.transsubstation"/><itextbox id="equipment.transsubstation"/>
+						所属公司:<a:bind value="equipment.organise"/><itextbox id="equipment.organise" value="忠县供电公司" cols="40"/>
+						</row> -->
+				
+						
+						<!-- ******************************************************************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+					</grid>
+				</groupbox>
+				
+				<hbox  width="100%">
+				<groupbox><caption label="基本信息"></caption><!--  -->
+					<grid>
+						<rows>
+						<!-- //////////////////////row//////////////// -->
+						<!--<row>
+						电压等级：<a:bind value="equipment.pressure"/><icombobox id="equipment.pressure" cols="20"/>
+						</row>-->
+						<row>
+						出厂日期<!--  -->:<a:bind value="equipment.lfdate"/><idatebox id="equipment.lfdate" cols="20"/>
+						</row>
+						<row>
+						评价等级<!--  -->:<a:bind value="equipment.grade"/><icombobox id="equipment.grade" cols="20"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						安装时间<!--  -->:<a:bind value="equipment.installdate"/><idatebox id="equipment.installdate"/>
+						</row>
+						<row>
+						运行日期<!--  -->:<a:bind value="equipment.rundate"/><idatebox id="equipment.rundate" cols="20"/>
+						</row>
+						<row>
+						负责部门<!--  -->:<a:bind value="equipment.deptnum"/><ibandbox id="equipment.deptnum" lookup="department"/>
+						</row>
+						<row>
+						运行编号<!--  -->:<a:bind value="equipment.runnumber"/><itextbox id="equipment.runnumber" cols="20"/>
+						</row>
+						<row>
+						施工单位<!--  -->:<a:bind value="equipment.construct"/><itextbox id="equipment.construct" cols="20"/>
+						</row>
+						<row>
+						型号规格<!--  -->:<a:bind value="equipment.model"/><itextbox id="equipment.model" cols="20"/>
+						</row>
+						<row>
+						生产厂家<!--  -->:<a:bind value="equipment.manufacturer"/><ibandbox id="equipment.manufacturer" lookup="companies"/>
+						</row>
+						<row>
+						出厂编号<!--  -->:<a:bind value="equipment.lfnumber"/><itextbox id="equipment.lfnumber" cols="20"/>
+						</row>
+						<row>
+						设备分类<!--  -->:<a:bind value="equipment.classid"/><ibandbox id="equipment.classid" lookup="classificationeq"/>
+						</row>
+						<row>
+						序列号<!--  -->:<a:bind value="equipment.serialnum"/><itextbox id="equipment.serialnum" cols="20"/>
+						</row>
+						<row>
+						父级设备<!--  -->:<a:bind value="equipment.parent"/><ibandbox id="equipment.parent" lookup="equipment"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						固定资产编号:<!--  --><a:bind value="equipment.assetnum"/><itextbox id="equipment.assetnum" cols="20"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+					</rows>
+					</grid>
+				</groupbox>
+				
+				<groupbox><caption label="其他信息"></caption><!--  -->
+				<grid>
+					<rows>
+						<row>
+						采购价格:<!-- --><a:bind value="equipment.purprice"/><idoublebox id="equipment.purprice"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						保修日期至:<!-- --><a:bind value="equipment.warrantyexpdate"/><idatebox id="equipment.warrantyexpdate"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备是否运行:<!-- --><a:bind value="equipment.isrunning"/><icheckbox id="equipment.isrunning"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						总成本:<!-- --><a:bind value="equipment.totalcost"/><ilongbox id="equipment.totalcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预算成本:<!-- --><a:bind value="equipment.budgetcost"/><ilongbox id="equipment.budgetcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<row>
+						库存成本:<!-- --><a:bind value="equipment.stockcost"/><ilongbox id="equipment.stockcost"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						修改人:<!-- --><a:bind value="equipment.changeby"/><itextbox id="equipment.changeby"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						修改时间:<!-- --><a:bind value="equipment.changedate"/><idatebox id="equipment.changedate"/>
+						</row>
+
+					</rows>
+				</grid>
+				</groupbox>
+				</hbox>
+				</vbox>
+		
+</editwindow>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog title="添加位置" use="combiz.ui.location.AddLocationDialog" border="normal" closable="true" width="700"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	<groupbox>
+		<caption label="基本信息" />
+		<grid>
+			<rows>
+					<row spans="1,3">
+						位置:
+						<groupbox>
+						<a:bind value="locstruct.location"/><itextbox id="locstruct.location"/>
+						<a:bind value="locstruct.description"/><itextbox id="locstruct.description" cols="40"/>
+						</groupbox>
+					</row>
+					<row spans="1,3">
+						父级:
+						<groupbox>
+						<a:bind value="locstruct.parent"/><ibandbox id="locstruct.parent" lookup="location"/>
+						<a:bind value="parent.description"/><itextbox id="parent.description" cols="40"/>
+						</groupbox>
+					</row>
+					<row>
+						分类:<a:bind value="locstruct.classid"/><ibandbox id="locstruct.classid" lookup="classificationeq"/>
+						类型:<a:bind value="locstruct.type"/><icombobox id="locstruct.type"/>
+					</row>
+					<row>
+						所属部门:<a:bind value="locstruct.deptnum"/><ibandbox id="locstruct.deptnum" lookup="department"/>
+						所属专业:<a:bind value="locstruct.craft"/><icombobox id="locstruct.craft"/>
+					</row>
+					<row spans="1,3">
+						排序号:<a:bind value="locstruct.orderby"/><itextbox id="locstruct.orderby" cols="4"/>
+					</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<div align="center">
+		<button label="确 定" onClick="mainWnd.addLoc()" />
+		<button label="取 消" onClick="mainWnd.cancel()" />
+	</div>
+
+</commondialog>

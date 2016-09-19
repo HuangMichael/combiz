@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="报表" app="invreport" closable="true" use="combiz.ui.inventory.InvtransprotSearch" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<hbox width="100%">
+		<groupbox width="170">
+		<grid>
+		<rows>
+		<row>
+		输入报表条件,点击"统计报表<!-- 输入报表条件,点击"统计报表" -->
+		</row>
+		</rows>
+		</grid>
+			<button label="$统 计 报 表" onClick="mainWnd.search()" width="170"/><!-- 统 计 报 表 -->
+		</groupbox>
+		<groupbox id="searchBox"><caption label="查询条件" /><!-- 查询条件 -->
+			<grid>
+				<rows>
+					<row>
+						查询年度:<!-- 查询年度 -->
+						<scombobox data="invtrans.transdate" />
+						查询月份:<!-- 查询月份 -->
+						<scombobox data="invtrans.quantity" />
+						仓  库:<!-- 仓  库 -->
+						<sbandbox data="invtrans.warehouse" lookup="warehouse"/>
+						
+						查询月份：
+						<sedatebox data="invreport.thisdate" /> -->
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</hbox>
+	<groupbox><caption label="统计报表预览窗口" /><!-- 统计报表预览窗口 -->
+	<iframe use="combiz.system.rpt.QueryView"  height="500" report="/inventory/newfinereport/itemtointrans.cpt"/>
+	</groupbox>
+</window>
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly =
+		{"assetscardline.networth","assetscardline.residual","assetscardline.mthval","assetscardline.mthamount"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="设备折旧明细">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<row>
+					设备编号:
+					<a:bind value="assetscardline.assetcode" />
+					<itextbox id="assetscardline.assetcode" cols="20" />
+
+					数量:
+					<a:bind value="assetscardline.quantity" />
+					<idoublebox id="assetscardline.quantity" cols="20" />
+					型号:
+					<a:bind value="assetscardline.model" />
+					<itextbox id="assetscardline.model" cols="20" />
+				</row>
+				<row>
+					供应商:
+					<a:bind value="assetscardline.suppliers" />
+					<itextbox id="assetscardline.suppliers" cols="20" />
+					制造商:
+					<a:bind value="assetscardline.manufacturers" />
+					<itextbox id="assetscardline.manufacturers"
+						cols="20" />
+					原值:
+					<a:bind value="assetscardline.cost" />
+					<idoublebox id="assetscardline.cost" cols="20" />
+
+				</row>
+				<row>
+					预计使用月数:
+					<a:bind value="assetscardline.expectedmonth" />
+					<ilongbox id="assetscardline.expectedmonth"
+						cols="20" />
+					已计提折旧月数:
+					<a:bind value="assetscardline.depreciationmonth" />
+					<ilongbox id="assetscardline.depreciationmonth"
+						cols="20" />
+
+					累计折旧:
+					<a:bind value="assetscardline.accdepreciation" />
+					<idoublebox id="assetscardline.accdepreciation"
+						cols="20" />
+
+
+
+				</row>
+				<row>
+
+					净值:
+					<a:bind value="assetscardline.networth" />
+					<idoublebox id="assetscardline.networth" cols="20" />
+					减值准备:
+					<a:bind value="assetscardline.impairment" />
+					<idoublebox id="assetscardline.impairment"
+						cols="20" />
+
+					净额:
+					<a:bind value="assetscardline.net" />
+					<idoublebox id="assetscardline.net" cols="20" />
+
+
+				</row>
+				<row>
+					残值率:
+					<a:bind value="assetscardline.residualvalues" />
+					<idoublebox id="assetscardline.residualvalues"
+						cols="20" />
+
+					残值:
+					<a:bind value="assetscardline.residual" />
+					<idoublebox id="assetscardline.residual" cols="20" />
+					月折旧率:
+					<a:bind value="assetscardline.mthval" />
+					<idoublebox id="assetscardline.mthval" cols="20" />
+				</row>
+				<row>
+
+					月折旧额:
+					<a:bind value="assetscardline.mthamount" />
+					<idoublebox id="assetscardline.mthamount" cols="20"
+						format="###,###.00" />
+
+
+
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+</editwindow>

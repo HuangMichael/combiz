@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibsusers" title="用户" resize="true" use="combiz.ui.user.IbsusersWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="用户" width="70px"/>
+			<tab id="appauthtab" label="权限" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+<zscript><![CDATA[
+//在此处加入应用程序默认过滤条件
+String queryString="";
+mainWnd.setQueryString(queryString);
+mainWnd.setOrderby("");
+]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					用户ID：<stextbox data="userid"/>
+					工号：<stextbox data="labornum"/>
+					<button label="搜索" style="cursor:hand" onClick="mainWnd.search()"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="userid" label="用户" sort="auto" width="20%"/>
+						<resultlistheader data="labornum" label="工号" sort="auto" width="25%"/>
+						<resultlistheader data="labor.laborname" label="姓名" sort="auto" width="25%"/>
+						<resultlistheader data="loginid" label="登录用户名" sort="auto" width="15%"/>
+						<resultlistheader data="status" label="状态" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibsusers.failedlogins"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						用户:<a:bind value="ibsusers.userid"/><itextbox id="ibsusers.userid"/>
+						<label style="color:red" value="人员(如果不存在请手工输入)："/><a:bind value="ibsusers.labornum"/><ibandbox id="ibsusers.labornum" lookup="labor" checkdata="false" applink="labor"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						登录名：<a:bind value="ibsusers.loginid"/><itextbox id="ibsusers.loginid"/>
+						姓名：<a:bind value="labor.laborname"/><itextbox id="labor.laborname"/>
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						失败的登录次数：<a:bind value="ibsusers.failedlogins"/><ilongbox id="ibsusers.failedlogins"/>
+						密码:<a:bind value="ibsusers.password"/><itextbox id="ibsusers.password" cols="40" type="password"/> <!-- type="password"  -->
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						密码过期时间：<a:bind value="ibsusers.pwexpiration"/><idatebox id="ibsusers.pwexpiration"/>
+						密码是否过期：<a:bind value="ibsusers.paswdexpiration"/><icheckbox id="ibsusers.paswdexpiration" />
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						是系统用户：<a:bind value="ibsusers.issysuser"/><icheckbox id="ibsusers.issysuser" />
+						状态：<a:bind value="ibsusers.status"/><icheckbox id="ibsusers.status"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						备注：<a:bind value="ibsusers.remark"/><itextbox id="ibsusers.remark" cols="60"/>
+						<!--
+						默认仓库：<a:bind value="ibsusers.defstoreroom"/><ibandbox id="ibsusers.defstoreroom"/>
+						-->
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				
+			    <window id="usergroupTable" title="权限组" use="combiz.ui.user.UsergroupList" dialog="/user/usergroupdialog.xul">
+				<tablelist band="usergroupTable" pageSize="8">	
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="grpname" label="权限组" sort="auto" width="30%"/>
+						<tablelistheader data="group.description" label="组描述" sort="auto" width="70%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</window>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+<!-- ********************************** 用户组数据窗口 ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+						用户:<a:bind value="ibsusers.userid"/><textbox/>
+						姓名：<a:bind value="labor.laborname"/><textbox/>
+						<!--
+						人员：<a:bind value="ibsusers.labornum"/><textbox/>
+						登录名：<a:bind value="ibsusers.loginid"/><textbox/>
+						--></row>
+					</rows>
+				</grid>
+				用户授权信息：
+				<tree use="combiz.system.common.IbsusersAppauthList"/>
+			</tabpanel>
+<!-- ********************************** 用户组数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

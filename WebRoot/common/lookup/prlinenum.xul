@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="采购申请行" width="600">
+	<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+	<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器" />
+		采购申请行编号：
+		<stextbox data="prlinenum" cols="10" />
+		库存项目编号:
+		<stextbox data="itemnum" cols="10" />
+		<image src="/images/button/search.gif" style="cursor:hand" onClick="lookupWnd.search()" />
+	</groupbox>
+	<!-- //////////////////查询过滤条件///////////////////////// -->
+
+	<!-- //////////////////数据列表区///////////////////////// -->
+	<pagenavigator />
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="prlinenum" label="采购申请行" sort="auto" width="10%"/>
+			<lookuplistheader data="itemnum" label="库存项目编号" sort="auto" width="13%"/>
+			<lookuplistheader data="orderqty" label="订购数量" sort="auto" width="10%"/>
+			<lookuplistheader data="orderunit" label="订购单位" sort="auto" width="20%"/>
+			<lookuplistheader data="unitcost" label="单价" sort="auto" width="10%"/>
+			<lookuplistheader data="linecost" label="行总价" sort="auto" width="10%"/>
+			<lookuplistheader data="enterby" label="录入人" sort="auto" width="10%"/>
+			<lookuplistheader data="loadedcost" label="载入的成本" sort="auto" width="10%"/>
+			<lookuplistheader data="inspection" label="需要检查" sort="auto" width="10%"/>
+		</listhead>
+	</lookuplist>
+	<!-- //////////////////数据列表区///////////////////////// -->
+
+	<div align="center">
+		<button label=" 确 定 " onClick="lookupWnd.ok(event)" />
+		<button label=" 取 消 " onClick="lookupWnd.cancel(event)" />
+	</div>
+
+</lookupwindow>

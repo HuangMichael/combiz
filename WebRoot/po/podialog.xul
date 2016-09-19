@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {"poline.unitcost"}; 
+		mainWnd.setRequired(required); 
+		
+		String[] readonly = {"poline.receivedtotalcost","poline.rejectedqty","poline.linecost","poline.loadedcost","poline.taxlinecost","poline.tasknum","poline.service","poline.stocktype","poline.polinenum","poline.modelnum","poline.description","poline.receivedqty","poline.inspection","poline.receiptscomplete","poline.enterby","poline.enterdate","poline.receivedunitcost","pr.budnum","pr.buditem"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+
+
+	<groupbox>
+		<caption label="采购行明细">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<groupbox>
+			<caption label="行项目"></caption>
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+
+						行:
+						<a:bind value="poline.polinenum" />
+						<ilongbox id="poline.polinenum" />
+						采购编号:
+						<a:bind value="poline.itemnum" />
+						<ibandbox id="poline.itemnum" lookup="item" applink="item" />
+						
+
+					</row>
+					<row>
+									预算号:
+									<a:bind value="poline.budnum" />
+									<ibandbox id="poline.budnum" lookup= 'budnum'/>
+								
+									预算项目:
+									<a:bind value="poline.buditem" />
+									<ibandbox id="poline.buditem" lookup='budgetitem'/>
+					</row>
+					<row>
+						仓库:
+						<a:bind value="poline.warehouse" />
+						<ibandbox id="poline.warehouse"
+							lookup="warehouse"  />
+						描述:
+						<a:bind value="poline.description" />
+						<itextbox id="poline.description" />
+					</row>
+					
+					<row>
+						规格型号:
+						<a:bind value="poline.modelnum" />
+						<itextbox id="poline.modelnum" cols="35"/>
+						录入人:
+						<a:bind value="poline.enterby" />
+						<itextbox id="poline.enterby" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="数量和成本"></caption>
+			<grid>
+				<rows>
+					<row>
+						数量:
+						<a:bind value="poline.orderqty" />
+						<idoublebox id="poline.orderqty" format="0.00" />
+						订购单位:
+						<a:bind value="poline.orderunit" />
+						<ibandbox id="poline.orderunit"
+							lookup="measurement" />
+						<!--
+						税代码:
+						<a:bind value="poline.taxcode" />
+						<itextbox id="poline.taxcode" />
+						
+						 不含税总价:
+						<a:bind value="poline.linecost" />
+						<idoublebox id="poline.linecost" format="0.00" /> -->
+
+					</row>
+					<row>
+					    含税单价:
+						<a:bind value="poline.unitcost" />
+						<idoublebox id="poline.unitcost" format="0.00" />
+						含税总价:
+						<a:bind value="poline.linecost" />
+						<idoublebox id="poline.linecost" format="0.00" />
+						
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="其他相关信息"></caption>
+			<grid>
+				<rows>
+					<row>
+						接收数量:
+						<a:bind value="poline.receivedqty" />
+						<idoublebox id="poline.receivedqty" format="0.00" />
+						拒收数量:
+						<a:bind value="poline.rejectedqty" />
+						<idoublebox id="poline.rejectedqty" format="0.00" />
+					</row>
+					<row>
+						接收到的总价:
+						<a:bind value="poline.receivedtotalcost" />
+						<idoublebox id="poline.receivedtotalcost"
+							format="0.00" />
+						完成接收:
+						<a:bind value="poline.receiptscomplete" />
+						<icombobox id="poline.receiptscomplete" />
+					</row>
+					<row>
+					   申请人:
+						<a:bind value="poline.requestedby" />
+						<ibandbox id="poline.requestedby"
+							lookup="labor" />
+						录入日期:
+						<a:bind value="poline.enterdate" />
+						<idatebox id="poline.enterdate" />
+					</row>
+					<!-- 
+					申请人:
+						<a:bind value="poline.requestedby" />
+						<ibandbox id="poline.requestedby"
+							lookup="labor" />
+					 -->
+					
+				</rows>
+			</grid>
+		</groupbox>
+	</groupbox>
+</editwindow>

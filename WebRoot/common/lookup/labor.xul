@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="人员" width="600" use="combiz.ui.common.lookup.LookupLaborWindow"><!-- 人员 -->
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			<tab label="列表" width="70px"/><!-- 列表 -->
+			<tab label="按部门" width="70px"/><!-- 按部门 -->
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+					<groupbox id="searchBox">
+						<caption label="过滤器"/><!-- 过滤器 -->
+						人员:<!-- 人员 --><stextbox data="labornum" cols="15"/>
+						姓名:<!-- 姓名 --><stextbox data="laborname" cols="15"/>
+						部门:<!-- 部门 --><stextbox data="deptnum" cols="15"/>
+						<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+					</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				
+				<!-- //////////////////数据列表区///////////////////////// -->		
+					<pagenavigator/>
+					<lookuplist pageSize="20">
+						<listhead>
+							<lookuplistheader data="labornum" label="人员" sort="auto" width="40%"/><!--人员  -->
+							<lookuplistheader data="laborname" label="姓名" sort="auto" width="30%"/><!--姓名  -->
+							<lookuplistheader data="deptnum" label="部门" sort="auto" width="30%"/><!--部门 -->
+						</listhead>
+					</lookuplist>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+
+					<div align="center">
+					<button label="确 定" onClick="lookupWnd.ok(event)"/><!--  确 定  -->
+					<button label="取 消" onClick="lookupWnd.cancel(event)"/><!--  取 消  -->
+					</div>
+			</tabpanel>
+			
+			<tabpanel>
+				<hbox spacing="0">
+					<groupbox><caption label="部门树"/><!-- 部门树 -->
+						<tree use="combiz.ui.common.lookup.FindLaborOfDepartmentTree" width="180"/>
+					</groupbox>
+					
+						<listwindow id="laborOfDepartment" title="人员列表" searchable="false" autodata="false" tablename="labor" 
+						use="combiz.system.ui.CommonListWindow" edittype="LISTONLY" width="100%"><!-- 人员列表 -->
+						<tablelist band="laborOfDepartment" pageSize="8">
+							<listhead>
+									<tablelistheader src="/images/img_listitem.gif" width="10%"/>
+									<tablelistheader data="LABORNUM" label="员工代码" sort="auto" width="20%"/><!--员工代码  -->
+									<tablelistheader data="LABORNAME" label="姓名" sort="auto" width="20%"/><!--姓名 -->
+									<tablelistheader data="CRAFT" label="工种" sort="auto" width="50%"/><!-- 工种 -->
+							</listhead>
+						</tablelist>
+						</listwindow>
+				</hbox>
+						<div align="center">
+						<button label="确 定" onClick="lookupWnd.departOfok(event)"/><!--   确 定 -->
+						<button label="取 消" onClick="lookupWnd.cancel(event)"/><!--  取 消 -->
+						</div>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</lookupwindow>

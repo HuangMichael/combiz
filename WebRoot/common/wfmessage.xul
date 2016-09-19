@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="工作流催办" use="combiz.system.common.MessageSenderWindow" width="700" closable="true"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox>
+ 
+				<grid>
+					<rows>
+						<row>
+						标题：<a:bind value="msgsender.title"/><itextbox id="msgsender.title" cols="80"/>
+						</row>
+
+						<row>
+						内容：<a:bind value="msgsender.body"/><itextbox id="msgsender.body" cols="80" rows="10"/>
+						</row>
+
+						<row>
+						接收人：<a:bind value="msgsender.reclist"/><ibandbox id="msgsender.reclist" lookup="labor" multiple="true" cols="80" checkdata="false"/>
+						</row>
+						
+						<row>
+						发送邮件？<a:bind value="msgsender.sendmail"/><icheckbox id="msgsender.sendmail"/>
+						</row>
+						
+					</rows>
+				</grid>
+				
+				<div align="center">
+				<button label=" 发送催办消息 " onClick="mainWnd.send();"/>
+				<button label="关    闭" onClick="mainWnd.cancel()"/>
+				</div>
+ </groupbox>				
+</window>

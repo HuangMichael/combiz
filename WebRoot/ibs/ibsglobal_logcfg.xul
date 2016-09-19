@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="系统运行日志配置" use="combiz.ui.ibs.IbsglobalLogcfgDialog" 
+width="600" closable="true">
+	<groupbox><caption label="启用系统运行日志"/>
+	<checkbox id="log_console" label="输出到控制台"/> <checkbox id="log_file" label="输出到日志文件"/>
+	</groupbox>
+	<groupbox><caption label="日志信息内容"/>
+	<radiogroup id="loginfo" orient="vertical">
+	<radio id="loginfo_info" value="info" label="运行信息 *包括了错误信息，日志量会比较大，适合调试环境"/>
+	<radio id="loginfo_error" value="error" label="仅错误信息 *适合于产品正式运行环境"/>
+	</radiogroup>
+
+	</groupbox>
+	<groupbox><caption label="日志文件配置"/>
+	<vbox>
+	文件位置：
+	<textbox id="logfile_location" cols="40" value="默认位置"/>
+	一般不需要修改，如果需要指定日志保存位置，请输入完整的路径名，如：c:\logs\inbasis.log
+	<label value="单个文件大小："/><hbox><longbox id="logfile_size" value="500"/>KB</hbox>
+	<label value="日志文件存储数量："/><longbox id="logfile_count"  value="10"/>
+	</vbox>
+	</groupbox>
+	*需要重启系统使其生效！
+		<div align="center">
+			<button label="保    存" onClick="IbsglobalLogcfgDialog.confirm();" />
+			<button label="取    消" onClick="IbsglobalLogcfgDialog.onClose();" />
+		</div>
+	
+</window>

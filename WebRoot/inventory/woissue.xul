@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="工单发放" app="woissue" resize="true" use="combiz.ui.inventory.WomaterissueWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="工单" width="70px" /><!-- 工单 -->
+			<tab id="securitytab" label="发放" width="70px" /><!-- 发放 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("statusdate desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器:字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						<label value="工单编号" /><!-- 工单编号 -->
+						<stextbox data="wonum" />
+						<label value="工单描述" /><!-- 工单描述 -->
+						<stextbox data="description" />
+						<label value="工单状态" /><!-- 工单状态 -->
+						<slistbox data="status" mold="select">
+							<listitem label="" />
+							<listitem label="等待批准" /><!-- 等待批准 -->
+							<listitem label="CLOSE" />
+							<listitem label="已批准" /><!-- 已批准 -->
+						</slistbox>
+						<label value="状态时间" /><!-- 状态时间 -->
+						<ssdatebox data="statusdate" />
+						至<!-- 至 -->
+						<sedatebox data="statusdate" />
+
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="wonum" label="工单编号"
+							sort="auto" width="20%" /><!-- 工单编号 -->
+							<resultlistheader data="description" label="描述"
+							sort="auto" width="45%" /><!-- 描述 -->
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="15%" /><!-- 状态 -->
+						<resultlistheader data="statusdate" label="状态日期"
+							sort="auto" width="20%" /><!--状态日期  -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"workorder.wonum","workorder.description","workorder.crewid"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"workorder.status","location.description","equipment.description","jobplan.description"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="基本信息" /><!-- 基本信息 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- *************************在下面修改主界面字段**************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									工单:<!-- 工单 -->
+									<a:bind value="workorder.wonum" />
+									<itextbox id="workorder.wonum" />
+									描述:<!-- 描述 -->
+									<a:bind
+										value="workorder.description" />
+									<itextbox id="workorder.description"
+										cols="40" />
+								</row>
+								<row>
+									项目编号:<!-- 项目编号 -->
+									<a:bind value="workorder.prjnum" />
+									<ibandbox id="workorder.prjnum"
+										lookup="prjparent" />
+									任务编号:<!-- 任务编号 -->
+									<a:bind value="workorder.tasknum" />
+									<ibandbox id="workorder.tasknum"
+										lookup="prjtask" />
+								</row>
+								<row>
+									位置:<!-- 位置 -->
+									<a:bind value="workorder.location" />
+									<ibandbox id="workorder.location"
+										lookup="location" />
+									位置描述:<!-- 位置描述 -->
+									<a:bind
+										value="location.description" />
+									<itextbox id="location.description"
+										cols="40" />
+								</row>
+								<row spans="1,1,1,3">
+									设备:<!-- 设备 -->
+									<a:bind value="workorder.eqnum" />
+									<ibandbox id="workorder.eqnum"
+										lookup="equipment" />
+									设备描述:<!--  设备描述-->
+									<a:bind
+										value="equipment.description" />
+									<itextbox id="equipment.description"
+										cols="40" />
+									<!--<ibandbox id="workorder.eqnum" onOpen="mainWnd.lookup(&quot;workorderlookup&quot;,self.id)"/> -->
+								</row>
+								<row>
+									状态:<!-- 状态 -->
+									<a:bind value="workorder.status" />
+									<itextbox id="workorder.status" />
+									状态日期:<!-- 状态日期 -->
+									<a:bind
+										value="workorder.statusdate" />
+									<idatebox id="workorder.statusdate" />
+								</row>
+
+								<row>
+									工作类型:<!-- 工作类型-->
+									<a:bind value="workorder.worktype" />
+									<icombobox id="workorder.worktype" />
+									需要设备停机<!--  需要设备停机-->
+									<a:bind value="workorder.eqdown" />
+									<icheckbox id="workorder.eqdown"
+										/>
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="相关人员" /><!-- 相关人员 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									报告人<!-- 报告人 -->
+									<a:bind
+										value="workorder.reportedby" />
+									<ibandbox id="workorder.reportedby"
+										lookup="labor" />
+									报告日期<!-- 报告日期 -->
+									<a:bind
+										value="workorder.reportdate" />
+									<idatebox id="workorder.reportdate" />
+									电话<!-- 电话 -->
+									<a:bind value="workorder.phone" />
+									<itextbox id="workorder.phone" />
+								</row>
+
+								<row spans="1,1,1,5">
+									发现人<!-- 发现人 -->
+									<a:bind value="workorder.digoutby" />
+									<ibandbox id="workorder.digoutby"
+										lookup="labor" />
+									发现时间:<!-- 发现时间 -->
+									<a:bind
+										value="workorder.didoutdate" />
+									<idatebox id="workorder.didoutdate" />
+								</row>
+
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+
+				<listwindow id="wpmaterialTable" title="备件"
+					use="combiz.ui.workorder.WpmaterialList"
+					dialog="/workorder/wpmaterialdialog.xul" edittype="readonly">
+					<tablelist band="wpmaterialTable" pageSize="8"><!-- 备件 -->
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="物料"
+								sort="auto" width="10%" /><!-- 物料 -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							<tablelistheader data="warehouse" label="仓库"
+								sort="auto" width="10%" /><!-- 仓库 -->
+							<tablelistheader data="itemqty" label="数量"
+								sort="auto" width="10%" /><!-- 数量 -->
+							<tablelistheader data="unitcost" label="单价"
+								sort="auto" width="10%" /><!--  单价-->
+							<tablelistheader data="linecost" label="行总价"
+								sort="auto" width="10%" /><!-- 行总价 -->
+							
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+
+			
+
+
+			<!-- **********************************  实  际  ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<row spans="1,1,1,3">
+							工单:<!-- 工单 -->
+							<a:bind value="workorder.wonum" />
+							<textbox id="wonum_actual" disabled="true" />
+							描述:<!-- 描述 -->
+							<a:bind value="workorder.description" />
+							<textbox id="description_actual" cols="50"
+								disabled="true" />
+							状态:<!-- 状态 -->
+							<a:bind value="workorder.status" />
+							<textbox id="status_actual" cols="20"
+								disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<separator spacing="2px" />
+				<!-- //////////////////////标准维修操作步骤//////////////// -->
+
+				<!-- separator spacing="2px"/>   -->
+				<!-- //////////////////////计划子TAB页面//////////////// -->
+						<!-- //////////////////////备件//////////////// -->
+							<listwindow id="invusertrans" title="备件"
+								use="combiz.ui.inventory.WoIssuematerialline"
+								dialog="/inventory/woissuematerialdialog.xul">
+								<tablelist band="invusertrans"
+									pageSize="8"><!-- 备件 -->
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+									<tablelistheader data="state" label="状态"
+								sort="auto" width="5%" /><!-- 状态 -->
+								    <tablelistheader data="issuetype" label="类型"
+								sort="auto" width="5%" /><!-- 类型 -->
+										<tablelistheader data="itemnum"
+											label="物料" sort="auto" width="10%" /><!-- 物料 -->
+										<tablelistheader
+											data="description" label="描述" sort="auto" width="20%" /><!-- 描述 -->
+										<tablelistheader
+											data="warehouse" label="仓库" sort="auto" width="10%" /><!-- 仓库 -->
+										<tablelistheader data="quantity"
+											label="数量" sort="auto" width="5%" /><!-- 数量 -->
+										<tablelistheader data="unitcost"
+											label="单价" sort="auto" width="10%" /><!-- 单价 -->
+										<tablelistheader data="linecost"
+											label="行总价" sort="auto" width="10%" /><!-- 行总价 -->
+											<tablelistheader data="eqnum"
+											label="资产编号" sort="auto" width="15%" /><!-- 箱柜 -->
+										<tablelistheader data="lotnum" label="批次号"
+								             sort="auto" width="15%" /><!-- 批次号 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+
+			</tabpanel>
+			<!-- **********************************  //实 际 ********************************** -->
+
+
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

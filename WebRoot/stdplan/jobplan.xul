@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="GBK"?><!-- title="标准作业计划" -->
+<mainwindow title="标准作业计划" app="jobplan" resize="true" use="combiz.ui.stdplan.JobplanWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="标准作业计划" width="110px"/><!-- 标准作业计划 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+						<label value="作业计划"/><stextbox data="jpnum"/><!-- 作业计划 -->
+						<label value="描述"/><stextbox data="description"/><!-- 描述 -->
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="jpnum" label="作业计划编号" sort="auto" width="10%"/><!--作业计划编号  -->
+						<resultlistheader data="description" label="描述" sort="auto" width="60%"/><!-- 描述 -->
+						<resultlistheader data="status" label="状态" sort="auto" width="10%"/><!-- 状态 -->
+						<resultlistheader data="statusdate" label="状态日期" sort="auto" width="20%"/><!-- 状态日期 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"jobplan.statusdate","jobplan.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+					<!-- ******************************************************************** -->
+					<!-- *************************在下面修改主界面字段**************************** -->
+					<!-- ********************************************************************-->					
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						作业计划编号<!-- 作业计划编号 -->:<a:bind value="jobplan.jpnum"/><itextbox id="jobplan.jpnum"/>
+						描述<!-- 描述 -->：<a:bind value="jobplan.description"/><itextbox id="jobplan.description" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						状态<!-- 状态 -->:<a:bind value="jobplan.status"/><itextbox id="jobplan.status"/>
+						状态日期<!-- 状态日期 -->：<a:bind value="jobplan.statusdate"/><idatebox id="jobplan.statusdate"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						持续时间小时数<!-- 持续时间小时数 -->:<a:bind value="jobplan.jpduration"/><idoublebox id="jobplan.jpduration"/>
+						修改人<!-- 修改人 -->：<a:bind value="jobplan.changby"/><itextbox id="jobplan.changby"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				
+				<!-- //////////////////////标准维修操作步骤//////////////// -->
+				<listwindow id="jobtaskTable" title="操作步骤" use="combiz.ui.stdplan.JobtaskList" dialog="/stdplan/jobtaskdialog.xul"><!-- 操作步骤 -->
+					<tablelist band="jobtaskTable" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="TASKNUM" label="任务编号" sort="auto" width="10%"/><!-- 任务编号 -->
+							<tablelistheader data="DESCRIPTION" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+							<tablelistheader data="TASKDURATION" label="任务持续时间（小时）" sort="auto" width="10%"/><!-- 任务持续时间（小时） -->
+							<tablelistheader data="LOCATION" label="位置" sort="auto" width="20%"/><!-- 位置 -->
+							<tablelistheader data="EQNUM" label="设备" sort="auto" width="20%"/><!-- 设备 -->
+					<!-- 		<tablelistheader data="POINTNUM" label="测点" sort="auto" width="10%"/>   -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				<tabbox width="99%">
+					<tabs>
+						<tab label="物料" width="70px"/><!-- 物料 -->
+						<tab label="工具" width="70px"/><!-- 工具 -->
+						<tab label="人工" width="70px"/><!-- 人工 -->
+						<tab label="承包单位" width="70px"/><!-- 承包单位 -->
+					</tabs>
+					<tabpanels>
+						<!-- //////////////////////物料领用////////////////-->
+						<tabpanel>
+						<listwindow id="jobmaterialTable" title="物料" use="combiz.ui.stdplan.JobmaterialList" dialog="/stdplan/jobmaterialdialog.xul"><!-- 物料 -->
+							<tablelist band="jobmaterialTable" pageSize="8">
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="itemnum" label="物料" sort="auto" width="25%"/><!-- 物料 -->
+									<tablelistheader data="itemdesp.description" label="描述" sort="auto" width="30%"/><!-- 描述 -->
+									<tablelistheader data="warehouse" label="仓库" sort="auto" width="25%"/><!-- 仓库 -->
+									<tablelistheader data="qty" label="数量" sort="auto" width="20%"/><!-- 数量 -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel>
+						
+						<!-- //////////////////////工具领用//////////////// -->
+						<tabpanel>
+						<listwindow id="jobtoolTable" title="工具" use="combiz.ui.stdplan.JobtoolList" dialog="/stdplan/jobtooldialog.xul">
+							<tablelist band="jobtoolTable" pageSize="8"><!-- 工具 -->
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="tasknum" label="任务编号" sort="auto" width="10%"/><!-- 任务编号 -->
+									<tablelistheader data="toolnum" label="工具编号" sort="auto" width="20%"/><!-- 工具编号 -->
+									<tablelistheader data="tooldesp.description" label="描述" sort="auto" width="40%"/><!-- 描述 -->
+									<tablelistheader data="qty" label="工具数量" sort="auto" width="10%"/><!-- 工具数量 -->
+									<tablelistheader data="toolhrs" label="工具工时" sort="auto" width="20%"/><!-- 工具工时 -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel> 
+						
+						<!-- //////////////////////人工/////////////////// -->
+						<tabpanel>
+						<listwindow id="joblaborTable" title="人工" use="combiz.ui.stdplan.JoblaborList" dialog="/stdplan/joblabordialog.xul">
+							<tablelist band="joblaborTable" pageSize="8"><!-- 人工 -->
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="tasknum" label="任务编号" sort="auto" width="10%"/><!-- 任务编号 -->
+									<tablelistheader data="labornum" label="人员编号" sort="auto" width="20%"/><!-- 人员编号 -->
+									<tablelistheader data="qty" label="人工数量" sort="auto" width="10%"/><!-- 人工数量 -->
+									<tablelistheader data="laborhrs" label="人工小时" sort="auto" width="20%"/><!-- 人工小时 -->
+									<tablelistheader data="rate" label="人工费率" sort="auto" width="10%"/><!-- 人工费率 -->
+									<tablelistheader data="vendor" label="承包商" sort="auto" width="30%"/><!-- 承包商 -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel> 						
+						<!-- //////////////////////承包单位/////////////////// -->
+						<tabpanel>
+						<listwindow id="jobvendorTable" title="$承包单位" use="combiz.ui.stdplan.JobvendorList" dialog="/stdplan/jobvendordialog.xul">
+							<tablelist band="jobvendorTable" pageSize="8"><!-- 承包单位 -->
+								<listhead>
+									<tablelistheader src="/images/img_listitem.gif"/>
+									<tablelistheader data="tasknum" label="任务编号" sort="auto" width="5%"/><!--任务编号  -->
+									<tablelistheader data="vendor" label="承包单位编号" sort="auto" width="15%"/><!-- 承包单位编号 -->
+									<tablelistheader data="vendordesp.description" label="描述" sort="auto" width="30%"/><!-- 描述 -->
+									<tablelistheader data="rate" label="费率" sort="auto" width="10%"/><!-- 费率 -->
+									<tablelistheader data="contract" label="合同号" sort="auto" width="20%"/><!-- 合同号 -->
+									<tablelistheader data="cntlinenum" label="合同行编号" sort="auto" width="20%"/><!-- 合同行编号 -->
+								</listhead>
+								<tablelistfoot/>
+							</tablelist>
+						</listwindow>
+						</tabpanel> 												
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

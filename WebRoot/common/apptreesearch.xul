@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="组合树查询" use="combiz.system.common.AppTreeSearchWnd" 
+width="230" border="normal" closable="true"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	
+	<groupbox width="99%%"><caption label="组合树查询" />
+		<div align="left">
+		<radiogroup>
+		<radio id="appsearchsingle_radio" label="单项查询" checked="true" onCheck="appSearchValue_Tree.singleSelect();"/>
+		<radio id="appsearchand_radio" label="组合查询" onCheck="appSearchValue_Tree.multipleSelect();"/>
+		</radiogroup>
+		</div>
+		<separator spacing="2px"/>
+		<tree use="combiz.system.common.AppSearchTree" width="215" height="260"/>
+		<textbox id="appsearchword_textbox" cols="26" rows="2"/><button label="查询" onClick="appSearchValue_Tree.search(appsearchword_textbox.value)"/>
+	</groupbox>
+	
+	<groupbox><caption label="保存当前查询" />
+		<hbox>
+		<textbox id="appsearchquery_textbox" cols="16" value="请输入查询名称"/>
+		<button label="保存" onClick="appTreeSearch_Window.saveQuery();"/>
+		<button label="关闭" onClick="appTreeSearch_Window.onClose();"/>
+		</hbox>
+	</groupbox>
+
+	
+</window>

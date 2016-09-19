@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<window  id="eqdowntimeWnd" width="700"  title="设备停机历史" closable="true"><!-- 设备停机历史 -->
+	<listwindow id="eqdowntime" tablename="eqdowntime" edittype="edit" 
+    use="combiz.ui.equipment.EqdowntimeList" dialog="/equipment/eqdowntimedialog.xul">
+					<tablelist band="eqdowntime" pageSize="4">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="eqnum" label="设备编号" sort="auto" width="15%"/><!-- 设备编号 -->
+							<tablelistheader data="starttime" label="停机开始时间" sort="auto" width="20%"/><!-- 停机开始时间 -->
+							<tablelistheader data="endtime" label="停机结束时间" sort="auto" width="20%"/><!-- 停机结束时间 -->
+							<tablelistheader data="downtime" label="停机(小时)" sort="auto" width="10%"/><!-- 停机(小时) -->
+							<tablelistheader data="reportby" label="汇报人" sort="auto" width="15%"/><!-- 汇报人 -->
+							<tablelistheader data="reportdate" label="汇报时间" sort="auto" width="20%"/><!-- 汇报时间 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+	</listwindow>
+	<div align="center">
+					<button label="确定" onClick="eqdowntime.save()"/><!-- 确定 -->
+					<button label="关闭列表窗口" onClick="eqdowntimeWnd.onClose()"/><!-- 关闭列表窗口 -->
+	</div>	
+</window>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="invoice" title="发票"  resize="true" use="combiz.ui.invoice.InvoiceWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!--  -->
+			<tab id="main" label="发票" width="70px"/><!--  -->
+			<tab id="invoicelinetab" label="发票行" width="70px"/><!--  -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("invoicenum desc");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!--  -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!--  -->
+						发票号<!--  -->：<stextbox data="invoicenum" cols="10"/>
+						录入人<!--  -->:<stextbox data="enterby" cols="10"/>
+						状态<!--  -->：<stextbox data="status" cols="10"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="invoicenum" label="发票号" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="STATUS" label="状态" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="STATUSDATE" label="状态日期" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="ENTERBY" label="录入人" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="ENTERDATE" label="录入日期" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="CHANGEBY" label="更改人" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="CHANGEDATE" label="更改日期" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="basetotalcost" label="含税总价" sort="auto" width="10%"/><!--  -->
+						<resultlistheader data="description" label="描述" sort="auto" width="20%"/><!--  -->
+						<!-- 
+						<resultlistheader data="TOTALCOST" label="不含税总价" sort="auto" width="8%"/>
+						<resultlistheader data="TOTALTAX" label="税总额" sort="auto" width="4%"/>
+						 -->
+					
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"invoice.vendor"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invoice.invoicenum","invoice.enterby","invoice.enterdate","invoice.changeby","invoice.changedate","invoice.statusdate","invoice.totalcost","invoice.totaltax","invoice.basetotalcost","invoice.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			<groupbox><caption label="发票" />
+					<grid>
+						<rows>
+							<row  spans="1,1,1,6">
+							发票编号<!--  -->:<a:bind value="invoice.invoicenum"/><itextbox id="invoice.invoicenum"/>	
+							描述<!--  -->:<a:bind value="invoice.description"/><itextbox id="invoice.description" cols="80"/>
+							</row>
+							<row>
+							采购单<!--  -->:<a:bind value="invoice.ponum"/><ibandbox id="invoice.ponum" lookup="ponum" cols="10"/>
+							合同<!--  -->:<a:bind value="invoice.cntnum"/><ibandbox id="invoice.cntnum" lookup="cntnum" cols="10"/>
+							发票编号：<a:bind value="invoice.invoiceno"/><itextbox id="invoice.invoiceno" cols="30"/>				
+							状态<!--  -->:<a:bind value="invoice.status"/><itextbox id="invoice.status"/>	
+							</row>	
+						</rows>
+					</grid>
+				</groupbox>
+			<hbox width="100%">
+			<groupbox><caption label="基本信息" /><!--  -->
+					<grid>
+						<rows>
+							<row>
+								录入人<!--  -->:<a:bind value="invoice.enterby"/><ibandbox id="invoice.enterby" lookup="labor" cols="10"/>	
+							</row>
+							<row>
+								更改人<!--  -->:<a:bind value="invoice.changeby"/><ibandbox id="invoice.changeby" lookup="labor" cols="10"/>	
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<groupbox><caption label="供应商" /><!--  -->
+					<grid>
+						<rows>
+						<row>
+								供应商<!--  -->:<a:bind value="invoice.vendor"/><ibandbox id="invoice.vendor" lookup="companies" cols="25"/>								
+								</row>
+								<row>
+								描述<!--  -->:<a:bind value="company.description"/><itextbox id="company.description"  cols="25"/>
+								</row>
+						</rows>
+					</grid>
+				</groupbox>	
+				<groupbox><caption label="成本" /><!--  -->
+					<grid>
+						<rows>
+							<row>
+								汇率<!--  -->:<a:bind value="invoice.exchangerate"/><idoublebox id="invoice.exchangerate" cols="10"/>	
+								税总额<!--  -->:<a:bind value="invoice.totaltax"/><idoublebox id="invoice.totaltax" cols="10"/>		
+							</row>
+							<row>
+								不含税总价<!--  -->:<a:bind value="invoice.totalcost"/><idoublebox id="invoice.totalcost" cols="10"/>
+								总计成本<!--  -->:<a:bind value="invoice.basetotalcost"/><idoublebox id="invoice.basetotalcost" cols="10"/>
+							</row>
+							
+						</rows>
+					</grid>
+				</groupbox>
+				
+				</hbox>
+				<hbox width="100%">
+				<groupbox><caption label="日期" /><!--  -->
+					<grid>
+						<rows>
+								<row>
+								状态日期<!--  -->:<a:bind value="invoice.statusdate"/><idatebox id="invoice.statusdate" cols="20"/>		
+								输入日期<!--  -->:<a:bind value="invoice.enterdate"/><idatebox id="invoice.enterdate" cols="20"/>			
+								更改日期<!--  -->:<a:bind value="invoice.changedate"/><idatebox id="invoice.changedate" cols="20"/>		
+								</row>
+								<row>
+								汇率日期<!--  -->:<a:bind value="invoice.exchangedate"/><idatebox id="invoice.exchangedate" cols="20"/>		
+								
+								发票日期<!--  -->:<a:bind value="invoice.invoicedate"/><idatebox id="invoice.invoicedate" cols="20"/>		
+								
+								到期日<!--  -->:<a:bind value="invoice.duedate"/><idatebox id="invoice.duedate" cols="20"/>		
+								</row>
+								<row spans="1,6">
+								支付日期<!--  -->:<a:bind value="invoice.paiddate"/><idatebox id="invoice.paiddate" cols="20"/>		
+								</row>
+						</rows>
+					</grid>
+				</groupbox>
+				</hbox>
+				<hbox width="100%">
+				<groupbox><caption label="财务信息" /><!--  -->
+					<grid>
+						<rows>
+							<row>
+								财务周期<!--  -->:<a:bind value="invoice.finperiod"/><itextbox id="invoice.finperiod"/>	
+								
+								银行帐号<!--  -->:<a:bind value="invoice.bankaccount2"/><itextbox id="invoice.bankaccount2" cols="30"/>		
+							
+								银行名称<!--  -->:<a:bind value="invoice.bankname"/><itextbox id="invoice.bankname" cols="30"/>		
+					
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				
+				
+				
+				 
+				</hbox>
+				
+			</tabpanel>
+			<!-- ********************************主窗体数据结束******************************************** -->
+			
+			<!-- ********************************发票行******************************************** -->
+			
+			<tabpanel>
+				<listwindow id="invoiceline" title="发票行" use="combiz.ui.invoice.InvoicelineList" dialog="/invoice/invoicelinedialog.xul">
+					<tablelist band="invoiceline" pageSize="8"><!--  -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="invoicelinenum" label="发票行" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="state" label="状态" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="invoiceqty" label="发票数量" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="taxunitcost" label="含税单价" sort="auto" width="15%"/><!--  -->
+							<tablelistheader data="taxlinecost" label="含税总价" sort="auto" width="15%"/><!--  -->
+							<tablelistheader data="ITEMNUM" label="库存项目" sort="auto" width="15%"/><!--  -->
+							<tablelistheader data="ponum" label="采购单" sort="auto" width="15%"/><!--  -->
+							<tablelistheader data="polinenum" label="采购单行" sort="auto" width="10%"/><!--  -->
+							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 	
+				
+				
+				<listwindow id="invoicetrans" parentWnd="invoiceline" title="发票差异行" use="combiz.ui.invoice.InvoicetransList" dialog="/invoice/invoicetransdialog.xul"  edittype="readonly">
+					<tablelist band="invoicetrans" pageSize="8" >
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="vendor" label="供应商" sort="auto" width="25%"/>
+							<tablelistheader data="enterby" label="处理人" sort="auto" width="25%"/>
+							<tablelistheader data="transtype" label="交易类型" sort="auto" width="20%"/>
+							<tablelistheader data="linecost" label="差异行成本" sort="auto" width="10%"/>
+							<tablelistheader data="transdate" label="交易日期" sort="auto" width="20%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+				
+				
+			</tabpanel>
+			
+			<!-- ********************************发票部分结束******************************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {}; mainWnd.setReadonly(readonly);
+	</zscript>
+
+	<hbox width="100%">
+		<groupbox>
+			<caption label="基本信息"></caption><!--  -->
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						仓库:<!--  -->
+						<a:bind value="inventory.warehouse" />
+						<ibandbox id="inventory.warehouse"
+							lookup="warehouse" />
+						货位号:<!--  -->
+						<a:bind value="inventory.binnum" />
+						<itextbox id="inventory.binnum" />
+						型号:<!--  -->
+						<a:bind value="inventory.modelnum" />
+						<itextbox id="inventory.modelnum" />
+
+					</row>
+
+					<row spans="1,1,1,3">
+						ABC类型:<!--  -->
+						<a:bind value="inventory.abctype" />
+						<icombobox id="inventory.abctype" />
+						余量:<!--  -->
+						<a:bind value="inventory.sumcurbal" />
+						<idoublebox id="inventory.sumcurbal" />
+					</row>
+
+					<row>
+						库存类型:<!--  -->
+						<a:bind value="inventory.stocktype" />
+						<itextbox id="inventory.stocktype" />
+						平均成本:<!--  -->
+						<a:bind value="inventory.avgcost" />
+						<idoublebox id="inventory.avgcost" />
+						上次成本:<!--  -->
+						<a:bind value="inventory.lastcost" />
+						<idoublebox id="inventory.lastcost" />
+						
+					</row>
+					<row>
+						最低库存:<!--  -->
+						<a:bind value="inventory.minlevel" />
+						<idoublebox id="inventory.minlevel" />
+						安全库存:<!--  -->
+						<a:bind value="inventory.maxlevel" />
+						<idoublebox id="inventory.maxlevel" />
+						经济订购数量:<!--  -->
+						<a:bind value="inventory.orderqty" />
+						<idoublebox id="inventory.orderqty" format="0.00" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</hbox>
+
+
+
+
+
+
+
+	<hbox width="100%">
+		<groupbox>
+			<caption label="订购信息"></caption><!--  -->
+			<grid>
+				<rows>
+					<row>
+						制造商:<!--  -->
+						<a:bind value="inventory.manufacturer" />
+						<ibandbox id="inventory.manufacturer"
+							lookup="companies2" />
+						供应商:<!--  -->
+						<a:bind value="inventory.vendor" />
+						<ibandbox id="inventory.vendor"
+							lookup="companies" />
+						转换系数:<!--  -->
+						<a:bind value="inventory.conversion" />
+						<idoublebox id="inventory.conversion" />
+					</row>
+					<row>
+						订购单位:<!--  -->
+						<a:bind value="inventory.orderunit" />
+						<itextbox id="inventory.orderunit" />
+						发放单位:<!--  -->
+						<a:bind value="inventory.issueunit" />
+						<itextbox id="inventory.issueunit" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</hbox>
+
+</editwindow>

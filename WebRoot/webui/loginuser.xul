@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="loginUserWnd" title="选择登录用户" width="600" closable="true"
+use="combiz.system.common.LoginUserWindow">
+
+	<hbox spacing="0">
+		<groupbox>
+			<caption label="部门" />
+			<tree id="loginDepartmentTree" use="combiz.system.common.LoginDepartmentTree" width="180"/>
+		</groupbox>
+
+		<listwindow id="userOfDepartment" title="用户列表" searchable="false" autodata="false" export="false" 
+		tablename="ibsusers" use="combiz.system.ui.CommonListWindow" edittype="LISTONLY" width="100%">
+			<tablelist band="userOfDepartment" pageSize="8">
+				<listhead>
+					<tablelistheader src="/images/img_listitem.gif" width="10%" />
+					<tablelistheader data="userid" label="员工代码" sort="auto" width="20%" />
+					<tablelistheader data="loginid" label="登录名" sort="auto" width="20%" />
+					<tablelistheader data="labornum" label="员工" sort="auto" width="20%" />
+					<tablelistheader data="labor.laborname" label="姓名" sort="auto" width="20%" />
+					<tablelistheader data="labor.PHONENUM" label="电话" sort="auto" width="20%" />
+				</listhead>
+			</tablelist>
+		</listwindow>
+	</hbox>
+	
+	<div align="center">
+		<button label=" 确 定 " onClick="loginUserWnd.confirm()" />
+		<button label=" 取 消 " onClick="loginUserWnd.onClose()" />
+	</div>
+
+</window>

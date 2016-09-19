@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {}; 
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="$故障代码"><!-- 故障代码 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<row>
+					故障代码<!-- 故障代码 -->:
+					<a:bind value="wofailcode.failurecode" />
+					<ibandbox id="wofailcode.failurecode" lookup="failurecode" checkdata="false"/>
+					描述<!-- 描述 -->:
+					<a:bind value="wofailcode.description" />
+					<itextbox id="wofailcode.description" cols="30" />
+					分类<!-- 分类 -->:
+					<a:bind value="wofailcode.classid" />
+					<ibandbox id="wofailcode.classid" lookup="classificationfialureclass" checkdata="false"/>
+				</row>
+				<row>
+					位置<!-- 位置 -->:
+					<a:bind value="wofailcode.location" />
+					<ibandbox id="wofailcode.location" lookup="location"/>
+					描述<!-- 描述 -->:
+					<a:bind value="location.description" />
+					<itextbox id="location.description" cols="30" />
+				</row>
+				<row>
+					设备编码<!-- 设备编码 -->:
+					<a:bind value="wofailcode.eqnum" />
+					<ibandbox id="wofailcode.eqnum" lookup="equipment"/>
+					描述<!-- 描述 -->:
+					<a:bind value="eqnum.description" />
+					<itextbox id="eqnum.description" cols="30" />
+				
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

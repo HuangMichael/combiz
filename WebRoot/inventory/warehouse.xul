@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="warehouse" title="仓库" resize="true"
+	use="combiz.ui.inventory.WarehouseWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- 仓库 -->
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="仓库" width="70px" /><!-- 仓库 -->
+			<tab id="invbin_tab" label="货柜" width="70px" /><!-- 货柜 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						仓库:<!-- 仓库 -->
+						<stextbox data="warehouse" />
+						描述:<!-- 描述 -->
+						<stextbox data="description" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="warehouse" label="仓库"
+							sort="auto" width="20%" /><!-- 仓库 -->
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="35%" /><!-- 描述 -->
+						<resultlistheader data="warehouseadmin"
+							label="仓库管理员" sort="auto" width="15%" /><!-- 仓库管理员 -->
+						<resultlistheader data="shiptolabor" label="收货人"
+							sort="auto" width="15%" /><!-- 收货人 -->
+						<resultlistheader data="sitenum" label="地点"
+							sort="auto" width="15%" /><!-- 收货人 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript><![CDATA[
+ String[] required = {"warehouse.sitenum"};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							仓库:<!-- 仓库 -->
+							<a:bind value="warehouse.warehouse" />
+							<itextbox id="warehouse.warehouse" />
+							描述:<!-- 描述 -->
+							<a:bind value="warehouse.description" />
+							<itextbox id="warehouse.description"
+								cols="60" />
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							仓库管理员:
+							<a:bind value="warehouse.warehouseadmin" />
+							<ibandbox id="warehouse.warehouseadmin"
+								lookup="labor" />
+							地点:
+							<a:bind value="warehouse.sitenum" />
+							<ibandbox id="warehouse.sitenum"
+								lookup="department" />
+						</row>
+						<row>
+							收货人:<!-- 收货人 -->
+							<a:bind value="warehouse.shiptolabor" />
+							<ibandbox id="warehouse.shiptolabor"
+								lookup="labor" />
+							收货地址:<!-- 收货地址 -->
+							<a:bind value="warehouse.shiptoaddr" />
+							<itextbox id="warehouse.shiptoaddr"
+								cols="40" />
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				<listwindow id="inventoryTable" title="仓库库存"
+					use="combiz.ui.inventory.WHInventoryList"
+					dialog="/inventory/whinventorydialog.xul" edittype="readonly">
+					<tablelist band="inventoryTable" pageSize="8"><!-- 仓库库存 -->
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="物料"
+								sort="auto" width="10%" /><!-- 物料 -->
+							<tablelistheader data="item.description"
+								label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							<tablelistheader data="binnum" label="货位"
+								sort="auto" width="10%" /><!-- 货位 -->
+							<tablelistheader data="orderunit"
+								label="定购单位" sort="auto" width="10%" /><!-- 定购单位 -->
+							<tablelistheader data="stocktype"
+								label="库存类型" sort="auto" width="10%" /><!-- 库存类型 -->
+							<tablelistheader data="avgcost" label="平均价格"
+								sort="auto" width="10%" /><!-- 平均价格 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+			<tabpanel>
+				<listwindow id="invbin" title="仓库货柜"
+					dialog="/inventory/invbindialog.xul">
+					<defaultvalue band="invbin"
+						value="warehouse={warehouse}" /><!-- 仓库货柜 -->
+					<tablelist band="invbin" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="binnum" label="货柜编号"
+								sort="auto" width="40%" /><!-- 货柜编号 -->
+							<tablelistheader data="memo" label="备注"
+								sort="auto" width="60%" /><!-- 备注 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

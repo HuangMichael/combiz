@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 联系人联系方式 -->
+ <groupbox><caption label="联系人联系方式"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						联系人名<!-- 联系人名 -->:<a:bind value="compcontact.contact"/><itextbox id="compcontact.contact"/>
+						联系人职位<!-- 联系人职位 -->：<a:bind value="compcontact.position"/><itextbox id="compcontact.position"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<row>						
+						联系人Email<!-- 联系人Email -->：<a:bind value="compcontact.email"/><itextbox id="compcontact.email"/>
+						联系人住宅电话<!-- 联系人住宅电话 -->:<a:bind value="compcontact.homephone"/><itextbox id="compcontact.homephone"/>						
+						</row>
+						<row>						
+						办公电话<!-- 办公电话 -->：<a:bind value="compcontact.officephone"/><itextbox id="compcontact.officephone"/>
+						联系人传真<!-- 联系人传真 -->:<a:bind value="compcontact.faxphone"/><itextbox id="compcontact.faxphone"/>					
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>						
+						手机<!-- 手机 -->:<a:bind value="compcontact.mobilephone"/><itextbox id="compcontact.mobilephone"/>	
+										
+						</row>
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

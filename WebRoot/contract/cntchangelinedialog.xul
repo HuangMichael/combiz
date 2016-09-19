@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="合同变更审批"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							合同版本:<a:bind value="contchange.cntversion"/><itextbox id="contchange.cntversion"/>		
+						</row>
+						<row>
+						     状态:<a:bind value="contchange.status"/><itextbox id="contterms.status"/>	
+						     状态时间:<a:bind value="contchange.statusdate"/><idatebox id="contchange.statusdate"/>	
+						</row>
+						<row>	
+							变更人:<a:bind value="contchange.changeby"/><ibandbox id="contchange.changeby" lookup="labor"/>		
+							变更人日期:<a:bind value="contchange.changedate"/><idatebox id="contchange.changedate"/>	
+						</row>
+						<row spans="1,3">	
+							变更理由:<a:bind value="contchange.chgcause"/><itextbox id="contchange.chgcause" cols="120" rows="3"/>			
+						</row>
+						<row spans="1,4">	
+							变更内容:<a:bind value="contchange.chgcontent"/><itextbox id="contchange.chgcontent" cols="120" rows="4"/>			
+						</row>
+						<row spans="1,3">	
+							变更备注:<a:bind value="contchange.remark"/><itextbox id="contchange.remark" cols="120" rows="3"/>			
+						</row>
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

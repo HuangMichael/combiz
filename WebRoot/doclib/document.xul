@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="document" title="文档管理" resize="true" use="combiz.ui.doclib.DocumentWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab label="文档列表" width="70px" id="list" />
+			<tab label="文档" width="70px" id="main" />
+			<tab label="文档权限" width="70px" />
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+					<caption label="高级查询" />
+						<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						文档编号：<stextbox data="docnum" />
+						描述：<stextbox data="description" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="docnum" label="文档编号"
+							sort="auto" width="30%" />
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="45%" />
+						<resultlistheader data="creator" label="创建人"
+							sort="auto" width="10%" />
+						<resultlistheader data="createdate" label="创建日期"
+							sort="auto" width="15%" />
+							
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+				 String[] required = {};
+				 mainWnd.setRequired(required);
+				 String[] readonly = {"document.creator","document.createdate","document.ownertable",
+				 "document.ownerid","document.author","document.changedate","document.changeby","document.libnum"}; 
+				 mainWnd.setReadonly(readonly);
+				 ]]>
+			</zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						文档编号:<a:bind value="document.docnum"/><itextbox id="document.docnum"/>		
+						描 述:<a:bind value="document.description"/><itextbox id="document.description" cols="40"/>		
+						</row>
+						<row>
+						文档类型:<a:bind value="document.doctype"/><icombobox id="document.doctype"/>		
+						文档扩展名:<a:bind value="document.docextend"/><itextbox id="document.docextend"/>		
+						</row>
+						<row>
+						创建人:<a:bind value="document.creator"/><itextbox id="document.creator"/>		
+						创建时间:<a:bind value="document.createdate"/><idatebox id="document.createdate"/>		
+						</row>
+						<row>
+						文档路径类型:<a:bind value="document.urltype"/><icombobox id="document.urltype"/>		
+						文档路径:<a:bind value="document.urlpath"/><itextbox id="document.urlpath" cols="40"/>		
+						</row>
+						<!-- <row>
+						关联表:<a:bind value="document.ownertable"/><itextbox id="document.ownertable"/>		
+						关联表记录ID:<a:bind value="document.ownerid"/><ilongbox id="document.ownerid"/>		
+						</row> -->
+						<row>
+						文档状态:<a:bind value="document.status"/><icombobox id="document.status"/>		
+						作者:<a:bind value="document.author"/><itextbox id="document.author"/>		
+						</row>
+						<row>
+						最近一次修改时间:<a:bind value="document.changedate"/><idatebox id="document.changedate"/>		
+						修改人:<a:bind value="document.changeby"/><itextbox id="document.changeby"/>		
+						</row>
+						<row>
+						写作时间:<a:bind value="document.authordate"/><idatebox id="document.authordate"/>		
+						所属部门:<a:bind value="document.ownerdept"/><ibandbox id="document.ownerdept" lookup="department"/>		
+						</row>
+						<row spans="1,3">
+						所属目录:<a:bind value="document.libnum"/><itextbox id="document.libnum"/>
+						</row>
+					</rows>
+				</grid>
+				<tabbox width="100%">
+					<tabs>
+						<tab label="版本列表"></tab>
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<!--  edittype="readonly" -->
+							<listwindow id="docversion" title="文档版本列表"
+								use="combiz.ui.doclib.DocversionList"
+								dialog="/doclib/docversiondialog.xul">
+								<tablelist band="docversion"
+									pageSize="8">
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif" />
+										<tablelistheader data="VERSION" label="版本号" sort="auto" width="10%"/>
+										<tablelistheader data="DESCRIPTION" label="版本描述" sort="auto" width="30%"/>
+										<tablelistheader data="status" label="是否上传" sort="auto" width="10%"/>
+										<tablelistheader data="filename" label="文件名" sort="auto" width="20%"/>
+										<tablelistheader data="CREATOR" label="创建人" sort="auto" width="15%"/>
+										<tablelistheader data="CREATEDATE" label="创建时间" sort="auto" width="15%"/>
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+			<tabpanel>
+				<!--  edittype="readonly" -->
+				<listwindow id="docauth" title="文档权限"	use="combiz.ui.doclib.DocauthList" dialog="/doclib/docauthdialog.xul">
+					<tablelist band="docauth" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="DOCNUM" label="文档编号"
+								sort="auto" width="20%" />
+							<tablelistheader data="GRPNAME" label="用户组名称"
+								sort="auto" width="20%" />
+							<tablelistheader data="DOCREAD"
+								label="是否可读" sort="auto" width="20%" />
+							<tablelistheader data="DOCEDIT" label="是否可写"
+								sort="auto" width="20%" />
+							<tablelistheader data="MEMO"
+								label="备注" sort="auto" width="20%" />
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+
+			<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

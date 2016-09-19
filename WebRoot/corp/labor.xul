@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="labor" title="人员" resize="true" use="combiz.ui.corp.LaborWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="人员" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					人员：<stextbox data="labornum"/>
+					姓名：<stextbox data="laborname"/>
+					部门：<stextbox data="deptnum"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="labornum" label="人员" sort="auto" width="30%"/>
+						<resultlistheader data="laborname" label="姓名" sort="auto" width="20%"/>
+						<resultlistheader data="deptnum" label="部门" sort="auto" width="20%"/>
+						<resultlistheader data="craft" label="专业" sort="auto" width="15%"/>
+						<resultlistheader data="enabled" label="状态" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"labor.deptnum"};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			<hbox width="100%">
+			<groupbox><caption label="基本信息" />
+				
+				<grid>
+					<rows>
+						<row>
+						人员：<a:bind value="labor.labornum"/><itextbox id="labor.labornum"/>
+						姓名：<a:bind value="labor.laborname"/><itextbox id="labor.laborname"/>
+						</row>
+						<row>
+						部门：<a:bind value="labor.deptnum"/><ibandbox id="labor.deptnum" lookup="department"/>
+						专业：<a:bind value="labor.craft"/><icombobox id="labor.craft"/>
+						</row>	
+						<row spans="1,3">
+						部门结构：<istructbox band="labor.deptnum" label=":{deptnum}"/>
+						</row>				
+						<row>
+						职务：<a:bind value="labor.jobcode"/><itextbox id="labor.jobcode"/>
+						雇佣类型：<a:bind value="labor.employeetype"/><icombobox id="labor.employeetype"/>
+						</row>						
+						<row>
+						办公电话：<a:bind value="labor.phonenum"/><itextbox id="labor.phonenum"/>
+						工作地址：<a:bind value="labor.wkaddress"/><itextbox id="labor.wkaddress" cols="60"/>
+						</row>						
+						<row>
+						家庭电话：<a:bind value="labor.homephone"/><itextbox id="labor.homephone"/>
+						家庭住址：<a:bind value="labor.homeaddress"/><itextbox id="labor.homeaddress" cols="60"/>
+						</row>						
+						<row>
+						移动电话：<a:bind value="labor.mphone"/><itextbox id="labor.mphone"/>
+						电子邮箱：<a:bind value="labor.email"/><itextbox id="labor.email" cols="60"/>
+						</row>			
+						<row>
+						邮编：<a:bind value="labor.postnum"/><itextbox id="labor.postnum"/>
+						出生日期：<a:bind value="labor.birthdate"/><idatebox id="labor.birthdate"/>
+						</row>
+					</rows>
+				</grid>
+				
+				
+			</groupbox>
+			<groupbox><caption label="照片" />
+				<attachimage label="照片(点击右键上传)" width="200" imgwidth="200" imgheight="160" horizontal="true" readOnly="false"/>
+			</groupbox>
+			</hbox>
+			
+			<groupbox><caption label="其他信息" />	
+				<grid>
+					<rows>
+						<row>
+						雇佣日期：<a:bind value="labor.hiredate"/><idatebox id="labor.hiredate"/>
+						默认位置：<a:bind value="labor.defaultloc"/><ibandbox id="labor.defaultloc" lookup="location"/>
+						</row>									
+						<row>
+						主管人：<a:bind value="labor.supervisor"/><ibandbox id="labor.supervisor" lookup="labor"/>
+						默认仓库：<a:bind value="labor.defaultstoreloc"/><ibandbox id="labor.defaultstoreloc" lookup="warehouse"/>
+						</row>											
+						<row>
+						日历：<a:bind value="labor.calnum"/><ibandbox id="labor.calnum" lookup="calendar"/>
+						班次：<a:bind value="labor.shiftnum"/><ibandbox id="labor.shiftnum" lookup="calshift"/>
+						</row>										
+						<row>
+						费率：<a:bind value="labor.payrate"/><idoublebox id="labor.payrate"/>
+						外部：<a:bind value="labor.outside"/><icheckbox id="labor.outside"/>
+						<!--
+						有效：<a:bind value="labor.enabled"/><icheckbox id="labor.enabled"/>
+						-->
+						</row>
+						<row>
+						加班系数：<a:bind value="labor.otscale"/><idoublebox id="labor.otscale"/>
+						供应商：<a:bind value="labor.vendor"/><ibandbox id="labor.vendor" lookup="companies"/>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<groupbox><caption label="系统配置信息" />							
+				<grid>
+					<rows>
+						<row>
+						流程委托人：<a:bind value="labor.consign"/><ibandbox id="labor.consign" lookup="labor"/>
+						显示工作流提醒：<a:bind value="labor.showmind"/><icheckbox id="labor.showmind"/>
+						</row>
+						<row>
+						委托开始时间：<a:bind value="labor.consigsdate"/><idatebox id="labor.consigsdate"/>
+						委托结束时间：<a:bind value="labor.consigedate"/><idatebox id="labor.consigedate"/>
+						</row>
+						<row>
+						应用菜单导航模式：<a:bind value="labor.navmenutype"/><icombobox id="labor.navmenutype" cols="10"/>
+						授权的顶级部门：<a:bind value="labor.sitenum"/><ibandbox id="labor.sitenum" lookup="department"/>
+						</row>
+						<!-- 
+						<row>
+						组织机构：<a:bind value="labor.corpnum"/><ibandbox id="labor.corpnum" lookup="corporation"/>
+						</row>
+						 -->
+					</rows>
+				</grid>
+			</groupbox>
+			
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly =
+		{"item.description","invusetrans.issuetype","invusetrans.curbal","invusetrans.physcnt","invusetrans.reqqty","invusetrans.lotnum",
+		"invusetrans.unitcost","invusetrans.actualcost","invusetrans.linecost","pr.budnum","pr.buditem","invusetrans.budnum"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="物料事物">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption><!-- 关闭 -->
+		<grid><!-- 物料事物 -->
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					库存项目:<!-- 库存项目 -->
+					<a:bind value="invusetrans.itemnum" />
+					<ibandbox id="invusetrans.itemnum" lookup="item" />
+					库存项目描述:<!-- 库存项目描述 -->
+					<a:bind value="item.description" />
+					<itextbox id="item.description" />
+				</row>
+				<row>
+					预算号:
+					<a:bind value="invusetrans.budnum" />
+					<ibandbox id="invusetrans.budnum" lookup='budnum' />
+
+					预算项目:
+					<a:bind value="invusetrans.buditem" />
+					<ibandbox id="invusetrans.buditem"
+						lookup='budgetitem' />
+				</row>
+				<row>
+					仓库:<!-- 仓库 -->
+					<a:bind value="invusetrans.warehouse" />
+					<ibandbox id="invusetrans.warehouse"
+						lookup="warehouse" />
+					箱柜编号:<!-- 箱柜编号 -->
+					<a:bind value="invusetrans.binnum" />
+					<ibandbox id="invusetrans.binnum" lookup="binnum" />
+				</row>
+
+				<row>
+					发放类型:<!--  发放类型-->
+					<a:bind value="invusetrans.issuetype" />
+					<icombobox id="invusetrans.issuetype" cols="8" />
+					交易日期:<!-- 交易日期 -->
+					<a:bind value="invusetrans.transdate" />
+					<idatebox id="invusetrans.transdate" />
+				</row>
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					实际日期:<!-- 实际日期 -->
+					<a:bind value="invusetrans.actualdate" />
+					<idatebox id="invusetrans.actualdate" />
+					交易数量:<!-- 交易数量 -->
+					<a:bind value="invusetrans.quantity" />
+					<idoublebox id="invusetrans.quantity" format="0.00" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					当前余量:<!-- 当前余量 -->
+					<a:bind value="invusetrans.curbal" />
+					<idoublebox id="invusetrans.curbal" format="0.00" />
+					实际盘点数量:<!-- 实际盘点数量-->
+					<a:bind value="invusetrans.physcnt" />
+					<idoublebox id="invusetrans.physcnt" format="0.00" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					单价:<!--单价  -->
+					<a:bind value="invusetrans.unitcost" />
+					<idoublebox id="invusetrans.unitcost" />
+					实际单价:<!-- 实际单价 -->
+					<a:bind value="invusetrans.actualcost" />
+					<idoublebox id="invusetrans.actualcost" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					发放总价:<!-- 发放总价 -->
+					<a:bind value="invusetrans.linecost" />
+					<idoublebox id="invusetrans.linecost" />
+					工单:<!-- 工单 -->
+					<a:bind value="invusetrans.wonum" />
+					<ibandbox id="invusetrans.wonum" lookup="wonum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					批次编号:<!-- 批次编号 -->
+					<a:bind value="invusetrans.lotnum" />
+					<itextbox id="invusetrans.lotnum" />
+					转换系数:<!-- 转换系数 -->
+					<a:bind value="invusetrans.conversion" />
+					<idoublebox id="invusetrans.conversion" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<row>
+					位置编号:<!-- 位置编号 -->
+					<a:bind value="invusetrans.location" />
+					<ibandbox id="invusetrans.location"
+						lookup="location" />
+					设备编号:<!-- 设备编号 -->
+					<a:bind value="invusetrans.eqnum" />
+					<ibandbox id="invusetrans.eqnum" lookup="equipment" />
+				</row>
+
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,3">
+					发至员工:<!-- 发至员工 -->
+					<a:bind value="invusetrans.issuetolabor" />
+					<ibandbox id="invusetrans.issuetolabor"
+						lookup="labor" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					采购单:<!--采购单  -->
+					<a:bind value="invusetrans.ponum" />
+					<ibandbox id="invusetrans.ponum" lookup="ponum" />
+					装箱单编号:<!-- 装箱单编号 -->
+					<a:bind value="invusetrans.packnum" />
+					<itextbox id="invusetrans.packnum" />
+
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					采购单行:<!-- 采购单行 -->
+					<a:bind value="invusetrans.polinenum" />
+					<ilongbox id="invusetrans.polinenum" />
+					周转设备编号:<!-- 周转设备编号 -->
+					<a:bind value="invusetrans.roteqnum" />
+					<itextbox id="invusetrans.roteqnum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					汇率:<!-- 汇率 -->
+					<a:bind value="invusetrans.exchangerate" />
+					<idoublebox id="invusetrans.exchangerate" />
+					申请数量:<!-- 申请数量 -->
+					<a:bind value="invusetrans.reqqty" />
+					<idoublebox id="invusetrans.reqqty" format="0.00" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<row>
+					接收行:<!-- 接收行 -->
+					<a:bind value="invusetrans.invrectransid" />
+					<ilongbox id="invusetrans.invrectransid" />
+					退料情况:<!-- 退料情况 -->
+					<a:bind value="invusetrans.issueid" />
+					<ilongbox id="invusetrans.issueid" />
+				</row>
+
+				<row spans="1,3">
+					备忘:<!-- 备忘 -->
+					<a:bind value="invusetrans.memo" />
+					<itextbox id="invusetrans.memo" cols="80" rows="2" />
+				</row>
+
+
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="locsystemWnd" title="配置系统" width="600" tablename="locsystem" 
+use="combiz.ui.location.LocSystemListwindow" dialog="/location/locsystemdialog.xul">
+	<tablelist band="locsystemWnd" pageSize="8">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="systemid" label="系统" sort="auto" width="20%"/>
+			<tablelistheader data="description" label="描述" sort="auto" width="30%"/>
+			<tablelistheader data="isdefault" label="默认？" sort="auto" width="50%"/>
+		</listhead>
+	</tablelist>
+	<div align="center">
+	<button label="保存数据" onClick="locsystemWnd.save()"/>
+	<button label="关闭窗口" onClick="locsystemWnd.onClose()"/>
+	</div>		
+</listwindow>
+

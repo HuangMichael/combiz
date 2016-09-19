@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 物料报废 -->
+ <groupbox><caption label="物料报废"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+		<groupbox><caption label="基本信息" /><!-- 基本信息 -->
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						接收处理类型:<!-- 接收处理类型： --><a:bind value="invrectrans.rectype"/><itextbox id="invrectrans.rectype"/>
+						库存项目:<!-- 库存项目： --><a:bind value="invrectrans.itemnum"/><itextbox id="invrectrans.itemnum"/>
+						库存项目描述:<!-- 库存项目描述： --><a:bind value="item.description"/><itextbox id="item.description"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						源仓库:<!-- 源仓库： --><a:bind value="invrectrans.fromwarehouse"/><itextbox id="invrectrans.fromwarehouse" />
+						接收仓库:<!-- 接收仓库： --><a:bind value="invrectrans.towarehouse"/><itextbox id="invrectrans.towarehouse" />
+						接收单位:<!-- 接收单位： --><a:bind value="invrectrans.recunit"/><itextbox id="invrectrans.recunit"/>
+						</row>
+						
+						<row>
+						批次:<!--批次：  --><a:bind value="invrectrans.tolot"/><itextbox id="invrectrans.tolot"/>
+						单价:<!-- 单价： --><a:bind value="invrectrans.unitcost"/><idoublebox id="invrectrans.unitcost"/>
+						行总价:<!--行总价：  --><a:bind value="invrectrans.linecost"/><idoublebox id="invrectrans.linecost"/>
+						</row>
+						<row>
+						交易数量:<!-- 交易数量： --><a:bind value="invrectrans.quantity"/><idoublebox id="invrectrans.quantity" format="0.00"/>
+						交易日期:<!-- 交易日期： --><a:bind value="invrectrans.transdate"/><idatebox id="invrectrans.transdate"/>
+						申请人:<!-- 申请人： --><a:bind value="invrectrans.changeby"/><itextbox id="invrectrans.changeby"/>
+						</row>
+
+					</rows>
+				</grid>
+				</groupbox>
+
+ </groupbox>	
+
+</editwindow>

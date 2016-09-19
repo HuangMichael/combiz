@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	************************************************************************************************************
+	********************************** 除特别声明的地方，该文件的其他内容不应随意改动 ***********************************
+	************************************************************************************************************
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+<!-- //////////////////数据库配置properties文件////////////////// -->  
+	<bean id="propertyConfigurer" class="combiz.system.config.DecryptPropertyPlaceholderConfigurer">  
+	  <property name="locations">
+	   <list>  
+	    <value>/WEB-INF/database.properties</value>  
+	   </list>  
+	  </property>  
+	</bean>
+
+<!--/////////////////////////////////////////////////////////////-->
+<!-- 数据库连接池 -->
+<!--/////////////////////////////////////////////////////////////--> 
+	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	<property name="driverClass">
+    	 <value>${driver}</value>
+    </property>
+    <property name="jdbcUrl">
+    	<value>${url}</value>
+    </property>
+    <property name="user">
+    	<value>${username}</value>
+    </property>
+    <property name="password">
+    	<value>${password}</value>
+    </property>
+    <!-- 其他连接属性配置 -->
+    <property name="initialPoolSize"><value>${initialPoolSize}</value></property>
+    <property name="minPoolSize"><value>${minPoolSize}</value></property>
+    <property name="maxPoolSize"><value>${maxPoolSize}</value></property>
+    <property name="acquireIncrement"><value>${acquireIncrement}</value></property>
+    
+    <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+    <property name="maxIdleTime"><value>60</value></property>
+    <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements
+  	属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。
+  	如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->
+    <property name="maxStatements"><value>0</value></property>
+    <!--每1800秒检查所有连接池中的空闲连接。Default: 0 -->
+    <property name="idleConnectionTestPeriod"><value>1800</value></property> 
+    <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+    <property name="acquireRetryAttempts"><value>30</value></property>
+    <!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效
+  	保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试
+  	获取连接失败后该数据源将申明已断开并永久关闭。Default: false-->
+    <property name="breakAfterAcquireFailure"><value>false</value></property>
+    <!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交的
+  	时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable
+  	等方法来提升连接测试的性能。Default: false -->
+    <property name="testConnectionOnCheckout"><value>false</value></property>
+   </bean>
+	
+	<!--使用JNDI配置数据源
+	<bean id="DataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="combizds"/>
+	</bean>
+	-->
+
+<!-- /////////////配置SessionFactory//////////////////////-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="DataSource"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${dialect}</prop>
+				<prop key="hibernate.show_sql">${showsql}</prop>
+			    <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+			    
+			   	<!--
+			  	<prop key="connection.pool.size">1</prop>   
+			  	<prop key="statement_cache.size">25</prop>   
+			  	<prop key="jdbc.fetch_size">50</prop>   
+			 	<prop key="jdbc.batch_size">30</prop>
+				-->
+			</props>
+		</property>
+		<!--使用mappingDirectoryLocations属性可以指定某目录下的hbm文件-->
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath*:/combiz/domain/*/</value>
+			</list>
+		</property>
+	</bean>
+
+<!-- ////////////////////////// Base DAO ////////////////////////////	 -->	
+	 <bean id="IBOBaseDao" class="combiz.system.IBOBaseDaoImpl">
+	 	<property name="sessionFactory"><ref bean="sessionFactory" /></property>
+	 </bean>
+	 <bean id="IBOBaseSrv" class="combiz.system.IBOBaseImpl">
+		<property name="baseDao"><ref bean="IBOBaseDao" /></property>
+     </bean>
+     
+<!-- //////////////////////////事务配置////////////////////////////	 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>  
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+	      	<tx:method name="get*" read-only="true"/>
+	      	<tx:method name="find*" read-only="true"/>
+	      	<tx:method name="select*" read-only="true"/>
+	    </tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:advisor id="systemTx" advice-ref="txAdvice" pointcut="execution(* combiz.system.*.*(..))" order="0" />
+		<aop:advisor id="bussinessTx" advice-ref="txAdvice" pointcut="execution(* combiz.business.*.*.*(..))" order="1" />
+	</aop:config>
+
+</beans>
+

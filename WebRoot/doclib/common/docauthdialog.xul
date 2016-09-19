@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"docauth.docnum"}; 
+ mainWnd.setReadonly(readonly);
+//mainWnd.sigMainData(true);
+ </zscript>
+ <groupbox><caption label="文档权限"><!-- 文档权限 --><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							文档编号:<!-- 文档编号 --><a:bind value="docauth.docnum"/><itextbox id="docauth.docnum"/>		
+						</row>
+						<row>
+							用户组:<!-- 用户组 --><a:bind value="docauth.grpname"/><ibandbox id="docauth.grpname" lookup="ibsgroups"/>		
+						</row>
+						<row>
+							操作:<!-- 操作 --><div>
+							是否可读:<!-- 是否可读 --><a:bind value="docauth.docread"/><icheckbox id="docauth.docread" />
+							<space/>
+							是否可写:<!-- 是否可写 --><a:bind value="docauth.docedit"/><icheckbox id="docauth.docedit" />		
+							</div>	
+						</row>
+						<row>
+							备注:<!-- 备注 --><a:bind value="docauth.memo"/><itextbox id="docauth.memo" width="80%"/>		
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口-->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

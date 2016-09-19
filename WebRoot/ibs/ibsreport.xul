@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibsreport" title="报表配置" resize="true" use="combiz.ui.ibs.IbsreportWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="报表配置"/>
+			<tab id="rptauthTab" label="报表授权"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("app,position");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						描述：<stextbox data="description"/>
+						报表路径：<stextbox data="rptpath"/>
+						应用程序：<sbandbox data="app" cols="10" lookup="ibsapps"/>
+						报表名：<stextbox data="rptname" cols="10"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="30%"/>
+						<resultlistheader data="rptpath" label="报表路径" sort="auto" width="30%"/>
+						<resultlistheader data="app" label="应用程序" sort="auto" width="20%"/>
+						<resultlistheader data="rptname" label="报表名称" sort="auto" width="20%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstables.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+						报表:<a:bind value="ibsreport.rptname"/><itextbox id="ibsreport.rptname"/>
+						描述：<a:bind value="ibsreport.description"/><itextbox id="ibsreport.description" cols="40"/>
+						</row>
+						<row>
+						应用程序：<a:bind value="ibsreport.app"/><ibandbox id="ibsreport.app" lookup="ibsapps"/>
+						排序：<a:bind value="ibsreport.position"/><ilongbox id="ibsreport.position"/>
+						</row>
+						<row spans="1,3">
+						报表路径:<a:bind value="ibsreport.rptpath"/><itextbox id="ibsreport.rptpath" cols="70"/>
+						</row>
+						
+					</rows>
+				</grid>
+				<listwindow id="ibsrptparam" title="报表参数配置" orderby="parampos" use="combiz.ui.ibs.IbsrptparamList"
+				 dialog="/ibs/ibsrptparamdialog.xul">
+				<tablelist band="ibsrptparam" pageSize="16">	
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="paramname" label="参数名" sort="auto" width="20%"/>
+						<tablelistheader data="description" label="参数描述" sort="auto" width="30%"/>
+						<tablelistheader data="paramfield" label="参数字段" sort="auto" width="20%"/>
+						<tablelistheader data="autodata" label="自动取值" sort="auto" width="10%"/>
+						<tablelistheader data="paramvalue" label="参数值" sort="auto" width="20%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+<!-- *****************************报表授权**************************** -->
+			<tabpanel>
+				<listwindow id="ibsrptauth" title="报表授权" use="combiz.ui.ibs.IbsrptauthList" dialog="/ibs/ibsrptauthdialog.xul">
+				<tablelist band="ibsrptauth" pageSize="16">		
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="grpname" label="权限组" sort="auto" width="40%"/>
+						<tablelistheader data="ibsgroups.description" label="权限组名称" sort="auto" width="60%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- *****************************//报表授权**************************** -->
+
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

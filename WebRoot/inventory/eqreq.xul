@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="eqreq" title="设备领用申请" resize="true" wfenabled="true"
+	use="combiz.ui.inventory.EqreqWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="领用申请单" /><!-- 领用申请单 -->
+			<tab id="issue" label="设备实际发放" /><!-- 设备实际发放 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="reqtype='设备领用申请' ";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("matreqnum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器： -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						<label value="申请编号" /><!--申请编号  -->
+						<stextbox data="matreqnum" />
+						<label value="描述" /><!-- 描述 -->
+						<stextbox data="description" />
+						<label value="申请人" /><!-- 申请人 -->
+						<stextbox data="requestby" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="matreqnum" label="申请编号"
+							sort="auto" width="15%" /><!-- 申请编号 -->
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="40%" /><!-- 描述 -->
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="10%" /><!-- 状态 -->
+						<resultlistheader data="requestby" label="申请人"
+							sort="auto" width="10%" /><!-- 申请人 -->
+						<resultlistheader data="reqdept" label="申请部门"
+							sort="auto" width="10%" /><!-- 申请部门 -->
+						<resultlistheader data="requestdate"
+							label="申请时间" sort="auto" width="15%" /><!-- 申请时间 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"matreq.status","matreq.statusdate","matreq.budnum","matreq.requestby","matreq.matreqnum"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							申请编号:<!--  申请编号-->
+							<a:bind value="matreq.matreqnum" />
+							<itextbox id="matreq.matreqnum" />
+							描述:<!-- 描述 -->
+							<a:bind value="matreq.description" />
+							<itextbox id="matreq.description" cols="60" />
+
+						</row>
+
+						<row spans="1,1,1,3">
+							申请状态:<!-- 申请状态 -->
+							<a:bind value="matreq.status" />
+							<itextbox id="matreq.status" />
+							状态时间:<!-- 状态时间 -->
+							<a:bind value="matreq.statusdate" />
+							<idatetimebox id="matreq.statusdate" />
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							申请人:<!-- 申请人 -->
+							<a:bind value="matreq.requestby" />
+							<ibandbox id="matreq.requestby"
+								lookup="labor" />
+							申请部门:<!-- 申请部门 -->
+							<a:bind value="matreq.reqdept" />
+							<ibandbox id="matreq.reqdept"
+								lookup="department" />
+
+
+						</row>
+						<row>
+							申请日期:<!-- 申请日期 -->
+							<a:bind value="matreq.requestdate" />
+							<idatebox id="matreq.requestdate" />
+							需用日期:<!--  需用日期-->
+							<a:bind value="matreq.requireddate" />
+							<idatebox id="matreq.requireddate" />
+						</row>
+						<row>
+							预算号:
+							<a:bind value="matreq.budnum" />
+							<ibandbox id="matreq.budnum"
+								lookup='budnum' />
+
+							预算项目:
+							<a:bind value="matreq.buditem" />
+							<ibandbox id="matreq.buditem"
+								lookup='budgetitem' />
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							部门负责人:<!--  部门负责人-->
+							<a:bind value="matreq.supervisor" />
+							<ibandbox id="matreq.supervisor"
+								lookup="labor" />
+							专业:<!-- 专业 -->
+							<a:bind value="matreq.craft" />
+							<icombobox id="matreq.craft" />
+
+
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,2">
+							使用部门:<!--  使用部门-->
+							<a:bind value="matreq.usedept" />
+							<ibandbox id="matreq.usedept"
+								lookup="department" />
+							<attachment />
+
+						</row>
+						<row spans="1,5">
+							领用原因:
+							<a:bind value="matreq.memo" />
+							<itextbox id="matreq.memo" rows="5"
+								cols="120" inputTip="请输入设备领用申请的原因" />
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				<listwindow id="wpmaterial" title="领用申请行"
+					use="combiz.ui.inventory.MatreqLineList"
+					dialog="/inventory/matreqlinedialog.xul"><!-- 领用申请行 -->
+					<tablelist band="wpmaterial" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="物料"
+								sort="auto" width="20%" /><!--物料  -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="35%" /><!-- 描述 -->
+							<tablelistheader data="warehouse" label="仓库"
+								sort="auto" width="15%" /><!-- 仓库 -->
+							<tablelistheader data="itemqty" label="数量"
+								sort="auto" width="10%" /><!-- 数量 -->
+							<tablelistheader data="unitcost" label="单价"
+								sort="auto" width="10%" format="#,##0.00000" /><!-- 单价 -->
+							<tablelistheader data="linecost" label="行总价"
+								sort="auto" width="10%" format="#,##0.00000" /><!-- 行总价 -->
+						</listhead>
+					</tablelist>
+				</listwindow>
+				<div align="right">
+					<button label="物资BOM备件"
+						onClick="mainWnd.findeqbom()" /><!--物资BOM备件 -->
+					<button label="设备备件"
+						onClick="mainWnd.findeqsparepart()" /><!-- 设备备件 -->
+					<button label="加入收藏夹"
+						onClick="wpmaterial.addfavorite()" /><!-- 加入收藏夹 -->
+					<button label="我的收藏夹"
+						onClick="wpmaterial.findfavorite()" /><!-- 我的收藏夹 -->
+				</div>
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+			<tabpanel>
+				<listwindow id="invusetrans" title="实际物料发放"
+					edittype="readonly" use="combiz.ui.inventory.IssueMrInvuseList"
+					dialog="/inventory/issuemrinvusedialog.xul"><!-- 实际物料发放 -->
+					<tablelist band="invusetrans" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="库存项目"
+								sort="auto" width="10%" /><!-- 库存项目 -->
+							<tablelistheader data="issuetype"
+								label="发放类型" sort="auto" width="10%" /><!-- 发放类型 -->
+							<tablelistheader data="transdate"
+								label="交易日期" sort="auto" width="10%" /><!-- 交易日期 -->
+							<tablelistheader data="actualdate"
+								label="实际日期" sort="auto" width="10%" /><!-- 实际日期 -->
+							<tablelistheader data="quantity"
+								label="交易数量" sort="auto" width="5%" /><!-- 交易数量 -->
+							<tablelistheader data="curbal" label="当前余量"
+								sort="auto" width="5%" /><!-- 当前余量 -->
+							<tablelistheader data="physcnt"
+								label="实际盘点数量" sort="auto" width="10%" /><!-- 实际盘点数量 -->
+							<tablelistheader data="unitcost" label="单价"
+								sort="auto" width="5%" /><!-- 单价 -->
+							<tablelistheader data="actualcost"
+								label="实际单价" sort="auto" width="5%" /><!-- 实际单价 -->
+							<tablelistheader data="linecost"
+								label="发放总价" sort="auto" width="10%" /><!-- 发放总价 -->
+							<tablelistheader data="conversion"
+								label="转换系数" sort="auto" width="10%" /><!-- 转换系数 -->
+							<tablelistheader data="enterby" label="录入人"
+								sort="auto" width="10%" /><!-- 录入人 -->
+						</listhead>
+
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

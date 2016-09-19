@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="个人信息" use="combiz.system.ui.CommonDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+
+						<row>
+						人员：<a:bind value="labor.labornum"/><ilabel id="labor.labornum"/>
+						姓名：<a:bind value="labor.laborname"/><ilabel id="labor.laborname"/>
+						
+						</row>
+
+						<row>
+						部门：<a:bind value="labor.deptnum"/><ilabel id="labor.deptnum"/>
+						专业：<a:bind value="labor.craft"/><ilabel id="labor.craft"/>
+						</row>						
+	
+						<row>
+						职务：<a:bind value="labor.jobcode"/><ilabel id="labor.jobcode"/>
+						电子邮箱：<a:bind value="labor.email"/><ilabel id="labor.email"/>
+						</row>					
+
+						<row>
+						邮编：<a:bind value="labor.postnum"/><ilabel id="labor.postnum"/>
+						工作地址：<a:bind value="labor.wkaddress"/><ilabel id="labor.wkaddress"/>
+						</row>						
+	
+						<row>
+						办公电话：<a:bind value="labor.phonenum"/><ilabel id="labor.phonenum"/>
+						移动电话：<a:bind value="labor.mphone"/><ilabel id="labor.mphone"/>
+						</row>	
+						
+						<row>
+						家庭电话：<a:bind value="labor.homephone"/><ilabel id="labor.homephone"/>
+						家庭住址：<a:bind value="labor.homeaddress"/><ilabel id="labor.homeaddress"/>
+						</row>
+			
+					</rows>
+				</grid>
+	<div align="center">
+	<button label=" 关   闭 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

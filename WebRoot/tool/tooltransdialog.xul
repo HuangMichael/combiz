@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"tooltrans.state"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="地址"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						工具数量:<a:bind value="tooltrans.toolqty"/><ilongbox id="tooltrans.toolqty" format="0.00" />						
+						费率：<a:bind value="tooltrans.toolrate"/><idoublebox id="tooltrans.toolrate" />
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>						
+						交易日期：<a:bind value="tooltrans.transdate"/><idatebox id="tooltrans.transdate" />
+						交易类型：<a:bind value="tooltrans.transtype"/><icombobox id="tooltrans.transtype" cols="4" />
+						</row>
+						<row>
+						工具工时：<a:bind value="tooltrans.toolhrs"/><ifloatbox id="tooltrans.toolhrs" />
+						外部:<a:bind value="tooltrans.outside"/><icombobox id="tooltrans.outside" cols="1"/>
+						</row>
+						<row>			
+						行成本：<a:bind value="tooltrans.linecost"/><idoublebox id="tooltrans.linecost" />
+						<!-- 状态：<a:bind value="tooltrans.state"/><itextbox id="tooltrans.state" /> -->
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

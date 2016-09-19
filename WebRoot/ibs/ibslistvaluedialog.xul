@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="静态列表信息配置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						值:<a:bind value="ibslistvalue.value"/><itextbox id="ibslistvalue.value"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						描述：<a:bind value="ibslistvalue.valdesc"/><itextbox id="ibslistvalue.valdesc" cols="40"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						排序:	<a:bind value="ibslistvalue.orderby"/><ilongbox id="ibslistvalue.orderby" cols="2"/>
+						</row>
+						<row>
+						是否默认？:	<a:bind value="ibslistvalue.defaults"/><icheckbox id="ibslistvalue.defaults"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

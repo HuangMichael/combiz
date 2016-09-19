@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="doclib" title="文档库管理" resize="true" use="combiz.ui.doclib.DoclibaryWindow"
+ 	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="目录树"/>
+<tree use="combiz.ui.doclib.DoclibaryTree" width="180"/>
+</groupbox>
+<!--  splitter collapse="before"/> -->
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"  onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="文档库" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"doclibary.parent","doclibary.libpath","doclibary.creator",
+ "doclibary.createdate","doclibary.changeby","doclibary.changedate","doclibary.changedate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							目录名:<a:bind value="doclibary.libnum"/><itextbox id="doclibary.libnum"/>		
+							描述:<a:bind value="doclibary.description"/><itextbox id="doclibary.description" cols="45"/>		
+						</row>
+						<row>
+							父目录:<a:bind value="doclibary.parent"/><itextbox id="doclibary.parent"/>		
+							序号:<a:bind value="doclibary.orderby"/><ilongbox id="doclibary.orderby" cols="5"/>		
+						</row>
+						<row>
+							创建人:<a:bind value="doclibary.creator"/><ibandbox id="doclibary.creator" lookup="labor"/>		
+							创建日期:<a:bind value="doclibary.createdate"/><idatetimebox id="doclibary.createdate"/>		
+						</row>
+						<row>
+							最近修改人:<a:bind value="doclibary.changeby"/><itextbox id="doclibary.changeby"/>		
+							最近修改日期:<a:bind value="doclibary.changedate"/><idatetimebox id="doclibary.changedate"/>	
+						</row>
+						<row>
+						目录路径:<a:bind value="doclibary.libpath"/><itextbox id="doclibary.libpath" cols="45"/>
+						状态:<a:bind value="doclibary.status"/><icheckbox id="doclibary.status"/>	
+						</row>
+					</rows>
+				</grid>
+				<tabbox width="100%">
+					<tabs>
+						<!-- <tab label="子目录列表" width="90"/> -->
+						<tab label="文档版本及授权"  width="120"/>
+						<tab label="绑定和关联应用程序" width="160px"/>
+					</tabs>
+					<tabpanels><!--					
+						<tabpanel>
+							 <listwindow id="childdoclibTable" edittype="readonly" title="子目录信息" dialog="/doclib/childdoclibdialog.xul">
+								<tablelist band="childdoclibTable" pageSize="10">
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif"/>
+										<tablelistheader data="libnum" label="目录名" sort="auto" width="20%"/>
+										<tablelistheader data="description" label="描述" sort="auto" width="20%"/>
+										<tablelistheader data="creator" label="创建人" sort="auto" width="20%"/>
+										<tablelistheader data="createdate" label="创建日期" sort="auto" width="20%"/>
+										<tablelistheader data="libpath" label="目录路径" sort="auto" width="20%"/>
+									</listhead>
+									<tablelistfoot/>
+								</tablelist>
+							</listwindow>
+						</tabpanel>-->
+						<tabpanel>
+						<!-- -->
+							 <listwindow id="childdocumentTable"  title="文档信息" edittype="readonly" dialog="/doclib/childdocumentdialog.xul">
+								<tablelist band="childdocumentTable" pageSize="10">
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif"/>
+										<tablelistheader data="docnum" label="文档编号" sort="auto" width="30%"/>
+										<tablelistheader data="description" label="描述" sort="auto" width="40%"/>
+										<tablelistheader data="creator" label="创建人" sort="auto" width="10%"/>
+										<tablelistheader data="createdate" label="创建日期" sort="auto" width="20%"/>
+									</listhead>
+									<tablelistfoot/>
+								</tablelist>
+							</listwindow>
+							<tabbox width="100%">
+								<tabs>
+									<tab label="版本列表"></tab>
+									<tab label="访问权限"></tab>
+								</tabs>
+								<tabpanels>
+									<tabpanel>
+									<!--  edittype="readonly" -->
+										 <listwindow id="docversion" title="文档版本列表" edittype="readonly" parentWnd="childdocumentTable" dialog="/doclib/docversiondialog.xul">
+											<tablelist band="docversion" pageSize="10">
+												<listhead>
+													<tablelistheader src="/images/img_listitem.gif" />
+													<tablelistheader data="VERSION" label="版本号" sort="auto" width="10%"/>
+													<tablelistheader data="DESCRIPTION" label="版本描述" sort="auto" width="30%"/>
+													<tablelistheader data="status" label="是否上传" sort="auto" width="10%"/>
+													<tablelistheader data="filename" label="文件名" sort="auto" width="20%"/>
+													<tablelistheader data="CREATOR" label="创建人" sort="auto" width="15%"/>
+													<tablelistheader data="CREATEDATE" label="创建时间" sort="auto" width="15%"/>
+												</listhead>
+												<tablelistfoot/>
+											</tablelist>
+										</listwindow>
+									</tabpanel>
+									<tabpanel>
+									<listwindow id="docauth" title="文档权限"	use="combiz.ui.doclib.DocauthList"
+									parentWnd="childdocumentTable"  dialog="/doclib/docauthdialog.xul">
+										<tablelist band="docauth" pageSize="8">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader data="DOCNUM" label="文档编号"
+													sort="auto" width="20%" />
+												<tablelistheader data="GRPNAME" label="用户组名称"
+													sort="auto" width="20%" />
+												<tablelistheader data="DOCREAD"
+													label="是否可读" sort="auto" width="20%" />
+												<tablelistheader data="DOCEDIT" label="是否可写"
+													sort="auto" width="20%" />
+												<tablelistheader data="MEMO"
+													label="备注" sort="auto" width="20%" />
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+									</tabpanel>
+								</tabpanels>
+							</tabbox>
+						</tabpanel>
+						<tabpanel>
+							 <listwindow id="docapplibTable"  title="绑定应用程序列表" use="combiz.ui.doclib.DocapplibList" dialog="/doclib/docapplibdialog.xul">
+								<tablelist band="docapplibTable" pageSize="10">
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif"/>
+										<tablelistheader data="app" label="绑定应用程序" sort="auto" width="20%"/>
+										<tablelistheader data="ibsapps.description" label="应用程序名" sort="auto" width="60%"/>
+										<tablelistheader data="ownertable" label="所属绑定表" sort="auto" width="20%"/>
+									</listhead>
+									<tablelistfoot/>
+								</tablelist>
+							</listwindow>
+							
+							 <listwindow id="reldocapplib" parentWnd="docapplibTable" title="上面绑定应用程序所关联的其他应用程序（关联显示）" dialog="/doclib/doclibary_docapplib.xul">
+								<defaultvalue band="reldocapplib" value="isrelapp=是;libnum={libnum};ownertable={ownertable}"/>
+								<tablelist band="reldocapplib" pageSize="10">
+									<listhead>
+										<tablelistheader src="/images/img_listitem.gif"/>
+										<tablelistheader data="app" label="关联应用程序" sort="auto" width="20%"/>
+										<tablelistheader data="ibsapps.description" label="应用程序名" sort="auto" width="30%"/>
+										<tablelistheader data="relquery" label="文档关联查询条件" sort="auto" width="30%"/>
+										<tablelistheader data="ownertable" label="所属绑定表" sort="auto" width="20%"/>
+									</listhead>
+									<tablelistfoot/>
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

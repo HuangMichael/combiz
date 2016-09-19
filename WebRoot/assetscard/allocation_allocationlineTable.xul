@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {"allocationline.eqnum","allocationline.description","allocationline.fromwarehouse","allocationline.modelnum","allocationline.itemnum","allocationline.quantity" }; mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="调拨明细表">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<row>
+					资产编号:
+					<a:bind value="allocationline.eqnum" />
+					<itextbox id="allocationline.eqnum" />
+					描述:
+					<a:bind value="allocationline.description" />
+					<itextbox id="allocationline.description" />
+
+				</row>
+				<row>
+					源仓库:
+					<a:bind value="allocationline.fromwarehouse" />
+					<itextbox id="allocationline.fromwarehouse" />
+					型号:
+					<a:bind value="allocationline.modelnum" />
+					<itextbox id="allocationline.modelnum" />
+
+				</row>
+				<row>
+					库存编号:
+					<a:bind value="allocationline.itemnum" />
+					<itextbox id="allocationline.itemnum" />
+
+					数量:
+					<a:bind value="allocationline.quantity" />
+					<idoublebox id="allocationline.quantity" />
+				</row>
+				<row>
+					成本:
+					<a:bind value="allocationline.totalcost" />
+					<idoublebox id="allocationline.totalcost" />
+				</row>
+				<!-- 
+				调拨单号:
+					<a:bind value="allocationline.allocationnum" />
+					<itextbox id="allocationline.allocationnum" />
+				<row>
+					地点:
+					<a:bind value="allocationline.sitenum" />
+					<ibandbox id="allocationline.sitenum"
+						lookup="corpsite" />
+					组织机构:
+					<a:bind value="allocationline.corpnum" />
+					<itextbox id="allocationline.corpnum" />
+
+				</row>
+				 -->
+
+			</rows>
+		</grid>
+	</groupbox>
+</editwindow>

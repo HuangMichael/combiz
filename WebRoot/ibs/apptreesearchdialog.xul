@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"ibstreesearch.searchlist","ibstreesearch.description","ibstreesearch.searchbandfld"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibstreesearch.listtype"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="搜索值列表配置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						搜索值列表：<a:bind value="ibstreesearch.searchlist"/><ibandbox id="ibstreesearch.searchlist" lookup="ibslist"/>	
+						查询描述：<a:bind value="ibstreesearch.description"/><itextbox id="ibstreesearch.description" cols="40"/>					
+						</row>
+						<row>
+						搜索绑定字段：<a:bind value="ibstreesearch.searchbandfld"/><ibandbox id="ibstreesearch.searchbandfld" lookup="ibstablecols"/>	
+						</row>
+						<row>
+						人员值列表：<a:bind value="ibstreesearch.islabor"/><icheckbox id="ibstreesearch.islabor"/>	
+						部门值列表：<a:bind value="ibstreesearch.isdepartment"/><icheckbox id="ibstreesearch.isdepartment"/>	
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

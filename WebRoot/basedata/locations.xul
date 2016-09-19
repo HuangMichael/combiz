@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="locations" title="组装结构" resize="true" use="combiz.ui.location.LocationsWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="设备位置结构"/>
+<hbox width="220px">
+<label value="系统:"/>
+<listbox use="combiz.ui.location.LocsystemListbox" width="170"/>
+</hbox>
+<separator spacing="1"/>
+<tree use="combiz.ui.location.LocationsTree"/>
+</groupbox>
+<splitter collapse="before"/>
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="位置" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"locations.changeby","locations.changedate","locations.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row spans="1,3">
+						位置:
+						<groupbox>
+						<a:bind value="locations.location"/><itextbox id="locations.location"/>
+						<a:bind value="locations.description"/><itextbox id="locations.description" cols="40"/>
+						</groupbox>
+						</row>
+						<row spans="1,3">
+						父级:
+						<groupbox>
+						<a:bind value="locstruct.parent"/><itextbox id="locstruct.parent"/>
+						<a:bind value="parent.description"/><itextbox id="parent.description" cols="40"/>
+						</groupbox>
+						</row>
+						<row>
+						状态:<a:bind value="locations.status"/><icombobox id="locations.status"/>
+						类型:<a:bind value="locations.type"/><icombobox id="locations.type"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						所属部门:<a:bind value="locations.deptnum"/><ibandbox id="locations.deptnum" lookup="department"/>
+						所属专业:<a:bind value="locations.craft"/><icombobox id="locations.craft"/>
+						</row>
+						<row>
+						分类:<a:bind value="locations.classid"/><ibandbox id="locations.classid" lookup="classificationeq"/>
+						排序号:<a:bind value="locstruct.orderby"/><itextbox id="locstruct.orderby" cols="4"/>
+						</row>
+						<!--<row>
+						修改人: 修改人 <a:bind value="locations.changeby"/><itextbox id="locations.changeby"/>
+						修改时间: 修改时间 <a:bind value="locations.changedate"/><idatebox id="locations.changedate"/>
+						</row>
+						-->
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<attachimage label="设备图片(点击右键上传图片)" width="99%" imgwidth="100" imgheight="100" horizontal="true" readOnly="false"/>
+				<separator spacing="2px"/>
+				
+				<listwindow id="equipment" title="位置上的设备" editpopup="true" applink="equipment" edittype="READONLY" 
+				use="combiz.ui.location.EquipmentList" dialog="/location/equipmentdialog.xul">
+					<tablelist band="equipment" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="eqnum" label="设备" sort="auto" width="20%"/><!--  -->
+							<tablelistheader data="description" label="描述" sort="auto" width="50%"/><!--  -->
+							<tablelistheader data="status" label="状态" sort="auto" width="10%"/><!--  -->
+							<tablelistheader data="labornum" label="负责人" sort="auto" width="10%" applink="labor"/>
+							<tablelistheader data="deptnum" label="负责部门 " sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				
+			</tabpanel>
+		
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

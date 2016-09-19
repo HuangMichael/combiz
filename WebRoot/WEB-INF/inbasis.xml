@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<inbasis>
+
+	<system-config>
+		<max-event-threads>1000</max-event-threads>
+		<max-upload-size>51200</max-upload-size>
+		<response-charset>GBK</response-charset>
+	</system-config>
+	
+	<!-- Configure the error page  -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/system/error.xul</location>
+	</error-page>
+	
+	<session-config>
+		<timeout-uri>/system/timeout.xul</timeout-uri>
+	</session-config>
+	
+</inbasis>

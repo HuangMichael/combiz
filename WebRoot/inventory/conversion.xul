@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="conversionWnd" title="单位转化系数" width="600" closable="true">
+	<listwindow id="conversionList" tablename="conversion"
+		dialog="/inventory/conversiondialog.xul"
+		use="combiz.ui.inventory.InventoryConversion">
+		<tablelist band="conversionList" pageSize="16">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif" />
+				<tablelistheader data="orderunit" label="订购单位"
+					sort="auto" width="20%" />
+				<tablelistheader data="issueunit" label="发放单位"
+					sort="auto" width="20%" />
+				<tablelistheader data="conversion" label="转换系数"
+					sort="auto" width="10%" />
+				<tablelistheader data="itemnum" label="物资编码"
+					sort="auto" width="20%" />
+				<tablelistheader data="item.description" label="描述"
+					sort="auto" width="30%" />
+			</listhead>
+		</tablelist>
+	</listwindow>
+	<div align="center">
+		<button label="保存数据" onClick="conversionList.save()" />
+		<button label="关闭窗口" onClick="conversionWnd.onClose()" />
+	</div>
+</window>

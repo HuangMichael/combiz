@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="工作流操作" width="600">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+					<groupbox id="searchBox">
+						<caption label="过滤器"/>
+						操作：<stextbox data="action" cols="10"/> 
+						描述：<stextbox data="description" cols="15"/> 
+						<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+					</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				
+				<!-- //////////////////数据列表区///////////////////////// -->		
+					<pagenavigator/>
+					<lookuplist pageSize="20">
+						<listhead>
+							<lookuplistheader data="action" label="操作" sort="auto" width="20%"/>
+							<lookuplistheader data="description" label="描述" sort="auto" width="25%"/>
+							<lookuplistheader data="actiontype" label="操作类型" sort="auto" width="15%"/>
+							<lookuplistheader data="actionstring" label="操作值" sort="auto" width="25%"/>
+							<lookuplistheader data="TABLECOL" label="操作字段" sort="auto" width="15%"/>
+						</listhead>
+					</lookuplist>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+
+					<div align="center">
+					<button label="确 定" onClick="lookupWnd.ok(event)"/>
+					<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+					</div>
+</lookupwindow>

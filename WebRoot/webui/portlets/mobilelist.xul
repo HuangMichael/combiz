@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--
+公司通讯录
+linkapp: 如果是业务数据，设置该属性链接到业务应用程序。
+linkpage: 如果是信息类数据，设置该属性后使用页面打开详细数据，linkpage="/webui/msgdialog.xul"，该页面需要继承CommonDialog
+listwhere: 设置过滤条件，可以使用全局参数，如receiver=':{labor.labornum}' 或 userid =':{ibsusers.userid}' 等
+-->
+<window id="mobileListWnd" tablename="labor" use="combiz.system.ui.portal.PortletWindow" 
+showfilter="true" orderby="deptnum" linkpage="/webui/portlets/laborprofile.xul">
+	<tablelist band="mobileListWnd" pageSize="8">
+		<listhead>
+			<tablelistheader data="laborname" label="姓名" sort="auto" width="30%" />
+			<tablelistheader data="deptnum" label="部门" sort="auto" width="45%" />
+			<tablelistheader data="mphone" label="手机号码" sort="auto" width="25%" />
+		</listhead>
+	</tablelist>
+</window>

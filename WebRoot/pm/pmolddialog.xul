@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {}; mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="预防性维护历史表"><!-- 预防性维护历史表 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					工单编号<!-- 工单编号 -->：
+					<a:bind value="pmgenhistory.wonum" />
+					<ibandbox id="pmgenhistory.wonum" lookup="wonum" />
+					起始日期<!-- 起始日期 -->：
+					<a:bind value="pmgenhistory.startdate" />
+					<idatebox id="pmgenhistory.startdate" cols="20" />
+
+				</row>
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					上一次生成日期<!-- 上一次生成日期 -->:
+					<a:bind value="pmgenhistory.performdate" />
+					<idatebox id="pmgenhistory.performdate" cols="20" />
+					下次执行日期<!-- 下次执行日期 -->：
+					<a:bind value="pmgenhistory.nextstartdate" />
+					<idatebox id="pmgenhistory.nextstartdate" cols="20" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					标准作业计划<!-- 标准作业计划 -->：
+					<a:bind value="pmgenhistory.jpnum" />
+					<ibandbox id="pmgenhistory.jpnum" lookup="jobplan" />
+
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

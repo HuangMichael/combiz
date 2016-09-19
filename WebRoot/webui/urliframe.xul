@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="应用链接窗口" use="combiz.system.common.UrlIframeDialog" closable="true">
+<iframe id="urlView" width="100%" height="94%"/>
+<div align="right">
+<button label="关闭应用链接窗口" onClick="urlWnd.onClose()"/>
+</div>
+</window>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="位置技术参数"><!-- 位置技术参数 --><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						分类:<!-- 分类 --><a:bind value="locspec.classid"/><itextbox id="locspec.classid"/>
+						属性:<!-- 属性 --><a:bind value="locspec.classattr"/><itextbox id="locspec.classattr"/>
+						</row>
+						<row spans="1,3">
+						字符值:<!-- 字符值 --><a:bind value="locspec.strvalue"/><itextbox id="locspec.strvalue" cols="40"/>
+						</row>	
+						<row>
+						单位:<!-- 单位--><a:bind value="locspec.unitid"/><ibandbox id="locspec.unitid" lookup="measurement" />
+						是否必需:<!-- 是否必需 --><a:bind value="locspec.ismustbe"/><icheckbox id="locspec.ismustbe"/>
+						</row>		
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						备注:<!-- 备注 --><a:bind value="locspec.remark"/><itextbox id="locspec.remark" cols="40"/>
+						
+						</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口-->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

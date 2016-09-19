@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="appHelpWiewWnd" title="帮助文档" use="combiz.system.ui.StateWindow" border="normal" closable="true">
+<iframe id="appHelpView" width="100%" height="94%"/>
+<div align="right">
+<button label="关闭帮助窗口" onClick="appHelpWiewWnd.onClose()"/>
+</div>
+</window>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="指定重新将任务分配给谁？" use="combiz.system.workflow.WFReassignDialog" 
+width="700" border="normal" closable="true" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	<groupbox>
+		<grid>
+			<rows>
+				<row spans="2">请修改下面的任务分配人，点击确定后您的任务将会被分配给下面选择的人。</row>
+				<row>
+					任务分配人:
+					<a:bind value="wfassignment.reassign" />
+					<ibandbox id="wfassignment.reassign" lookup="labor" />
+				</row>
+			</rows>
+		</grid>
+		<groupbox>
+			<caption label="审批意见:"/>
+			<a:bind value="wfassignment.lastmemo" />
+			<itextbox id="wfassignment.lastmemo" cols="80" rows="3"/>
+		</groupbox>
+	<listwindow id="wftransWnd" title="之前的流程审批意见" use="combiz.system.ui.CommonListWindow" tablename="WFTRANS" edittype="LISTONLY" searchable="false">
+	<tablelist band="wftransWnd" pageSize="8">
+		<listhead>
+				<tablelistheader src="/images/img_listitem.gif"/>
+				<tablelistheader data="assigncode" label="审批人" sort="auto" width="10%"/>
+				<tablelistheader data="memo" label="审批意见" sort="auto" width="60%"/>
+				<tablelistheader data="transdate" label="审批时间" sort="auto" width="30%"/>
+		</listhead>
+	</tablelist>
+	</listwindow>
+	</groupbox>
+		<div align="center">
+			<button label="确定" onClick="mainWnd.reassign()"/>
+			<button label="取消" onClick="mainWnd.onClose()"/>
+		</div>
+</window>

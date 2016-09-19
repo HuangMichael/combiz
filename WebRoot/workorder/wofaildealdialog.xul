@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="措施代码"><!-- 措施代码 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<row>
+					措施代码<!-- 措施代码 -->:
+					<a:bind value="wofaildeal.failuredeal" />
+					<ibandbox id="wofaildeal.failuredeal" lookup="failuredeal" checkdata="false"/>
+				</row>
+				<row>
+					描述<!-- 描述 -->:
+					<a:bind value="wofaildeal.description" />
+					<itextbox id="wofaildeal.description" />
+				</row>
+
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

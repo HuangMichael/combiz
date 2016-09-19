@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required =
+		{"premaint.firstdate","premaint.worktype","premaint.autowf"};
+		mainWnd.setRequired(required); 
+		String[] readonly =
+		{"premaint.adjnextdue","premaint.pmcounter","premaint.lastcompdate","premaint.laststartdate"};
+		mainWnd.setReadonly(readonly); mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="预防性维护"><!-- 预防性维护 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,1,1,3">
+					预防性维护<!-- 预防性维护 -->:
+					<a:bind value="premaint.pmnum" />
+					<itextbox id="premaint.pmnum" />
+					描述<!-- 描述 -->：
+					<a:bind value="premaint.description" />
+					<itextbox id="premaint.description" cols="40" />
+
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,1,1,3">
+					位置<!-- 位置 -->：
+					<a:bind value="premaint.location" />
+					<ibandbox id="premaint.location" lookup="location" />
+					位置描述<!-- 位置描述： -->:
+					<a:bind value="locations.description" />
+					<itextbox id="locations.description" cols="40" />
+				</row>
+				<row spans="1,1,1,3">
+					设备编号<!-- 设备编号 -->:
+					<a:bind value="premaint.eqnum" />
+					<ibandbox id="premaint.eqnum" lookup="equipment" />
+					设备描述<!-- 设备描述 -->：
+					<a:bind value="equipment.description" />
+					<itextbox id="equipment.description" cols="40" />
+				</row>
+				<row>
+					频率<!-- 频率 -->:
+					<a:bind value="premaint.frequency" />
+					<ilongbox id="premaint.frequency" />
+					使用频率?<!-- 使用频率? -->：
+					<a:bind value="premaint.usefrequency" />
+					<icheckbox id="premaint.usefrequency" />
+					是否启用工作流<!-- 是否启用工作流 -->：
+					<a:bind value="premaint.autowf" />
+					<icheckbox id="premaint.autowf" />
+
+
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					频率单位<!-- 频率单位 -->:
+					<a:bind value="premaint.frequnit" />
+					<icombobox id="premaint.frequnit" cols="4" />
+					使用作业序列？<!-- 使用作业序列？ -->：
+					<a:bind value="premaint.usejpseq" />
+					<icheckbox id="premaint.usejpseq" />
+					需要停机?<!-- 需要停机? -->：
+					<a:bind value="premaint.eqdown" />
+					<icheckbox id="premaint.eqdown" />
+
+
+				</row>
+
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					工单类型<!-- 工单类型 -->:
+					<a:bind value="premaint.worktype" />
+					<icombobox id="premaint.worktype" />
+					标准作业计划<!-- 标准作业计划 -->：
+					<a:bind value="premaint.jpnum" />
+					<ibandbox id="premaint.jpnum" lookup="jobplan" />
+					工单状态<!-- 工单状态 -->:
+					<a:bind value="premaint.wostatus" />
+					<ibandbox id="premaint.wostatus"
+						lookup="ibslistvalue" />
+
+				</row>
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					第一次启动日期<!-- 第一次启动日期 -->:
+					<a:bind value="premaint.firstdate" />
+					<idatebox id="premaint.firstdate" />
+					下一个到期日<!-- 下一个到期日 -->：
+					<a:bind value="premaint.nextdate" />
+					<idatebox id="premaint.nextdate" />
+					最近一次完成日期<!-- 最近一次完成日期 -->：
+					<a:bind value="premaint.lastcompdate" />
+					<idatebox id="premaint.lastcompdate" />
+
+
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					负责班组<!-- 负责班组 -->:
+					<a:bind value="premaint.crewid" />
+					<ibandbox id="premaint.crewid" lookup="department" />
+					工作负责人<!-- 工作负责人 -->：
+					<a:bind value="premaint.supervisor" />
+					<ibandbox id="premaint.supervisor" lookup="labor" />
+					维护次数<!-- 维护次数 -->:
+					<a:bind value="premaint.pmcounter" />
+					<ilongbox id="premaint.pmcounter" cols="4" />
+
+					<!-- 仓库:
+						<a:bind value="premaint.warehouse" />
+						<ibandbox id="premaint.warehouse"
+						lookup="warehouse" />
+					-->
+
+
+				</row>
+				<row>
+
+					<!--  	提前期：
+						<a:bind value="premaint.leadtime" />
+						<ilongbox id="premaint.leadtime" cols="4" />
+					-->
+
+					父级<!-- 父级 -->:
+					<a:bind value="premaint.parent" />
+					<ibandbox id="premaint.parent" lookup="premaint" />
+					上次开始日期<!-- 上次开始日期 -->：
+					<a:bind value="premaint.laststartdate" />
+					<idatebox id="premaint.laststartdate" />
+
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

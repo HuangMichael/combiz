@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="公告信息" use="combiz.system.ui.CommonDialog" width="700" closable="true"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>	
+
+				<grid>
+					<rows>
+						<row spans="1,5">
+						标题：<a:bind value="msgsender.title"/><itextbox id="msgsender.title" cols="80" />
+						<attachment readonly="true"/>
+						</row>
+
+						<row spans="1,5">
+						内容：<a:bind value="msgsender.body"/><itextbox id="msgsender.body" cols="80" rows="10"/>
+						</row>
+							
+					</rows>
+				</grid>
+
+
+
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.onClose()"/>
+	</div>
+	
+</window>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="发放库存项目" use="combiz.ui.inventory.IssueInventoryDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invusetrans.itemnum","invusetrans.description"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						库存项目：<a:bind value="invusetrans.itemnum"/><itextbox id="invusetrans.itemnum"/>
+						描述：<a:bind value="invusetrans.description"/><itextbox id="invusetrans.description" cols="40"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						仓库：<a:bind value="invusetrans.warehouse"/><itextbox id="nvusetrans.warehouse"/>
+						箱柜号：<a:bind value="invusetrans.binnum"/><ibandbox id="invusetrans.binnum" lookup="binnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						发放位置：<a:bind value="invusetrans.location"/><ibandbox id="invusetrans.location" lookup="location"/>
+						发放人员：<a:bind value="invusetrans.issuetolabor"/><ibandbox id="invusetrans.issuetolabor" lookup="labor" />
+						</row>
+						<row>
+						数量：<a:bind value="invusetrans.quantity"/><idoublebox id="invusetrans.quantity" format="0.00"/>
+						</row>
+						</rows>
+						<!-- //////////////////////row//////////////// -->
+				</grid>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.issue();mainWnd.save();mainWnd.cancel()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

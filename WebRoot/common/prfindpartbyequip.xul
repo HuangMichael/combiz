@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<window width="700"  title="选择备件" closable="true" use="combiz.ui.common.PrFindpartByequip" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<div><!-- 选择备件 -->
+		设备编号:<!-- 设备编号 --><a:bind value="workorder.eqnum"/><ibandbox  id="workorder.eqnum" lookup="equipment" />
+		描述:<!-- 描述 --><a:bind value="equipment.description" /><itextbox id="equipment.description" cols="40" />
+		<button label="查 询" onClick="mainWnd.searchpart()" /><!--  查 询  -->
+	</div>
+<listwindow id="prfindpartyequipWnd" use="combiz.system.ui.CommonListWindow" closable="true"  multiple="true" edittype="listonly" tablename="eqsparepart" autodata="false"><!-- 选择备件 -->
+	<tablelist band="prfindpartyequipWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="itemnum" label="备件编号" sort="auto" width="20%" /><!-- 备件编号 -->
+			<tablelistheader data="description" label="描述" sort="auto" width="80%" /><!-- 描述 -->
+		</listhead>
+	</tablelist>
+
+</listwindow>
+	
+	<div align="center">
+		<button label="确 定" onClick="mainWnd.addpart()" /><!-- 确 定  -->
+		<button label="取 消" onClick="mainWnd.onClose()" /><!-- 取 消  -->
+	</div>
+</window>
+

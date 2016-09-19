@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.WorkSheet">
+<Version>2.0</Version>
+<TableDataMap>
+<NameTableData name="inbasis.workticket">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from workticket where wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.工作任务">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a,woworktask b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.安全措施-断路器，隔离开关">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wosafety b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.安全措施-接地线，接地刀闸">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wosafetyline b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.安全措施-遮拦，标示牌">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wosafetybaffle b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.危险点控制措施">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wosafecontrol b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.人员变动">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wouserchange b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.工作票延期">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, workdefer b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.开收工时间">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wostartendtime b where a.wonum=b.wonum and b.wonum='[?wonum|?]'
+]]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.工作地点保留的带电部分或注意事项">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="wonum" type="0">
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from workticket a, wohaveele b where a.wonum=b.wonum and b.wonum='[?wonum|?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.11811023622047245" left="0.1968503937007874" bottom="0.11811023622047245" right="0.1968503937007874" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportExportAttr pdfPrinting="false"/>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,20.0,20.0,20.0,20.0,20.0,19.0,20.0,20.0,25.0,20.0,25.0,25.0,25.0,20.0,25.0,25.0,20.0,25.0,25.0,25.0,25.0,20.0,25.0,25.0,20.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,19.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,19.0,19.0,19.0,19.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0,25.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[36.0,36.0,18.0,23.0,18.0,36.0,36.0,36.0,36.0,36.0,18.0,36.0,36.0,36.0,36.0,72.0,18.0,72.0,18.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="9" cs="6" s="0"><O t="S">1.工作负责人（监护人）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="9" cs="2" s="1"><O t="S">班组：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="11" cs="8" s="0"><O t="S">2.工作人员(不包括工作负责人)：</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="11" s="0"><O t="S">人</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="12" cs="19" rs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="WORKUSER" dsDisplayName="inbasis.workticket" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="15" cs="8" s="0"><O t="S">3.工作地点(变配电站名称)：</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="15"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="15"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="15"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="15"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="15"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="9" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="DEPTGROUP" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="18" cs="4" s="0"><O t="S">4.工作任务</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="20" cs="6" s="2"><O t="DSColumn"><Attributes dsName="inbasis.工作任务" columnName="ADDRESS" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="21" cs="6" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="19" cs="6" s="4"><O t="S">工作地点</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="23" cs="5" s="0"><O t="S">5、计划工作时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="26" cs="8" s="0"><O t="S">6.安全措施（必要时可附页绘图说明）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="33" cs="10" s="5"><O t="S">工作地点保留带电部分或注意事项</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="35" cs="10" s="2"><O t="DSColumn"><Attributes dsName="inbasis.工作地点保留的带电部分或注意事项" columnName="ELENAME" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="38" cs="5" s="6"><O t="S">工作票签发人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="19" cs="8" s="4"><O t="S">工作内容</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="20" cs="8" s="2"><O t="DSColumn"><Attributes dsName="inbasis.工作任务" columnName="WORKCONTENT" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="21" cs="8" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="37" cs="5" s="7"><O t="S">签发工作票时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="7"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="8" s="8"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="8" s="8"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="11" cs="2" s="8"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="WORKUSER" dsDisplayName="inbasis.workticket" />
+<O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=LEN(WORKUSER)-LEN(SUBSTITUTE(WORKUSER,"、",""))+1]]>
+</Attributes>
+</O></O><CellExpandAttr />
+</C>
+<C c="6" r="21" cs="5" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="27" cs="15" s="4"><O t="S">应拉断路器（开关）和隔离刀闸（开关）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="28" cs="15" s="2"><O t="DSColumn"><Attributes dsName="inbasis.安全措施-断路器，隔离开关" columnName="NAME" dsDisplayName="inbasis.安全措施-断路器，隔离开关" />
+<Complex type="2" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="31" cs="15" s="4"><O t="S">应设遮栏，应挂标示牌及防止二次回路误碰</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="32" cs="15" s="2"><O t="DSColumn"><Attributes dsName="inbasis.安全措施-遮拦，标示牌" columnName="NAME" dsDisplayName="inbasis.安全措施-遮拦，标示牌" />
+<Complex type="2" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="29" cs="15" s="4"><O t="S">应装接地线、应合接地刀闸</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="30" cs="15" s="2"><O t="DSColumn"><Attributes dsName="inbasis.安全措施-接地线，接地刀闸" columnName="NAME" dsDisplayName="inbasis.安全措施-接地线，接地刀闸" />
+<Complex type="2" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="34" cs="10" s="9"><O t="S">（工作票签发人填写）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="36" cs="10" s="10"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="36" cs="9" s="11"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="27" cs="4" s="4"><O t="S">已执行</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="29" cs="4" s="4"><O t="S">已执行</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="31" cs="4" s="4"><O t="S">已执行</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="28" cs="4" s="11"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="30" cs="4" s="11"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="32" cs="4" s="11"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="38" s="12"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="37" s="12"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="18" r="37" s="13"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="18" r="38" s="13"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="33" cs="9" s="14"><O t="S">补充工作地点保留带电部分和安全措施</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="34" cs="9" s="15"><O t="S">（工作许可人填写）</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="35" cs="9" s="2"><O t="DSColumn"><Attributes dsName="inbasis.工作地点保留的带电部分或注意事项" columnName="NOTICE" />
+</O><CellExpandAttr />
+</C>
+<C c="14" r="37" cs="3" s="16"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="38" cs="3" s="17"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="38" cs="4" s="6"><O t="S">工作票接收人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="37" cs="4" s="7"><O t="S">收到工作票时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="16" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="1"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="1" cs="5" rs="5" s="18"><O t="S">变1</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="7" cs="2" s="1"><O t="S">编号：</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="7" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="TICKETNUM" />
+</O><CellExpandAttr />
+</C>
+<C c="4" r="7" cs="3" s="19"><O t="S">工作单位：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="7" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="WORKDEPT" />
+</O><CellExpandAttr />
+</C>
+<C c="6" r="19" cs="5" s="4"><O t="S">设备双重名称</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="20" cs="5" s="2"><O t="DSColumn"><Attributes dsName="inbasis.工作任务" columnName="EQNUM" />
+</O><CellExpandAttr />
+</C>
+<C c="5" r="2" cs="13" rs="2" s="20"><O t="S">重庆市忠县供电公司变电第一种工作票</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="0"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="43"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="42"><O t="S"></O><CellExpandAttr direction="2" />
+<CellAttr repeat="false" /></C>
+<C c="12" r="11" s="21"><O t="S">共</O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="39"><O t="S"></O><CellExpandAttr direction="2" />
+<CellAttr pageAfterRow="true" /></C>
+<C c="0" r="44" cs="4" s="0"><O t="S">7.许可开始时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="45" cs="6" s="0"><O t="S">     工作许可人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="45"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="45" cs="3" s="1"><O t="S">工作负责人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="45" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="PRINCIPAL1" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="47" cs="5" s="0"><O t="S">8、危险点控制措施</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="48" cs="6" s="4"><O t="S">监护地点</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="48" cs="10" s="4"><O t="S">具体工作内容</O><CellExpandAttr direction="2" />
+</C>
+<C c="16" r="48" cs="3" s="4"><O t="S">专责监护人</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="49" cs="6" s="2"><O t="DSColumn"><Attributes dsName="inbasis.危险点控制措施" columnName="WARDSTATION" dsDisplayName="inbasis.危险点控制措施" />
+</O><CellExpandAttr />
+</C>
+<C c="6" r="49" cs="10" s="2"><O t="DSColumn"><Attributes dsName="inbasis.危险点控制措施" columnName="WORKCONTENT" />
+</O><CellExpandAttr />
+</C>
+<C c="16" r="49" cs="3" s="2"><O t="DSColumn"><Attributes dsName="inbasis.危险点控制措施" columnName="WARDUSER" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="50" cs="19" s="4"><O t="S">工作班组人员签名：（确认工作负责人布置的任务和本工作的安全措施）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="51" cs="19" rs="3" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="55" cs="8" s="0"><O t="S">9.工作负责人及工作人员变动：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="56" cs="5" s="1"><O t="S">     原工作负责人</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="57" cs="2" s="0"><O t="S">变动时间：</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="57"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="58" cs="4" s="0"><O t="S">工作票签发人：</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="58" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="SIGNATORY" />
+</O><CellExpandAttr />
+</C>
+<C c="11" r="58" cs="3" s="1"><O t="S">工作许可人：</O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="58" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="FIATUSER" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="59" cs="12" s="0"><O t="S">工作人员变动情况（增减人员姓名、变动日期及时间）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="60" cs="19" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="USERCHANGE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="61"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="61"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="61"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="61" cs="3" s="1"><O t="S">工作负责人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="61" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="NEWPRINCIPAL" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="63" cs="4" s="0"><O t="S">10.工作票延期</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="64" cs="6" s="1"><O t="S">    有效期延长到： </O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="65" cs="4" s="0"><O t="S">工作负责人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="65" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.工作票延期" columnName="PRINCIPAL" />
+</O><CellExpandAttr />
+</C>
+<C c="10" r="65"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="65" cs="3" s="1"><O t="S">工作许可人签名：</O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="65" cs="3" s="3"><O t="DSColumn"><Attributes dsName="inbasis.工作票延期" columnName="FIATUSER" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="67" cs="12" s="0"><O t="S">11.每日开工和收工时间（使用一天的工作票不必填写）</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="68" cs="4" s="22"><O t="S">收工时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="68" cs="4" s="4"><O t="S">工作负责人</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="68" cs="3" s="4"><O t="S">工作许可人</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="68" cs="4" s="4"><O t="S">开工时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="68" cs="2" s="4"><O t="S">工作负责人</O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="68" cs="2" s="4"><O t="S">工作许可人</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="69" cs="4" s="23"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="FINALTIME" dsDisplayName="inbasis.开收工时间" />
+</O><CellExpandAttr />
+</C>
+<C c="4" r="69" cs="4" s="2"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="PRINCIPAL1" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="69" cs="3" s="2"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="FIATUSER1" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="69" cs="4" s="23"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="STARTTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="69" cs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="PRINCIPAL2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="69" cs="2" s="2"><O t="DSColumn"><Attributes dsName="inbasis.开收工时间" columnName="FIATUSER2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="70" cs="4" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="70" cs="4" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="70" cs="3" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="70" cs="4" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="70" cs="2" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="70" cs="2" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="72" cs="4" s="0"><O t="S">12.工作终结：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="80" cs="5" s="0"><O t="S">13、工作票终结：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="86" cs="8" s="0"><O t="S">14.备注：（可汇图可写文字说明）</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="86" cs="11" s="8"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="87" cs="19" rs="7" s="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="17" r="71"><O t="S"></O><CellExpandAttr direction="2" />
+<CellAttr repeat="false" /></C>
+<C c="1" r="73" cs="4" s="0"><O t="S">  全部工作于</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="73" cs="9" s="1"><O t="S">结束，设备及安全措施已恢复至开工前状态，工作人员已全部</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="74" cs="8" s="0"><O t="S">撤离，材料工具已清理完毕，工作终结。</O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="81" cs="12" s="0"><O t="S">   临时遮栏、标示牌已拆除，常设遮栏已恢复。未拆除接地</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="84" cs="3" s="0"><O t="S">工作许可人：</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="84" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="FIATUSER5" />
+</O><CellExpandAttr />
+</C>
+<C c="6" r="9" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="PRINCIPAL" dsDisplayName="inbasis.workticket" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="37" cs="5" s="24"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="SIGNDATE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="38" cs="5" s="25"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="SIGNATORY" />
+</O><CellExpandAttr />
+</C>
+<C c="4" r="44" cs="5" s="26"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="FIATDATE" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="45" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="FIATUSER1" />
+</O><CellExpandAttr />
+</C>
+<C c="5" r="56" cs="4" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="PRINCIPAL" />
+</O><CellExpandAttr />
+</C>
+<C c="9" r="56" cs="3" s="1"><O t="S">离去，变更</O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="56" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="NEWPRINCIPAL" />
+</O><CellExpandAttr />
+</C>
+<C c="14" r="56" cs="3" s="0"><O t="S">为工作负责人。</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="57" cs="5" s="26"><O t="DSColumn"><Attributes dsName="inbasis.人员变动" columnName="CHANGEDATE" />
+</O><CellExpandAttr />
+</C>
+<C c="6" r="64" cs="4" s="26"><O t="DSColumn"><Attributes dsName="inbasis.工作票延期" columnName="NEWDATE" />
+</O><CellExpandAttr />
+</C>
+<C c="7" r="84" cs="2" s="1"><O t="S">日期：</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="84" cs="4" s="26"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="TICKETFINALTIME" />
+</O><CellExpandAttr />
+</C>
+<C c="17" r="75"><O t="S"></O><CellExpandAttr direction="2" />
+<CellAttr pageAfterRow="true" /></C>
+<C c="15" r="84" cs="3" s="8"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="82" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="UNLINECOUNT" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="82" s="1"><O t="S">共</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="82" cs="4" s="1"><O t="S">组、接地刀闸共</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="82" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="SWITCHCOUNT" />
+<Complex type="2" />
+</O><CellExpandAttr />
+</C>
+<C c="9" r="82" cs="5" s="1"><O t="S">把、绝缘挡板（罩）共</O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="82" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="BAFFLECOUNT" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="14" r="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="15" r="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="16" r="22"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="16" cs="18" s="27"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="SITENUM" dsDisplayName="inbasis.workticket" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="16" s="27"><O t="S"></O></C>
+<C c="5" r="73" cs="4" s="26"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="FINALTIME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="81" cs="6" s="3"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="UNLINENAME" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="16" r="82" cs="3" s="1"><O t="S">块，已汇报调度</O></C>
+<C c="0" r="83" cs="2" s="0"><O t="S">值班员。</O></C>
+<C c="6" r="24" s="1"><O t="S">至</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="24" cs="5" s="26"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="ENDDATE" />
+</O><CellExpandAttr />
+</C>
+<C c="6" r="23" s="1"><O t="S">自</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="23" cs="5" s="26"><O t="DSColumn"><Attributes dsName="inbasis.workticket" columnName="STARTDATE" />
+</O><CellExpandAttr />
+</C>
+</CellElementList>
+<WorkSheetAttr />
+<StyleList>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="50" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="宋体" style="1" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="25" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy-M-d]]>
+</Format>
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top color="-16777216"
+ /><Bottom style="1" /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+</StyleList>
+</Report>

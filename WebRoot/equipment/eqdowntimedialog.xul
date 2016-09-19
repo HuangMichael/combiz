@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow title="设备停机时间" width="700" closable="false"  use="combiz.system.ui.EditWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {"eqdowntime.wonum","eqdowntime.eqnum","eqdowntime.starttime","eqdowntime.endtime","eqdowntime.downtime"}; 
+		mainWnd.setRequired(required); 
+		String[] readonly = {}; 
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<grid>
+		<rows>
+			<row spans="1,3">
+				故障单:<!-- 故障单 -->
+				<a:bind value="eqdowntime.wonum" />
+				<ibandbox id="eqdowntime.wonum" lookup="wonum" />
+			</row>
+			<row>
+				设备编号:<!-- 设备编号 -->
+				<a:bind value="eqdowntime.eqnum" />
+				<ibandbox id="eqdowntime.eqnum" lookup="equipment" />
+				设备描述:<!-- 设备描述 -->
+				<a:bind value="equipment.description" />
+				<itextbox id="equipment.description" cols="40" />
+			</row>
+			<row>
+				位置:<!-- 位置 -->
+				<a:bind value="eqdowntime.location" />
+				<ibandbox id="eqdowntime.location" lookup="location" />
+				位置描述:<!-- 位置描述 -->
+				<a:bind value="location.description" />
+				<itextbox id="location.description" cols="40" />
+			</row>
+			<row>
+				停机开始时间:<!-- 停机开始时间 -->
+				<a:bind value="eqdowntime.starttime" />
+				<idatetimebox id="eqdowntime.starttime" />	
+				停机结束时间:<!-- 停机结束时间 -->
+				<a:bind value="eqdowntime.endtime" />
+				<idatetimebox id="eqdowntime.endtime" />
+			</row>
+			<row spans="1,3">
+				停机(小时):<!-- 停机(小时) -->
+				<a:bind value="eqdowntime.downtime" />
+				<idoublebox id="eqdowntime.downtime" />
+			</row>
+			<row spans="1,3" >
+				备注:<!-- 备注 -->
+				<a:bind value="eqdowntime.remark" />
+				<itextbox id="eqdowntime.remark" width="99%" rows="2"/>
+			</row>
+			<row>
+				汇报人:<!-- 汇报人 -->
+				<a:bind value="eqdowntime.reportby" />
+				<ibandbox id="eqdowntime.reportby" lookup="labor" />
+				汇报时间:<!-- 汇报时间 -->
+				<a:bind value="eqdowntime.reportdate" />
+				<idatetimebox id="eqdowntime.reportdate" />
+			</row>
+			</rows>
+		</grid>
+		<div align="right">
+			<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+		</div>
+		
+	</groupbox>
+</editwindow>

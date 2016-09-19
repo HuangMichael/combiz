@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="rptparamWnd" title="报表参数传递" closable="true" width="600"
+use="combiz.system.rpt.ReportParamDialog">
+<grid>
+<rows id="paramrow"/>
+</grid>
+<div align="center">
+<button label="确定" onClick="rptparamWnd.confirm()"/>
+<button label="取消" onClick="rptparamWnd.onClose()"/>
+</div>
+</window>

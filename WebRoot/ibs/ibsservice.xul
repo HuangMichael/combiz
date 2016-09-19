@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="IBSSERVICE" title="WEB服务" resize="true" use="combiz.ui.ibs.IbsserviceWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="WEB服务"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						服务名称<stextbox data="srvname" cols="10"/>
+						服务类名<stextbox data="classname" cols="10"/>
+						服务描述<stextbox data="description" cols="20"/>
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="srvname" label="服务名称" sort="auto" width="20%"/>
+						<resultlistheader data="enable" label="是否启用？" sort="auto" width="10%"/>
+						<resultlistheader data="classname" label="服务类名" sort="auto" width="40%"/>
+						<resultlistheader data="description" label="服务描述" sort="auto" width="30%"/>
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {""};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<row>
+						服务名称（可以是中文）:<a:bind value="ibsservice.srvname"/><itextbox id="ibsservice.srvname" cols="30"/>
+						</row>
+						<row>
+						服务类名（类的全路径）:<a:bind value="ibsservice.classname"/><itextbox id="ibsservice.classname" cols="60"/>
+						</row>
+						<row>
+						服务描述:<a:bind value="ibsservice.description"/><itextbox id="ibsservice.description" cols="60" rows="4"/>
+						</row>
+						<row>
+						是否启用：<a:bind value="ibsservice.enable"/><icheckbox id="ibsservice.enable"/>
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="GBK"?>
+<?page id="topPage"?>
+<window id="loginWnd" use="combiz.system.ui.LoginWnd">
+<zscript><![CDATA[
+String copyrights = loginWnd.getCopyrights();
+String version = loginWnd.getVersion();
+String imagePath = loginWnd.getImagePath();
+String prodName = loginWnd.getProductName();
+]]></zscript>
+<html>
+<attribute name="content">
+<![CDATA[
+<script type="text/javascript">
+window.document.title="${prodName}";
+</script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="809" height="446" align="center" background="${imagePath}/blue/login_bg.jpg">
+
+  <tr>
+   <td style="text-align: center;">
+	<!--<img alt="" src="${imagePath}/blue/login_bg.jpg" width="809" height="446" style="">--></td>
+
+  </tr>
+  <tr>
+   <td>
+   <table style="width: 100%">
+	<tr>
+		<td>&nbsp;</td>
+		<td style="width: 300px">
+
+]]>
+</attribute>
+</html>
+	<vbox>
+		<hbox>
+			
+			<vbox height="64px">
+				<!--<label value="用户名："/>--> <image src="/images/login/blue/username.gif"/>
+				<!--<label value="密&amp;码："/>--> <image src="/images/login/blue/password.gif"/>
+				
+				<!--<label value="导航菜单："/>-->
+			</vbox>
+			<vbox>
+				<hbox>
+				<iusernamebox/>
+				<!--<image id="selectUser" style="cursor:hand" onClick="loginWnd.selectUser()" src="/images/node_image_dept.gif"/>-->
+				</hbox>
+				<hbox>
+				<ipasswordbox/>
+				</hbox>
+				<hbox>
+				<div align="center">
+				<button id="loginAction" label="登录" style="cursor:hand" onClick="loginWnd.onLogin()"/>
+				</div>
+				</hbox>
+			</vbox>
+		</hbox>
+		<div height="15px">
+		 <label id="uiMessage"/>
+		 </div>
+	</vbox>
+</window>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="IBSHELPS" title="帮助文档" resize="true" use="combiz.ui.ibs.IbshelpsWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<tree use="combiz.ui.ibs.IbshelpsTree" width="140"/>
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="编辑帮助文档"/>
+		</tabs>
+		
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"ibshelps.menutype","ibshelps.helppath"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						
+						<row>
+						帮助菜单:<a:bind value="ibshelps.appmenu"/><itextbox id="ibshelps.appmenu"/>
+						文档描述:<a:bind value="ibshelps.description"/><itextbox id="ibshelps.description" cols="60"/>
+						
+						</row>
+						<row>
+						菜单类型:<a:bind value="ibshelps.menutype"/><itextbox id="ibshelps.menutype"/>
+						菜单排序:<a:bind value="ibshelps.position"/><ilongbox id="ibshelps.position"/>
+						</row>
+						<row spans="1,3">
+						帮助文件路径:<a:bind value="ibshelps.helppath"/><itextbox id="ibshelps.helppath" cols="60"/>
+						</row>
+
+					</rows>
+				</grid>
+				帮助文档编辑:修改文件后请点击”保存当前编辑文件“保存文件<button label="编辑当前文件" onClick="mainWnd.helpeditor()"/>
+				<groupbox width="98%" height="100%"><caption label="帮助文件预览" />
+					<iframe id="helpPreview" width="99%"/>
+				</groupbox>
+				
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

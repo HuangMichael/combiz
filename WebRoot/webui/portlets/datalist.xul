@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--
+门户数据列表示例
+linkapp: 如果是业务数据，设置该属性链接到业务应用程序。
+linkpage: 如果是信息类数据，设置该属性后使用页面打开详细数据，linkpage="/webui/msgdialog.xul"，该页面需要继承CommonDialog
+listwhere: 设置过滤条件，可以使用全局参数，如receiver=':{labor.labornum}' 或 userid =':{ibsusers.userid}' 等
+-->
+<window id="datalistwnd" tablename="item" use="combiz.system.ui.portal.PortletWindow">
+	<tablelist band="datalistwnd" pageSize="8">
+		<listhead>
+			<tablelistheader data="itemnum" label="应用" sort="auto" width="30%" />
+			<tablelistheader data="description" label="描述" sort="auto" width="70%" />
+		</listhead>
+	</tablelist>
+</window>

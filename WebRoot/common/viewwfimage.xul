@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="查看工作流程图" border="normal" width="820" closable="true"
+ use="combiz.system.workflow.ViewWFImageDialog" showinfo="true">
+	<grid id="wfimagemap" height="500"/>
+	<div align="center">
+		<checkbox label="显示审批人信息" use="combiz.system.ui.common.ShowWFInfo"/>
+		<button label=" 确 定 " onClick="mainWnd.onClose()"/>
+	</div>
+</window>

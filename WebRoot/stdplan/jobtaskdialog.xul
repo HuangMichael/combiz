@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 操作步骤 -->
+ <groupbox><caption label="操作步骤"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						任务编号<!-- 任务编号 -->:<a:bind value="jobtask.tasknum"/><itextbox id="jobtask.tasknum"  />
+						描述<!-- 描述 -->:<a:bind value="jobtask.description"/><itextbox id="jobtask.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						
+						任务持续时间<!-- 任务持续时间 -->:<a:bind value="jobtask.taskduration"/><ifloatbox id="jobtask.taskduration"/>
+						位置<!-- 位置 -->:<a:bind value="jobtask.location"/><ibandbox id="jobtask.location" lookup="location"/>
+						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备<!-- 设备 -->:<a:bind value="jobtask.eqnum"/>
+						<ibandbox id="jobtask.eqnum" lookup="equipment"/>
+						 <!-- <itextbox id="jobtask.eqnum" cols="10"/>-->
+						
+			 <!--			测点:	<a:bind value="jobtask.pointnum"/><itextbox id="jobtask.pointnum" cols="10"/>   -->
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

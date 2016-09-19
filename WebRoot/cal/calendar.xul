@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainlistwindow app="calendar" title="日历" resize="true" dialog="/cal/calendarpopup.xul"
+use="combiz.ui.cal.CalendarWindow" closable="true" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- **********************************  列表结果集页面 ********************************** -->
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					日历：<stextbox data="calnum"/>
+					描述：<stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="calnum" label="日历" sort="auto" width="20%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="50%"/>
+						<resultlistheader data="startdate" label="开始时间" sort="auto" width="15%"/>
+						<resultlistheader data="enddate" label="结束时间" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+				
+<!-- ********************************** //列表结果集页面 ********************************** -->				
+<button label="定义倒班模式" onClick="mainWnd.shift()"/>
+<!-- ********************************** //工作时间页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%">
+		<tabs>
+			<tab label="班次定义" width="70px" />
+			<tab label="工作排程表" width="100px" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<listwindow id="calshift" title="班次定义" dialog="/cal/calshiftdialog.xul">
+					<tablelist band="calshift" pageSize="10">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="shiftnum" label="班次" sort="auto" width="30%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="40%"/>
+							<tablelistheader data="startday" label="开始时间" sort="auto" width="30%"/>
+							<tablelistheader data="daymold" label="日模式" sort="auto" width="30%"/>
+						</listhead>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<tabpanel>
+				<listwindow id="calworkperiod" title="日历工作时间表" edittype="listonly" orderby="starttime">
+					<tablelist band="calworkperiod" pageSize="20">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="workdate" label="工作日期" sort="auto" width="20%"/>
+							<tablelistheader data="shiftnum" label="班次" sort="auto" width="20%"/>
+							<tablelistheader data="starttime" label="开始时间" sort="auto" width="20%"/>
+							<tablelistheader data="endtime" label="结束时间" sort="auto" width="20%"/>
+							<tablelistheader data="workhours" label="工作时长" sort="auto" width="20%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</mainlistwindow>

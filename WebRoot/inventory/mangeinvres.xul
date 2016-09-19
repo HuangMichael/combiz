@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="MANGEINVRES" title="预留管理" resize="true" use="combiz.ui.inventory.InvreserveWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="预留管理"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("reqdate");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						采购编码：<sbandbox data="itemnum" lookup="itemequip"/>
+						申请单号：<stextbox data="reqnum"/>
+						申请日期：<ssdatebox data="reqdate"/>
+						
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="itemnum" label="采购编码" sort="auto" width="10%"/>
+						<resultlistheader data="item.modelnum" label="规格型号" sort="auto" width="20%"/>
+						<resultlistheader data="item.description" label="描述" sort="auto" width="20%"/>
+						<resultlistheader data="reservedqty" label="预留数量" sort="auto" width="5%"/>
+						<resultlistheader data="loc.description" label="预留位置" sort="auto" width="10%"/>
+						<resultlistheader data="reqnum" label="申请单号" sort="auto" width="10%"/>
+						<resultlistheader data="issuedeptnum" label="发放至部门" sort="auto" width="10%"/>
+						<resultlistheader data="reqby" label="申请人" sort="auto" width="5%"/>
+						<resultlistheader data="reqdate" label="申请日期" sort="auto" width="10%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invreserve.itemnum","invreserve.reqdate","invreserve.reservedqty","invreserve.reqnum","invreserve.location","invreserve.issuedeptnum","invreserve.issuetolabor","invreserve.reqby","invreserve.requireddate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+							物资编码:
+							<a:bind value="invreserve.itemnum" />
+							<itextbox id="invreserve.itemnum" />
+							描述:
+							<a:bind value="item.description" />
+							<itextbox id="item.description" />
+						</row>
+						<row>
+						     规格型号:
+							<a:bind value="item.modelnum" />
+							<itextbox id="item.modelnum" />
+							申请的时间:
+							<a:bind value="invreserve.reqdate" />
+							<idatebox id="invreserve.reqdate" />
+						</row>
+						<row>
+							预留数量:
+							<a:bind value="invreserve.reservedqty" />
+							<idoublebox id="invreserve.reservedqty" />
+							申请编号:
+							<a:bind value="invreserve.reqnum" />
+							<itextbox id="invreserve.reqnum" />
+						</row>
+						<row>
+							预留位置:
+							<a:bind value="invreserve.location" />
+							<itextbox id="invreserve.location" />
+							描述:
+							<a:bind value="loc.description" />
+							<itextbox id="loc.description" />
+						</row>
+						<row>
+							发放至部门:
+							<a:bind value="invreserve.issuedeptnum" />
+							<itextbox id="invreserve.issuedeptnum" />
+							发至员工:
+							<a:bind value="invreserve.issuetolabor" />
+							<ibandbox id="invreserve.issuetolabor"
+								lookup="labor" />
+						</row>
+						<row>
+							申请人:
+							<a:bind value="invreserve.reqby" />
+							<itextbox id="invreserve.reqby" />
+							需求日期:
+							<a:bind value="invreserve.requireddate" />
+							<idatebox id="invreserve.requireddate" />
+						</row>
+						
+					</rows>
+				</grid>
+			</tabpanel>
+		
+		</tabpanels>
+	</tabbox>
+</mainwindow>

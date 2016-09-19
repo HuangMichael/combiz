@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {"wptask.jpnum"}; mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox><!-- 工单任务 -->
+		<caption label="工单任务">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,3">
+					<!--						作业包编号:<a:bind value="wptask.jpnum"/><itextbox id="wptask.jpnum"/>	-->
+					任务编号<!-- 任务编号 -->:
+					<a:bind value="wptask.tasknum" />
+					<itextbox id="wptask.tasknum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					描述<!-- 描述 -->:
+					<a:bind value="wptask.description" />
+					<itextbox id="wptask.description" cols="60" />
+					任务持续时间<!-- 任务持续时间 -->：
+					<a:bind value="wptask.taskduration" />
+					<idoublebox id="wptask.taskduration" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					状态<!-- 状态 -->：
+					<a:bind value="wptask.status" />
+					<itextbox id="wptask.status" />
+					状态日期<!-- 状态日期 -->：
+					<a:bind value="wptask.statusdate" />
+					<idatebox id="wptask.statusdate" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					位置<!-- 位置 -->：
+					<a:bind value="wptask.location" />
+					<ibandbox id="wptask.location" lookup="location" />
+					设备<!-- 设备 -->：
+					<a:bind value="wptask.eqnum" />
+					<ibandbox id="wptask.eqnum" lookup="equipment" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!--
+					<row spans="1,3">
+					测点:<a:bind value="wptask.pointnum"/>	<itextbox id="wptask.pointnum"/>
+					</row>
+				-->
+
+				<!-- //////////////////////row//////////////// -->
+				<!--
+					<row>
+					MEAVALUE:<a:bind value="wptask.meavalue"/><ifloatbox id="wptask.meavalue"/>
+					MEADATE:<a:bind value="wptask.meadate"/><idatebox id="wptask.meadate" />						
+					</row>
+				-->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					目标开始日期<!-- 目标开始日期 -->:
+					<a:bind value="wptask.targstart" />
+					<idatebox id="wptask.targstart" />
+					目标完成日期<!-- 目标完成日期 -->:
+					<a:bind value="wptask.targcomp" />
+					<idatebox id="wptask.targcomp" />
+				</row>
+				<row>
+					计划开始日期<!-- 计划开始日期 -->:
+					<a:bind value="wptask.schedstart" />
+					<idatebox id="wptask.schedstart" />
+					计划完成日期 <!-- 计划完成日期 -->:
+					<a:bind value="wptask.schedfinish" />
+					<idatebox id="wptask.schedfinish" />
+				</row>
+				<row>
+					实际开始日期<!-- 实际开始日期 -->:
+					<a:bind value="wptask.actstart" />
+					<idatebox id="wptask.actstart" />
+					实际完成日期<!-- 实际完成日期 -->:
+					<a:bind value="wptask.actfinish" />
+					<idatebox id="wptask.actfinish" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

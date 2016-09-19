@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="CHANGEMETHOD" title="增减方式" wfenabled="false" resize="true" use="combiz.ui.assetscard.ChangemethodWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="增减方式"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+							编号：<stextbox data="parent" />
+						    大类：<stextbox data="categories" />
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+							<resultlistheader data="parent" label="编号" sort="auto" width="33%"/>
+						<resultlistheader data="details" label="明细类别" sort="auto" width="33%"/>
+						<resultlistheader data="categories" label="大类" sort="auto" width="33%"/>
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {""};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						编号:<a:bind value="changemethod.parent"/><itextbox id="changemethod.parent"/>
+						大类:<a:bind value="changemethod.categories"/><itextbox id="changemethod.categories"/>
+					明细类别:<a:bind value="changemethod.details"/><itextbox id="changemethod.details"/>
+												
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</mainwindow>

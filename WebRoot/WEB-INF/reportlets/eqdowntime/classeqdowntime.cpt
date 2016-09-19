@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="eqdowntime">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="classid" type="0" pop="true" />
+<O t="S">fan</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from eqdowntime where eqnum in (select eqnum from equipment where classid in (select classid from classification start with classid='[?classid|fan?]' connect by prior classid = parent))]]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="equipment">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="classid" type="0" pop="true" />
+<O t="S">fan</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select description from equipment where classid in (select classid from classification start with classid='[?classid|fan?]' connect by prior classid = parent) and eqnum in (select eqnum from eqdowntime )
+
+]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[72.0,173.0,51.0,48.0,47.0,46.0,62.0,81.0,1.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="1" r="0" cs="6" rs="2" s="0"><O t="S">设备停机分析</O></C>
+<C c="0" r="2" s="1"><O t="S">设备编号</O></C>
+<C c="1" r="2" s="1"><O t="S">设备描述</O></C>
+<C c="2" r="2" cs="2" s="1"><O t="S">停机开始时间</O></C>
+<C c="4" r="2" cs="2" s="1"><O t="S">停机结束时间</O></C>
+<C c="6" r="2" s="1"><O t="S">汇报人</O></C>
+<C c="7" r="2" cs="2" s="1"><O t="S">汇报时间</O></C>
+<C c="0" r="3" s="1"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="EQNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="3" s="2"><O t="DSColumn"><Attributes dsName="equipment" columnName="DESCRIPTION" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="3" cs="2" s="1"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="STARTTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="3" cs="2" s="1"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="ENDTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="3" s="1"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="REPORTBY" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="3" cs="2" s="1"><O t="DSColumn"><Attributes dsName="eqdowntime" columnName="REPORTDATE" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="28" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

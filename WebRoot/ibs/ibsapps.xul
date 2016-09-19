@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainlistwindow app="ibsapps" title="应用程序配置" resize="true" use="combiz.ui.ibs.IbsappsWindow" 
+closable="true" dialog="/ibs/ibsappspopup.xul" 
+actionlink="action1:操作菜单1;antion2:操作菜单2" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- **********************************  列表结果集页面 ********************************** -->
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			mainWnd.setQueryString("");
+			mainWnd.setOrderby("app");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					应用程序：<stextbox data="app" cols="10"/>
+					描述：<stextbox data="description" cols="10"/>
+					类型：<scombobox data="apptype" cols="10"/>
+					主表：<sbandbox data="maintbname" lookup="ibstables" cols="10"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="app" label="应用程序" sort="auto" width="20%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="50%"/>
+						<resultlistheader data="apptype" label="应用程序类型" sort="auto" width="15%"/>
+						<resultlistheader data="maintbname" label="主表" sort="auto" width="15%" applink="ibstables"/>
+					</listhead>
+				</resultlist>
+				
+</mainlistwindow>

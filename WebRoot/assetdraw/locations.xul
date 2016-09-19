@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="GBK"?>
+<window use="combiz.system.assetdraw.EditDialog" tablename="locations" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<tabbox id="appTabbox" width="100%">
+		<tabs>
+			<tab id="main" label="详细信息" width="80px"/>
+			<tab id="locequipment" label="位置设备" width="80px"/>
+			<!--<tab id="pmtab" label="预防性维护" width="100px"/>
+			<tab id="workordertab" label="维修工单" width="100px"/>
+		-->
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+			<hbox>
+			<menubar id="menubar" width="2px">
+				<menuitem id="menuSave" label="保存记录" image="/images/menus/menu_icon_save.gif" onClick="mainWnd.save()"/>
+				<menuitem id="menuCloseThis" label="关闭编辑界面" image="/images/menus/menu_icon_add.gif" onClick="mainWnd.cancel()"/>
+				<!--<menu label="选择操作" image="/images/menus/menu_icon_action.gif">
+					<menupopup>
+						<menuitem label="新建记录" onClick="alert(self.label)"/>
+						<menuitem label="保存记录" onClick="alert(self.label)"/>
+						<menuitem label="清除屏幕记录" onClick="alert(self.label)"/>
+						<menuseparator/>
+						<menuitem label="拷贝作业计划"/>
+					</menupopup>
+				</menu>-->
+			</menubar>
+			<messagebar/>
+			</hbox>
+			<zscript>
+				 String[] required = {}; 
+				 mainWnd.setRequired(required);
+				 String[] readonly = {}; 
+				 mainWnd.setReadonly(readonly);
+			</zscript>
+			<grid>
+					<rows>
+						<row spans="1,3">
+						位置:
+						<groupbox>
+						<a:bind value="locations.location"/><itextbox id="locations.location"/>
+						<a:bind value="locations.description"/><itextbox id="locations.description" cols="40"/>
+						</groupbox>
+						</row>
+						<!--<row spans="1,3">
+						父级：
+						<groupbox>
+						<a:bind value="locations.parent"/><itextbox id="locations.parent"/>
+						<a:bind value="parent.description"/><itextbox id="parent.description" cols="40"/>
+						</groupbox>
+						</row>
+						-->
+						<row>
+						状态:<a:bind value="locations.status"/><itextbox id="locations.status"/>
+						类型：<a:bind value="locations.type"/><icombobox id="locations.type"/>
+						</row>
+						<row>
+						部门:<a:bind value="locations.deptnum"/><ibandbox id="locations.deptnum" lookup="department"/>
+						专业：<a:bind value="locations.craft"/><itextbox id="locations.craft"/>
+						</row>
+						<row>	
+						分类：<a:bind value="locations.classid"/><ibandbox id="locations.classid" lookup="classificationeq"/>
+						</row>				
+					</rows>
+				</grid>
+				<window id="locspec" use="combiz.assetdraw.ui.LocspecList" tablename="locspec"
+				 dialog="/assetdraw/locspecedit.xul">
+					<tablelist band="locspec" pageSize="10">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="classattr" label="参数" sort="auto" width="30%"/>
+							<tablelistheader data="strvalue" label="参数值" sort="auto" width="50%"/>
+							<tablelistheader data="unitid" label="单位" sort="auto" width="10%"/>
+							<tablelistheader data="remark" label="备注" sort="auto" width="20%"/>
+						</listhead>
+					</tablelist>
+				</window>
+			</tabpanel>
+			<tabpanel>
+				<window id="equipment" use="combiz.system.assetdraw.ListDataWindow" 
+				tablename="equipment" edittype="listonly" dialog="/assetdraw/locspecedit.xul">
+					<tablelist band="equipment" pageSize="10">		
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="eqnum" label="设备编号" sort="auto" width="25%"/>
+							<tablelistheader data="description" label="设备名称" sort="auto" width="50%"/>
+							<tablelistheader data="parent" label="父级设备" sort="auto" width="25%"/>
+						</listhead>
+					</tablelist>
+				</window>
+			</tabpanel>
+	</tabpanels>
+	</tabbox>
+</window>

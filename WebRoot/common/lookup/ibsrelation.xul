@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="请选择关联关系" width="700">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器"/>
+		关系：<stextbox data="relname" cols="10"/>
+		父表：<stextbox data="parent" cols="10"/>
+		子表：<stextbox data="child" cols="10"/>
+		关系类型：<scombobox data="reltype" cols="10"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="relname" label="关系" sort="auto" width="15%"/>
+			<lookuplistheader data="parent" label="父表" sort="auto" width="10%"/>
+			<lookuplistheader data="child" label="子表" sort="auto" width="10%"/>
+			<lookuplistheader data="reltype" label="类型" sort="auto" width="10%"/>
+			<lookuplistheader data="listwhere" label="条件" sort="auto" width="40%"/>
+			<lookuplistheader data="remark" label="备注" sort="auto" width="15%"/>
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->	
+
+		
+	<div align="center">
+	<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+	<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+	</div>
+	
+</lookupwindow>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<window  border="normal" title="请选择工作流程下一步操作" width="700"
+use="combiz.system.workflow.WFActionDialog">
+<vbox width="100%">
+	<groupbox>
+		<caption label="请选择操作"/>
+		<radiogroup id="actionGroup"/>
+	</groupbox>
+	<groupbox>
+		<caption label="审批意见:"/>
+		<textbox id="actionRemark" cols="80" rows="3"/>
+		<combobox id="quickRemark" value="常用意见短语" cols="40"/>
+	</groupbox>
+	<hbox>
+		<button label="重新分配任务" onClick="wfactionWnd.reassign()"/>
+		<checkbox id="sendSMS" label="发送手机短信"/>
+		<checkbox id="sendEmail" label="发送邮件通知"/>
+		<checkbox id="selLabor" label="手工选择流程接收者"/>
+	</hbox>
+	
+<listwindow id="wftransWnd" title="审批流程意见" use="combiz.system.ui.CommonListWindow" tablename="WFTRANS" edittype="LISTONLY" searchable="false">
+<tablelist band="wftransWnd" pageSize="8">
+	<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="assigncode" label="审批人" sort="auto" width="10%"/>
+			<tablelistheader data="memo" label="审批意见" sort="auto" width="60%"/>
+			<tablelistheader data="transdate" label="审批时间" sort="auto" width="30%"/>
+	</listhead>
+</tablelist>
+</listwindow>
+
+<separator spacing="4px"/>
+<div align="center">
+	<button label="发送工作流" onClick="wfactionWnd.confirm()"/>
+	<button label="取消并返回" onClick="wfactionWnd.cancel()"/>
+</div>
+
+</vbox>
+</window>

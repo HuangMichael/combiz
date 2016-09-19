@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="物资接收" app="receive"  resize="true" use="combiz.ui.inventory.MatrecWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="采购单" width="70px" /><!--采购单  -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("ponum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+					<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+							采购单号:<!-- 采购单号 --><stextbox data="ponum" cols="10"/>
+							描述:<!-- 描述 --><stextbox data="description" cols="20"/>
+					</groupbox>
+				</hbox>
+				
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="ponum" label="采购单" sort="auto" width="10%" /><!-- 采购单 -->
+					  	<resultlistheader data="description" label="描述" sort="auto" width="30%" /><!-- 描述 -->
+					  	<resultlistheader data="status" label="采购单状态" sort="auto" width="10%" /><!-- 采购单状态 -->
+						<resultlistheader data="statusdate" label="状态日期" sort="auto" width="10%" /><!-- 状态日期 -->
+						<resultlistheader data="receipts" label="接收状态" sort="auto" width="10%" /><!-- 接收状态 -->
+						<resultlistheader data="vendor" label="供应商" sort="auto" width="30%" /><!-- 供应商 -->
+						
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 接收行明细 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"po.ponum","po.description","po.orderdate","po.requireddate","po.status","po.vendor","po.receipts"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+		<tabpanel>
+			<groupbox><caption label="基本信息" /><!-- 基本信息 -->
+				<grid>
+				<rows>
+					<row>
+					采购单:<!-- 采购单 --><a:bind value="po.ponum"/><itextbox id="po.ponum" cols="10"/>		
+					描述:<!-- 描述 --><a:bind value="po.description"/><itextbox id="po.description" cols="30"/>
+					采购单状态:<!-- 采购单状态 --><a:bind value="po.status"/><itextbox id="po.status" cols="20"/>			
+					</row>
+					<row>
+					定购日期:<!--定购日期  --><a:bind value="po.orderdate"/><idatebox id="po.orderdate"/>		
+					供应商:<!--供应商  --><a:bind value="po.vendor"/><itextbox id="po.vendor" cols="30"/>
+					接收状态:<!--  接收状态--><a:bind value="po.receipts"/><itextbox id="po.receipts" cols="20"/>		
+					</row>
+				</rows>
+				</grid>
+			</groupbox>
+		
+			<!-- <div align="left">
+				<button label="选择加入物料接收" onClick="mainWnd.addPoline()"/>
+				<button label="检验" onClick="mainWnd.verify()"/>
+			</div> -->
+			<!-- ********************************** //主数据窗口 ********************************** -->
+
+			<listwindow id="invrectrans" title="物料接收" use="combiz.ui.inventory.InvrectransList2" dialog="/inventory/invrectransdialog2.xul" orderby = "transdate desc" edittype="EDIT">
+					<tablelist band="invrectrans" pageSize="8"><!-- 物料接收 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="status" label="状态" sort="auto" width="2%" preclass="combiz.ui.inventory.InvTblChanged"/><!-- 状态 -->
+							<!-- <tablelistheader data="status" label="状态" sort="auto" width="8%"/>
+							<tablelistheader data="tobin" label="接收箱柜" sort="auto" width="10%"/> -->
+							<tablelistheader data="towarehouse" label="接收仓库" sort="auto" width="10%"/><!--接收仓库  -->
+							<tablelistheader data="itemnum" label="库存项目" sort="auto" width="10%"/><!--库存项目  -->
+							<tablelistheader data="eqnum" label="设备编号" sort="auto" width="20%"/><!-- 设备编号 -->
+							<tablelistheader data="description" label="描述" sort="auto" width="28%"/><!-- 描述 -->
+							<tablelistheader data="transdate" label="接收日期" sort="auto" width="10%"/><!-- 接收日期 -->
+							<tablelistheader data="quantity" label="接收数量" sort="auto" width="10%"/><!-- 接收数量 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="10%"/><!--单价  -->
+<!-- 
+<tablelistheader data="loadedcost" label="载入的成本" sort="auto" width="10%"/>
+<tablelistheader data="conversion" label="转换系数" sort="auto" width="5%"/>
+ -->
+							<tablelistheader data="linecost" label="行总价" sort="auto" width="10%"/>
+							<!-- <tablelistheader data="actualcost" label="实际单价" sort="auto" width="5%"/>
+	
+
+							
+							<tablelistheader data="changeby" label="修改人" sort="auto" width="5%"/>
+							<tablelistheader data="curbal" label="当前余量" sort="auto" width="5%"/> -->
+							
+
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</mainwindow>

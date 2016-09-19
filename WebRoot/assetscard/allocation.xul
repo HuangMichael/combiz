@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ALLOCATION" title="调拨申请" wfenabled="false"
+	resize="true" use="combiz.ui.assetscard.AllocationWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+
+	<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="调拨申请" width="90px"/>
+			<!-- <tab id="allocationlinetableTab" label="调拨明细表" /> -->
+		</tabs>
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+				<!-- 查询过滤器 -->
+				<hbox width="100%">
+					<groupbox width="180">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						调拨单号:<stextbox data="allocationnum" />
+						接收地点:<sbandbox data="tosite" lookup="department"/>
+					</groupbox>
+				</hbox>
+
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="allocationnum"
+							label="调拨单号" sort="auto" width="10%" />
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="25%" />
+						<resultlistheader data="fromsite" label="调出地点"
+							sort="auto" width="10%" />
+						<resultlistheader data="fromperson"
+							label="调出部门经办人" sort="auto" width="10%" />
+						<resultlistheader data="tosite" label="调入地点"
+							sort="auto" width="10%" />
+						<resultlistheader data="toperson" label="接收方经办人"
+							sort="auto" width="10%" />
+						<resultlistheader data="enterby" label="录入人"
+							sort="auto" width="10%" />
+						<resultlistheader data="enterdate" label="录入日期"
+							sort="auto" width="15%" />
+
+
+
+						<!-- 
+							<resultlistheader data="fromdate" label="调出日期" sort="auto" width="10%"/>
+							<resultlistheader data="corpnum" label="组织机构" sort="auto" width="10%"/>
+							<resultlistheader data="sitenum" label="地点" sort="auto" width="10%"/>
+							<resultlistheader data="todate" label="接收日期" sort="auto" width="10%"/>
+						-->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript><![CDATA[
+ String[] required = {"allocation.allocationnum","allocation.fromsite","allocation.tosite","allocation.fromperson","allocation.toperson","allocation.fromdate"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"allocation.enterby","allocation.enterdate","allocation.status","allocation.statusdate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+							调拨单号:
+							<a:bind value="allocation.allocationnum" />
+							<itextbox id="allocation.allocationnum" />
+							描述:
+							<a:bind value="allocation.description" />
+							<itextbox id="allocation.description" />
+
+						</row>
+						
+						<row>
+						     调出地点:
+							<a:bind value="allocation.fromsite" />
+							<ibandbox id="allocation.fromsite" lookup="department"/>
+							调出部门经办人:
+							<a:bind value="allocation.fromperson" />
+							<ibandbox id="allocation.fromperson" lookup="labor"/>
+
+						</row>
+						<row>
+							调入地点:
+							<a:bind value="allocation.tosite" />
+							<ibandbox id="allocation.tosite" lookup="department"/>
+							接收方经办人:
+							<a:bind value="allocation.toperson" />
+							<ibandbox id="allocation.toperson"
+								lookup="labor" />
+
+						</row>
+						<row>
+						    录入人:
+							<a:bind value="allocation.enterby" />
+							<itextbox id="allocation.enterby" />
+							录入日期:
+							<a:bind value="allocation.enterdate" />
+							<idatetimebox id="allocation.enterdate" />
+						</row>
+						
+						<row>
+						    状态:
+							<a:bind value="allocation.status" />
+							<itextbox id="allocation.status" />
+						    状态日期:
+							<a:bind value="allocation.statusdate" />
+							<idatebox id="allocation.statusdate" />
+							
+						</row>
+						
+						
+						<!-- 
+						<row>
+						    调出日期:
+							<a:bind value="allocation.fromdate" />
+							<idatebox id="allocation.fromdate" />
+							
+						</row>
+						<row>
+							组织机构:
+							<a:bind value="allocation.corpnum" />
+							<itextbox id="allocation.corpnum" />
+						<row>
+							地点:
+							<a:bind value="allocation.sitenum" />
+							<ibandbox id="allocation.sitenum"
+								lookup="corpsite" />
+						</row>
+						<row>
+							接收日期:
+							<a:bind value="allocation.todate" />
+							<idatebox id="allocation.todate" />
+						</row>
+						 -->
+
+						
+						
+						
+						
+						
+					</rows>
+				</grid>
+			
+			<!-- *****************************调拨明细表**************************** -->
+			<listwindow id="allocationlineTable" title="调拨明细表"
+					use="combiz.ui.assetscard.Allocation_AllocationlineTableList"
+					dialog="/assetscard/allocation_allocationlineTable.xul" addshow="false">
+					<defaultvalue band="allocationlineTable" value="" />
+					<tablelist band="allocationlineTable"
+						pageSize="16">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="linenum" label="行号"
+								sort="auto" width="5%" />
+							<tablelistheader data="itemnum" label="库存编号"
+								sort="auto" width="10%" />
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="20%" />
+							<tablelistheader data="fromwarehouse"
+								label="源仓库" sort="auto" width="10%" />
+							<tablelistheader data="modelnum" label="型号"
+								sort="auto" width="20%" />
+							<tablelistheader data="eqnum" label="资产编号"
+								sort="auto" width="15%" />
+							<tablelistheader data="quantity" label="数量"
+								sort="auto" width="10%" />
+							<tablelistheader data="totalcost" label="成本" format="0.00"
+								sort="auto" width="10%" />
+							
+							<!-- 
+							<tablelistheader data="allocationnum"
+								label="调拨单号" sort="auto" width="10%" />
+							<tablelistheader data="corpnum" label="组织机构"
+								sort="auto" width="10%" />
+							<tablelistheader data="sitenum" label="地点"
+								sort="auto" width="10%" />
+							 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

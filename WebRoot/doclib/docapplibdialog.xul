@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {};
+		mainWnd.setRequired(required); 
+		String[] readonly = {}; 
+		mainWnd.setReadonly(readonly); 
+	</zscript>
+	<groupbox>
+		<caption label="关联数据选择">
+			<toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<space/>
+		<groupbox>
+			<caption label="请选择要关联的应用程序" />
+			<grid>
+				<rows>
+					<row>
+						应用程序:
+						<a:bind value="docapplib.app" />
+						<ibandbox id="docapplib.app" lookup="ibsapps" />
+						应用程序描述:
+						<a:bind value="ibsapps.description" />
+						<itextbox id="ibsapps.description" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="如果该目录是“附件”，那么请选择下面要绑定的表，否则请不要选择。" />
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						所属表:
+						<a:bind value="docapplib.ownertable" />
+						<ibandbox id="docapplib.ownertable" lookup="ibstables" />
+						表描述:
+						<a:bind value="ibstables.description" />
+						<itextbox id="ibstables.description" />
+					</row>
+
+				</rows>
+			</grid>
+		</groupbox>
+		<div align="right">
+			<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" />
+		</div>
+	</groupbox>
+</editwindow>

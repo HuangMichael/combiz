@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="信息发送" app="msgsender"  resize="true" use="combiz.ui.smsg.MsgsenderWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!--列表-->
+			<tab id="main" label="信息" width="70px"/><!-- 信息-->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="sender=':{labor.labornum}'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+					信息标题<!-- 信息标题 -->：<stextbox data="title"/>
+					发送时间<!-- 发送时间 -->：<stextbox data="sddate"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="title" label="标题" sort="auto" width="45%"/><!-- 标题 -->
+						<resultlistheader data="sendtype" label="公告/私有" sort="auto" width="15%"/><!-- 公告/私有 -->
+						<resultlistheader data="rectype" label="信息接收类型" sort="auto" width="15%"/><!-- 信息接收类型 -->
+						<resultlistheader data="sddate" label="发送时间" sort="auto" width="15%"/><!-- 发送时间 -->
+						<resultlistheader data="issue" label="是否发布" sort="auto" width="10%"/><!-- 是否发布 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"msgsender.issue","msgsender.rectype","msgsender.recdept","msgsender.reclaborgrp","msgsender.reclabor"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,4">
+						标题<!-- 标题 -->：<a:bind value="msgsender.title"/><itextbox id="msgsender.title" cols="80"/><attachment/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,5">
+						内容<!-- 内容 -->：<a:bind value="msgsender.body"/><itextbox id="msgsender.body" cols="100" rows="20"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						公告/私有<!-- 公告/私有 -->：<a:bind value="msgsender.sendtype"/><icombobox id="msgsender.sendtype"/>
+						是否发布<!--是否发布 -->：<a:bind value="msgsender.issue"/><icheckbox id="msgsender.issue"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						信息接收类型<!-- 信息接收类型 -->：<a:bind value="msgsender.rectype"/><icombobox id="msgsender.rectype"/>
+						接收人<!-- 接收人 -->：<a:bind value="msgsender.reclabor"/><ibandbox id="msgsender.reclabor" lookup="labor"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						接收部门<!-- 接收部门 -->：<a:bind value="msgsender.recdept"/><ibandbox id="msgsender.recdept" lookup="department"/>
+						接收人员组<!-- 接收人员组 -->：<a:bind value="msgsender.reclaborgrp"/><ibandbox id="msgsender.reclaborgrp" lookup="laborgroup"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

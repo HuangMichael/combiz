@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation" width="700">
+ <zscript>
+ String[] required = {"wftasknotify.description"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"wftasknotify.wfname","wftasknotify.wfrevision"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="流程任务抄送"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row spans="1,3">
+						描述:<a:bind value="wftasknotify.description"/><itextbox id="wftasknotify.description" cols="80" rows="2"/>
+						</row>
+						<row>
+						角色:<a:bind value="wftasknotify.wfrole"/><ibandbox id="wftasknotify.wfrole" lookup="wfrole"/>
+						应用程序:<a:bind value="wftasknotify.app"/><ibandbox id="wftasknotify.app" lookup="ibsapps"/>
+						</row>
+						<!--<row>
+						字段NODEID:<a:bind value="wftasknotify.nodeid"/><ilongbox id="wftasknotify.nodeid"/>
+						</row>
+						-->
+						<row>
+						地点过滤:<a:bind value="wftasknotify.sitefilter"/><icheckbox id="wftasknotify.sitefilter"/>
+						邮件通知:<a:bind value="wftasknotify.emailnotify"/><icheckbox id="wftasknotify.emailnotify"/>
+						</row>
+						<row spans="1,3">
+						条件:<a:bind value="wftasknotify.condition"/><itextbox id="wftasknotify.condition" cols="80" rows="2"/>
+						</row>
+						<row spans="1,3">
+						条件类？:<a:bind value="wftasknotify.conditionclass"/><icheckbox id="wftasknotify.conditionclass"/>
+						</row>
+						<row>
+						流程:<a:bind value="wftasknotify.wfname"/><itextbox id="wftasknotify.wfname"/>
+						版本:<a:bind value="wftasknotify.wfrevision"/><ilongbox id="wftasknotify.wfrevision"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

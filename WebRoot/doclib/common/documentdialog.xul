@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"document.creator","document.createdate","document.ownertable",
+ "document.ownerid","document.author","document.changedate","document.changeby","document.libnum"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="文档列表"><!-- 文档列表 --><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						文档编号:<!-- 文档编号 --><a:bind value="document.docnum"/><itextbox id="document.docnum"/>		
+						描 述:<!-- 描 述 --><a:bind value="document.description"/><itextbox id="document.description" cols="40"/>		
+						</row>
+						<row>
+						文档类型:<!-- 文档类型 --><a:bind value="document.doctype"/><icombobox id="document.doctype"/>		
+						文档扩展名:<!-- 文档扩展名 --><a:bind value="document.docextend"/><itextbox id="document.docextend"/>		
+						</row>
+						<row>
+						创建人:<!-- 创建人 --><a:bind value="document.creator"/><itextbox id="document.creator"/>		
+						创建时间:<!-- 创建时间 --><a:bind value="document.createdate"/><idatebox id="document.createdate"/>		
+						</row>
+						<row>
+						文档路径类型:<!-- 文档路径类型 --><a:bind value="document.urltype"/><icombobox id="document.urltype"/>		
+						文档路径:<!-- 文档路径 --><a:bind value="document.urlpath"/><itextbox id="document.urlpath" cols="40"/>		
+						</row>
+						<row>
+						关联表:<!-- 关联表 --><a:bind value="document.ownertable"/><itextbox id="document.ownertable"/>		
+						关联表记录ID:<!-- 关联表记录ID --><a:bind value="document.ownerid"/><ilongbox id="document.ownerid"/>		
+						</row>
+						<row>
+						文档状态:<!-- 文档状态 --><a:bind value="document.status"/><icombobox id="document.status"/>		
+						作者:<!-- 作者 --><a:bind value="document.author"/><itextbox id="document.author"/>		
+						</row>
+						<row>
+						最近一次修改时间:<!-- 最近一次修改时间 --><a:bind value="document.changedate"/><idatebox id="document.changedate"/>		
+						修改人:<!-- 修改人 --><a:bind value="document.changeby"/><itextbox id="document.changeby"/>		
+						</row>
+						<row>
+						写作时间:<!-- 写作时间 --><a:bind value="document.authordate"/><idatebox id="document.authordate"/>		
+						所属部门:<!-- 所属部门 --><a:bind value="document.ownerdept"/><itextbox id="document.ownerdept"/>		
+						</row>
+						<row spans="1,3">
+						所属目录:<!-- 所属目录 --><a:bind value="document.libnum"/><itextbox id="document.libnum"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口-->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

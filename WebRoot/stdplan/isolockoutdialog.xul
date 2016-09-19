@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 隔离步骤 -->
+ <groupbox><caption label="隔离步骤"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						隔离步骤<!-- 隔离步骤 -->:<a:bind value="isolockout.isolockid"/><itextbox id="isolockout.isolockid" cols="40"/>
+						描述<!-- 描述 -->:<a:bind value="isolockout.description"/><itextbox id="isolockout.description" cols="40"/>
+						</row>
+						<row>
+						位置<!-- 位置 -->:<a:bind value="isolockout.location"/><ibandbox id="isolockout.location" lookup="location"/>
+						设备<!-- 设备 -->:<a:bind value="isolockout.eqnum"/><ibandbox id="isolockout.eqnum" lookup="equipment"/>
+						</row>
+						<row>
+						设备隔离状态描述<!-- 设备隔离状态描述 -->:<a:bind value="isolockout.eqdescriptioin"/><itextbox id="isolockout.eqdescriptioin" cols="40"/>
+						隔离状态<!-- 隔离状态 -->:<a:bind value="isolockout.state"/><itextbox id="isolockout.state" cols="40"/>
+						</row>
+						<row>
+						操作顺序<!-- 操作顺序 -->:<a:bind value="isolockout.aplyseq"/><ilongbox id="isolockout.aplyseq" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

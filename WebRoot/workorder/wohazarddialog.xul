@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 危险及措施 -->
+ <groupbox><caption label="危险及措施"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						危险标识<!-- 危险标识 -->:<a:bind value="wohazard.hazardid"/><ibandbox id="wohazard.hazardid" lookup="hazard"/>
+						描述<!-- 描述 -->：<a:bind value="wohazard.description"/><itextbox id="wohazard.description" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预防措施启用状态<!-- 预防措施启用状态 -->:<a:bind value="wohazard.hazprec"/><itextbox id="wohazard.hazprec"/>
+						危险物料启用状态<!-- 危险物料启用状态 -->：<a:bind value="wohazard.hazmat"/><itextbox id="wohazard.hazmat"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						安全隔离<!-- 安全隔离 -->：<a:bind value="wohazard.haztagout"/><itextbox id="wohazard.haztagout"/>
+						MSDS编号<!-- MSDS编号 -->：<a:bind value="wohazard.msdsnum"/><itextbox id="wohazard.msdsnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						危险类型<!-- 危险类型 -->:<a:bind value="wohazard.hazardtype"/><itextbox id="wohazard.hazardtype"/>
+						健康等级<!-- 健康等级 -->:<a:bind value="wohazard.health"/><ilongbox id="wohazard.health"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>
+		
+</editwindow>

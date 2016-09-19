@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow title="盘点" app="CHECKQTY"  resize="true" use="combiz.ui.inventory.CheckqtyWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="库存盘点"/><!--库存盘点 -->
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询}" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						<label value="盘点单号" /><!-- 盘点单号 -->
+						<stextbox data="checkqtynum" />
+						<label value="盘点备注" /><!-- 盘点备注 -->
+						<stextbox data="memo" />
+						<label value="流程状态" /><!-- 流程状态 -->
+						<stextbox data="status" />
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="checkqtynum" label="盘点单号" sort="auto" width="10%"/><!-- 盘点单号 -->
+						<resultlistheader data="memo" label="盘点备注" sort="auto" width="20%"/><!-- 盘点备注 -->
+						<resultlistheader data="chkwarehouse" label="盘点库房" sort="auto" width="10%"/><!-- 盘点库房 -->
+						<resultlistheader data="isall" label="所有库房" sort="auto" width="10%"/><!-- 所有库房 -->
+						<resultlistheader data="informman" label="负责人" sort="auto" width="10%"/><!-- 负责人 -->
+						<resultlistheader data="operator" label="盘点员" sort="auto" width="10%"/><!-- 盘点员 -->
+						<resultlistheader data="checkdate" label="盘点日期" sort="auto" width="10%"/><!-- 盘点日期 -->
+						<resultlistheader data="status" label="流程状态" sort="auto" width="10%"/><!-- 流程状态 -->
+						<resultlistheader data="statusdate" label="状态日期" sort="auto" width="10%"/><!-- 状态日期 -->
+						<!-- 
+						<resultlistheader data="classid" label="库存分类" sort="auto" width="10%"/>
+						<resultlistheader data="itemnum" label="物资编号" sort="auto" width="10%"/>
+						<resultlistheader data="checkbinnum" label="盘点箱柜" sort="auto" width="10%"/>
+						
+						 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"checkqty.statusdate","checkqty.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row spans="1,1,1,3">
+						     盘点单号:<!-- 盘点单号 -->
+							<a:bind value="checkqty.checkqtynum" />
+							<itextbox id="checkqty.checkqtynum" />
+							盘点备注:<!-- 盘点备注 -->
+							<a:bind value="checkqty.memo" />
+							<itextbox id="checkqty.memo" width="90%" />
+							
+						</row>
+						<row>
+						    盘点库房:<!-- 盘点库房 -->
+							<a:bind value="checkqty.chkwarehouse" />
+							<ibandbox id="checkqty.chkwarehouse" lookup="dupwarehouse" checkdata="false" multiple="true" />
+							盘点箱柜:<!-- 盘点箱柜 -->
+							<a:bind value="checkqty.checkbinnum" />
+							<itextbox id="checkqty.checkbinnum" />
+							物资编号:<!-- 物资编号 -->
+							<a:bind value="checkqty.itemnum" />
+							<itextbox id="checkqty.itemnum" />
+							
+						</row>
+						<row>
+						     库存分类:<!-- 库存分类 -->
+							<a:bind value="checkqty.classid" />
+							<ibandbox id="checkqty.classid" lookup="classificationitem" />
+							盘点员:<!-- 盘点员 -->
+							<a:bind value="checkqty.operator" />
+							<ibandbox id="checkqty.operator"
+								lookup="labor" />
+							盘点日期:<!-- 盘点日期 -->
+							<a:bind value="checkqty.checkdate" />
+							<idatebox id="checkqty.checkdate" />
+						</row>
+						<row>
+							盘点所有库房?<!-- 盘点所有库房? -->
+							<a:bind value="checkqty.isall" />
+							<icheckbox id="checkqty.isall" />
+							负责人:<!-- 负责人 -->
+							<a:bind value="checkqty.informman" />
+							<ibandbox id="checkqty.informman"
+								lookup="labor" />
+							流程状态:<!-- 流程状态 -->
+							<a:bind value="checkqty.status" />
+							<itextbox id="checkqty.status" />
+						</row>
+						<row>
+							
+							状态日期:<!-- 状态日期 -->
+							<a:bind value="checkqty.statusdate" />
+							<idatebox id="checkqty.statusdate" />
+							
+						</row>
+						<row spans="6,1">
+						"红色球"标识盘盈，"绿色球"标识盘亏，"黄色球"标识帐物一致。
+						</row>
+					</rows>
+				</grid>
+				<listwindow id="checkqtyitem" title="盘点明细表" use="combiz.ui.inventory.CheckqtyitemList" dialog="/inventory/checkqtyitemdialog.xul">
+				<tablelist band="checkqtyitem" pageSize="16"><!-- 盘点明细表 -->
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="status" label="状态" sort="auto" width="3%" preclass="combiz.ui.inventory.Checkitemstatus"/><!-- 状态 -->
+						<tablelistheader data="warehouse" label="库房名称" sort="auto" width="10%"/><!-- 库房名称 -->
+						<tablelistheader data="binnum" label="箱柜" sort="auto" width="10%"/><!-- 箱柜 -->
+						<tablelistheader data="itemnum" label="库存项目编号" sort="auto" width="13%"/><!-- 库存项目编号 -->
+						<tablelistheader data="itemdesc" label="库存描述" sort="auto" width="30%"/><!-- 库存描述 -->
+						<tablelistheader data="lotnum" label="批次号" sort="auto" width="14%"/><!-- 批次号 -->
+						<tablelistheader data="accountqty" label="账上数量" sort="auto" width="10%"/><!-- 账上数量 -->
+						<tablelistheader data="actualqty" label="盘点数量" sort="auto" width="10%" input="doublebox"/><!--  盘点数量-->
+						
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		
+		</tabpanels>
+	</tabbox>
+</mainwindow>

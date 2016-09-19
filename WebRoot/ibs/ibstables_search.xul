@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK"?>
+<searchpage title="全屏幕字段搜索" width="800">
+<vbox width="100%">
+	<grid>
+		<rows>
+			<row>
+			表：<stextbox data="ibstables.tablename"/>
+			描述：<stextbox data="ibstables.description" cols="50"/>
+			</row>
+			<row>
+			
+			系统表：<scombobox data="ibstables.issystem"/>
+			映射类：<stextbox data="ibstables.classname" cols="50"/>
+			</row>
+			<row>
+			授权级别：<sbandbox data="ibstables.authlevel" lookup="ibslistvalue"/>
+			业务类：<stextbox data="ibstables.servicename" cols="50"/>
+			</row>
+		</rows>
+	</grid>
+	<div align="center">
+		<button label=" 执行查询 " onClick="sreenSearchWnd.confirm()"/>
+		<button label=" 清除查询 " onClick="sreenSearchWnd.clearquery()"/>
+		<button label=" 关   闭 " onClick="sreenSearchWnd.cancel()"/>
+	</div>
+</vbox>
+</searchpage>

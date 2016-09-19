@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="wfnotifyWnd" use="combiz.ui.common.WFNotifyListWindow" orderby="startdate desc" defselect="false"
+ edittype="LISTONLY" searchable="false" export="false" pagenav="true" showfilter="false" showmultiple="false">
+<tablelist band="wfnotifyWnd" pageSize="8">
+	<listhead>
+			<tablelistheader data="description" label="任务描述" sort="auto" width="70%"/>
+			<tablelistheader data="assignstatus" label="任务状态" sort="auto" width="10%"/>
+			<tablelistheader data="startdate" label="启动时间" sort="auto" width="20%"/>
+	</listhead>
+</tablelist>
+</listwindow>

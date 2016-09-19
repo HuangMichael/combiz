@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {"invusetrans.location"};
+		mainWnd.setRequired(required); String[] readonly =
+		{"invusetrans.unitcost","invusetrans.lotnum","invusetrans.linecost","invusetrans.reqqty","invusetrans.itemnum","invusetrans.warehouse","invusetrans.description"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="工单物料发放"><!-- 工单物料发放 -->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+
+					物资编码:<!-- 物资编码 -->
+					<a:bind value="invusetrans.itemnum" />
+					<ibandbox id="invusetrans.itemnum" lookup="item" />
+					描述:<!-- 描述 -->
+					<a:bind value="invusetrans.description" />
+					<itextbox id="invusetrans.description" cols="40" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					仓库:<!-- 仓库 -->
+					<a:bind value="invusetrans.warehouse" />
+					<ibandbox id="invusetrans.warehouse"
+						lookup="warehouse" />
+					箱柜:<!-- 箱柜 -->
+					<a:bind value="invusetrans.binnum" />
+					<ibandbox id="invusetrans.binnum" lookup="binnum" />
+
+				</row>
+				<row>
+					发放位置:
+					<a:bind value="invusetrans.location" />
+					<ibandbox id="invusetrans.location"
+						lookup="location" />
+					描述:
+					<a:bind value="locations.description" />
+					<itextbox id="locations.description" cols="20" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					预留数量:<!--预留数量  -->
+					<a:bind value="invusetrans.reqqty" />
+					<idoublebox id="invusetrans.reqqty"
+						format="#,##0.00" />
+					发放数量:<!--  发放数量-->
+					<a:bind value="invusetrans.quantity" />
+					<idoublebox id="invusetrans.quantity"
+						format="#,##0.00" />
+
+				</row>
+				<row>
+					单价:<!-- 单价 -->
+					<a:bind value="invusetrans.unitcost" />
+					<idoublebox id="invusetrans.unitcost"
+						format="#,##0.00" />
+					行总价:<!-- 行总价 -->
+					<a:bind value="invusetrans.linecost" />
+					<idoublebox id="invusetrans" format="#,##0.00" />
+				</row>
+				<row>
+					批次管理:<!-- 批次管理 -->
+					<a:bind value="item.lottype" />
+					<itextbox id="item.lottype" />
+					批次号:<!-- 批次号 -->
+					<a:bind value="invusetrans.lotnum" />
+					<itextbox id="invusetrans.lotnum" />
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				<row spans="6,,,,," align="right" height="30">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()" /><!-- 关闭编辑窗口 -->
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

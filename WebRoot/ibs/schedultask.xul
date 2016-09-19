@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="schedutask" title="任务调度" resize="true" use="combiz.ui.ibs.SchedultaskWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="任务" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						<label value="任务名"/><stextbox data="description"/>
+						<label value="任务类"/><stextbox data="classname"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="description" label="任务名" sort="auto" width="20%"/>
+						<resultlistheader data="cronexp" label="执行频率" sort="auto" width="20%"/>
+						<resultlistheader data="isruning" label="是否启动" sort="auto" width="5%"/>
+						<resultlistheader data="classname" label="任务类" sort="auto" width="40%"/>
+						<resultlistheader data="startdatetime" label="启动时间" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"schedultask.isruning","schedultask.startdatetime","schedultask.enddatetime"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			<grid>
+				<rows>
+					<row>
+						任务描述:<a:bind value="schedultask.description"/><itextbox id="schedultask.description"/>
+						任务类名:<a:bind value="schedultask.classname"/><itextbox id="schedultask.classname" cols="60"/>
+					</row>
+					<row>
+						任务调度周期:<a:bind value="schedultask.cronexp"/><itextbox id="schedultask.cronexp"/>
+						是否启动:<a:bind value="schedultask.isruning"/><icheckbox id="schedultask.isruning"/>
+					</row>
+					<row>
+						任务启动日期:<a:bind value="schedultask.startdatetime"/><itextbox id="schedultask.startdatetime"/>
+						任务停止日期:<a:bind value="schedultask.enddatetime"/><itextbox id="schedultask.enddatetime"/>
+					</row>
+				</rows>
+			</grid>
+			<!-- 
+	字段DESCRIPTION:<a:bind value="schedultask.description"/><itextbox id="schedultask.description"/><separator/>
+	字段CLASSNAME:<a:bind value="schedultask.classname"/><itextbox id="schedultask.classname" cols="60"/><separator/>		
+	字段METHODNAME:<a:bind value="schedultask.methodname"/><itextbox id="schedultask.methodname"/><separator/>		
+	字段GROUPNAME:<a:bind value="schedultask.groupname"/><itextbox id="schedultask.groupname"/><separator/>		
+	字段TRIGGERNAME:<a:bind value="schedultask.triggername"/><itextbox id="schedultask.triggername"/><separator/>		
+	字段CRONEXP:<a:bind value="schedultask.cronexp"/><itextbox id="schedultask.cronexp"/><separator/>		
+	字段REPEATCOUNT:<a:bind value="schedultask.repeatcount"/><itextbox id="schedultask.repeatcount"/><separator/>		
+	字段ENDDATETIME:<a:bind value="schedultask.enddatetime"/><itextbox id="schedultask.enddatetime"/><separator/>		
+	字段STARTDATETIME:<a:bind value="schedultask.startdatetime"/><itextbox id="schedultask.startdatetime"/><separator/>		
+	字段ISRUNING:<a:bind value="schedultask.isruning"/><itextbox id="schedultask.isruning"/>	<separator/>	 -->
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

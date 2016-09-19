@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"doclibary.description","doclibary.status","doclibary.parent","doclibary.status","doclibary.creator","doclibary.createdate","doclibary.libpath","doclibary.changeby","doclibary.changedate"}; 
+ mainWnd.setReadonly(readonly);
+ //mainWnd.sigMainData(true);
+ </zscript>
+ <groupbox><caption label="子目录列表"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							目录名:<a:bind value="doclibary.libnum"/><itextbox id="doclibary.libnum"/>		
+							描述:<a:bind value="doclibary.description"/><itextbox id="doclibary.description"/>		
+						</row>
+						<row>
+							父目录:<a:bind value="doclibary.parent"/><itextbox id="doclibary.parent"/>		
+							状态:<a:bind value="doclibary.status"/><itextbox id="doclibary.status"/>		
+						</row>
+						<row>
+							创建者:<a:bind value="doclibary.creator"/><ibandbox id="doclibary.creator" lookup="labor"/>		
+							创建日期:<a:bind value="doclibary.createdate"/><idatebox id="doclibary.createdate" format="yyyy-MM-dd HH:mm:ss"/>		
+						</row>
+						<row>
+							目录路径:<a:bind value="doclibary.libpath"/><itextbox id="doclibary.libpath"/>		
+							最近修改人:<a:bind value="doclibary.changeby"/><itextbox id="doclibary.changeby"/>		
+						</row>
+						<row>
+							最近修改日期:<a:bind value="doclibary.changedate"/><idatebox id="doclibary.changedate" format="yyyy-MM-dd HH:mm:ss"/>		
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭查看窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

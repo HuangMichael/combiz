@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="wfreassignWnd" title="任务重新分配"  use="combiz.ui.workflow.WFReassignDialog" 
+width="600" closable="true">
+	<listwindow id="wfreassignList" tablename="wfassignment" use="combiz.system.ui.CommonListWindow" autodata="false"
+	editshow="true" dialog="/workflow/wfreassigndialog.xul">
+		<tablelist band="wfreassignList" pageSize="8">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif"/>
+				<tablelistheader data="assigncode" label="分配人" sort="auto" width="10%"/>
+				<tablelistheader data="description" label="工作任务" sort="auto" width="60%"/>
+				<tablelistheader data="app" label="应用" sort="auto" width="5%"/>
+				<tablelistheader data="startdate" label="开始时间" sort="auto" width="15%"/>
+				<tablelistheader data="wfrole" label="流程角色" sort="auto" width="10%"/>
+			</listhead>
+		</tablelist>
+	</listwindow>
+		<div align="center">
+			<button label="确定" onClick="wfreassignWnd.reassign();wfreassignWnd.onClose()"/>
+			<button label="取消" onClick="wfreassignWnd.onClose()"/>
+		</div>
+</window>

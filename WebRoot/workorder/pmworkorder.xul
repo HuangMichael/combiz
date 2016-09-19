@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="pmworkorder" title="" resize="true" wfenabled="true"
+	use="combiz.ui.workorder.PmWorkorderWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<!-- <tab id="list" label="列表" width="70px" />
+				<tab id="main" label="工单" width="70px" />
+				<tab id="plantab" label="计划" width="70px" />
+				<tab id="securitytab" label="安全" width="70px" />
+				<tab id="reporttab" label="汇报" width="70px" />
+				<tab id="doctab" label="文档" width="70px" />
+				<tab id="analysetab" label="故障分析" width="70px" /> -->
+
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="工单" width="70px" /><!-- 工单 -->
+			<tab id="plantab" label="计划" width="70px" /><!-- 计划 -->
+			<tab id="securitytab" label="安全" width="70px" /><!-- 安全 -->
+			<tab id="reporttab" label="汇报" width="70px" /><!-- 汇报 -->
+			<tab id="doclib" label="文档" width="70px" /><!-- 文档 -->
+			<!-- <tab id="analysetab" label="故障分析" width="70px" /> --><!-- 故障分析 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="worktype = 'PM'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("wonum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器:字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!--  -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!--  -->
+						<label value="工单编号" /><!--  -->
+						<stextbox data="wonum" />
+						<label value="工单描述" /><!--  -->
+						<stextbox data="description" />
+						<label value="状态时间" /><!--  -->
+						<ssdatebox data="statusdate" />
+						至<!--  -->
+						<sedatebox data="statusdate" />
+
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="wonum" label="工单编号"
+							sort="auto" width="20%" /><!--  -->
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="30%" /><!--  -->
+						<resultlistheader data="reportedby" label="汇报人"
+							sort="auto" width="10%" /><!--  -->
+						<resultlistheader data="reportdate" label="汇报日期"
+							sort="auto" width="15%" /><!--  -->
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="10%" /><!--  -->
+						<resultlistheader data="statusdate" label="状态日期"
+							sort="auto" width="15%" /><!--  -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"workorder.wonum","workorder.description","workorder.crewid"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"workorder.status","location.description","equipment.description","jobplan.description"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="基本信息" /><!--    -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- *************************在下面修改主界面字段**************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									工单<!-- : -->
+									:
+									<a:bind value="workorder.wonum" />
+									<itextbox id="workorder.wonum" />
+									描述<!-- : -->
+									:
+									<a:bind
+										value="workorder.description" />
+									<itextbox id="workorder.description"
+										cols="40" />
+								</row>
+								<!--	<row>
+									项目编号  :
+									<a:bind value="workorder.prjnum" />
+									<ibandbox id="workorder.prjnum"
+									lookup="prjparent" />
+									任务编号:
+									<a:bind value="workorder.tasknum" />
+									<ibandbox id="workorder.tasknum"
+									lookup="prjtask" />
+									</row>-->
+								<row>
+									位置<!-- 位置: -->
+									:
+									<a:bind value="workorder.location" />
+									<ibandbox id="workorder.location"
+										lookup="location" />
+									位置描述<!-- 位置描述: -->
+									:
+									<a:bind
+										value="location.description" />
+									<itextbox id="location.description"
+										cols="40" />
+								</row>
+								<row spans="1,1,1,3">
+									设备<!-- 设备: -->
+									:
+									<a:bind value="workorder.eqnum" />
+									<ibandbox id="workorder.eqnum"
+										lookup="equipment" />
+									设备描述<!-- 设备描述: -->
+									:
+									<a:bind
+										value="equipment.description" />
+									<itextbox id="equipment.description"
+										cols="40" />
+									<!--<ibandbox id="workorder.eqnum" onOpen="mainWnd.lookup(&quot;workorderlookup&quot;,self.id)"/> -->
+								</row>
+								<row>
+									标准作业计划<!-- 标准作业计划: -->
+									:
+									<a:bind value="workorder.jpnum" />
+									<ibandbox id="workorder.jpnum"
+										lookup="jobplan" />
+									标准作业计划描述<!-- 标准作业计划描述: -->
+									:
+									<a:bind value="jobplan.description" />
+									<itextbox id="jobplan.description"
+										cols="40" />
+								</row>
+								<row>
+									状态<!-- 状态: -->
+									:
+									<a:bind value="workorder.status" />
+									<itextbox id="workorder.status" />
+									状态日期<!-- 状态日期: -->
+									:
+									<a:bind
+										value="workorder.statusdate" />
+									<idatebox id="workorder.statusdate" />
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+
+
+				<vbox width="100%">
+					<groupbox>
+						<caption label="相关人员" /><!-- 相关人员 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									报告人<!-- 报告人: -->
+									:
+									<a:bind
+										value="workorder.reportedby" />
+									<ibandbox id="workorder.reportedby"
+										lookup="labor" />
+									报告日期<!-- 报告日期: -->
+									:
+									<a:bind
+										value="workorder.reportdate" />
+									<idatebox id="workorder.reportdate" />
+
+								</row>
+
+								<row>
+									发现人<!-- 发现人: -->
+									:
+									<a:bind value="workorder.digoutby" />
+									<ibandbox id="workorder.digoutby"
+										lookup="labor" />
+									发现时间<!-- 发现时间: -->
+									:
+									<a:bind
+										value="workorder.didoutdate" />
+									<idatebox id="workorder.didoutdate" />
+								</row>
+
+								<row>
+
+									负责班组<!-- 负责班组: -->
+									:
+									<a:bind value="workorder.crewid" />
+									<ibandbox id="workorder.crewid"
+										lookup="department" />
+									负责人<!-- 主管人: -->
+									:
+									<a:bind
+										value="workorder.supervisor" />
+									<ibandbox id="workorder.supervisor"
+										lookup="labor" />
+								</row>
+								<row spans="1,3">
+									电话<!-- 电话: -->
+									:
+									<a:bind value="workorder.phone" />
+									<itextbox id="workorder.phone" />
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+				<hbox width="100%">
+					<groupbox>
+						<caption label="计划时间" /><!-- 计划时间 -->
+						<grid>
+							<rows>
+								<row>
+									计划开始<!-- 计划开始: -->
+									:
+									<a:bind
+										value="workorder.schedstart" />
+									<idatetimebox
+										id="workorder.schedstart" />
+									计划完成<!-- 计划完成: -->
+									:
+									<a:bind
+										value="workorder.schedfinish" />
+									<idatetimebox
+										id="workorder.schedfinish" />
+
+								</row>
+								<row spans="1,3">
+									预计持续时间<!-- 预计持续时间: -->
+									:
+									<a:bind value="workorder.estdur" />
+									<ilongbox id="workorder.estdur" />
+								</row>
+
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+
+				<hbox width="100%">
+					<groupbox>
+						<caption label="实际时间" /><!-- 实际时间 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+
+
+								<row>
+									实际开始<!-- 实际开始: -->
+									:
+									<a:bind value="workorder.actstart" />
+									<idatetimebox
+										id="workorder.actstart" />
+									实际完成<!-- 实际完成: -->
+									:
+									<a:bind value="workorder.actfinish" />
+									<idatetimebox
+										id="workorder.actfinish" />
+
+								</row>
+								<row spans="1,3">
+									剩余持续时间<!-- 剩余持续时间: -->
+									:
+									<a:bind value="workorder.remdur" />
+									<ilongbox id="workorder.remdur" />
+								</row>
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+
+				<!-- ******************************************************************** -->
+
+
+
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+
+			<!-- **********************************  计 划  ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<row spans="1,1,1,3">
+							工单<!-- 工单: -->
+							:
+							<a:bind value="workorder.wonum" />
+							<textbox id="wonum_plan" disabled="true" />
+							描述<!-- 描述: -->
+							:
+							<a:bind value="workorder.description" />
+							<textbox id="description_plan" cols="50"
+								disabled="true" />
+							状态<!-- 状态: -->
+							:
+							<a:bind value="workorder.status" />
+							<textbox id="status" cols="20"
+								disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<separator spacing="2px" />
+				<!-- //////////////////////标准维修操作步骤//////////////// -->
+				<listwindow id="wptaskTable" title="标准作业计划"
+					use="combiz.ui.workorder.WptaskList"
+					dialog="/workorder/wptaskdialog.xul"><!-- 标准作业计划 -->
+					<tablelist band="wptaskTable" pageSize="10">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="TASKNUM" label="任务编号"
+								sort="auto" width="20%" /><!-- 任务编号 -->
+							<tablelistheader data="DESCRIPTION"
+								label="描述" sort="auto" width="40%" /><!-- 描述 -->
+							<tablelistheader data="SCHEDSTART"
+								label="计划开始日期" sort="auto" width="10%" /><!-- 计划开始日期 -->
+							<tablelistheader data="SCHEDFINISH"
+								label="计划完成日期" sort="auto" width="10%" /><!-- 计划完成日期 -->
+							<tablelistheader data="ACTSTART"
+								label="实际开始日期" sort="auto" width="10%" /><!-- 实际开始日期 -->
+							<tablelistheader data="ACTFINISH"
+								label="实际完成日期" sort="auto" width="10%" /><!-- 实际完成日期 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				<!-- separator spacing="2px"/>   -->
+				<!-- //////////////////////计划子TAB页面//////////////// -->
+				<tabbox width="99%">
+					<tabs>
+						<tab label="备件" width="70px" /><!-- 备件 -->
+						<tab label="工具" width="70px" /><!-- 工具 -->
+						<tab label="人工" width="70px" /><!-- 人工 -->
+						<tab label="承包单位" width="70px" /><!-- 承包单位 -->
+					</tabs>
+					<tabpanels>
+						<!-- //////////////////////备件//////////////// -->
+						<tabpanel>
+							<listwindow id="wpmaterialTable" title="备件"
+								use="combiz.ui.workorder.WpmaterialList"
+								dialog="/workorder/wpmaterialdialog.xul"><!-- 备件 -->
+								<tablelist band="wpmaterialTable"
+									pageSize="8">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="itemnum"
+											label="物料" sort="auto" width="10%" /><!-- 物料 -->
+										<tablelistheader
+											data="description" label="描述" sort="auto" width="50%" /><!-- 描述 -->
+										<tablelistheader
+											data="warehouse" label="仓库" sort="auto" width="10%" /><!-- 仓库 -->
+										<tablelistheader data="itemqty"
+											label="数量" sort="auto" width="10%" /><!-- 数量 -->
+										<tablelistheader data="unitcost"
+											label="单价" sort="auto" width="10%" /><!-- 单价 -->
+										<tablelistheader data="linecost"
+											label="行总价" sort="auto" width="10%" /><!-- 行总价 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+							<div align="right">
+								<button label="物资BOM备件"
+									onClick="mainWnd.findeqbom()" /><!--物资BOM备件 -->
+								<button label="设备备件"
+									onClick="wpmaterialTable.findeqsparepart()" /><!-- 设备备件 -->
+								<button label="加入收藏夹"
+									onClick="wpmaterialTable.addfavorite()" /><!-- 加入收藏夹 -->
+								<button label="我的收藏夹"
+									onClick="wpmaterialTable.findfavorite()" /><!-- 我的收藏夹 -->
+							</div>
+						</tabpanel>
+						<!-- //////////////////////工具//////////////// -->
+						<tabpanel>
+							<listwindow id="wptoolTable" title="工具"
+								use="combiz.ui.workorder.WptoolList"
+								dialog="/workorder/wptooldialog.xul"><!-- 工具 -->
+								<tablelist band="wptoolTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="toolnum"
+											label="工具编号" sort="auto" width="20%" /><!-- 工具编号 -->
+										<tablelistheader data="tasknum"
+											label="任务编号" sort="auto" width="20%" /><!-- 任务编号 -->
+										<tablelistheader data="toolqty"
+											label="工具数量" sort="auto" width="20%" /><!-- 工具数量 -->
+										<tablelistheader data="toolhrs"
+											label="工具工时" sort="auto" width="20%" /><!-- 工具工时 -->
+										<tablelistheader data="rate"
+											label="费率" sort="auto" width="20%" /><!-- 费率 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<!-- //////////////////////人工//////////////// -->
+						<tabpanel>
+							<listwindow id="wplaborTable" title="人工"
+								use="combiz.ui.workorder.WplaborList"
+								dialog="/workorder/wplabordialog.xul"><!-- 人工 -->
+								<tablelist band="wplaborTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="labornum"
+											label="人工编号" sort="auto" width="10%" /><!-- 人工编号 -->
+										<tablelistheader data="tasknum"
+											label="任务编号" sort="auto" width="50%" /><!-- 任务编号 -->
+										<tablelistheader data="laborqty"
+											label="人工数量" sort="auto" width="10%" /><!-- 人工数量 -->
+										<tablelistheader data="laborhrs"
+											label="人工工时" sort="auto" width="10%" /><!-- 人工工时 -->
+										<tablelistheader data="rate"
+											label="费率" sort="auto" width="10%" /><!-- 费率 -->
+										<tablelistheader data="vendor"
+											label="承包公司" sort="auto" width="10%" /><!-- 承包公司 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<!-- //////////////////////承包单位//////////////// -->
+						<tabpanel>
+							<listwindow id="wpvendorTable" title="承包单位"
+								use="combiz.ui.workorder.WpvendorList"
+								dialog="/workorder/wpvendordialog.xul"><!-- 承包单位 -->
+								<tablelist band="wpvendorTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="vendor"
+											label="承包商" sort="auto" width="30%" /><!-- 承包商 -->
+										<tablelistheader data="tasknum"
+											label="任务编号" sort="auto" width="50%" /><!-- 任务编号 -->
+										<tablelistheader
+											data="vendorhrs" label="供应商" sort="auto" width="10%" />
+										<tablelistheader data="rate"
+											label="费率" sort="auto" width="10%" /><!-- 费率 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+			<!-- **********************************  //计 划 ********************************** -->
+
+			<!-- **********************************  安  全 ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							工单<!-- 工单: -->
+							:
+							<a:bind value="workorder.wonum" />
+							<textbox id="wonum_safty" disabled="true" />
+							描述<!-- 描述: -->
+							:
+							<a:bind value="workorder.description" />
+							<textbox id="description_safty" cols="60"
+								disabled="true" />
+							状态<!-- 状态: -->
+							:
+							<a:bind value="workorder.status" />
+							<textbox id="aq_status" cols="20"
+								disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<separator spacing="4px" />
+				<!-- //////////////////////关联表//////////////// -->
+				<listwindow id="wohazardTable" title="危险"
+					use="combiz.ui.workorder.WohazardList"
+					dialog="/workorder/wohazarddialog.xul"><!-- 危险 -->
+					<tablelist band="wohazardTable" pageSize="10">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="WONUM" label="工单号"
+								sort="auto" width="10%" /><!-- 工单号 -->
+							<tablelistheader data="HAZARDID"
+								label="危险标识" sort="auto" width="10%" /><!-- 危险标识 -->
+							<tablelistheader data="DESCRIPTION"
+								label="描述" sort="auto" width="20%" /><!-- 描述 -->
+							<tablelistheader data="HAZPREC"
+								label="预防措施启用" sort="auto" width="10%" /><!-- 预防措施启用 -->
+							<tablelistheader data="HAZMAT"
+								label="危险物料启用" sort="auto" width="10%" /><!-- 危险物料启用 -->
+							<tablelistheader data="HAZTAGOUT"
+								label="安全隔离" sort="auto" width="10%" /><!-- 安全隔离 -->
+							<tablelistheader data="HAZARDTYPE"
+								label="危险类型" sort="auto" width="10%" /><!-- 危险类型 -->
+							<tablelistheader data="MSDSNUM"
+								label="MSDS编号" sort="auto" width="10%" /><!-- MSDS编号 -->
+							<tablelistheader data="HEALTH" label="健康等级"
+								sort="auto" width="10%" /><!-- 健康等级 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				<tabbox width="100%">
+					<tabs>
+						<tab label="预防措施" width="70px" /><!-- 预防措施 -->
+						<tab label="安全隔离" width="70px" /><!-- 安全隔离 -->
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<!-- //////////////////////危险及预防措施//////////////// -->
+							<listwindow id="wohazprecTable" title="预防措施"
+								parentWnd="wohazardTable"
+								use="combiz.ui.workorder.WohazprecList"
+								dialog="/workorder/wohazprecdialog.xul"><!-- 预防措施 -->
+								<tablelist band="wohazprecTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="HAZARDID"
+											label="危险标识" sort="auto" width="30%" /><!-- 危险标识 -->
+										<tablelistheader
+											data="HAZARDPREC" label="预防措施标识" sort="auto" width="30%" /><!-- 预防措施标识 -->
+										<tablelistheader
+											data="DESCRIPTION" label="描述" sort="auto" width="40%" /><!-- 描述 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+						<tabpanel>
+							<!-- //////////////////////安全隔离//////////////// 	-->
+							<listwindow id="woisotagTable" title="安全隔离"
+								parentWnd="wohazardTable"
+								use="combiz.ui.workorder.WoisotagList"
+								dialog="/workorder/woisotagdialog.xul"><!-- 安全隔离 -->
+								<tablelist band="woisotagTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader data="isotagid"
+											label="安全标记" sort="auto" width="10%" /><!-- 安全标记 -->
+										<tablelistheader
+											data="description" label="描述" sort="auto" width="40%" /><!-- 描述 -->
+										<tablelistheader data="location"
+											label="位置" sort="auto" width="20%" /><!-- 位置 -->
+										<tablelistheader data="eqnum"
+											label="设备" sort="auto" width="10%" /><!-- 设备 -->
+										<tablelistheader data="aplyseq"
+											label="操作序列" sort="auto" width="10%" /><!-- APLYSEQ -->
+										<tablelistheader data="state"
+											label="需求日期" sort="auto" width="10%" /><!-- 需求日期 -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+							<!-- //////////////////////隔离装置步骤、状态//////////////// -->
+							<listwindow id="woisolockoutTable"
+								title="隔离装置步骤、状态" parentWnd="woisotagTable"
+								use="combiz.ui.workorder.WoisolockoutList"
+								dialog="/workorder/woisolockoutdialog.xul"><!-- 隔离装置步骤、状态 -->
+								<tablelist band="woisolockoutTable"
+									pageSize="10">
+									<listhead>
+										<tablelistheader
+											src="/images/img_listitem.gif" />
+										<tablelistheader
+											data="ISOLOCKID" label="编号" sort="auto" width="15%" /><!-- 编号 -->
+										<tablelistheader
+											data="DESCRIPTION" label="描述" sort="auto" width="25%" /><!-- 描述 -->
+										<tablelistheader data="LOCATION"
+											label="位置" sort="auto" width="10%" /><!-- 位置 -->
+										<tablelistheader data="EQNUM"
+											label="设备" sort="auto" width="10%" /><!-- 设备 -->
+										<tablelistheader
+											data="EQDESCRIPTIOIN" label="设备隔离状态描述" sort="auto"
+											width="10%" /><!-- 设备隔离状态描述 -->
+										<tablelistheader data="STATE"
+											label="需求日期" sort="auto" width="10%" /><!-- 需求日期 -->
+										<tablelistheader data="APLYSEQ"
+											label="操作序列" sort="auto" width="10%" /><!-- APLYSEQ -->
+										<tablelistheader data="PERFORM"
+											label="执行操作" sort="auto" width="10%" /><!-- PERFORM -->
+									</listhead>
+									<tablelistfoot />
+								</tablelist>
+							</listwindow>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</tabpanel>
+			<!-- **********************************  //安  全  ********************************** -->
+
+			<!-- **********************************  汇  报 ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+							工单<!-- 工单: -->
+							:
+							<a:bind value="workorder.wonum" />
+							<textbox id="wonum_report" disabled="true" />
+							描述<!-- 描述: -->
+							:
+							<a:bind value="workorder.description" />
+							<textbox id="description_report" cols="60"
+								disabled="true" />
+							状态<!-- 状态: -->
+							:
+							<a:bind value="workorder.status" />
+							<textbox id="hb_status" cols="20"
+								disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<separator spacing="2px" />
+				<listwindow id="wofailclass" title="故障代码"
+					use="combiz.ui.workorder.WofailcodeList"
+					dialog="/workorder/wofailcodedialog.xul"><!-- 故障代码 -->
+					<tablelist band="wofailclass" pageSize="15">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="failurecode"
+								label="故障代码" sort="auto" width="20%" /><!-- 故障代码 -->
+							<tablelistheader data="description"
+								label="故障描述" sort="auto" width="30%" />
+							<!-- 故障描述 -->
+							<tablelistheader data="location" label="位置"
+								sort="auto" width="50%" /><!-- 位置 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+
+				<listwindow id="wofailcode" parentWnd="wofailclass"
+					title="故障问题" use="combiz.ui.workorder.WofailproblemList"
+					dialog="/workorder/wofailproblemdialog.xul"><!-- 故障问题 -->
+					<tablelist band="wofailcode" pageSize="15">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="failureproblem"
+								label="故障问题" sort="auto" width="40%" /><!-- 故障问题 -->
+							<tablelistheader
+								data="woproblem.description" label="描述" sort="auto" width="60%" /><!-- 描述 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+
+				<listwindow id="wofailproblem" parentWnd="wofailcode"
+					title="原因代码" use="combiz.ui.workorder.WofailcauseList"
+					dialog="/workorder/wofailcausedialog.xul"><!-- 原因代码 -->
+					<tablelist band="wofailproblem" pageSize="15">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="failurecause"
+								label="原因代码" sort="auto" width="40%" /><!-- 原因代码 -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="60%" /><!-- 描述 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+
+				<listwindow id="wofailcause" parentWnd="wofailproblem"
+					title="故障措施" use="combiz.ui.workorder.WofaildealList"
+					dialog="/workorder/wofaildealdialog.xul"><!-- 故障措施 -->
+					<tablelist band="wofailcause" pageSize="15">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="failuredeal"
+								label="故障措施" sort="auto" width="40%" /><!-- 故障措施 -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="60%" /><!-- 描述 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+
+				<!-- //////////////////////关联表//////////////// -->
+			</tabpanel>
+			<!-- **********************************  //汇  报  ********************************** -->
+
+			<!-- **********************************  文 档 ********************************** -->
+			<tabpanel>
+				<hbox>
+					<groupbox>
+						<caption label="文档库" /><!-- 文档库 -->
+						<tree id="doclibtree"
+							use="combiz.system.doclib.DocLibTree" width="180" />
+					</groupbox>
+					<!-- ********************************** //结果树页面 ********************************** -->
+					<vbox width="99%">
+						<listwindow id="document" title="文档"
+							use="combiz.system.doclib.DocumentList"
+							dialog="/doclib/common/documentdialog.xul"><!-- 文档 -->
+							<tablelist band="document" pageSize="10">
+								<listhead>
+									<tablelistheader
+										src="/images/img_listitem.gif" />
+									<tablelistheader data="docnum"
+										label="文档编号" sort="auto" width="10%" /><!-- 文档编号 -->
+									<tablelistheader data="description"
+										label="描述" sort="auto" width="60%" /><!-- 描述 -->
+									<tablelistheader data="creator"
+										label="创建人" sort="auto" width="10%" /><!-- 创建人 -->
+									<tablelistheader data="createdate"
+										label="创建日期" sort="auto" width="20%" /><!-- 创建日期 -->
+								</listhead>
+								<tablelistfoot />
+							</tablelist>
+						</listwindow>
+						<!-- 子表 -->
+						<tabbox width="100%">
+							<tabs>
+								<tab label="版本列表"></tab><!-- 版本列表 -->
+								<tab label="访问权限"></tab><!-- 访问权限 -->
+							</tabs>
+							<tabpanels width="100%">
+								<tabpanel>
+									<listwindow id="docversion"
+										title="文档版本列表" parentWnd="document" orderby="createdate desc"
+										use="combiz.system.doclib.DocversionList"
+										dialog="/doclib/common/docversiondialog.xul"><!-- 文档版本列表 -->
+										<tablelist band="docversion"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="VERSION" label="版本号" sort="auto" width="10%" /><!-- 版本号 -->
+												<tablelistheader
+													data="DESCRIPTION" label="版本描述" sort="auto" width="30%" /><!-- 版本描述 -->
+												<tablelistheader
+													data="status" label="是否上传" sort="auto" width="10%" /><!-- 是否上传 -->
+												<tablelistheader
+													data="filename" label="文件名" sort="auto" width="20%" /><!-- 文件名 -->
+												<tablelistheader
+													data="CREATOR" label="创建人" sort="auto" width="15%" /><!-- 创建人 -->
+												<tablelistheader
+													data="CREATEDATE" label="创建时间" sort="auto" width="15%" /><!-- 创建时间 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+								<tabpanel>
+									<listwindow id="docauth"
+										title="文档权限" parentWnd="document"
+										use="combiz.system.doclib.DocauthList"
+										dialog="/doclib/common/docauthdialog.xul"><!-- 文档权限 -->
+										<tablelist band="docauth"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="DOCNUM" label="文档编号" sort="auto" width="20%" /><!-- 文档编号 -->
+												<tablelistheader
+													data="GRPNAME" label="用户组名称" sort="auto" width="20%" /><!-- 用户组名称 -->
+												<tablelistheader
+													data="DOCREAD" label="是否可读" sort="auto" width="20%" /><!-- 是否可读 -->
+												<tablelistheader
+													data="DOCEDIT" label="是否可写" sort="auto" width="20%" /><!-- 是否可写 -->
+												<tablelistheader
+													data="MEMO" label="备注" sort="auto" width="20%" /><!-- 备注 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+						<!-- 子表 -->
+					</vbox>
+				</hbox>
+
+			</tabpanel>
+			<!-- **********************************  //文 档  ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

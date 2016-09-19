@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="kpipicture" title="KPI实例" resize="true" use="combiz.ui.ibs.KpipictureWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="KPI实例列表" width="120px"/>
+			<tab id="main" label="KPI实例" width="70px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					<label value="KPI实例编号"/><stextbox data="kptnum"/>
+					<label value="KPI图类型"/><stextbox data="kpttype"/>
+					<label value="描述"/><stextbox data="description"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="kptnum" label="KPI实例编号" sort="auto" width="30%"/>
+						<resultlistheader data="kpttype" label="KPI图类型" sort="auto" width="30%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="40%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"schedultask.isruning"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+			<grid><!--
+					<columns>
+					<column width="120px"></column>
+					</columns>
+				--><rows>
+					<row>
+						KPI实例编号:<a:bind value="kpipicture.kptnum"/><itextbox id="kpipicture.kptnum"/>
+					</row>
+					<row>
+						KPI图类型:<a:bind value="kpipicture.kpttype"/><icombobox id="kpipicture.kpttype"/>
+					</row>
+					<row>
+						描述:<a:bind value="kpipicture.description"/><itextbox id="kpipicture.description" cols="80" />
+					</row>
+				</rows>
+			</grid>
+			<hbox>
+				<listwindow id="kpilinkTable" title="kpi指标"  use="combiz.ui.ibs.KpilinkList" dialog="/ibs/kpilinkdialog.xul" width="99%">
+				<tablelist band="kpilinkTable" pageSize="12">		
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<!-- <tablelistheader data="kptnum" label="KPI实例编号" sort="auto" width="40%"/> -->
+						<tablelistheader data="series" label="分组" sort="auto" width="25%"/>
+						<tablelistheader data="xpoint" label="指标值(X轴)" sort="auto" width="25%"/>
+						<tablelistheader data="ypoint" label="指标值(Y轴)" sort="auto" width="25%"/>
+						<tablelistheader data="kpinum" label="指标(Y轴)" sort="auto" width="25%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+				<div>
+				<ichart id="kpichart" title="KPI指标展示" width="500px" height="300px"/>
+				</div>
+				</hbox>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

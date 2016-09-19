@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation" width="700">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"wfnode.isaggre","wfnode.nodetype","wfnode.wfname","wfnode.wfrevision"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="流程节点表"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						节点名称:<a:bind value="wfnode.title"/><itextbox id="wfnode.title"/>
+						节点描述:<a:bind value="wfnode.description"/><itextbox id="wfnode.description" cols="40"/>
+						</row>
+						
+						<row spans="1,3">
+						条件（条件节点）:<a:bind value="wfnode.condition"/><itextbox id="wfnode.condition" cols="80" rows="4"/>
+						</row>
+						
+						<row spans="1,3">
+						自定义CLASS？:<a:bind value="wfnode.customclass"/><icheckbox id="wfnode.customclass"/>
+						</row>
+						
+						<row>
+						节点类型:<a:bind value="wfnode.nodetype"/><itextbox id="wfnode.nodetype"/>
+						是否会签:<a:bind value="wfnode.isaggre"/><icheckbox id="wfnode.isaggre"/>
+						</row>
+						
+						<row>
+						工作流:<a:bind value="wfnode.wfname"/><itextbox id="wfnode.wfname"/>
+						工作流版本:<a:bind value="wfnode.wfrevision"/><ilongbox id="wfnode.wfrevision"/>
+						</row>
+						
+						<row>
+						<!--
+						X轴位置:<a:bind value="wfnode.xcanvas"/><ilongbox id="wfnode.xcanvas"/>
+						Y轴位置:<a:bind value="wfnode.ycanvas"/><ilongbox id="wfnode.ycanvas"/>
+						-->
+						</row>
+
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

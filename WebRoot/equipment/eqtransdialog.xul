@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="设备历史"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						现使用人:<a:bind value="eqtrans.tocustodian"/><ibandbox id="eqtrans.tocustodian" lookup="labor"/>
+						现责任人:<a:bind value="eqtrans.tolabornum"/><ibandbox id="eqtrans.tolabornum" lookup="labor"/>
+						</row>
+						<row>
+						采购单号:<a:bind value="eqtrans.ponum"/><itextbox id="eqtrans.ponum"/>
+						工单编号:<a:bind value="eqtrans.wonum"/><itextbox id="eqtrans.wonum"/>
+</row>
+						<row>
+						原所在部门:<a:bind value="eqtrans.fromdeptnum"/><itextbox id="eqtrans.fromdeptnum"/>
+						现所在部门:<a:bind value="eqtrans.todeptnum"/><itextbox id="eqtrans.todeptnum"/>
+</row>
+						<row>
+						父级:<a:bind value="eqtrans.fromparent"/><itextbox id="eqtrans.fromparent"/>
+						目的:<a:bind value="eqtrans.toparent"/><itextbox id="eqtrans.toparent"/>
+</row>
+						<row>
+						原使用人:<a:bind value="eqtrans.fromcustodian"/><itextbox id="eqtrans.fromcustodian"/>
+						原责任人:<a:bind value="eqtrans.fromlabornum"/><itextbox id="eqtrans.fromlabornum"/>
+</row>
+						<row>
+						异动前位置:<a:bind value="eqtrans.fromloc"/><itextbox id="eqtrans.fromloc"/>
+						异动后位置:<a:bind value="eqtrans.toloc"/><ibandbox id="eqtrans.toloc" lookup="location"/>
+</row>
+						
+						<row>
+						移动日期:<a:bind value="eqtrans.datemoved"/><idatebox id="eqtrans.datemoved"/>
+						加载时间:<a:bind value="eqtrans.readingdate"/><idatebox id="eqtrans.readingdate"/>
+						</row>
+						<row>
+						移动人:<a:bind value="eqtrans.moveby"/><itextbox id="eqtrans.moveby"/>
+						发生时间:<a:bind value="eqtrans.transdate"/><idatebox id="eqtrans.transdate"/>
+</row>
+						<row spans="1,3">
+						备注:<a:bind value="eqtrans.memo"/><itextbox id="eqtrans.memo"/>
+</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

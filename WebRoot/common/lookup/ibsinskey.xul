@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="自动序列表" width="600">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器"/>
+		名称:<stextbox data="inskey" cols="12"/>
+		前缀:<stextbox data="prefix" cols="12"/>
+		起始值:<stextbox data="seed" cols="12"/>
+		目前值:<stextbox data="curvalue" cols="12"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="inskey" label="名称" sort="auto" width="30%"/>
+			<lookuplistheader data="prefix" label="前缀" sort="auto" width="30%"/>
+			<lookuplistheader data="seed" label="起始值" sort="auto" width="20%"/>
+			<lookuplistheader data="curvalue" label="目前值" sort="auto" width="20%"/>
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->
+
+
+	<div align="center">
+	<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+	<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+	</div>
+	
+</lookupwindow>

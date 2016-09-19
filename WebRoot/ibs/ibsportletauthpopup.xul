@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="portletsAuthWnd" border="none" closable="true">
+<listwindow id="portletsAuthList" title="授予权限组" tablename="ibsportletsauth" use="combiz.system.ui.CommonListWindow"
+dialog="/ibs/ibsportletauthdialog.xul" width="600px" autodata="true">
+	<tablelist band="portletsAuthList" pageSize="8">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="grpname" label="权限组" sort="auto" width="40%" />
+			<tablelistheader data="ibsgroups.description" label="描述" sort="auto" width="60%" />
+		</listhead>
+	</tablelist>
+
+</listwindow>
+	<div align="center">
+		<button label="确  定" onClick="portletsAuthList.save();portletsAuthWnd.onClose()"/>
+		<button label="取  消" onClick="portletsAuthWnd.onClose()"/>
+	</div>	
+</window>

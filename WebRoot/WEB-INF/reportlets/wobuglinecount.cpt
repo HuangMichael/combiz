@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.WorkSheet">
+<Version>2.0</Version>
+<TableDataMap>
+<NameTableData name="inbasis.wobugeq">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="sitenum" type="0">
+<O t="S">like &apos;%&apos;</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="bugtype" type="0">
+</Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select t.bdzout 出线变电站,t.deptnum 所属部门,t.description 线路描述,t.serialnum 调度编号,w.location,w.bugtype, w.* from wobugeq w,locations t where w.eqnum is null and t.location=w.location 
+and w.sitenum [?sitenum|like '%'?]
+and w.bugtype='[?bugtype|?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings orientation="1" isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.3937007874015748" left="0.07874015748031496" bottom="0.3937007874015748" right="0.07874015748031496" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="5">
+<O t="S">2006-01-01</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="5">
+<O t="S">2009-06-10</O></Parameter>
+</Parameters>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportExportAttr pdfPrinting="false"/>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,19.0,24.0,19.0,30.0,30.0,30.0,35.0,35.0,35.0,19.0,19.0,19.0,35.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[30.0,112.0,90.0,117.0,90.0,90.0,90.0,65.0,60.0,72.0,76.0,60.0,60.0,90.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<SpreadSheetAttributes startRepeatRow="13" endRepeatRow="14" />
+<CellElementList>
+<C c="0" r="6" cs="2" s="0"><O t="S">填报部门：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="7" cs="2" s="0"><O t="S">批准：</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="1" cs="14" rs="3" s="1"><O t="S">    线路缺陷统计报表</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="7" s="0"><O t="S"> 填写：</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="7" s="0"><O t="S">日期：</O><CellExpandAttr direction="2" />
+</C>
+<C c="12" r="7" cs="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="7" cs="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="4"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="4"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="4"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="8" cs="14" s="2"><O t="S">缺陷分类统计 </O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="9" cs="2" s="2"><O t="S">紧急缺陷合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="9" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGTYPE" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">紧急</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="9" s="2"><O t="S">消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="9" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">紧急</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="10">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="9" cs="2" s="2"><O t="S">及时消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="9" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">紧急</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="0">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="9" s="2"><O t="S">消缺率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="9" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=E10/(IF (C10==0,1,C10))]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="9" cs="2" s="2"><O t="S">消除及时率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="9" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=H10/IF (C10==0,1,C10)]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="10" cs="2" s="2"><O t="S">重大缺陷合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="10" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGTYPE" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">重大</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="10" s="2"><O t="S">消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="10" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">重大</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="10">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="10" cs="2" s="2"><O t="S">及时消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="10" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">重大</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="0">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="10" s="2"><O t="S">消缺率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="10" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=E11/IF (H11==0,1,H11)]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="10" cs="2" s="2"><O t="S">消除及时率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="10" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=H11/IF (C11==0,1,C11)]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="11" cs="2" s="2"><O t="S">一般缺陷合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="11" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGTYPE" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">一般</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="11" s="2"><O t="S">消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="11" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">一般</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="10">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="11" cs="2" s="2"><O t="S">及时消除合计（次）：</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="11" cs="2" s="3"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="STATUS" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="BUGTYPE" />
+<Condition op="0">
+<O t="S">一般</O></Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="STATUS" />
+<Condition op="0">
+<O t="S">工单关闭</O></Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="3" function="com.fr.data.util.function.CountFunction" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="9" r="11" s="2"><O t="S">消缺率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="11" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=E12/IF (C12==0,1,C12)]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="11" cs="2" s="2"><O t="S">消除及时率：</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="11" s="4"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=H12/IF (C12==0,1,C12)]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="13" rs="2" s="2"><O t="S">序号</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="13" rs="2" s="2"><O t="S">发现时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="7" r="13" cs="3" rs="2" s="2"><O t="S">缺陷内容</O><CellExpandAttr direction="2" />
+</C>
+<C c="10" r="13" rs="2" s="2"><O t="S">缺陷类别</O><CellExpandAttr direction="2" />
+</C>
+<C c="11" r="13" cs="2" rs="2" s="2"><O t="S">处理时间</O><CellExpandAttr direction="2" />
+</C>
+<C c="13" r="13" rs="2" s="2"><O t="S">处理情况</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="15" s="5"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=&B16]]>
+</Attributes>
+</O><CellExpandAttr leftParentDefault="false" left="B16" upParentDefault="false" />
+</C>
+<C c="1" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="LOCATION" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex type="2" />
+</O><CellExpandAttr />
+</C>
+<C c="2" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="线路描述" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="3" r="15" s="6"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="FINDTIME" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="4" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="出线变电站" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="6" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="所属部门" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="7" r="15" cs="3" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="DESCRIPTION" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="10" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="BUGTYPE" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="11" r="15" cs="2" s="6"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIREDTIME" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="13" r="15" s="5"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="REPAIREDCOMMENT" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+<C c="4" r="4" cs="2" s="7"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=$begindate]]>
+</Attributes>
+</O><CellExpandAttr />
+</C>
+<C c="7" r="4" cs="2" s="8"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=$enddate]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="6"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="0" cs="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="1" r="13" rs="2" s="9"><O t="S">线路名称</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="13" rs="2" s="2"><O t="S">线路描述</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="13" rs="2" s="9"><O t="S">所属部门</O><CellExpandAttr direction="2" />
+</C>
+<C c="6" r="4" s="10"><O t="S">--------</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="13" rs="2" s="9"><O t="S">调度编号</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="13" rs="2" s="9"><O t="S">出线变电站</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="7" cs="2"><O t="S"></O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="7" s="0"><O t="S">审核：</O><CellExpandAttr direction="2" />
+</C>
+<C c="5" r="15" s="11"><O t="DSColumn"><Attributes dsName="inbasis.wobugeq" columnName="调度编号" dsDisplayName="inbasis.wobugeq" />
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="3">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+<O t="S">2006-01-01</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<SelectionColumn name="FINDTIME" />
+<Condition op="5">
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+<O t="S">2009-06-10</O></Parameter>
+</Condition>
+</Condition>
+</JoinCondition>
+</Condition>
+</O><CellExpandAttr />
+</C>
+</CellElementList>
+<WorkSheetAttr />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="32" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.DecimalFormat"><![CDATA[#0]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.DecimalFormat"><![CDATA[#0.00%]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日H时:mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日]]>
+</Format>
+<FRFont name="SimSun" style="1" size="20" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日]]>
+</Format>
+<FRFont name="SimSun" style="1" size="20" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /></Border>
+</Style>
+</StyleList>
+</Report>

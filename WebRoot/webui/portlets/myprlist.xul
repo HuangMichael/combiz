@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--
+我的采购计划
+linkapp: 如果是业务数据，设置该属性链接到业务应用程序。
+linkpage: 如果是信息类数据，设置该属性后使用页面打开详细数据，linkpage="/webui/msgdialog.xul"，该页面需要继承CommonDialog
+listwhere: 设置过滤条件，可以使用全局参数，如listwhere="receiver=':{labor.labornum}'" 或 userid =':{ibsusers.userid}' 等
+-->
+<window id="prlistwnd" tablename="pr" use="combiz.system.ui.portal.PortletWindow"
+linkapp="pr">
+	<tablelist band="prlistwnd" pageSize="8">
+		<listhead>
+			<tablelistheader data="prnum" label="采购计划" sort="auto" width="20%" />
+			<tablelistheader data="description" label="描述" sort="auto" width="80%" />
+		</listhead>
+	</tablelist>
+</window>

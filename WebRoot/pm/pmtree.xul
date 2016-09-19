@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="pmtree" title="预防性维护" resize="true"
+	use="combiz.ui.pm.PmClassWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation"><!-- title="预防性维护" -->
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+	<hbox spacing="0">
+		<!-- **********************************  结果树页面 ********************************** -->
+		<groupbox>
+			<caption label="预防性维护" /><!-- 预防性维护 -->
+			<tree use="combiz.ui.pm.PmClassTree" width="180" />
+		</groupbox>
+
+		<!-- ********************************** //结果树页面 ********************************** -->
+		<!-- ********************************** //顶级标签 ********************************** -->
+		<tabbox id="appTabbox" width="100%"
+			onSelect="mainWnd.selectTab()">
+			<tabs>
+				<tab id="main" label="预防性维护" width="90px" /><!-- 预防性维护 -->
+			</tabs>
+			<!-- ********************************** //顶级标签 ********************************** -->
+			<tabpanels width="100%">
+				<!-- ********************************** 主数据窗口 ********************************** -->
+				<!-- 初始化设置字段的必输和只读 -->
+				<zscript>
+					<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.parent","classification.haschild"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+				</zscript>
+				<tabpanel>
+					<grid>
+						<rows>
+							<!-- ******************************************************************** -->
+							<!-- *************************在下面修改主界面字段**************************** -->
+							<!-- ********************************************************************-->
+							<!-- //////////////////////row//////////////// -->
+							<row spans="1,1,1,3">
+								分类<!-- 分类 -->:
+								<a:bind value="classification.classid" />
+								<itextbox id="classification.classid" />
+								描述<!-- 描述 -->:
+								<a:bind
+									value="classification.description" />
+								<itextbox
+									id="classification.description" cols="40" />
+							</row>
+							<!-- //////////////////////row//////////////// -->
+							<row>
+								父级分类<!-- 父级分类 -->:
+								<a:bind value="classification.parent" />
+								<itextbox id="classification.parent" />
+								有子级<!-- 有子级 -->:
+								<a:bind value="classification.haschild" />
+								<icheckbox id="classification.haschild" />
+							</row>
+							<row spans="1,3">
+							序号<!-- 序号 -->:<a:bind value="classification.orderby"/>
+							<ilongbox id="classification.orderby" cols="5"/>
+							</row>
+							<!-- //////////////////////row//////////////// -->
+
+						</rows>
+					</grid>
+					<!-- 物资列表 -->
+					<listwindow id="pmclass" title="预防性维护"
+						use="combiz.ui.pm.PmTreeList" dialog="/pm/pmtreedialog.xul"><!-- 预防性维护 -->
+						<tablelist band="pmclass" pageSize="15">
+							<listhead>
+								<tablelistheader
+									src="/images/img_listitem.gif" />
+								<tablelistheader data="pmnum"
+									label="预防性维护" sort="auto" width="10%" /><!-- 预防性维护 -->
+								<tablelistheader data="description"
+									label="描述" sort="auto" width="20%" /><!-- 描述 -->
+								<tablelistheader data="equipment.description"
+									label="设备" sort="auto" width="15%" /><!-- 设备 -->
+								<tablelistheader data="locations.description"
+									label="位置" sort="auto" width="10%" /><!-- 位置 -->
+								<tablelistheader data="worktype"
+									label="工作类型" sort="auto" width="10%" /><!-- 工作类型 -->
+								<tablelistheader data="jobplantable.description"
+									label="标准作业计划" sort="auto" width="20%" /><!-- 标准作业计划 -->
+									<tablelistheader data="frequency"
+									label="频率" sort="auto" width="7.5%" /><!-- 频率 -->
+									<tablelistheader data="frequnit"
+									label="频率单位" sort="auto" width="7.5%" /><!-- 频率单位 -->
+							</listhead>
+							<tablelistfoot />
+						</tablelist>
+					</listwindow>
+					<space />
+					<!-- 物资其他信息 -->
+					<tabbox width="100%">
+						<tabs>
+							<tab label="维护历史" width="90px" /><!-- 维护历史 -->
+							<tab label="作业序列" width="90px" /><!-- 作业序列 -->
+						</tabs>
+						<tabpanels width="100%">
+							<tabpanel>
+								<listwindow id="oldpmlist"
+									parentWnd="pmclass" title="维护历史表" use="combiz.ui.pm.PmOldList"
+									dialog="/pm/pmolddialog.xul" edittype="READONLY"><!-- 维护历史表 -->
+									<tablelist band="oldpmlist"
+										pageSize="8">
+										<listhead>
+											<tablelistheader
+												data="performdate" label="上一次生成日期" sort="auto" width="20%" /><!-- 上一次生成日期 -->
+											<tablelistheader
+												data="wonum" label="工单编号" sort="auto" width="20%" /><!-- 工单编号 -->
+											<tablelistheader
+												data="startdate" label="开始日期" sort="auto" width="20%" /><!--开始日期  -->
+											<tablelistheader
+												data="jpnum" label="标准作业计划" sort="auto" width="20%" /><!-- 标准作业计划 -->
+											<tablelistheader
+												data="nextstartdate" label="下次执行日期" sort="auto" width="20%" /><!-- 下次执行日期 -->
+
+										</listhead>
+									</tablelist>
+								</listwindow>
+							</tabpanel>
+							
+							<tabpanel>
+								<listwindow id="pmjpseq"
+									parentWnd="pmclass" title="维护序列表" use="combiz.ui.pm.PmjpqList"
+									dialog="/pm/pmjpseqdialog.xul" edittype="READONLY"><!-- 维护序列表 -->
+									<tablelist band="pmjpseq"
+										pageSize="8">
+										<listhead>
+											<tablelistheader
+												src="/images/img_listitem.gif" />
+											<tablelistheader
+												data="sequence" label="序列" sort="auto" width="50%" /><!-- 序列 -->
+											<tablelistheader
+												data="jpnum" label="标准作业计划" sort="auto" width="50%" /><!-- 标准作业计划 -->
+										</listhead>
+										<tablelistfoot />
+									</tablelist>
+								</listwindow>
+							</tabpanel>
+
+						</tabpanels>
+					</tabbox>
+					<!-- ////////物资其他信息 -->
+
+				</tabpanel>
+				<!-- ********************************** //主数据窗口 ********************************** -->
+
+			</tabpanels>
+		</tabbox>
+	</hbox>
+</mainwindow>

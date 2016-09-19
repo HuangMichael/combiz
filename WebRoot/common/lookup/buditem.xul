@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="预算项目" width="600">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="1=2";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+<groupbox>
+	<caption label="预算项目" />
+	预算版本：<listbox use="combiz.ui.budget.BudgetItemVersion"/>
+</groupbox>
+	<tabbox width="100%">
+		<tabs>
+			<tab label="树型" width="70px"/>
+			<tab label="列表" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+		<!-- //////////////////树型列表区///////////////////////// -->
+		<tabpanel>
+			<groupbox><caption label="预算项目"/>		
+					<tree use="combiz.ui.common.lookup.FindBudgetItemTree"/>
+			</groupbox>
+									
+			<div align="center">
+				<button label=" 确 定 " onClick="lookupWnd.treeok(event)"/>
+				<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+			</div>
+					
+		</tabpanel>	
+		<!-- //////////////////数据列表区///////////////////////// -->	
+		<tabpanel>
+	     <groupbox id="searchBox">  
+			<caption label="过滤器"/>
+			预算编号：<stextbox data="buditem"/>
+			名称：<stextbox data="description"/>
+			<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+			</groupbox>
+			<pagenavigator/>
+			<lookuplist pageSize="20">
+				<listhead>
+					<lookuplistheader data="buditem" label="预算编号" sort="auto" width="30%"/>
+					<lookuplistheader data="description" label="名称" sort="auto" width="40%"/>
+					<lookuplistheader data="budtype" label="预算类型" sort="auto" width="10%"/>
+					<lookuplistheader data="orderby" label="排序" sort="auto" width="10%"/>
+					<lookuplistheader data="enabled" label="启用？" sort="auto" width="10%"/>
+					
+				</listhead>
+			</lookuplist>
+			<div align="center">
+			<button label=" 确 定 " onClick="lookupWnd.ok(event)"/>
+			<button label=" 取 消 " onClick="lookupWnd.cancel(event)"/>
+			</div>
+	</tabpanel>
+
+	</tabpanels>
+	</tabbox>
+</lookupwindow>

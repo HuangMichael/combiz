@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="classmage" resize="true" use="combiz.ui.basedata.ClassificationWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="分类管理"/>
+<tree use="combiz.ui.basedata.ClassTree" width="180"/>
+</groupbox>
+<!-- ********************************** //结果树页面 ********************************** -->
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="分类及技术规范" width="120px"/>
+			<tab id="doclib" label="分类文档库" width="120px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"classification.classid","classification.classtype","classification.parent","classification.haschild"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						物资分类:<!-- 物资分类 --><a:bind value="classification.classid"/><itextbox id="classification.classid"/>
+						描述:<!-- 描述 --><a:bind value="classification.description"/><itextbox id="classification.description" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						父级分类:<!-- 父级分类 --><a:bind value="classification.parent"/><itextbox id="classification.parent"/>
+						有子级:<!--有子级  --><a:bind value="classification.haschild"/><icheckbox id="classification.haschild"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						序号:<!-- 序号 --><a:bind value="classification.orderby"/><ilongbox id="classification.orderby" cols="5"/>
+						类别:<!-- 类别 --><a:bind value="classification.classtype"/><itextbox id="classification.classtype"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+		
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				 <listwindow id="itemclassspecTable" title="技术参数" use="combiz.ui.basedata.ClassSepcList" dialog="/basedata/classspecdialog.xul">
+					<tablelist band="itemclassspecTable" pageSize="8"><!-- 技术参数 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="classattr" label="属性名称" sort="auto" width="30%"/><!-- 属性名称 -->
+							<tablelistheader data="unitid" label="单位" sort="auto" width="50%"/><!-- 单位 -->
+							<tablelistheader data="defaultnumvalue" label="默认数值" sort="auto" width="10%"/><!-- 默认数值 -->
+							<tablelistheader data="defaultstrvalue" label="默认字符" sort="auto" width="10%"/><!-- 默认字符 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+<!-- ********************************** //文档数据窗口 ********************************** -->
+			<tabpanel>
+				<hbox>
+					<groupbox>
+						<caption label="文档库" /><!--文档库 -->
+						<tree id="doclibtree"
+							use="combiz.system.doclib.DocLibTree" width="180" />
+					</groupbox>
+					<!-- ********************************** //结果树页面 ********************************** -->
+					<vbox width="99%">
+						<listwindow id="document"
+							title="文档"
+							use="combiz.system.doclib.DocumentList"
+							dialog="/doclib/common/documentdialog.xul"><!-- title:文档 -->
+							<tablelist band="document" pageSize="10">
+								<listhead>
+									<tablelistheader
+										src="/images/img_listitem.gif" />
+									<tablelistheader data="docnum"
+										label="文档编号" sort="auto" width="10%" /><!-- 文档编号 -->
+									<tablelistheader data="description"
+										label="描述" sort="auto" width="60%" /><!-- 描述 -->
+									<tablelistheader data="creator"
+										label="创建人" sort="auto" width="10%" /><!-- 创建人 -->
+									<tablelistheader data="createdate"
+										label="创建日期" sort="auto"
+										width="20%" /><!-- 创建日期 -->
+								</listhead>
+								<tablelistfoot />
+							</tablelist>
+						</listwindow>
+						<button label="添加当前文档库中的文档" onClick="mainWnd.selectDocs()"/>
+						<!-- 子表 -->
+						<tabbox width="100%">
+							<tabs>
+								<tab
+									label="版本列表">
+								</tab><!-- 版本列表 -->
+								<tab
+									label="访问权限">
+								</tab><!-- 访问权限 -->
+							</tabs>
+							<tabpanels width="100%">
+								<tabpanel>
+									<listwindow id="docversion"
+										title="文档版本列表" parentWnd="document"
+										orderby="createdate desc"
+										use="combiz.system.doclib.DocversionList"
+										dialog="/doclib/common/docversiondialog.xul"><!-- title:文档版本列表 -->
+										<tablelist band="docversion"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="VERSION" label="版本号"
+													sort="auto" width="10%" /><!-- 版本号 -->
+												<tablelistheader
+													data="DESCRIPTION" label="版本描述"
+													sort="auto" width="30%" /><!-- 版本描述 -->
+												<tablelistheader
+													data="status" label="是否上传"
+													sort="auto" width="10%" /><!-- 是否上传 -->
+												<tablelistheader
+													data="filename" label="文件名"
+													sort="auto" width="20%" /><!-- 文件名 -->
+												<tablelistheader
+													data="CREATOR" label="创建人"
+													sort="auto" width="15%" /><!-- 创建人 -->
+												<tablelistheader
+													data="CREATEDATE" label="创建时间"
+													sort="auto" width="15%" /><!-- 创建时间 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+								<tabpanel>
+									<listwindow id="docauth"
+										title="文档权限"
+										parentWnd="document" use="combiz.system.doclib.DocauthList"
+										dialog="/doclib/common/docauthdialog.xul"><!-- title:文档权限 -->
+										<tablelist band="docauth"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="DOCNUM" label="文档编号"
+													sort="auto" width="20%" /><!-- 文档编号 -->
+												<tablelistheader
+													data="GRPNAME" label="用户组名称"
+													sort="auto" width="20%" /><!-- 用户组名称 -->
+												<tablelistheader
+													data="DOCREAD" label="是否可读"
+													sort="auto" width="20%" /><!-- 是否可读 -->
+												<tablelistheader
+													data="DOCEDIT" label="是否可写"
+													sort="auto" width="20%" /><!-- 是否可写 -->
+												<tablelistheader
+													data="MEMO" label="备注" sort="auto"
+													width="20%" /><!-- 备注 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+						<!-- 子表 -->
+					</vbox>
+				</hbox>
+
+			</tabpanel>
+			<!-- ********************************** //文档数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

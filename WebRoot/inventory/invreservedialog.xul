@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"equipment.location"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="物料事物处理"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						工单编号：<a:bind value="invreserve.wonum"/><ibandbox id="invreserve.wonum" lookup="wonum"/>
+						实际发放的数量：<a:bind value="invreserve.actualqty"/><idoublebox id="invreserve.actualqty" format="0.00"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预留数量：<a:bind value="invreserve.reservedqty"/><idoublebox id="invreserve.reservedqty" format="0.00"/>
+						直接申请？：<a:bind value="invreserve.directreq"/><icheckbox id="invreserve.directreq"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						申请人：<a:bind value="invreserve.reqby"/><itextbox id="invreserve.reqby"/>
+						申请的时间：<a:bind value="invreserve.reqdate"/><idatebox id="invreserve.reqdate"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						需求日期：<a:bind value="invreserve.requireddate"/><idatebox id="invreserve.requireddate"/>
+						预留的采购单：<a:bind value="invreserve.ponum"/><itextbox id="invreserve.ponum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						预留的采购单行：<a:bind value="invreserve.polinenum"/><idoublebox id="invreserve.polinenum"/>
+						发放到员工：<a:bind value="invreserve.issuetolabor"/><ibandbox id="invreserve.issuetolabor" lookup="labor"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备编号：<a:bind value="invreserve.eqnum"/><ibandbox id="invreserve.eqnum" lookup="equipment"/>
+						设备位置：<a:bind value="equipment.location"/><itextbox id="equipment.location"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+
+						<!-- //////////////////////row//////////////// -->
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+
+</editwindow>

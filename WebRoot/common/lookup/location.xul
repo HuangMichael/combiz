@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="请选择位置" width="650">
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("systemid,location");
+]]></zscript>
+	<tabbox width="100%">
+		<tabs>
+			
+			<tab label="位置树" width="70px"/>
+			<tab label="列表" width="70px"/>
+		</tabs>
+		<tabpanels width="100%">
+		<tabpanel>
+						<groupbox><caption label="设备位置结构"/>
+							<hbox spacing="0" width="220px">
+							<label value="位置系统"/><listbox use="combiz.ui.location.LocsystemListbox" width="170"/>
+							</hbox>			
+							<tree use="combiz.ui.common.lookup.FindLocationsTree"/>
+						</groupbox>
+									
+				<div align="center">
+					<button label="确 定" onClick="lookupWnd.treeok(event)"/>
+					<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+				</div>
+					
+			</tabpanel>
+			<tabpanel>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+				<groupbox id="searchBox">
+					<caption label="过滤器"/>
+					系统:<sbandbox data="systemid" lookup="locsystem"/>
+					位置:<stextbox data="location"/>
+					<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+				</groupbox>
+				<!-- //////////////////查询过滤条件///////////////////////// -->
+			
+				<!-- //////////////////数据列表区///////////////////////// -->		
+				<pagenavigator/>
+				<lookuplist pageSize="20">
+					<listhead>
+						<lookuplistheader data="location" label="位置" sort="auto" width="25%"/>
+						<lookuplistheader label="图片" sort="auto" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+						<lookuplistheader data="locations.description" label="描述" sort="auto" width="40%"/>
+						<lookuplistheader data="systemid" label="系统" sort="auto" width="10%"/>
+						<lookuplistheader data="locsystem.description" label="系统描述" sort="auto" width="25%"/>
+					</listhead>
+				</lookuplist>
+				
+				<div align="center">
+					<button label="确 定" onClick="lookupWnd.ok(event)"/>
+					<button label="取 消" onClick="lookupWnd.cancel(event)"/>
+				</div>	
+				</tabpanel>
+				<!-- //////////////////数据列表区///////////////////////// -->	
+										
+							
+				
+		</tabpanels>
+	</tabbox>
+
+		
+
+	
+</lookupwindow>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="ibscenterWnd" title="配置业务中心" width="600" closable="true">
+	<listwindow id="ibscenterList" tablename="ibscenter" use="combiz.system.ui.CommonListWindow" 
+	dialog="/user/ibscenterdialog.xul">
+		<tablelist band="ibscenterList" pageSize="8">
+			<listhead>
+				<tablelistheader src="/images/img_listitem.gif"/>
+				<tablelistheader data="bicenter" label="名称" sort="auto" width="20%"/>
+				<tablelistheader data="description" label="描述" sort="auto" width="30%"/>
+				<tablelistheader data="page" label="页面文件" sort="auto" width="50%"/>
+			</listhead>
+		</tablelist>
+	</listwindow>
+		<div align="center">
+			<button label="保存数据" onClick="ibscenterList.save()"/>
+			<button label="关闭窗口" onClick="ibscenterWnd.onClose()"/>
+		</div>
+</window>

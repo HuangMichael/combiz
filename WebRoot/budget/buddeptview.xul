@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<mainwindow app="buddeptview" title="部门预算查询" resize="true" 
+use="combiz.ui.corp.DepartmentWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="部门树"/>
+<tree use="combiz.ui.corp.DepartmentTree" width="180"/>
+</groupbox>
+<splitter collapse="before"/>
+
+<!-- ********************************** 顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="部门预算查询" width="130px"/>
+		</tabs>
+		<tabpanels width="100%">
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				 <listwindow id="budget" edittype="listonly" title="预算信息" orderby="changedate desc">
+					<tablelist band="budget" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="budnum" label="预算编号" sort="auto" width="10%"/>
+							<tablelistheader data="description" label="预算说明" sort="auto" width="30%"/>
+							<tablelistheader data="budget" label="预算合计" sort="auto" width="10%" style="color:red" align="right"/>
+							<tablelistheader data="status" label="审批状态" sort="auto" width="10%"/>
+							<tablelistheader data="enabled" label="启用？" sort="auto" width="5%"/>
+							<tablelistheader data="budcycle" label="预算周期" sort="auto" width="10%"/>
+							<tablelistheader data="changeby" label="编制人" sort="auto" width="10%"/>
+							<tablelistheader data="changedate" label="编制时间" sort="auto" width="20%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+				<!-- *****************************预算行**************************** -->
+				<treelistwindow id="budgetline" parentWnd="budget" title="预算行" edittype="listonly"
+				use="combiz.ui.budget.BudgetlineList" dialog="/budget/budgetlinedialog.xul">
+				<treelist pageSize="10" openchild="true" childrel="budnum=':{budnum}' and parent=':{buditem}' and version=':{version}'">
+					<treecols>
+						<treelistheader data="description" label="预算名称" width="30%"/>
+						<treelistheader data="buditem" label="预算编号" width="15%"/>
+						<treelistheader data="budget" label="预算费用" width="10%" style="color:red" align="right"/>
+						<treelistheader data="budfeed" label="实际费用" width="10%" style="color:red" align="right"/>
+						<treelistheader data="enabled" label="启用？" width="10%" align="center"/>
+						<treelistheader data="budclass" label="预算类型" width="10%"/>
+						<treelistheader data="budtype" label="核算类型" width="10%"/>
+						<treelistheader data="orderby" label="排序" width="5%"/>
+					</treecols>
+				</treelist>
+				</treelistwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

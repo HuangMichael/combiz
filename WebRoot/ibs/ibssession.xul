@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainlistwindow app="ibssession" title="在线用户监控" resize="true" use="combiz.ui.ibs.IbssessionWindow"
+closable="true"  xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- **********************************  列表结果集页面 ********************************** -->
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="status='在线'";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("logintime desc");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					用户编号：<stextbox data="userid"/>
+					登录用户名：<stextbox data="loginid"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="loginid" label="登录用户名" sort="auto" width="15%"/>
+						<resultlistheader data="userid" label="用户编号" sort="auto" width="15%" applink="ibsusers" linkstring="userid=':{userid}'"/>
+						<resultlistheader data="logintime" label="登录时间" sort="auto" width="20%"/>
+						<resultlistheader data="lastlogouttime" label="上次注销时间" sort="auto" width="20%"/>
+						<resultlistheader data="sessionid" label="会话" sort="auto" width="30%"/>
+					</listhead>
+				</resultlist>
+
+</mainlistwindow>
+	

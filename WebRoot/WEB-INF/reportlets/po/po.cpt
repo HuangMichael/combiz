@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="po">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="ponum" type="0" pop="true" />
+<O t="S">PO10216</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT p.ponum,p.status,p.receipts,p.description AS podes,p.vendor,p.orderdate,p.contact,p.requireddate,l.itemnum,l.polinenum,l.description AS linedes,l.orderqty,l.orderunit,l.unitcost,l.linecost,l.enterby FROM PO p 
+LEFT JOIN poline l ON p.ponum = l.ponum
+ WHERE  p.ponum='[?ponum|?]' AND p.status='已批准']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[115.0,60.0,69.0,75.0,78.0,67.0,79.0,79.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="2" r="2" cs="3" rs="2" s="0"><O t="S">采 购 单 </O></C>
+<C c="0" r="4" s="1"><O t="S">采购单</O></C>
+<C c="1" r="4" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="PONUM" />
+</O></C>
+<C c="4" r="4" s="1"><O t="S">状态</O></C>
+<C c="5" r="4" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="STATUS" />
+</O></C>
+<C c="0" r="5" s="1"><O t="S">接受的项目行</O></C>
+<C c="1" r="5" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="RECEIPTS" />
+</O></C>
+<C c="4" r="5" s="1"><O t="S">描述</O></C>
+<C c="5" r="5" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="PODES" />
+</O></C>
+<C c="0" r="6" s="1"><O t="S">供应商</O></C>
+<C c="1" r="6" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="VENDOR" />
+</O></C>
+<C c="4" r="6" s="1"><O t="S">定购日期</O></C>
+<C c="5" r="6" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="ORDERDATE" />
+</O></C>
+<C c="0" r="7" s="1"><O t="S">联系人</O></C>
+<C c="1" r="7" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="CONTACT" />
+</O></C>
+<C c="4" r="7" s="1"><O t="S">需求日期</O></C>
+<C c="5" r="7" cs="3" s="2"><O t="DSColumn"><Attributes dsName="po" columnName="REQUIREDDATE" />
+</O></C>
+<C c="0" r="8" s="1"><O t="S">库存项目编号</O></C>
+<C c="1" r="8" s="3"><O t="S">行编号</O></C>
+<C c="2" r="8" s="3"><O t="S">描述</O></C>
+<C c="3" r="8" s="1"><O t="S">定购数量</O></C>
+<C c="4" r="8" s="1"><O t="S">订购单位</O></C>
+<C c="5" r="8" s="3"><O t="S">单价</O></C>
+<C c="6" r="8" s="3"><O t="S">行总价</O></C>
+<C c="7" r="8" s="3"><O t="S">录入人</O></C>
+<C c="0" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="ITEMNUM" />
+<Complex type="2" />
+</O><Expand dir="0" leftParentDefault="false" left="F5" />
+</C>
+<C c="1" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="POLINENUM" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="LINEDES" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="ORDERQTY" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="ORDERUNIT" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="UNITCOST" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="LINECOST" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="9" s="4"><O t="DSColumn"><Attributes dsName="po" columnName="ENTERBY" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="1" size="27" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="16" />
+<Background name="ColorBackground"
+ color="-3355393">
+</Background>
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="16" />
+<Background name="ColorBackground"
+ color="-3355393">
+</Background>
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

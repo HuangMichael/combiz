@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="errorWnd" width="400px" border="normal" closable="true">
+	<zscript>
+	String message = requestScope.get("javax.servlet.error.message");
+	Integer statusCode = requestScope.get("javax.servlet.error.status_code");
+	message = message.substring(message.indexOf(":") + 1);
+	String reloadVisible = "true";
+	if(message.startsWith("[WARNING]"))
+	{
+		errorWnd.title="警告信息：";
+		reloadVisible = "false";
+		if(message.indexOf("[WARNING]")>=0)
+			message = message.substring(message.indexOf("[WARNING]") + 9);
+	}
+	else
+	{
+		errorWnd.title="异常提示："; // + statusCode;
+		if(message.indexOf("[ERROR]")>=0)
+			message = message.substring(message.indexOf("[ERROR]") + 7);
+	}
+	</zscript>
+<html>
+<attribute name="content">
+<![CDATA[
+<center>
+]]>
+</attribute>
+</html>	
+	<vbox width="99%">
+		<groupbox width="96%"><caption label="提示："/><image src="/images/error.gif" align="left"/>
+			<div align="left"><label value="${message}"/></div>
+		</groupbox>
+		<hbox style="margin-left:auto; margin-right:auto">
+			<button id="continue" label="继续操作" onClick="spaceOwner.detach()"/>
+		</hbox>
+	</vbox>
+<html>
+<attribute name="content">
+<![CDATA[
+</center>
+]]>
+</attribute>
+</html>		
+</window>

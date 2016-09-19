@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="GBK"?>
+<window app="ibsapps" use="combiz.system.rpt.PortalReportWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<queryview height="500px" report="reportlist.cpt"/>
+</window>

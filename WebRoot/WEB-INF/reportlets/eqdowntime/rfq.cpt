@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="rfq">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="rfqnum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from rfq where rfqnum='[?rfqnum|?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="rfqline">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="rfqnum" type="0" pop="true" />
+</Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from rfqline where rfqnum='[?rfqnum?]']]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="rfqvendor">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="rfqnum" type="0" pop="true" />
+<O t="S"></O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="vendor" type="0" pop="true" />
+<O t="S"></O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from rfqvendor where rfqnum='[?rfqnum?]' and vendor='[?vendor?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[91.0,72.0,53.0,66.0,112.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="2" r="0" cs="3" rs="2" s="0"><O t="S">询价单</O></C>
+<C c="5" r="0"><O t="S"></O></C>
+<C c="5" r="1"><O t="S"></O></C>
+<C c="0" r="2" s="1"><O t="S">发往(To):</O></C>
+<C c="1" r="2" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfqvendor" columnName="VENDOR" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="2" s="1"><O t="S">发件人(FROM):</O></C>
+<C c="5" r="2" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfq" columnName="CHANGEBY" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="3" s="1"><O t="S">收件人(ATTM):</O></C>
+<C c="1" r="3" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfqvendor" columnName="CONTACT" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="3" s="1"><O t="S">审核(CHECKED BY):</O></C>
+<C c="5" r="3" cs="3" s="1"><O t="S"></O></C>
+<C c="0" r="4" s="1"><O t="S">传真(FAX NO):</O></C>
+<C c="1" r="4" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfqvendor" columnName="FAXPHONE" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="4" s="1"><O t="S">签发(APPRVD BY):</O></C>
+<C c="5" r="4" cs="3" s="1"><O t="S"></O></C>
+<C c="0" r="5" s="1"><O t="S">页数(PAGES):</O></C>
+<C c="1" r="5" cs="3" s="1"><O t="S"></O></C>
+<C c="4" r="5" s="1"><O t="S">日期(DATE):</O></C>
+<C c="5" r="5" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfq" columnName="CHANGEDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="6" s="1"><O t="S">主题(SUB):</O></C>
+<C c="1" r="6" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfq" columnName="DESCRIPTION" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="6" s="1"><O t="S">编号(OUR REF):</O></C>
+<C c="5" r="6" cs="3" s="1"><O t="DSColumn"><Attributes dsName="rfq" columnName="RFQNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="7" s="2"><O t="S">询价单行</O></C>
+<C c="1" r="7" s="2"><O t="S">库存项目</O></C>
+<C c="2" r="7" cs="2" s="2"><O t="S">描述</O></C>
+<C c="4" r="7" s="2"><O t="S">订购数量</O></C>
+<C c="5" r="7" s="2"><O t="S">单位</O></C>
+<C c="6" r="7" s="2"><O t="S">单价</O></C>
+<C c="7" r="7" s="2"><O t="S">合计</O></C>
+<C c="0" r="8" s="2"><O t="DSColumn"><Attributes dsName="rfqline" columnName="RFQNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="1" r="8" s="2"><O t="DSColumn"><Attributes dsName="rfqline" columnName="ITEMNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="2" r="8" cs="2" s="2"><O t="DSColumn"><Attributes dsName="rfqline" columnName="DESCRIPTION" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="8" s="2"><O t="DSColumn"><Attributes dsName="rfqline" columnName="ORDERQTY" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="8" s="2"><O t="DSColumn"><Attributes dsName="rfqline" columnName="ORDERUNIT" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="8" s="2"><O t="S"></O></C>
+<C c="7" r="8" s="2"><O t="S"></O></C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="28" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

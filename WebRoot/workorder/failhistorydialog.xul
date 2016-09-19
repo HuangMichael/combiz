@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog title="设备故障历史" closable="true" width="600">
+<tree use="combiz.ui.failure.FailureTree"/>
+<div align="center">
+		<button label=" 确 定 " onClick="mainWnd.cancel()" />
+	</div>
+</commondialog>

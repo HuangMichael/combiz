@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="调整物料平均成本" use="combiz.ui.inventory.AdjInvstockDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="700">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"invtrans.newcost"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"invtrans.itemnum","invtrans.curbal","invtrans.warehouse","invtrans.oldcost"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						库存项目：<a:bind value="invtrans.itemnum"/><itextbox id="invtrans.itemnum"/>
+						描述：<a:bind value="itemnum.description"/><itextbox id="itemnum.description" cols="40"/>
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						仓库：<a:bind value="invtrans.warehouse"/><ibandbox id="invtrans.warehouse" lookup="warehouse"/>
+						原平均成本：<a:bind value="invtrans.oldcost"/><idoublebox id="invtrans.oldcost"/>
+						</row>
+						
+						<row spans="1,3">
+						
+						新平均成本：<a:bind value="invtrans.newcost"/><idoublebox id="invtrans.newcost"/>
+						</row>
+						</rows>
+						<!-- //////////////////////row//////////////// -->
+				</grid>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.rsetavgcost();mainWnd.save();mainWnd.cancel()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

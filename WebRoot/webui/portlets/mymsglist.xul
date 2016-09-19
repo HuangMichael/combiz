@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--
+我的消息
+linkapp: 如果是业务数据，设置该属性链接到业务应用程序。
+linkpage: 如果是信息类数据，设置该属性后使用页面打开详细数据，linkpage="/webui/msgdialog.xul"，该页面需要继承CommonDialog
+listwhere: 设置过滤条件，可以使用全局参数，如receiver=':{labor.labornum}' 或 userid =':{ibsusers.userid}' 等
+-->
+<window id="msgreceivelistwnd" tablename="msgreceive" use="combiz.system.ui.portal.PortletWindow"
+linkpage="/webui/portlets/msgdialog.xul" listwhere="receiver=':{labor.labornum}' and hasread='否'">
+	<tablelist band="msgreceivelistwnd" pageSize="8">
+		<listhead>
+			<tablelistheader data="title" label="消息" sort="auto" width="55%" />
+			<tablelistheader data="sender" label="发送者" sort="auto" width="15%" />
+			<tablelistheader data="sddate" label="发送时间" sort="auto" width="30%" />
+		</listhead>
+	</tablelist>
+</window>

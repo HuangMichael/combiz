@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="jobworeq" resize="true" wfenabled="true"
+	use="combiz.ui.workorder.JobWorkorderWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="工作详细" width="70px" />
+			<tab id="doclib" label="文档" width="70px" />
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString=" reportedby = ':{labor.labornum}' ";//只能查看本人的申请 and status = '流程未启动'
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("statusdate desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器:字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" />
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" />
+						<label value="工作编号" />
+						<stextbox data="wonum" />
+						<label value="工作内容" />
+						<stextbox data="description" />
+						<label value="状态时间" />
+						<ssdatebox data="statusdate" />
+						至
+						<sedatebox data="statusdate" />
+
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="wonum" label="工作编号"
+							sort="auto" width="20%" /><!-- 工作编号 -->
+						<resultlistheader data="description" label="工作描述"
+							sort="auto" width="30%" />
+						<resultlistheader data="reportedby" label="申请人"
+							sort="auto" width="10%" />
+						<resultlistheader data="reportdate" label="申请日期"
+							sort="auto" width="15%" />
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="10%" />
+						<resultlistheader data="statusdate" label="状态日期"
+							sort="auto" width="15%" />
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {"workorder.description","workorder.worktype"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"workorder.reportedby","workorder.reportdate","workorder.status","workorder.statusdate"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="基本信息" /><!--  基本信息  -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- *************************在下面修改主界面字段**************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									工作编号:
+									<a:bind value="workorder.wonum" />
+									<itextbox id="workorder.wonum" />
+									后续工作?
+									<a:bind
+										value="workorder.hasfollowupwork" />
+									<icheckbox
+										id="workorder.hasfollowupwork"/>
+									
+								</row>
+								<!-- <row>
+									项目编号:
+									<a:bind value="workorder.prjnum" />
+									<ibandbox id="workorder.prjnum"
+										lookup="prjparent" />
+									任务编号:
+									<a:bind value="workorder.tasknum" />
+									<ibandbox id="workorder.tasknum"
+										lookup="prjtask" />
+								</row> -->
+								<row>
+									位置:
+									<a:bind value="workorder.location" />
+									<ibandbox id="workorder.location"
+										lookup="location" />
+									位置描述:
+									<a:bind
+										value="location.description" />
+									<itextbox id="location.description"
+										cols="40" />
+								</row>
+								<row spans="1,1,1,3">
+									设备:
+									<a:bind value="workorder.eqnum" />
+									<ibandbox id="workorder.eqnum"
+										 lookup="equipment" />
+									设备描述:
+									<a:bind
+										value="equipment.description" />
+									<itextbox id="equipment.description"
+										cols="40" />
+									<!--<ibandbox id="workorder.eqnum" onOpen="mainWnd.lookup(&quot;workorderlookup&quot;,self.id)"/> -->
+								</row>
+								<row>
+									标准作业计划:
+									<a:bind value="workorder.jpnum" />
+									<ibandbox id="workorder.jpnum"
+										lookup="jobplan" />
+									标准作业计划描述:
+									<a:bind value="jobplan.description" />
+									<itextbox id="jobplan.description"
+										cols="40" />
+								</row>
+								<row>
+									状态:
+									<a:bind value="workorder.status" />
+									<itextbox id="workorder.status" />
+									状态日期:
+									<a:bind
+										value="workorder.statusdate" />
+									<idatebox id="workorder.statusdate" />
+								</row>
+
+								<row>
+									工作类型:
+									<a:bind value="workorder.worktype" />
+									<icombobox id="workorder.worktype" />
+									需要设备停机
+									<a:bind value="workorder.eqdown" />
+									<icheckbox id="workorder.eqdown"
+										/>
+									<!-- 注销掉，不要	
+										工单层次结构序列:<a:bind value="workorder.wosequence"/><itextbox id="workorder.wosequence"/>
+									-->
+								</row>
+
+								<row>
+									故障等级:
+									<a:bind value="workorder.faillevel" />
+									<icombobox id="workorder.faillevel" />
+									故障类别:
+									<a:bind value="workorder.failtype" />
+									<icombobox id="workorder.failtype" />
+								</row>
+
+
+								<row spans="1,3">
+									工作描述:
+									<a:bind
+										value="workorder.description" />
+									<itextbox id="workorder.description"
+										cols="100" rows="4"/>
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+
+
+				<vbox width="100%">
+					<groupbox>
+						<caption label="相关人员" />
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+								<row>
+									申请人:
+									<a:bind
+										value="workorder.reportedby" />
+									<ibandbox id="workorder.reportedby"
+										lookup="labor" />
+									申请日期:
+									<a:bind
+										value="workorder.reportdate" />
+									<idatebox id="workorder.reportdate" />
+								</row>
+
+								<row>
+									负责专业/工种:
+									<a:bind value="workorder.craft" />
+									<itextbox id="workorder.craft" />
+									负责班组:
+									<a:bind value="workorder.crewid" />
+									<ibandbox id="workorder.crewid"
+										lookup="department" />
+								</row>
+								<row>
+								主管人:
+									<a:bind
+										value="workorder.supervisor" />
+									<ibandbox id="workorder.supervisor"
+										lookup="labor" />
+								电话:
+									<a:bind value="workorder.phone" />
+									<itextbox id="workorder.phone" />
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+					</groupbox>
+				</vbox>
+
+				<hbox width="100%">
+					<groupbox>
+						<caption label="计划时间" />
+						<grid>
+							<rows>
+								<row>
+									计划开始:
+									<a:bind
+										value="workorder.schedstart" />
+									<idatetimebox id="workorder.schedstart" />
+									计划完成:
+									<a:bind
+										value="workorder.schedfinish" />
+									<idatetimebox
+										id="workorder.schedfinish" />
+								</row>
+								<row>
+								预计持续时间:
+									<a:bind value="workorder.estdur" />
+									<ilongbox id="workorder.estdur" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+
+
+
+			</tabpanel>
+			<!-- ********************************** //主数据窗口 ********************************** -->
+
+
+
+			<!-- **********************************  文 档 ********************************** -->
+			<tabpanel>
+				<hbox>
+					<groupbox>
+						<caption label="文档库" />
+						<tree id="doclibtree"
+							use="combiz.system.doclib.DocLibTree" width="180" />
+					</groupbox>
+					<!-- ********************************** //结果树页面 ********************************** -->
+					<vbox width="99%">
+						<listwindow id="document" title="文档"
+							use="combiz.system.doclib.DocumentList"
+							dialog="/doclib/common/documentdialog.xul">
+							<tablelist band="document" pageSize="10">
+								<listhead>
+									<tablelistheader
+										src="/images/img_listitem.gif" />
+									<tablelistheader data="docnum"
+										label="文档编号" sort="auto" width="10%" />
+									<tablelistheader data="description"
+										label="描述" sort="auto" width="60%" />
+									<tablelistheader data="creator"
+										label="创建人" sort="auto" width="10%" />
+									<tablelistheader data="createdate"
+										label="创建日期" sort="auto" width="20%" />
+								</listhead>
+								<tablelistfoot />
+							</tablelist>
+						</listwindow>
+						<button label="添加当前文档库中的文档" onClick="mainWnd.selectDocs()"/>
+						<!-- 子表 -->
+						<tabbox width="100%">
+							<tabs>
+								<tab label="版本列表"></tab>
+								<tab label="访问权限"></tab>
+							</tabs>
+							<tabpanels width="100%">
+								<tabpanel>
+									<listwindow id="docversion"
+										title="文档版本列表" parentWnd="document" orderby="createdate desc"
+										use="combiz.system.doclib.DocversionList"
+										dialog="/doclib/common/docversiondialog.xul">
+										<tablelist band="docversion"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="VERSION" label="版本号" sort="auto" width="10%" />
+												<tablelistheader
+													data="DESCRIPTION" label="版本描述" sort="auto" width="30%" />
+												<tablelistheader
+													data="status" label="是否上传" sort="auto" width="10%" />
+												<tablelistheader
+													data="filename" label="文件名" sort="auto" width="20%" />
+												<tablelistheader
+													data="CREATOR" label="创建人" sort="auto" width="15%" />
+												<tablelistheader
+													data="CREATEDATE" label="创建时间" sort="auto" width="15%" />
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+								<tabpanel>
+									<listwindow id="docauth"
+										title="文档权限" parentWnd="document"
+										use="combiz.system.doclib.DocauthList"
+										dialog="/doclib/common/docauthdialog.xul">
+										<tablelist band="docauth"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="DOCNUM" label="文档编号" sort="auto" width="20%" />
+												<tablelistheader
+													data="GRPNAME" label="用户组名称" sort="auto" width="20%" />
+												<tablelistheader
+													data="DOCREAD" label="是否可读" sort="auto" width="20%" />
+												<tablelistheader
+													data="DOCEDIT" label="是否可写" sort="auto" width="20%" />
+												<tablelistheader
+													data="MEMO" label="备注" sort="auto" width="20%" />
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+						<!-- 子表 -->
+					</vbox>
+				</hbox>
+
+			</tabpanel>
+			<!-- **********************************  //文 档  ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

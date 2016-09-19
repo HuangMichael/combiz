@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="GBK"?><!-- title="隔离" -->
+<mainwindow title="隔离" app="isotag"  resize="true" use="combiz.ui.stdplan.IsotagWindow" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/><!-- 列表 -->
+			<tab id="main" label="隔离" width="70px"/><!-- 隔离 -->
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" /><!-- 高级查询 -->
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" /><!-- 过滤器 -->
+					<label value="安全标记"/><stextbox data="isotagid"/><!-- 安全标记 -->
+					<label value="描述"/><stextbox data="description"/><!-- 描述 -->
+					<image src="/images/button/search.gif"  style="cursor:hand" onClick="mainWnd.search()"/>
+					<image src="/images/button/searchmore.gif"  style="cursor:hand" onClick="mainWnd.searchmore()"/>
+				</groupbox>
+			</hbox>
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+				<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="isotagid" label="安全标记" sort="auto" width="10%"/><!-- 安全标记 -->
+						<resultlistheader data="description" label="描述" sort="auto" width="60%"/><!-- 描述 -->
+						<resultlistheader data="location" label="位置" sort="auto" width="10%"/><!-- 位置 -->
+						<resultlistheader data="eqnum" label="设备" sort="auto" width="20%"/><!-- 设备 -->
+						<resultlistheader data="aplyseq" label="APLYSEQ" sort="auto" width="10%"/><!-- APLYSEQ -->
+						<resultlistheader data="state" label="需求日期" sort="auto" width="20%"/><!-- 需求日期 -->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"isotag.statusdate","isotag.status"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+					<!-- ******************************************************************** -->
+					<!-- *************************在下面修改主界面字段**************************** -->
+					<!-- ********************************************************************-->					
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						安全标记<!-- 安全标记 -->:<a:bind value="isotag.isotagid"/><itextbox id="isotag.isotagid"/>
+						描述<!-- 描述 -->：<a:bind value="isotag.description"/><itextbox id="isotag.description" cols="60"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						位置<!-- 位置 -->:<a:bind value="isotag.location"/><ibandbox id="isotag.location" lookup="location"/>
+						设备<!-- 设备 -->：<a:bind value="isotag.eqnum"/><ibandbox id="isotag.eqnum" lookup="equipment"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						操作顺序<!-- 操作顺序 -->：<a:bind value="isotag.aplyseq"/><ilongbox id="isotag.aplyseq"/>
+						需求日期<!-- 需求日期 -->：<a:bind value="isotag.state"/><itextbox id="isotag.state"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->
+					</rows>
+				</grid>
+				
+				<!-- //////////////////////隔离装置步骤、状态//////////////// -->
+				<listwindow id="isolockoutTable" title="隔离装置步骤、状态" use="combiz.ui.stdplan.IsolockoutList" dialog="/stdplan/isolockoutdialog.xul">
+					<tablelist band="isolockoutTable" pageSize="8"><!-- 隔离装置步骤、状态 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="ISOLOCKID" label=" 隔离措施" sort="auto" width="15%"/><!-- 隔离措施 -->
+							<tablelistheader data="DESCRIPTION" label="描述" sort="auto" width="20%"/><!-- 描述 -->
+							<tablelistheader data="LOCATION" label="位置" sort="auto" width="20%"/><!-- 位置 -->
+							<tablelistheader data="EQNUM" label="设备" sort="auto" width="15%"/><!-- 设备 -->
+							<tablelistheader data="EQDESCRIPTIOIN" label="设备隔离状态描述" sort="auto" width="10%"/><!-- 设备隔离状态描述 -->
+							<tablelistheader data="STATE" label="需求日期" sort="auto" width="10%"/><!-- 需求日期 -->
+							<tablelistheader data="APLYSEQ" label="操作顺序" sort="auto" width="10%"/><!-- 操作顺序 -->
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** //主数据窗口 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

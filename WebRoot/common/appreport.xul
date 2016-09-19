@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="综合查询窗口">
+<iframe id="reportView" width="100%" height="100%"/>
+</window>

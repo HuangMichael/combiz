@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog title="将位置添加到其他系统" use="combiz.ui.location.AddToSystemDialog" border="normal" closable="true" width="600"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<!-- 初始化设置字段的必输和只读 -->
+<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+	<groupbox>
+		<caption label="基本信息" />
+		<grid>
+			<rows>
+					<row spans="1,3">
+						系统:
+						<groupbox>
+						<a:bind value="locstruct.systemid"/><ibandbox id="locstruct.systemid" lookup="locsystem"/>
+						<a:bind value="locsystem.description"/><itextbox id="locsystem.description" cols="40"/>
+						</groupbox>
+					</row>
+					<row spans="1,3">
+						位置:
+						<groupbox>
+						<a:bind value="locstruct.location"/><itextbox id="locstruct.location"/>
+						<a:bind value="locations.description"/><itextbox id="locations.description" cols="40"/>
+						</groupbox>
+					</row>
+					<row spans="1,3">
+						父级:
+						<groupbox>
+						<a:bind value="locstruct.parent"/><ibandbox id="locstruct.parent" lookup="location"/>
+						<a:bind value="parent.description"/><itextbox id="parent.description" cols="40"/>
+						</groupbox>
+					</row>
+					<row>
+						排序号:<a:bind value="locstruct.orderby"/><itextbox id="locstruct.orderby" cols="3"/>
+						将子集也同时添加到系统:<a:bind value="locstruct.addchild"/><icheckbox id="locstruct.addchild"/>
+					</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<div align="center">
+		<button label="确 定" onClick="mainWnd.addtosystem()" />
+		<button label="取 消" onClick="mainWnd.cancel()" />
+	</div>
+
+</commondialog>

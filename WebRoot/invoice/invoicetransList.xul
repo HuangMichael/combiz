@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="testWnd" title="发票差异行" edittype="listonly"
+	tablename="invoicetrans" multiple="false"
+	use="combiz.ui.invoice.Invoiceinvtrans" closable="true" width="900">
+	<tablelist band="testWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="invoicenum" label="发票" sort="auto"
+				width="10%" />
+			<tablelistheader data="invoicelinenum" label="发票行" sort="auto"
+				width="10%" />
+			<tablelistheader data="vendor" label="供应商" sort="auto"
+				width="20%" />
+			<tablelistheader data="linecost" label="差异行成本" sort="auto"
+				width="15%" />
+			<tablelistheader data="enterby" label="处理人" sort="auto"
+				width="10%" />
+				<tablelistheader data="transtype" label="交易类型" sort="auto"
+				width="15%" />
+			<tablelistheader data="transdate" label="交易日期" sort="auto"
+				width="20%" />
+			
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<!--<button label=" 确 定 " onClick="testWnd.confirm()" /> 确 定 -->
+		<button label=" 确   定 " onClick="testWnd.cancel()" /><!-- 取 消 -->
+	</div>
+</listwindow>

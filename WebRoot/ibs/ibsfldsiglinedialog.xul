@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="主屏幕字段授权"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						界面字段ID：<a:bind value="ibsfldsigline.fieldid"/><ibandbox id="ibsfldsigline.fieldid" lookup="ibstablecols"/>						
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						是否只读：<a:bind value="ibsfldsigline.readonly"/><icheckbox id="ibsfldsigline.readonly"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						是否必需：<a:bind value="ibsfldsigline.required"/><icheckbox id="ibsfldsigline.required"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

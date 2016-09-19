@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainlistwindow app="BORROWBACK" title="设备借用归还" resize="true" use="combiz.ui.inventory.EqreturnWindow" 
+closable="true" dialog="/inventory/eqrebackdetailpopup.xul" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="issuetype='借用发放' and state = '已完成' and issueid is null and matreqnum in(select t.matreqnum from Matreq t where t.reqtype = '设备借用申请')";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						<!--过滤字段示例：  应用程序：<stextbox data="app" cols="10"/> -->
+						<label value="采购编码" />
+						<sbandbox data="itemnum" lookup="item" cols="12"/>
+						<label value="设备编号" />
+						<stextbox data="eqnum" cols="15" />
+						<label value="归还日期" />
+						<ssdatebox data="usedate" />
+						至
+						<sedatebox data="usedate" />
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="eqnum" label="设备编号" sort="auto" width="15%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="20%"/>
+						<resultlistheader data="item.modelnum" label="规格型号" sort="auto" width="20%"/>
+						<resultlistheader data="itemnum" label="采购编号" sort="auto" width="15%"/>
+						<resultlistheader data="requestdate"  label="借用时间" format="yyyy-MM-dd" sort="auto" width="10%"/>
+						<resultlistheader data="usedate" label="归还时间" format="yyyy-MM-dd" sort="auto" width="10%"/>
+						<resultlistheader data="issuetolabor" label="发至员工" sort="auto" width="10%"/>						
+					</listhead>
+				</resultlist>
+			
+		
+</mainlistwindow>

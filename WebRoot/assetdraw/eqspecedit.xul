@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<window use="combiz.system.assetdraw.EditDialog" tablename="eqspec"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<hbox>
+<menubar id="menubar" width="2px">
+		<menuitem id="menuSave" label="保存记录" image="/images/menus/menu_icon_save.gif" onClick="mainWnd.save()"/>
+		<menuitem id="menuCloseThis" label="关闭编辑界面" image="/images/menus/menu_icon_add.gif" onClick="mainWnd.cancel()"/>
+</menubar>
+<messagebar/>
+</hbox>
+
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"eqspec.eqnum"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+<grid>
+					<rows>
+						<row>
+						设备:<a:bind value="eqspec.eqnum"/><itextbox id="eqspec.eqnum"/>
+						</row>
+						<row>
+						参数:<a:bind value="eqspec.classattr"/><itextbox id="eqspec.classattr"/>
+						</row>
+						<row>
+						值:<a:bind value="eqspec.strvalue"/><itextbox id="eqspec.strvalue" cols="40"/>
+						</row>
+						<row>
+						单位:<a:bind value="eqspec.unitid"/><ibandbox id="eqspec.unitid" lookup="measurement"/>
+						</row>
+						<row>
+						备注:<a:bind value="eqspec.remark"/><itextbox id="eqspec.remark" cols="40"/>
+						</row>
+					</rows>
+				</grid>
+
+	
+</window>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="boardMsgList" use="combiz.ui.smsg.BoardList" tablename="MSGSENDER" dialog="/webui/boarddialog.xul"
+edittype="LISTONLY" searchable="false">
+<zscript>
+	boardMsgList.setQueryString("SENDTYPE='公告' and ISSUE='是'");
+</zscript>
+<tablelist band="boardMsgList" pageSize="8">
+	<listhead>
+			<tablelistheader src="/images/img_listitem.gif"/>
+			<tablelistheader data="title" label="标题" sort="auto" width="50%"/>
+			<tablelistheader data="sender" label="发送人" sort="auto" width="25%"/>
+			<tablelistheader data="sddate" label="发送时间" sort="auto" width="25%"/>
+	</listhead>
+	<!-- tablelistfoot/ -->
+</tablelist>
+</listwindow>

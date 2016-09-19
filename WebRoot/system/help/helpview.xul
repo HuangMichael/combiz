@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="helpViewWnd" title="帮助文档" border="normal" closable="true">
+<hbox height="94%">
+<tree use="combiz.ui.ibs.IbshelpsViewTree" width="180"/>
+<iframe id="helpView" width="99%"/>
+</hbox>
+<div align="right">
+<button label="关闭帮助窗口" onClick="helpViewWnd.onClose()"/>
+</div>
+</window>

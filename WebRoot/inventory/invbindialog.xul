@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="仓库货柜"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 仓库货柜 -->
+					<rows>
+						<row>
+						货柜编码:<!-- 货柜编码 --><a:bind value="invbin.binnum"/><itextbox id="invbin.binnum" cols="40"/>
+						</row>
+						<row>
+						备注:<!-- 备注 --><a:bind value="invbin.memo"/><itextbox id="invbin.memo" cols="60" rows="4"/>
+						</row>
+					</rows>
+				</grid>
+				<div align="right">
+					<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+				</div>
+ </groupbox>
+</editwindow>

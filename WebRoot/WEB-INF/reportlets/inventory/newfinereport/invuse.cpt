@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.GroupReport">
+<Version>6.1</Version>
+<ReportSettings orientation="1" shrinkToFit="true" isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="false" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+<WorkSheet>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+</CellElementList>
+</WorkSheet>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<Header reportPageType="0">
+<Background name="NullBackground" />
+<LeftList>
+</LeftList>
+<CenterList>
+</CenterList>
+<RightList>
+</RightList>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground" />
+<LeftList>
+</LeftList>
+<CenterList>
+<HFElement className="NumberOfPageHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[2]]>
+</HFElement>
+<HFElement className="TextHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[/]]>
+</HFElement>
+<HFElement className="NumberOfPageHFElement">
+<FRFont name="SimSun" style="1" size="12" />
+<![CDATA[2]]>
+</HFElement>
+</CenterList>
+<RightList>
+</RightList>
+</Footer>
+<RowHeight defaultValue="19.0">
+<![CDATA[42.0,32.0,25.0,28.0,23.0,27.0,29.0,38.0,43.0,26.0,27.0,32.0,39.0,24.0,25.0,25.0,31.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[84.0,107.0,60.0,96.0,82.0,81.0,72.0,58.0,72.0,85.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="warehouse" type="0" pop="true" />
+<O t="S">仓库2</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="astatedate" type="0" pop="true" />
+<O t="S">2008-01-01</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="benddate" type="0" pop="true" />
+<O t="S">2009-09-09</O></Parameter>
+</Parameters>
+<Attributes type="0" isCache="true" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[SELECT c.classid,c.classtype,i.description AS itemdesc,i.modelnum,t.itemnum,t.warehouse,t.binnum,t.quantity,t.issuetype,t.unitcost,t.linecost,t.lotnum,t.transdate,t.issuetolabor
+      
+FROM classification c
+LEFT JOIN item i ON i.classid = c.classid
+LEFT JOIN invusetrans t ON t.itemnum = i.itemnum
+WHERE t.warehouse='[?warehouse|?]' AND t.transdate BETWEEN to_date('[?astatedate|?]','YYYY-MM-DD') AND to_date('[?benddate|?]','YYYY-MM-DD') AND c.classtype in('资产','工具','物资') 
+CONNECT BY PRIOR c.classid = c.parent
+START WITH c.parent is null
+]]></Query>
+</TableData>
+<GroupColumnIndices><![CDATA[0]]></GroupColumnIndices>
+<SortOrders><![CDATA[2]]></SortOrders>
+<SummaryColumnIndices><![CDATA[10]]></SummaryColumnIndices>
+<GroupPages><![CDATA[0]]></GroupPages>
+<Title>
+<CellElementRow>
+<C c="0" r="0" cs="12" s="0"><O t="S">仓 库 出 库 单</O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="1" s="1"><O t="S">单位：</O></C>
+<C c="1" r="1" cs="8"><O t="S"></O></C>
+<C c="9" r="1" s="1"><O t="S">打印日期：</O></C>
+<C c="10" r="1" cs="2"><O t="S"></O></C>
+</CellElementRow>
+</Title>
+<Header>
+<CellElementRow>
+<C c="0" r="2" s="2"><O t="S">物资编码</O></C>
+<C c="1" r="2" s="2"><O t="S">描述</O></C>
+<C c="2" r="2" s="2"><O t="S">规格型号</O></C>
+<C c="3" r="2" s="2"><O t="S">批次编号</O></C>
+<C c="4" r="2" s="2"><O t="S">仓库</O></C>
+<C c="5" r="2" s="2"><O t="S">箱柜号</O></C>
+<C c="6" r="2" s="2"><O t="S">发放类型</O></C>
+<C c="7" r="2" s="2"><O t="S">数量</O></C>
+<C c="8" r="2" s="2"><O t="S">单价</O></C>
+<C c="9" r="2" s="2"><O t="S">总价</O></C>
+<C c="10" r="2" s="2"><O t="S">发放到人员</O></C>
+<C c="11" r="2" s="2"><O t="S">操作日期</O></C>
+</CellElementRow>
+</Header>
+<GroupHeader columnIndex="0">
+<CellElementRow>
+<C c="0" r="3" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=CLASSID]]>
+</Attributes>
+</O></C>
+<C c="1" r="3" cs="11" s="3"><O t="S"></O></C>
+</CellElementRow>
+</GroupHeader>
+<Detail>
+<CellElementRow>
+<C c="0" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ITEMNUM]]>
+</Attributes>
+</O></C>
+<C c="1" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ITEMDESC]]>
+</Attributes>
+</O></C>
+<C c="2" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=MODELNUM]]>
+</Attributes>
+</O></C>
+<C c="3" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LOTNUM]]>
+</Attributes>
+</O></C>
+<C c="4" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=WAREHOUSE]]>
+</Attributes>
+</O></C>
+<C c="5" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=BINNUM]]>
+</Attributes>
+</O></C>
+<C c="6" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ISSUETYPE]]>
+</Attributes>
+</O></C>
+<C c="7" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=QUANTITY]]>
+</Attributes>
+</O></C>
+<C c="8" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=UNITCOST]]>
+</Attributes>
+</O></C>
+<C c="9" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=LINECOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=ISSUETOLABOR]]>
+</Attributes>
+</O></C>
+<C c="11" r="4" s="4"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=TRANSDATE]]>
+</Attributes>
+</O></C>
+</CellElementRow>
+</Detail>
+<GroupFooter columnIndex="0">
+<CellElementRow>
+<C c="0" r="5" s="3"><O t="S">小计：</O></C>
+<C c="1" r="5" cs="8" s="4"><O t="S"></O></C>
+<C c="9" r="5" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST(G:CLASSID)]]>
+</Attributes>
+</O></C>
+<C c="10" r="5" cs="2" s="3"><O t="S"></O></C>
+</CellElementRow>
+</GroupFooter>
+<GrandFooter>
+<CellElementRow>
+<C c="0" r="6" s="3"><O t="S">总计：</O></C>
+<C c="1" r="6" cs="8" s="4"><O t="S"></O></C>
+<C c="9" r="6" s="3"><O t="Formula" class="Formula" ><Attributes
+><![CDATA[=SumOfLINECOST]]>
+</Attributes>
+</O></C>
+<C c="10" r="6" cs="2" s="3"><O t="S"></O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="0" s="1"><O t="S"></O></C>
+<C c="1" r="0" s="1"><O t="S"></O></C>
+<C c="2" r="0" s="1"><O t="S"></O></C>
+<C c="3" r="0" s="1"><O t="S"></O></C>
+<C c="4" r="0" s="1"><O t="S"></O></C>
+<C c="5" r="0" s="1"><O t="S"></O></C>
+<C c="6" r="7" cs="2" s="5"><O t="S">部门签字：</O></C>
+<C c="7" r="0" s="1"><O t="S"></O></C>
+<C c="8" r="7" cs="4" s="1"><O t="S"></O></C>
+<C c="9" r="0" s="1"><O t="S"></O></C>
+<C c="10" r="0" s="1"><O t="S"></O></C>
+<C c="11" r="0" s="1"><O t="S"></O></C>
+</CellElementRow>
+<CellElementRow>
+<C c="0" r="0" s="1"><O t="S"></O></C>
+<C c="1" r="0" s="1"><O t="S"></O></C>
+<C c="2" r="0" s="1"><O t="S"></O></C>
+<C c="3" r="0" s="1"><O t="S"></O></C>
+<C c="4" r="0" s="1"><O t="S"></O></C>
+<C c="5" r="0" s="1"><O t="S"></O></C>
+<C c="6" r="8" cs="2" s="5"><O t="S">领导签字：</O></C>
+<C c="7" r="0" s="1"><O t="S"></O></C>
+<C c="8" r="8" cs="4" s="6"><O t="S"></O></C>
+<C c="9" r="0" s="1"><O t="S"></O></C>
+<C c="10" r="0" s="1"><O t="S"></O></C>
+<C c="11" r="0" s="1"><O t="S"></O></C>
+</CellElementRow>
+</GrandFooter>
+<GroupReportAttr cache="false" />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="22" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="4" vertical_alignment="3">
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+</StyleList>
+</Report>

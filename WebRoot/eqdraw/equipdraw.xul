@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="EQUIPDRAW" title="图形化设备" resize="true" wfenabled="false" use="combiz.ui.eqdraw.EquipdrawTreeWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<hbox spacing="0">
+<!-- **********************************  结果树页面 ********************************** -->
+<groupbox><caption label="图形化设备"/>
+<tree use="combiz.system.ui.common.MainTree"
+topwhere="parent is null or parent=''" expwhere="parent=':{drawnum}'" parentvalue="drawnum"
+parentimg="/images/img_location.gif" childimg="/images/img_location.gif"
+label=":{description}" openchild="false" width="180"/>
+</groupbox>
+<!--<splitter collapse="before"/>
+--><!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="main" label="图形化工程" width="100px"/>
+		</tabs>
+		
+		<tabpanels width="100%">			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {"equipdraw.description"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"equipdraw.drawnum","equipdraw.parent","equipdraw.haschild","equipdraw.drawpath","equipdraw.createby","equipdraw.createdate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row spans="1,3">
+						图形文件:
+						<div>
+						<a:bind value="equipdraw.drawnum"/><itextbox id="equipdraw.drawnum"/><a:bind value="equipdraw.description"/><itextbox id="equipdraw.description" cols="40"/>
+						</div>
+						</row>
+						<row spans="1,3">
+						
+						</row>	
+						<row>
+						创建人:<a:bind value="equipdraw.createby"/><ibandbox id="equipdraw.createby" lookup="labor"/>	
+						创建时间:<a:bind value="equipdraw.createdate"/><idatetimebox id="equipdraw.createdate"/>						
+						</row>
+						<row>
+						父级:<a:bind value="equipdraw.parent"/><itextbox id="equipdraw.parent"/>
+						是否有子集:<a:bind value="equipdraw.haschild"/><itextbox id="equipdraw.haschild"/>
+						</row>
+						<row spans="1,3">
+						工程路径:<istructbox band="equipdraw.drawnum" label=":{description}" cols="80"/>
+						</row>
+						<!---->
+						<row spans="1,3">
+						文件路径:<a:bind value="equipdraw.drawpath"/><itextbox id="equipdraw.drawpath" cols="80"/>
+						</row>
+						
+						<row spans="1,3">
+						排序:<a:bind value="equipdraw.position"/><ilongbox id="equipdraw.position"/>	
+						</row>
+					</rows>
+				</grid>
+				<grid>
+					<rows>
+						<row spans="1,3">
+						<div align="left">
+						<iframe id="hiddenIframe" visible="false"/>
+						<button label="编辑选中的图形" onClick="mainWnd.redraw()"/>
+						<space/>
+						提示：编辑图形设备需要客户端安装JRE1.5以上版本，如果不能显示图形编辑器，
+						<label value="请点击此处下载JRE安装文件。" style="color: green; font-weight: bold;cursor:hand" onClick="mainWnd.downloadJRE()"/>
+						</div>
+					</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			
+		</tabpanels>
+	</tabbox>
+</hbox>
+</mainwindow>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<window>
+<hbox>
+	<listwindow id="kpichartwnd" tablename="kpilink" use="combiz.system.ui.CommonListWindow"
+	 edittype="listonly" searchable="false" export="false" pagenav="false" defselect="false" showmultiple="false"
+		showfilter="false" width="96%">
+		<zscript>kpichartwnd.setQueryString("kptnum='pie'");</zscript>
+		<tablelist band="kpichartwnd" pageSize="12">
+			<listhead>
+				<tablelistheader data="KPINUM" label="名称" sort="auto" width="50%" />
+				<tablelistheader data="YPOINT" label="数据" sort="auto" width="50%" />
+			</listhead>
+		</tablelist>
+	</listwindow>
+	<ichart id="kpichart" title="KPI指标展示" width="200px" height="150px" threeD="true" kptnum="pie" />
+</hbox>
+</window>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"itemdesp.description"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript><!-- 操作步骤 -->
+ <groupbox><caption label="操作步骤"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							物资编码<!-- 物资编码 -->:<a:bind value="jobmaterial.itemnum"/><ibandbox id="jobmaterial.itemnum" lookup="item"/>
+							描述<!-- 描述 -->：<a:bind value="itemdesp.description"/><itextbox id="itemdesp.description" cols="20"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>	
+							仓库<!-- 仓库 -->：<a:bind value="jobmaterial.warehouse"/><ibandbox id="jobmaterial.warehouse" lookup="warehouse"/>
+							数量<!-- 数量 -->：<a:bind value="jobmaterial.qty"/><idoublebox id="jobmaterial.qty" format="0.00"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

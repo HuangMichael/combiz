@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation" width="700">
+ <zscript>
+ String[] required = {"wfaction.action"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"wfaction.startnodeid","wfaction.endnodeid","wfaction.wfname",
+ "wfaction.wfrevision","wfaction.description","wfaction.actiontype","wfaction.actionstring"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="流程操作"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						操作:<a:bind value="wfaction.action"/><ibandbox id="wfaction.action" lookup="wfactionlist"/>
+						描述:<a:bind value="wfaction.description"/><itextbox id="wfaction.description" cols="40"/>
+						</row>
+						<row spans="1,3">
+						操作类型:<a:bind value="wfaction.actiontype"/><itextbox id="wfaction.actiontype"/>
+						<!--
+						正向反向？:<a:bind value="wfaction.ispositive"/><itextbox id="wfaction.ispositive"/>
+						-->
+						</row>
+						<row spans="1,3">
+						操作字符串:<a:bind value="wfaction.actionstring"/><itextbox id="wfaction.actionstring" cols="80" rows="2"/>
+						</row>
+						<!--<row>
+						排序号:<a:bind value="wfaction.actorderby"/><ilongbox id="wfaction.actorderby" cols="6"/>
+						默认操作？:<a:bind value="wfaction.defaultsel"/><icheckbox id="wfaction.defaultsel"/>
+						</row>
+						-->
+						<row spans="1,3">
+						执行条件:<a:bind value="wfaction.condition"/><itextbox id="wfaction.condition" cols="80" rows="2"/>
+						</row>
+						<row spans="1,3">
+						条件类？:<a:bind value="wfaction.conditionclass"/><icheckbox id="wfaction.conditionclass"/>
+						</row>
+						<row>
+						开始节点:<a:bind value="wfaction.startnodeid"/><ilongbox id="wfaction.startnodeid"/>
+						结束节点:<a:bind value="wfaction.endnodeid"/><ilongbox id="wfaction.endnodeid"/>
+						</row>
+						<row>
+						流程:<a:bind value="wfaction.wfname"/><itextbox id="wfaction.wfname"/>
+						版本:<a:bind value="wfaction.wfrevision"/><ilongbox id="wfaction.wfrevision"/>
+						</row>
+						<!--<row>
+						图标开始点:<a:bind value="wfaction.startpt"/><ilongbox id="wfaction.startpt"/>
+						图标终点:<a:bind value="wfaction.endpt"/><ilongbox id="wfaction.endpt"/>
+						</row>-->
+
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

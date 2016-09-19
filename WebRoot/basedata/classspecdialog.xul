@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="分类技术参数"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption><!-- 关闭 -->
+				<grid ><!-- 分类技术参数 -->
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						属性:<!-- 属性 --><a:bind value="classspec.classattr"/><itextbox id="classspec.classattr"/>
+						单位:<!-- 单位 --><a:bind value="classspec.unitid"/><ibandbox id="classspec.unitid" lookup="measurement"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						默认值:<!-- 默认值 --><a:bind value="classspec.defaultstrvalue"/><itextbox id="classspec.defaultstrvalue" cols="40"/>
+						备注:<!-- 备注 --><a:bind value="classspec.remark"/><itextbox id="classspec.remark" cols="40"/>
+						</row>
+
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

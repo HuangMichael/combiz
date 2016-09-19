@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="发送消息" use="combiz.system.common.MessageSenderWindow" width="800" closable="true"
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox>
+ 
+				<grid>
+					<rows>
+						<row>
+						标题：<a:bind value="msgsender.title"/><itextbox id="msgsender.title" cols="100"/><attachment use="combiz.system.common.MessageAttachment"/>
+						</row>
+
+						<row spans="1,2">
+						邮件：<a:bind value="msgsender.body"/><itextbox id="msgsender.body" cols="100" rows="10"/>
+						</row>
+
+						<row spans="1,2">
+						收件人：<a:bind value="msgsender.reclist"/><ibandbox id="msgsender.reclist" lookup="labor" multiple="true" cols="100" checkdata="false"/>
+						</row>
+						<row spans="3">
+						收件人的邮箱地址信息（在人员信息里面）必须准确，否则将无法发送。
+						</row>
+					</rows>
+				</grid>
+				
+				<div align="center">
+				<button label=" 发送消息 " onClick="mainWnd.send();"/>
+				<button label="关    闭" onClick="mainWnd.cancel()"/>
+				</div>
+ </groupbox>				
+</window>

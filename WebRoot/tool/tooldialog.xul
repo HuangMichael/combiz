@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {}; mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="故障代码">
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" />
+		</caption>
+		<grid>
+			<rows>
+				<row spans="1,1,1,3">
+				工具编号：<a:bind value="tool.toolnum"/><itextbox id="tool.toolnum"/>
+				描述：<a:bind value="tool.description"/><itextbox id="tool.description" cols="40"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				
+				<!-- //////////////////////row//////////////// -->
+				<row>
+				所属部门：<a:bind value="tool.owdept"/><ibandbox id="tool.owdept" lookup="department"/>
+				所属班组：<a:bind value="tool.crewid"/><ibandbox id="tool.crewid" lookup="department"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+				专业：<a:bind value="tool.craft"/><icombobox id="tool.craft"/>
+				总分类帐科目：<a:bind value="tool.glaccount"/><itextbox id="tool.glaccount" cols="40"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				
+				<!-- //////////////////////row//////////////// -->
+				<row>
+				工具数量：<a:bind value="tool.qty"/><ilongbox id="tool.qty" format="0.00"/>
+				费率：<a:bind value="tool.toolrate"/><idoublebox id="tool.toolrate" cols="40"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+
+				<!-- //////////////////////row//////////////// -->
+				<row>
+				外部：<a:bind value="tool.outside"/><icombobox id="tool.outside" cols="1"/>
+				有效：<a:bind value="tool.disabled"/><icombobox id="tool.disabled" cols="1"/>
+				</row>
+				<!-- //////////////////////row//////////////// -->
+				
+				<!-- //////////////////////row//////////////// -->
+				<row spans="1,5">
+				供应商：<a:bind value="tool.vendor"/><ibandbox id="tool.vendor" lookup="companies"/>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+
+</editwindow>

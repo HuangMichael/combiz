@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"ibsmenus.keyvalue"}; //
+ mainWnd.setRequired(required);
+ String[] readonly = {}; //"ibsmenus.keyvalue"
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="应用程序菜单配置"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						菜单:<a:bind value="ibsmenus.keyvalue"/><itextbox id="ibsmenus.keyvalue"/>
+						描述：<a:bind value="ibsmenus.header"/><itextbox id="ibsmenus.header" cols="40"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						工具栏/菜单:	<a:bind value="ibsmenus.menutype"/><icombobox id="ibsmenus.menutype"/>
+						排序：<a:bind value="ibsmenus.position"/><ilongbox id="ibsmenus.position"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						父级：<a:bind value="ibsmenus.parentmod"/><itextbox id="ibsmenus.parentmod"/>
+						菜单类型：<a:bind value="ibsmenus.elementtype"/><icombobox id="ibsmenus.elementtype"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						URL：<a:bind value="ibsmenus.url"/><itextbox id="ibsmenus.url"/>
+						是否显示：<a:bind value="ibsmenus.visible"/><icheckbox id="ibsmenus.visible"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						图标:<a:bind value="ibsmenus.image"/><itextbox id="ibsmenus.image"/>
+						显示模式:<a:bind value="ibsmenus.tabdisplay"/><icombobox id="ibsmenus.tabdisplay"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>	
+		
+</editwindow>

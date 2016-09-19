@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="rfq" title="询价单" resize="true"
+	use="combiz.ui.rfq.RfqWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar/>
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="询价单" width="70px" />
+			<tab id="rfqvendortab" label="询价供应商" width="90px" />
+			<tab id="rfqquotelinetab" label="报价行" width="70px" />
+			
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("rfqnum desc");
+			]]>
+				</zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					<!-- 从这里开始修改搜索字段 -->
+					询价单：<stextbox data="RFQNUM" cols="10"/>
+					描述：<stextbox data="description" cols="15"/>
+					状态：<stextbox data="status" cols="15"/>
+					类型：<stextbox data="rfqtype" cols="15"/>
+					<!-- 修改搜索字段结束 -->
+				</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif" />
+						<resultlistheader data="rfqnum" label="询价单" sort="auto" width="10%" />
+						<resultlistheader data="description" label="描述" sort="auto" width="30%" />	
+						<resultlistheader data="status" label="状态" sort="auto" width="15%" />
+						<resultlistheader data="STATUSDATE" label="状态日期" sort="auto" width="15%" />
+						<resultlistheader data="ENTERBY" label="录入人" sort="auto" width="10%" />	
+						<resultlistheader data="rfqtype" label="类型" sort="auto" width="10%" />
+						<resultlistheader data="CHANGEBY" label="更改人" sort="auto" width="10%" />
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 操作票 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"rfq.rfqnum","rfq.status","rfq.statusdate","rfq.changeby","rfq.changedate"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<groupbox><caption label="基本信息" />
+							<grid>
+								<rows>
+									<row>
+										询价单:<a:bind value="rfq.rfqnum"/><itextbox id="rfq.rfqnum"/>
+										描述:<a:bind value="rfq.description"/><itextbox id="rfq.description" cols="60"/>
+										</row>
+										<row>
+										状态:<a:bind value="rfq.status"/><itextbox id="rfq.status"/>	
+										状态日期:<a:bind value="rfq.statusdate"/><idatebox id="rfq.statusdate"/>
+										</row>
+								</rows>
+							</grid>
+					</groupbox>
+				<hbox width="100%">
+					
+						<groupbox><caption label="详细信息" />
+							<grid>
+								<rows>
+										
+										<row>
+										类型:<a:bind value="rfq.rfqtype"/><itextbox id="rfq.rfqtype"/>	
+										</row>
+										<row>
+										录入人:<a:bind value="rfq.enterby"/><ibandbox id="rfq.enterby" lookup="labor"/>
+										</row>
+										<row>
+										更改人:<a:bind value="rfq.changeby"/><ibandbox id="rfq.changeby" lookup="labor"/>		
+	
+										</row>	
+										
+										
+										<row spans="1,3">  </row>
+							</rows>
+							</grid>
+						</groupbox>
+						<groupbox><caption label="日期信息" />
+							<grid>
+								<rows>
+									<row>
+										录入日期:<a:bind value="rfq.enterdate"/><idatebox id="rfq.enterdate"/>
+									</row>
+									<row>
+										更改日期:<a:bind value="rfq.changedate"/><idatebox id="rfq.changedate"/>	
+									</row>
+									<row>	
+										回复日期:<a:bind value="rfq.replydate"/><idatebox id="rfq.replydate"/>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+						
+				</hbox>
+				<listwindow id="rfqline" title="询价单行" use="combiz.ui.rfq.RfqlineList" dialog="/rfq/rfqlinedialog.xul">
+					<tablelist band="rfqline" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="ITEMNUM" label="采购项目" sort="auto" width="10%"/>
+							<tablelistheader data="rfqlinenum" label="询价单行" sort="auto" width="5%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="40%"/>
+							<tablelistheader data="orderqty" label="数量" sort="auto" width="10%"/>
+							<tablelistheader data="orderunit" label="订购单位" sort="auto" width="10%"/>
+							<tablelistheader data="vendor" label="授予供应商" sort="auto" width="25%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 
+		
+						
+			</tabpanel>
+
+				
+		<!-- ********************************** //询价单行 ********************************** -->
+		
+		
+		<!-- ********************************** //询价供应商 ********************************** -->
+		<tabpanel>
+			
+			 <grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,1,1,3">
+						询价单:<a:bind value="rfq.rfqnum"/>
+						<textbox id="rfqnum3"/>
+						描述:<a:bind value="rfq.description"/>
+						<textbox id="description3" cols="60"/>
+						</row>
+					</rows>
+				</grid> 
+				
+			<listwindow id="rfqvendor" title="询价供应商" use="combiz.ui.rfq.RfqvendorList" dialog="/rfq/Rfqvendordialog.xul">
+					<tablelist band="rfqvendor" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="VENDOR" label="供应商" sort="auto" width="30%"/>
+							<tablelistheader data="CONTACT" label="供应商联系人" sort="auto" width="10%"/>
+							<tablelistheader data="PHONE" label="联系人电话" sort="auto" width="15%"/>
+							<tablelistheader data="FAXPHONE" label="联系人传真" sort="auto" width="15%"/>
+							<tablelistheader data="email" label="电子邮件" sort="auto" width="20%"/>
+							<tablelistheader data="VENDORQUOTENUM" label="报价单编号" sort="auto" width="10%"/>
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 
+		</tabpanel>
+		<!-- ********************************** //询价供应商 ********************************** -->
+		
+			<!-- ********************************** //报价单行 ********************************** -->
+		<tabpanel>
+				
+			<grid >
+					<rows>
+						<row spans="1,1,1,3">
+						询价单:<a:bind value="rfq.rfqnum"/><textbox id="rfqnum4"/>
+						描述:<a:bind value="rfq.description"/><textbox id="description4" cols="60"/>
+						</row>
+					</rows>
+			</grid> 
+			
+			<tabbox width="100%">
+					<tabs>
+						<tab label="按照供应商显示" width="120px"/>
+						<tab label="按照询价单行显示" width="120px"/>
+						
+					</tabs>
+					
+				<tabpanels>
+				<tabpanel>
+				<listwindow id="rfqvendor1" title="询价供应商">
+				<!-- <listwindow id="rfqvendor1" title="询价供应商" dialog="/rfq/Rfqvendordialog.xul"> -->
+					<tablelist band="rfqvendor1" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="VENDOR" label="供应商" sort="auto" width="30%"/>
+							<tablelistheader data="CONTACT" label="供应商联系人" sort="auto" width="10%"/>
+							<tablelistheader data="PHONE" label="联系人电话" sort="auto" width="15%"/>
+							<tablelistheader data="FAXPHONE" label="联系人传真" sort="auto" width="15%"/>
+							<tablelistheader data="email" label="电子邮件" sort="auto" width="20%"/>
+							<tablelistheader data="VENDORQUOTENUM" label="报价单编号" sort="auto" width="10%"/>
+							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 	
+				<listwindow id="RFQQUOTELINE" title="报价行" parentWnd="rfqvendor1" dialog="/rfq/Rfqquotelinedialog.xul" addshow="false">
+					<tablelist band="RFQQUOTELINE" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+						
+							<tablelistheader data="ITEMNUM" label="库存项目" sort="auto" width="15%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="20%"/>
+							<tablelistheader data="ENTERDATE" label="录入日期" sort="auto" width="10%"/>
+							<tablelistheader data="orderqty" label="订购数量" sort="auto" width="10%"/>
+							<tablelistheader data="UNITCOST" label="单价" sort="auto" width="10%"/>
+							<tablelistheader data="LINECOST" label="行总价" sort="auto" width="10%"/>
+							<tablelistheader data="TAX" label="税额" sort="auto" width="5%"/>
+							<tablelistheader data="isawarded" label="已授予" sort="auto" width="5%" preclass="combiz.ui.rfq.PreIsAwarded"/>
+							<tablelistheader data="remark" label="备注" sort="auto" width="15%"/>
+							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 
+				</tabpanel>
+				
+				<!-- ////////////////////////////////////////////////////////////////////// -->
+				
+				<tabpanel>
+					<listwindow id="rfqline1" title="询价单行"  edittype="readonly" dialog="/rfq/rfqlinedialog.xul">
+							<tablelist band="rfqline1" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="ITEMNUM" label="采购项目" sort="auto" width="10%"/>
+							<tablelistheader data="rfqlinenum" label="询价单行" sort="auto" width="5%"/>
+							<tablelistheader data="description" label="描述" sort="auto" width="40%"/>
+							<tablelistheader data="orderqty" label="数量" sort="auto" width="10%"/>
+							<tablelistheader data="orderunit" label="订购单位" sort="auto" width="10%"/>
+							<tablelistheader data="vendor" label="授予供应商" sort="auto" width="25%"/>
+							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 
+				
+					<listwindow id="RFQQUOTELINE1" title="报价行" edittype="readonly" parentWnd="rfqline1" dialog="/rfq/Rfqquotelinedialog.xul">
+					<tablelist band="RFQQUOTELINE1" pageSize="8">
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+						
+							<tablelistheader data="vendor" label="供应商" sort="auto" width="20%"/>
+							<tablelistheader data="ENTERDATE" label="录入日期" sort="auto" width="10%"/>
+							<tablelistheader data="orderqty" label="订购数量" sort="auto" width="10%"/>
+							<tablelistheader data="UNITCOST" label="单价" sort="auto" width="10%"/>
+							<tablelistheader data="LINECOST" label="行总价" sort="auto" width="10%"/>
+							<tablelistheader data="TAX" label="税额" sort="auto" width="10%"/>
+							<tablelistheader data="isawarded" label="已授予" sort="auto" width="10%" preclass="combiz.ui.rfq.PreIsAwarded"/>
+							<tablelistheader data="remark" label="备注" sort="auto" width="20%"/>
+							
+						</listhead>
+						<tablelistfoot/>
+					</tablelist>
+				</listwindow> 
+				
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+				
+		</tabpanel>
+		<!-- ********************************** //报价单行 ********************************** -->
+		
+		
+		</tabpanels>
+	</tabbox>
+</mainwindow>

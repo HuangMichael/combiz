@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 获取LOOKUP结果集 -->
+<lookupwindow title="供应商" width="600"><!-- 供应商 -->
+<zscript><![CDATA[
+//设置默认过滤
+String	queryString="";
+lookupWnd.setQueryString(queryString);
+lookupWnd.setOrderby("");
+]]></zscript>
+
+<!-- //////////////////查询过滤条件///////////////////////// -->
+	<groupbox id="searchBox">
+		<caption label="过滤器"/><!--过滤器  -->
+		公司名:<!-- 公司名： --><stextbox data="company"/>
+		父级公司:<!-- 父级公司： --><stextbox data="parent"/>
+		<image src="/images/button/search.gif"  style="cursor:hand" onClick="lookupWnd.search()"/>
+	</groupbox>
+<!-- //////////////////查询过滤条件///////////////////////// -->
+
+<!-- //////////////////数据列表区///////////////////////// -->		
+	<pagenavigator/>
+	<lookuplist pageSize="20">
+		<listhead>
+			<lookuplistheader data="company" label="公司" sort="auto" width="20%"/><!-- 公司 -->
+			<lookuplistheader data="description" label="公司名称" sort="auto" width="25%"/><!-- 公司名称 -->
+			<lookuplistheader data="parent" label="父级公司" sort="auto" width="25%"/><!-- 父级公司 -->
+			<lookuplistheader data="comptype" label="公司类型" sort="auto" width="15%"/><!-- 公司类型 -->
+			<lookuplistheader data="contact" label="联系人" sort="auto" width="15%"/><!-- 联系人 -->
+		</listhead>
+	</lookuplist>
+<!-- //////////////////数据列表区///////////////////////// -->	
+
+
+	<div align="center">
+	<button label="确 定" onClick="lookupWnd.ok(event)"/><!--  确 定  -->
+	<button label="取 消" onClick="lookupWnd.cancel(event)"/><!--  取 消  -->
+	</div>
+	
+</lookupwindow>

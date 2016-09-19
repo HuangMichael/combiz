@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="EQSPLIT" title="固定资产拆分" wfenabled="false" resize="true"
+	use="combiz.ui.equipment.EquipmentsplitWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="设备" width="70px" />
+			<!--<tab id="workordertab" label="工单"
+				width="70px" />
+				<tab id="premainttab" label="预防性维护"
+				width="90px" /> 
+				<tab id="eqhistorytab" label="设备历史"
+				width="70px" />
+			-->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="(parent is null or parent='') and eqnum in (select distinct t.parent from Equipment t where t.parent is not null)";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("eqnum");
+			]]></zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						设备:<!-- 设备 -->
+						<stextbox data="eqnum" />
+						描述:<!-- 描述 -->
+						<stextbox data="description" />
+						位置:
+						<sbandbox data="location" lookup="location" />
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<treelist pageSize="20" childrel="parent=':{eqnum}'"
+					openchild="false">
+					<treecols>
+						<treelistheader data="eqnum" label="设备编码"
+							width="20%" />
+						<treelistheader data="description" label="设备描述"
+							width="20%" />
+						<treelistheader data="location" label="设备位置"
+							width="20%" />
+						<treelistheader data="status" label="设置状态"
+							width="20%" />
+							<treelistheader data="net_xn" label="净值"
+							width="20%" />
+					</treecols>
+				</treelist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"equipment.assetnum","equipment.eqnum","location.description","equipment.changeby","equipment.changedate","equipment.runnumber",
+ "equipment.ytdcost","equipment.budgetcost","equipment.totalcost","equipment.transsubstation","equipment.organise"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="设备位置" /><!-- 设备位置 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- *************************在下面修改主界面字段**************************** -->
+								<!-- ********************************************************************-->
+								<!-- //////////////////////row//////////////// -->
+								<row>
+									设备:<!-- 设备 -->
+									<a:bind value="equipment.eqnum" />
+									<itextbox id="equipment.eqnum" />
+									设备描述:<!-- 设备描述 -->
+									<a:bind
+										value="equipment.description" />
+									<itextbox id="equipment.description"
+										cols="40" />
+								</row>
+
+								<!-- //////////////////////row//////////////// -->
+								<row>
+									位置:<!-- 位置 -->
+									<a:bind value="equipment.location" />
+									<ibandbox id="equipment.location"
+										lookup="location" />
+									位置描述:<!-- 位置描述 -->
+									<a:bind
+										value="location.description" />
+									<itextbox id="location.description"
+										cols="40" />
+								</row>
+
+								<row spans="1,3">
+									位置结构：
+									<istructbox
+										use="combiz.ui.location.LocationStructbox"
+										band="equipment.location" cols="100" />
+								</row>
+
+								<row>
+									采购编码
+									<a:bind value="equipment.itemnum" />
+									<ibandbox id="equipment.itemnum"
+										lookup="item" />
+									描述:<!-- 描述 -->
+									<a:bind value="item.description" />
+									<itextbox id="item.description"
+										cols="40" />
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+						<attachimage label="设备图片(点击右键上传图片)" width="99%"
+							imgwidth="100" imgheight="100" horizontal="true"
+							readOnly="false" />
+					</groupbox>
+				</vbox>
+				<listwindow id="assetcardTable" title="资产卡片" use="combiz.ui.equipment.Equipmentsplit_AssetcardTableList" dialog="/equipment/equipmentsplit_assetcardTable.xul">
+				<defaultvalue band="assetcardTable" value=""/>
+				<tablelist band="assetcardTable" pageSize="16">
+					<listhead>
+						<!-- 
+						<tablelistheader data="parent" label="父级" sort="auto" width="10%"/>
+						<tablelistheader data="summary" label="摘要" sort="auto" width="10%"/>
+						<tablelistheader data="location" label="存放地点" sort="auto" width="10%"/>
+						<tablelistheader data="responsible" label="负责人" sort="auto" width="10%"/>
+						<tablelistheader data="daterecorded" label="入账日期" sort="auto" width="10%"/>
+						<tablelistheader data="usedate" label="使用日期" sort="auto" width="10%"/>
+						<tablelistheader data="assetcode" label="资产编号" sort="auto" width="10%"/>
+						<tablelistheader data="status" label="状态" sort="auto" width="10%"/>
+						<tablelistheader data="usedepartment" label="使用部门" sort="auto" width="10%"/>
+						<tablelistheader data="depreciationmethod" label="折旧方式" sort="auto" width="10%"/>
+						<tablelistheader data="cost" label="原值" sort="auto" width="10%"/>						
+						<tablelistheader data="depreciationsjt" label="折旧科目" sort="auto" width="10%"/>
+						 -->
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="eqnum" label="资产编号" sort="auto" width="12%"/>
+						<tablelistheader data="assetname" label="资产名称" sort="auto" width="18%"/>
+						<tablelistheader data="assetclasses" label="资产类别" sort="auto" width="15%"/>
+						<tablelistheader data="assetsubject" label="资产科目" sort="auto" width="15%"/>																						
+						<tablelistheader data="assetstatus" label="资产状态" sort="auto" width="10%"/>
+						<tablelistheader data="changemethod" label="增减方式" sort="auto" width="10%"/>										
+						<tablelistheader data="users" label="使用人" sort="auto" width="10%"/>												
+						<tablelistheader data="net_xn" label="净值" sort="auto" width="10%"/>	
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+
+			</tabpanel>
+			<!-- ********************************** //设备技术参数 ********************************** -->
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<window id="mainWnd" title="待办任务信息" border="normal" width="800" closable="true"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+<caption image="/images/center_window_icon.gif"/>
+	<tabbox use="combiz.system.ui.common.TabboxLazy" width="100%">
+		<tabs>
+			<tab label="待办任务" width="100px"/>
+			<tab label="任务抄送" width="80px"/>
+			<tab label="已处理任务" width="100px"/>
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<iinclude id="todolist" width="98%" srcpage="/webui/todolist.xul"/>
+			</tabpanel>
+			<tabpanel>
+				<iinclude id="notifylist" width="98%" srcpage="/webui/notifylist.xul"/>
+			</tabpanel>
+			<tabpanel>
+				<iinclude id="donelist" width="98%" srcpage="/webui/donelist.xul"/>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<div align="center">
+		<button label=" 确 定 " onClick="mainWnd.onClose()"/>
+	</div>
+</window>

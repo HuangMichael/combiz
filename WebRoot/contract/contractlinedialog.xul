@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"contline.warehouse"}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"contline.linecost","contline.taxlinecost"}; 
+ 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="合同采购行"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							行项目编号:<a:bind value="contline.linenum"/><ilongbox id="contline.linenum"/>		
+						</row>
+						<row>
+						     库存项目:<a:bind value="contline.itemnum"/><ibandbox id="contline.itemnum" lookup="item"/>		
+							描述:<a:bind value="contline.description"/><itextbox id="contline.description" cols="60"/>		
+						</row>
+						<row>	
+							订购数量:<a:bind value="contline.orderqty"/><idoublebox id="contline.orderqty" format="0.00"/>		
+							订购单位:<a:bind value="contline.orderunit"/><itextbox id="contline.orderunit"/>		
+						</row>
+						<row>	
+							转换系数:<a:bind value="contline.conversion"/><idoublebox id="contline.conversion" format="0.00"/>		
+							不含税单价:<a:bind value="contline.unitcost"/><idoublebox id="contline.unitcost" format="0.00"/>		
+						</row>
+						<row>
+							含税单价:<a:bind value="contline.taxunitcost"/><idoublebox id="contline.taxunitcost" format="0.00"/>		
+							不含税总价:<a:bind value="contline.linecost"/><idoublebox id="contline.linecost" format="0.00"/>		
+						</row>
+						<row>	
+							含税总价:<a:bind value="contline.taxlinecost"/><idoublebox id="contline.taxlinecost" format="0.00"/>		
+							接收数量:<a:bind value="contline.receivedqty"/><idoublebox id="contline.receivedqty" format="0.00"/>		
+						</row>
+						<row>	
+							已接收的单价:<a:bind value="contline.receivedunitcost"/><idoublebox id="contline.receivedunitcost" format="0.00"/>		
+							接收到的总价:<a:bind value="contline.receivedtotalcost"/><idoublebox id="contline.receivedtotalcost" format="0.00"/>		
+						</row>
+						<row>	
+							税代码:<a:bind value="contline.taxcode"/><itextbox id="contline.taxcode"/>		
+							税率:<a:bind value="contline.taxrate"/><idoublebox id="contline.taxrate"/>		
+						</row>
+						<row>	
+							税额:<a:bind value="contline.tax"/><idoublebox id="contline.tax" format="0.00"/>		
+							拒收数量:<a:bind value="contline.rejectedqty"/><idoublebox id="contline.rejectedqty" format="0.00"/>		
+						</row>
+						<row>	
+							供应商发货日期:<a:bind value="contline.vendeliverydate"/><idatebox id="contline.vendeliverydate"/>		
+							录入日期:<a:bind value="contline.enterdate"/><idatebox id="contline.enterdate"/>		
+						</row>
+						<row>	
+							录入人:<a:bind value="contline.enterby"/><ibandbox id="contline.enterby" lookup="labor"/>		
+							申请人:<a:bind value="contline.requestedby"/><ibandbox id="contline.requestedby" lookup="labor"/>		
+						</row>
+						<row>
+							要求的交付日期:<a:bind value="contline.reqdeliverydate"/><idatebox id="contline.reqdeliverydate"/>		
+							制造商:<a:bind value="contline.manufacturer"/><ibandbox id="contline.manufacturer" lookup="companies2"/>		
+						</row>
+						<row>
+							规格型号:<a:bind value="contline.modelnum"/><itextbox id="contline.modelnum"/>		
+							服务:<a:bind value="contline.service"/><icheckbox id="contline.service"/>		
+						</row>
+						<row>	
+							库存类型:<a:bind value="contline.stocktype"/><icombobox id="contline.stocktype"/>		
+							注释:<a:bind value="contline.remark"/><itextbox id="contline.remark"/>		
+						</row>
+						<row>	
+							记帐位置:<a:bind value="contline.location"/><ibandbox id="contline.location" lookup="location"/>		
+							完成接收:<a:bind value="contline.receiptscomplete"/><icombobox id="contline.receiptscomplete"/>		
+						</row>
+						<row>	
+							需要检查:<a:bind value="contline.inspection"/><icheckbox id="contline.inspection"/>		
+							载入的成本:<a:bind value="contline.loadedcost"/><idoublebox id="contline.loadedcost"/>		
+						</row>
+						<row>	
+							已分摊:<a:bind value="contline.prorated"/><icheckbox id="contline.prorated"/>		
+							分摊服务成本:<a:bind value="contline.proratecost"/><idoublebox id="contline.proratecost"/>		
+						</row>
+						<row>	
+							采购订单：<a:bind value="contline.ponum"/><ibandbox id="contline.ponum" lookup="ponum"/>
+							仓库:<a:bind value="contline.warehouse"/><ibandbox id="contline.warehouse" lookup="warehouse"/>		
+						</row>
+						
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

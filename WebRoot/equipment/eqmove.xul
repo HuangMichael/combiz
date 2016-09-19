@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="设备移动" use="combiz.system.ui.CommonDialog" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation"  border="normal" closable="true" width="500">
+
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"eqtrans.eqnum","eqtrans.fromloc","eqtrans.toparent"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+ 
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						设备：<a:bind value="eqtrans.eqnum"/><itextbox id="eqtrans.eqnum"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						位置移自：<a:bind value="eqtrans.fromloc"/><itextbox id="eqtrans.fromloc"/>
+						位置移至：<a:bind value="eqtrans.toloc"/><ibandbox id="eqtrans.toloc" lookup="location"/>
+						</row>
+						<!-- //////////////////////row//////////////// -->
+						<!-- //////////////////////row//////////////// -->
+						<row spans="1,3">
+						备忘录：<a:bind value="eqtrans.memo"/><itextbox id="eqtrans.memo" cols="40"/>
+						</row>						
+						<!-- //////////////////////row//////////////// -->		
+					</rows>
+				</grid>
+	<div align="center">
+	<button label=" 确 定 " onClick="mainWnd.confirm()"/>
+	<button label=" 取 消 " onClick="mainWnd.cancel()"/>	
+	</div>
+
+</window>

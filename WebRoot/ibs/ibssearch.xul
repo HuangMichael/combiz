@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<searchwindow app="IBSSEARCH" title="综合查询" closable="true" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<hbox width="100%">
+		<groupbox width="156">
+			<caption label="查询过滤器" />
+			<menubar use="combiz.system.ui.common.SearchMenuBar" />
+			<button label="执 行 查 询" onClick="mainWnd.search()" width="150"/>
+		</groupbox>
+		<groupbox id="searchBox"><caption label="查询条件" />
+			<grid>
+				<rows>
+					<row>
+						应用程序：
+						<stextbox data="app" />
+						描述：
+						<stextbox data="description" />
+						时间：
+						<ssdatebox data="startdate" format="yyyy-MM-dd HH:mm:ss" cols="20"/>到<sedatebox data="enddate" format="yyyy-MM-dd HH:mm:ss" cols="20"/>
+					</row>
+					<row>
+						类型：
+						<scombobox data="apptype" />
+						主表：
+						<sbandbox data="xxx" lookup="ibstables" listname="ibstables"/>
+						自动编号：
+						<sbandbox data="ibstablecols.inskey" lookup="ibsinskey" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</hbox>
+	<groupbox><caption label="综合查询数据预览窗口" />
+	<queryview height="500px" report="/reportlist.cpt"/>
+	</groupbox>
+</searchwindow>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="testWnd" title="请选择数据" edittype="listonly"
+	tablename="poline" multiple="true"
+	use="combiz.ui.invoice.InvoicePoline" closable="true" width="900"><!-- 请选择数据 -->
+	<tablelist band="testWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="ponum" label="采购单" sort="auto"
+				width="10%" /><!-- 采购单 -->
+			<tablelistheader data="polinenum" label="行" sort="auto"
+				width="5%" /><!-- 行 -->
+			<tablelistheader data="itemnum" label="库存项目编号" sort="auto"
+				width="10%" /><!-- 库存项目编号 -->
+			<tablelistheader data="item.description" label="库存描述" sort="auto"
+				width="24%" /><!-- 库存描述 -->
+			<tablelistheader data="unitcost" label="单价" sort="auto"
+				width="10%" /><!-- 单价 -->
+			<tablelistheader data="linecost" label="行总价" sort="auto"
+				width="10%" /><!-- 行总价 -->
+			<tablelistheader data="orderqty" label="订购数量" sort="auto"
+				width="7%" /><!-- 订购数量 -->
+			<tablelistheader data="receivedqty" label="已接收数量"
+				sort="auto" width="7%" /><!-- 已接收数量 -->
+			<tablelistheader data="waitinvqty" label="未结算数量" sort="auto"
+				width="7%" /><!-- 未结算数量 -->
+			<tablelistheader data="enterby" label="录入人" sort="auto"
+				width="10%" /><!-- 录入人 -->
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<button label=" 确 定 " onClick="testWnd.confirm()" /><!-- 确 定 -->
+		<button label=" 取 消 " onClick="testWnd.cancel()" /><!-- 取 消 -->
+	</div>
+</listwindow>

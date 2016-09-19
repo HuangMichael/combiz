@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="查看工作流程信息" border="normal" width="90%" height="600" closable="true"
+ use="combiz.system.workflow.ViewWFInfoDialog" showinfo="true">
+	<tabbox width="100%">
+		<tabs>
+			<tab label="流程图" width="100px"/>
+			<tab label="任务分配" width="100px"/>
+			<tab label="审批意见" width="100px"/>
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<grid id="wfimagemap" height="500"/>
+				<div align="center">
+					<checkbox label="显示审批人信息" use="combiz.system.ui.common.ShowWFInfo"/>
+				</div>
+			</tabpanel>
+			<tabpanel>
+				<listwindow id="wfassignmentList" edittype="LISTONLY" use="combiz.system.ui.CommonListWindow"
+				 tablename="WFASSIGNMENT" searchable="false" autodata="false">
+				<tablelist band="wfassignmentList" pageSize="8">
+					<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="assigncode" label="任务分配人" sort="auto" width="20%"/>
+							<tablelistheader data="description" label="任务描述" sort="auto" width="50%"/>
+							<tablelistheader data="assignstatus" label="分配状态" sort="auto" width="10%"/>
+							<tablelistheader data="startdate" label="启动时间" sort="auto" width="20%"/>
+					</listhead>
+				</tablelist>
+				</listwindow>
+				<div align="left">
+					<button label="发送流程催办" onClick="mainWnd.wfpressto()"/>
+				</div>
+			</tabpanel>
+			<tabpanel>
+				<listwindow id="wftransList" edittype="LISTONLY" use="combiz.system.ui.CommonListWindow"
+				 tablename="WFTRANS" searchable="false" autodata="false">
+				<tablelist band="wftransList" pageSize="8">
+					<listhead>
+							<tablelistheader src="/images/img_listitem.gif"/>
+							<tablelistheader data="assigncode" label="审批人" sort="auto" width="20%"/>
+							<tablelistheader data="memo" label="审批意见" sort="auto" width="60%"/>
+							<tablelistheader data="transdate" label="审批时间" sort="auto" width="20%"/>
+					</listhead>
+				</tablelist>
+				</listwindow>
+			</tabpanel>		
+		</tabpanels>
+	</tabbox>
+	<div align="center">
+		<button label=" 确 定 " onClick="mainWnd.onClose()"/>
+	</div>
+</window>

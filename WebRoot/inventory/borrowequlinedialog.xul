@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {"wpmaterial.description","wpmaterial.modelnum"};
+ mainWnd.setRequired(required);
+ String[] readonly = {"wpmaterial.prnum","wpmaterial.prlinenum"};
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="借用设备明细"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+					
+						<row>
+						设备编码:<a:bind value="wpmaterial.itemnum"/><ibandbox id="wpmaterial.itemnum" lookup="itemeq" applink="item"/>
+						描述:<a:bind value="wpmaterial.description"/><itextbox id="wpmaterial.description" cols="40" inputTip="请输入设备的名称"/>
+						</row>						
+						<row>					
+						分类:<a:bind value="wpmaterial.classid"/><ibandbox id="wpmaterial.classid" lookup="classificationasset"/>
+						规格型号:<a:bind value="wpmaterial.modelnum"/><itextbox id="wpmaterial.modelnum" cols="40" inputTip="请输入设备的规格型号"/>
+						</row>					
+						<row>
+						借用数量:<a:bind value="wpmaterial.itemqty"/><idoublebox id="wpmaterial.itemqty" format="#,##0.00"/>
+						借用单位:<a:bind value="wpmaterial.orderunit"/><ibandbox id="wpmaterial.orderunit" lookup="measurement"/>					
+						</row>
+						<!-- //////////////////////row//////////////// -->				
+						<row spans="1,3">
+						用途:<a:bind value="wpmaterial.remark"/><itextbox id="wpmaterial.remark" cols="120" rows="4"/>
+						</row>			
+						<!-- //////////////////////row//////////////// -->
+						<row spans="6,,,,," align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>
+		
+</editwindow>

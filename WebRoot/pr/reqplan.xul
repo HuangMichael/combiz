@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="GBK"?>
+<?taglib uri="/WEB-INF/lib/core.dsp.tld" prefix="c"?>
+<mainwindow app="reqplan" title="需求计划" resize="true" wfenabled="true"
+	use="combiz.ui.pr.ReqplanWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation"><!-- title="需求计划" -->
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" /><!-- 列表 -->
+			<tab id="main" label="需求计划" width="70px" /><!-- 需求计划 -->
+			<tab id="prlinetab" label="需求计划行" width="90px" /><!-- 需求计划行 -->
+			<tab id="wftransListtab" label="审批意见" width="70px" /><!-- 审批意见 -->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript>
+					<![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="prtype='需求计划' ";
+			mainWnd.setQueryString(queryString);
+			
+			mainWnd.setOrderby("prnum desc");
+			]]>
+				</zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						<!-- 从这里开始修改搜索字段 -->
+						需求计划<!-- 需求计划 -->：
+						<stextbox data="prnum" cols="10" />
+						状态<!-- 状态 -->：
+						<stextbox data="status" cols="10" />
+						需求部门：
+						<stextbox data="requestdept" />
+						申请人<!-- 申请人 -->：
+						<stextbox data="requestedby" cols="10" />
+						<!-- 修改搜索字段结束 -->
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader
+							src="/images/img_listitem.gif" />
+						<resultlistheader data="prnum" label="需求计划"
+							sort="auto" width="10%" /><!-- 需求计划 -->
+						<resultlistheader data="description" label="描述"
+							sort="auto" width="30%" /><!-- 描述 -->
+						<resultlistheader data="requestdept"
+							label="需求部门" sort="auto" width="15%" /><!-- 需求部门 -->
+						<resultlistheader data="vendor" label="供应商"
+							sort="auto" width="20%" /><!-- 供应商 -->
+						<resultlistheader data="status" label="状态"
+							sort="auto" width="15%" /><!-- 状态 -->
+						<resultlistheader data="requestdate"
+							label="需求日期" sort="auto" width="10%" /><!-- 需求日期 -->
+
+					</listhead>
+				</resultlist>
+			</tabpanel>
+
+
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 操作票 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript>
+				<![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"pr.contact","pr.prnum","pr.status","pr.statusdate","pr.changeby","pr.changedate","pr.totalcost"};
+ mainWnd.setReadonly(readonly);
+ ]]>
+			</zscript>
+			<tabpanel>
+				<groupbox>
+					<caption label="基本信息" /><!-- 基本信息 -->
+					<grid>
+						<rows>
+							<row>
+								需求计划<!-- 需求计划 -->:
+								<a:bind value="pr.prnum" />
+								<itextbox id="pr.prnum" />
+								描述<!-- 描述 -->:
+								<a:bind value="pr.description" />
+								<itextbox id="pr.description" cols="60" />
+								状态<!-- 状态 -->:
+								<a:bind value="pr.status" />
+								<itextbox id="pr.status" cols="20" />
+								
+
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+				<hbox width="100%">
+
+					<groupbox width="500">
+						<caption label="详细信息" /><!-- 详细信息 -->
+						<grid>
+							<rows>
+
+
+								<row>
+									申请人<!-- 申请人 -->:
+									<a:bind value="pr.requestedby" />
+									<ibandbox id="pr.requestedby"
+										lookup="labor" />
+								</row>
+								<row>
+									需求部门<!-- 需求部门 -->:
+									<a:bind value="pr.requestdept" />
+									<ibandbox id="pr.requestdept"
+										lookup="department" />
+								</row>
+								<row>
+									主管人<!-- 主管人 -->:
+									<a:bind value="pr.supervisor" />
+									<ibandbox id="pr.supervisor"
+										lookup="labor" />
+								</row>
+								<row>
+									修改人<!-- 修改人 -->:
+									<a:bind value="pr.changeby" />
+									<ibandbox id="pr.changeby"
+										lookup="labor" />
+
+
+								</row>
+								<row>
+									客户编号<!-- 客户编号 -->:
+									<a:bind value="pr.customernum" />
+									<itextbox id="pr.customernum" />
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+					<groupbox>
+						<caption label="供应商及成本" /><!-- 供应商及成本 -->
+						<grid>
+							<rows>
+								<row>
+									供应商<!-- 供应商 -->:
+									<a:bind value="pr.vendor" />
+									<ibandbox id="pr.vendor"
+										lookup="companies" cols="30" />
+								</row>
+								<row>
+									联系人<!-- 联系人 -->:
+									<a:bind value="pr.contact" />
+									<ibandbox id="pr.contact" lookup="labor"/>
+								</row>
+								<row>
+									离岸价格<!-- 离岸价格 -->:
+									<a:bind value="pr.fobprice" />
+									<itextbox id="pr.fobprice"
+										cols="11" />
+								</row>
+								<row>
+									总成本<!-- 总成本 -->:
+									<a:bind value="pr.totalcost" />
+									<idoublebox id="pr.totalcost" />
+								</row>
+
+								<row>
+									税总额<!--  税总额-->:
+									<a:bind value="pr.totaltax" />
+									<idoublebox id="pr.totaltax" />
+								</row>
+							</rows>
+
+
+						</grid>
+					</groupbox>
+
+				</hbox>
+				<hbox width="100%">
+
+					<groupbox width="500">
+						<caption label="运输信息" /><!-- 运输信息 -->
+						<grid>
+							<rows>
+								<row>
+									运输条款<!-- 运输条款 -->:
+									<a:bind value="pr.freightterms" />
+									<itextbox id="pr.freightterms" />
+								</row>
+								<row>
+									运输方式<!-- 运输方式 -->:
+									<a:bind value="pr.shipvia" />
+									<itextbox id="pr.shipvia" />
+								</row>
+								<row spans="1,3">
+									支付条款<!-- 支付条款 -->:
+									<a:bind value="pr.paymentterms" />
+									<itextbox id="pr.paymentterms" />
+								</row>
+
+								<row spans="1,3">
+									收货人<!-- 收货人 -->：
+									<a:bind value="pr.shiptolabor" />
+									<ibandbox id="pr.shiptolabor"
+										lookup="labor" />
+								</row>
+								<row spans="1,3">
+									收货地址<!-- 收货地址 -->:
+									<a:bind value="pr.shiptoaddr" />
+									<itextbox id="pr.shiptoaddr"
+										cols="40" />
+								</row>
+								<row spans="1,3">
+									收票人<!-- 收票人 -->:
+									<a:bind value="pr.billtolabor" />
+									<ibandbox id="pr.billtolabor"
+										lookup="labor" />
+								</row>
+								<row spans="1,3">
+									收票地址<!-- 收票地址 -->:
+									<a:bind value="pr.billtoaddr" />
+									<itextbox id="pr.billtoaddr"
+										cols="40" />
+								</row>
+
+
+
+
+
+
+							</rows>
+						</grid>
+					</groupbox>
+					<groupbox>
+						<caption label="日期信息" /><!-- 日期信息 -->
+						<grid>
+							<rows>
+								<row>
+									状态日期<!-- 状态日期 -->:
+									<a:bind value="pr.statusdate" />
+									<idatebox id="pr.statusdate" />
+								</row>
+								<row>
+									需求日期<!-- 需求日期 -->:
+									<a:bind value="pr.requireddate" />
+									<idatebox id="pr.requireddate" />
+								</row>
+								<row>
+									申请日期<!-- 申请日期 -->:
+									<a:bind value="pr.requestdate" />
+									<idatebox id="pr.requestdate" />
+								</row>
+								<row>
+									修改日期<!-- 修改日期 -->:
+									<a:bind value="pr.changedate" />
+									<idatebox id="pr.changedate" />
+								</row>
+								<row>
+									汇率<!-- 汇率 -->:
+									<a:bind value="pr.exchangerate" />
+									<idoublebox id="pr.exchangerate" />
+								</row>
+								<row>
+									汇率日期<!-- 汇率日期 -->:
+									<a:bind value="pr.exchangedate" />
+									<idatebox id="pr.exchangedate" />
+								</row>
+
+							</rows>
+						</grid>
+					</groupbox>
+
+				</hbox>
+
+			</tabpanel>
+
+
+			<!-- ********************************** //主数据窗口 ********************************** -->
+
+
+			<!-- ********************************** //需求计划行 ********************************** -->
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+								需求计划<!-- 需求计划 -->:
+								<a:bind value="pr.prnum" />
+								<itextbox id="pr.prnum2" />
+								描述<!-- 描述 -->:
+								<a:bind value="pr.description" />
+								<itextbox id="pr.description2" cols="60" />
+								状态<!-- 状态 -->:
+								<a:bind value="pr.status" />
+								<itextbox id="pr.status2" cols="20" />
+						</row>
+					</rows>
+				</grid>
+
+				<listwindow id="prline" title="需求计划行"
+					use="combiz.ui.pr.PrlineList" dialog="/pr/prdialog.xul">
+					<tablelist band="prline" pageSize="8"><!-- 需求计划行 -->
+						<listhead>
+							<tablelistheader src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum" label="库存项目编号" sort="auto" width="20%" /><!-- 库存项目编号 -->
+							<tablelistheader data="description" label="库存项目" sort="auto" width="30%" /><!-- 库存项目 -->
+							<tablelistheader data="prlinenum" label="需求计划行" sort="auto" width="5%" /><!-- 需求计划行 -->
+							<tablelistheader data="orderqty" label="订购数量" sort="auto" width="10%" /><!-- 订购数量 -->
+							<tablelistheader data="orderunit" label="订购单位" sort="auto" width="5%" /><!-- 订购单位 -->
+							<tablelistheader data="unitcost" label="单价" sort="auto" width="10%" /><!-- 单价 -->
+							<tablelistheader data="linecost" label="行总价" sort="auto" width="10%" /><!-- 行总价 -->
+							<tablelistheader data="enterby" label="录入人" sort="auto" width="10%" /><!-- 录入人 -->
+
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+				<div align="right">
+							<button label="物资BOM备件" onClick="mainWnd.findeqbom()"/><!--物资BOM备件 -->
+							<button label="设备备件" onClick="mainWnd.findeqsparepart()"/><!-- 设备备件 -->
+							<button label="加入收藏" onClick="prline.addfavorite()"/><!-- 加入收藏夹 -->
+							<button label="我的收藏夹" onClick="prline.findfavorite()"/><!-- 我的收藏夹 -->
+							</div>
+			</tabpanel>
+			<!-- ********************************** //采购申请行 ********************************** -->
+
+			<!-- **********************************  审批意见 ********************************** -->
+			<tabpanel>
+				<listwindow id="wftransList" title="查看工作流程信息"
+					edittype="readonly"><!-- 查看工作流程信息 -->
+					<tablelist band="wftransList" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="assignlabor.deptnum"
+								label="审批部门" sort="auto" width="20%" /><!-- 审批部门 -->
+							<tablelistheader data="assigncode"
+								label="审批人" sort="auto" width="10%" /><!-- 审批人 -->
+							<tablelistheader data="memo" label="审批意见"
+								sort="auto" width="40%" /><!-- 审批意见 -->
+							<tablelistheader data="transdate"
+								label="审批时间" sort="auto" width="20%" /><!--审批时间 -->
+						</listhead>
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- **********************************  //审批意见 ********************************** -->
+		</tabpanels>
+	</tabbox>
+</mainwindow>

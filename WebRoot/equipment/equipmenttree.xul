@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="equipmenttree" title="设备结构" resize="true"
+	use="combiz.ui.equipment.EquipmentTreeWindow"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+	<!-- ********************************** 菜单条和工具栏 ********************************** -->
+	<imenubar id="menubar" />
+	<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+	<!-- ********************************** 消息提示框栏 ********************************** -->
+	<messagebar />
+	<!-- ********************************** //消息提示框栏 ********************************** -->
+
+	<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%"
+		onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px" />
+			<tab id="main" label="设备" width="70px" />
+			<tab id="eqspectab" label="技术参数" width="70px" />
+			<tab id="appertaintab" label="部件及附属" width="90px" />
+			<tab id="eqspareparttab" label="备件" width="70px" />
+			<tab id="doclib" label="文档" width="80px" />
+			<!--<tab id="workordertab" label="工单"
+				width="70px" />
+			<tab id="premainttab" label="预防性维护"
+				width="90px" /> 
+			<tab id="eqhistorytab" label="设备历史"
+				width="70px" />
+			-->
+		</tabs>
+		<!-- ********************************** //顶级标签 ********************************** -->
+
+		<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+				<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="parent is null or parent=''";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+				<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+				<hbox width="100%">
+					<groupbox width="170">
+						<caption label="高级查询" /><!-- 高级查询 -->
+						<menubar
+							use="combiz.system.ui.common.SearchMenuBar" />
+					</groupbox>
+					<groupbox id="searchBox">
+						<caption label="过滤器" /><!-- 过滤器 -->
+						设备:<!-- 设备 -->
+						<stextbox data="eqnum" />
+						描述:<!-- 描述 -->
+						<stextbox data="description" />
+						位置:
+						<sbandbox data="location" lookup="location"/>
+					</groupbox>
+				</hbox>
+				<!-- ////查询过滤器 -->
+				<!-- 结果集列表  -->
+				<pagenavigator />
+				<treelist pageSize="20" childrel="parent=':{eqnum}'" openchild="false">
+					<treecols>
+						<treelistheader data="eqnum" label="设备编码" width="20%" />
+						<treelistheader label="图片" width="5%" preclass="combiz.system.ui.common.PreClassAttachImage"/>
+						<treelistheader data="description" label="设备描述" width="30%" />
+						<treelistheader data="location" label="设备位置" width="30%" />
+						<treelistheader data="status" label="设置状态" width="20%" />
+					</treecols>
+				</treelist>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** 主数据窗口 ********************************** -->
+			<!-- 初始化设置字段的必输和只读 -->
+			<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"equipment.eqnum","location.description","equipment.changeby","equipment.changedate","equipment.runnumber",
+ "equipment.ytdcost","equipment.budgetcost","equipment.totalcost","equipment.transsubstation","equipment.organise"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<vbox width="100%">
+					<groupbox>
+						<caption label="设备位置" /><!-- 设备位置 -->
+						<grid>
+							<rows>
+								<!-- ******************************************************************** -->
+								<!-- *************************在下面修改主界面字段**************************** -->
+								<!-- ********************************************************************-->
+								<!-- //////////////////////row//////////////// -->
+								<row>
+									设备:<!-- 设备 -->
+									<a:bind value="equipment.eqnum" />
+									<itextbox id="equipment.eqnum" />
+									设备描述:<!-- 设备描述 -->
+									<a:bind
+										value="equipment.description" />
+									<itextbox id="equipment.description"
+										cols="40" />
+								</row>
+
+								<!-- //////////////////////row//////////////// -->
+								<row>
+									位置:<!-- 位置 -->
+									<a:bind value="equipment.location" />
+									<ibandbox id="equipment.location"
+										lookup="location" />
+									位置描述:<!-- 位置描述 -->
+									<a:bind
+										value="location.description" />
+									<itextbox id="location.description"
+										cols="40" />
+								</row>
+								
+								<row spans="1,3">
+									位置结构：<istructbox use="combiz.ui.location.LocationStructbox" band="equipment.location" cols="100"/>
+								</row>
+								
+								<row>
+									采购编码
+									<a:bind value="equipment.itemnum" />
+									<ibandbox id="equipment.itemnum"
+										lookup="item" />
+									描述:<!-- 描述 -->
+									<a:bind value="item.description" />
+									<itextbox id="item.description"
+										cols="40" />
+								</row>
+
+								<!-- ******************************************************************** -->
+								<!-- ********************************************************************-->
+							</rows>
+						</grid>
+						<attachimage label="设备图片(点击右键上传图片)" width="99%" imgwidth="100" imgheight="100" horizontal="true" readOnly="false"/>
+					</groupbox>
+					
+					<hbox width="100%">
+						<groupbox><caption label="基本信息" />
+							<grid>
+								<rows>
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										故障类别:<!-- 故障类别 -->
+										<a:bind
+											value="equipment.failurecode" />
+										<ibandbox
+											id="equipment.failurecode"
+											lookup="classificationfialureclass" />
+									</row>
+									<row>
+										单位代码:<!-- 单位代码 -->
+										<a:bind
+											value="equipment.deptnum" />
+										<ibandbox id="equipment.deptnum"
+											lookup="department" />
+									</row>
+									<row>
+										所属人:<!-- 所属人 -->
+										<a:bind
+											value="equipment.labornum" />
+										<ibandbox
+											id="equipment.labornum" lookup="labor" />
+									</row>
+									<row>
+										设备型号:<!-- 设备型号 -->
+										<a:bind value="equipment.model" />
+										<itextbox id="equipment.model"
+											cols="20" />
+									</row>
+									<row>
+										管理等级:<!-- 管理等级 -->
+										<a:bind value="equipment.grade" />
+										<icombobox id="equipment.grade"
+											cols="20" />
+									</row>
+
+									<row>
+										设备分类:<!-- 设备分类 -->
+										<a:bind
+											value="equipment.classid" />
+										<ibandbox id="equipment.classid"
+											lookup="classificationeq" />
+									</row>
+									<row>
+										父级设备:<!-- 父级设备 -->
+										<a:bind
+											value="equipment.parent" />
+										<ibandbox id="equipment.parent"
+											lookup="equipment" />
+									</row>
+									<row>
+										设备状态:<!-- 设备状态 -->
+										<a:bind
+											value="equipment.status" />
+										<icombobox id="equipment.status"
+											cols="20" />
+									</row>
+									<row>
+										货架号:<!--货架号 -->
+										<a:bind
+											value="equipment.binnum" />
+										<ibandbox id="equipment.binnum"
+											lookup="binnum" />
+									</row>
+									<row>
+										运行编号:<!-- 运行编号 -->
+										<a:bind
+											value="equipment.runnumber" />
+										<itextbox
+											id="equipment.runnumber" cols="20" />
+									</row>
+									<row>
+										施工单位:<!-- 施工单位 -->
+										<a:bind
+											value="equipment.construct" />
+										<itextbox
+											id="equipment.construct" cols="20" />
+									</row>
+									<row>
+										序列号:<!-- 序列号 -->
+										<a:bind
+											value="equipment.serialnum" />
+										<itextbox
+											id="equipment.serialnum" cols="20" />
+									</row>
+									<row>
+										固定资产编号:<!-- 固定资产编号 -->
+										<a:bind
+											value="equipment.assetnum" />
+										<itextbox
+											id="equipment.assetnum" cols="20" />
+									</row>
+
+									<row>
+										设备是否运行:<!-- 设备是否运行 -->
+										<a:bind
+											value="equipment.isrunning" />
+										<icheckbox
+											id="equipment.isrunning" />
+									</row>
+
+									<row>
+										生产厂家:<!-- 生产厂家 -->
+										<a:bind
+											value="equipment.manufacturer" />
+										<ibandbox
+											id="equipment.manufacturer" lookup="companies" />
+									</row>
+
+									<row>
+										出厂编号:<!-- 出厂编号 -->
+										<a:bind
+											value="equipment.lfnumber" />
+										<itextbox
+											id="equipment.lfnumber" cols="20" />
+									</row>
+									<row>
+										出厂日期:<!-- 出厂日期 -->
+										<a:bind
+											value="equipment.lfdate" />
+										<idatebox id="equipment.lfdate"
+											cols="20" />
+									</row>
+
+								</rows>
+							</grid>
+						</groupbox>
+						
+						<groupbox><caption label="其他信息" />
+							
+							<grid>
+								<rows>
+									<row>
+										采购价格:<!-- 采购价格 -->
+										<a:bind
+											value="equipment.purprice" />
+										<idoublebox
+											id="equipment.purprice" />
+									</row>
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										保修日期至:<!-- 保修日期至 -->
+										<a:bind
+											value="equipment.warrantyexpdate" />
+										<idatebox
+											id="equipment.warrantyexpdate" />
+									</row>
+									<!-- //////////////////////row//////////////// -->
+									<!-- //////////////////////row//////////////// -->
+									<!-- //////////////////////row//////////////// -->
+
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										总成本:<!-- 总成本 -->
+										<a:bind
+											value="equipment.totalcost" />
+										<ilongbox
+											id="equipment.totalcost" />
+									</row>
+									<!-- <row>
+										折旧率：<a:bind value="equipment.depreciationrate"/><ilongbox id="equipment.depreciationrate"/>
+										</row> 
+										<row>
+										折旧年限：<a:bind value="equipment.depreciationyear"/><ilongbox id="equipment.depreciationyear"/>
+										</row>-->
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										预算成本:<!-- 预算成本 -->
+										<a:bind
+											value="equipment.budgetcost" />
+										<ilongbox
+											id="equipment.budgetcost" />
+									</row>
+									<row>
+										安装时间:<!--安装时间 -->
+										<a:bind
+											value="equipment.installdate" />
+										<idatebox
+											id="equipment.installdate" />
+									</row>
+									<row>
+										运行日期:<!-- 运行日期 -->
+										<a:bind
+											value="equipment.rundate" />
+										<idatebox id="equipment.rundate"
+											cols="20" />
+									</row>
+									<!--
+									<row>
+										当前值: 当前值 
+										<a:bind
+											value="equipment.nowcost" />
+										<idoublebox id="equipment.nowcost"
+											cols="20" />
+									</row>
+									-->
+									<row>
+										预计年限:<!-- 预计年限 -->
+										<a:bind
+											value="equipment.planyears" />
+										<ilongbox id="equipment.planyears"
+											cols="20" />
+									</row>
+
+									<!-- //////////////////////row//////////////// -->
+
+									<!--<row>
+										库存成本：<a:bind value="equipment.stockcost"/><ilongbox id="equipment.stockcost"/>
+										</row>
+									-->
+									<!-- //////////////////////row//////////////// -->
+
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										修改人:<!-- 修改人 -->
+										<a:bind
+											value="equipment.changeby" />
+										<itextbox
+											id="equipment.changeby" />
+									</row>
+									<!-- //////////////////////row//////////////// -->
+									<row>
+										修改时间:<!-- 修改时间 -->
+										<a:bind
+											value="equipment.changedate" />
+										<idatebox
+											id="equipment.changedate" />
+									</row>
+									<row>
+										日历:
+										<a:bind
+											value="equipment.calnum" />
+										<ibandbox
+											id="equipment.calnum" lookup="calendar"/>
+									</row>
+									<row>
+										班次:
+										<a:bind
+											value="equipment.shiftnum"/>
+										<ibandbox
+											id="equipment.shiftnum" lookup="calshift"/>
+									</row>
+								</rows>
+							</grid>
+							
+						</groupbox>
+						
+					</hbox>
+				</vbox>
+
+			</tabpanel>
+			<!-- ********************************** //设备技术参数 ********************************** -->
+			<tabpanel>
+			<grid><rows><row>
+					设备:<a:bind value="equipment.eqnum" /><textbox/>
+					设备描述:<a:bind value="equipment.description" /><textbox cols="40" />
+					</row></rows></grid>
+				<listwindow id="eqspec"
+					title="设备技术参数"
+					use="combiz.ui.equipment.EqspecList"
+					dialog="/equipment/eqspecdialog.xul">
+					<tablelist band="eqspec" pageSize="8"><!-- title:设备技术参数 -->
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="classid"
+								label="分类" sort="auto" width="20%" /><!-- 分类 -->
+							<tablelistheader data="classattr"
+								label="参数" sort="auto" width="40%" /><!-- 参数 -->
+							<tablelistheader data="strvalue"
+								label="参数值" sort="auto" width="30%" /><!-- 参数值 -->
+							<tablelistheader data="unitid"
+								label="单位" sort="auto" width="10%" /><!-- 单位 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- **********************************  附属(部件)设备 ********************************** -->
+			<tabpanel>
+			<grid><rows><row>
+					设备:<a:bind value="equipment.eqnum" /><textbox/>
+					设备描述:<a:bind value="equipment.description" /><textbox cols="40" />
+					</row></rows></grid>
+				<listwindow id="appertain"
+					title="附属设备(部件)" applink="equipment" delshow="false"
+					use="combiz.ui.equipment.AppertainList"
+					dialog="/equipment/equdialog.xul"><!-- title:附属设备(部件) -->
+					<tablelist band="appertain" pageSize="8">
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="eqnum"
+								label="设备" sort="auto" width="20%" /><!--设备  -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="50%" /><!-- 描述 -->
+							<tablelistheader data="location"
+								label="位置" sort="auto" width="15%" /><!-- 位置 -->
+							<tablelistheader data="status"
+								label="状态" sort="auto" width="15%" /><!-- 状态 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- ********************************** //列表结果集页面 ********************************** -->
+
+			<!-- ********************************** //备件 ********************************** -->
+			<tabpanel>
+			<grid><rows><row>
+					设备:<a:bind value="equipment.eqnum" /><textbox/>
+					设备描述:<a:bind value="equipment.description" /><textbox cols="40" />
+					</row></rows></grid>
+				<listwindow id="eqsparepart"
+					title="备件"  delshow="false"
+					use="combiz.ui.equipment.EqsparepartList"
+					dialog="/equipment/eqsparepartdialog.xul">
+					<tablelist band="eqsparepart" pageSize="8"><!-- title:备件 -->
+						<listhead>
+							<tablelistheader
+								src="/images/img_listitem.gif" />
+							<tablelistheader data="itemnum"
+								label="备件编号" sort="auto"
+								width="20%" /><!-- 备件编号 -->
+							<tablelistheader data="quantity"
+								label="数量" sort="auto" width="20%" /><!-- 数量 -->
+								<tablelistheader data="culbar"
+								label="库存余量" sort="auto" width="20%" format="0.00"/><!-- 当前库存余量 -->
+							<tablelistheader data="description"
+								label="描述" sort="auto" width="40%" /><!-- 描述 -->
+						</listhead>
+						<tablelistfoot />
+					</tablelist>
+				</listwindow>
+			</tabpanel>
+			<!-- **********************************  文 档 ********************************** -->
+			<!-- ********************************** //文档数据窗口 ********************************** -->
+			<tabpanel>
+			<grid><rows><row>
+					设备:<a:bind value="equipment.eqnum" /><textbox/>
+					设备描述:<a:bind value="equipment.description" /><textbox cols="40" />
+					</row></rows></grid>
+				<hbox>
+					<groupbox>
+						<caption label="文档库" /><!--文档库 -->
+						<tree id="doclibtree"
+							use="combiz.system.doclib.DocLibTree" width="180" />
+					</groupbox>
+					<!-- ********************************** //结果树页面 ********************************** -->
+					<vbox width="99%">
+						<listwindow id="document"
+							title="文档"
+							use="combiz.system.doclib.DocumentList"
+							dialog="/doclib/common/documentdialog.xul"><!-- title:文档 -->
+							<tablelist band="document" pageSize="10">
+								<listhead>
+									<tablelistheader
+										src="/images/img_listitem.gif" />
+									<tablelistheader data="docnum"
+										label="文档编号" sort="auto" width="10%" /><!-- 文档编号 -->
+									<tablelistheader data="description"
+										label="描述" sort="auto" width="60%" /><!-- 描述 -->
+									<tablelistheader data="creator"
+										label="创建人" sort="auto" width="10%" /><!-- 创建人 -->
+									<tablelistheader data="createdate"
+										label="创建日期" sort="auto"
+										width="20%" /><!-- 创建日期 -->
+								</listhead>
+								<tablelistfoot />
+							</tablelist>
+						</listwindow>
+						<button label="添加当前文档库中的文档" onClick="mainWnd.selectDocs()"/>
+						<!-- 子表 -->
+						<tabbox width="100%">
+							<tabs>
+								<tab
+									label="版本列表">
+								</tab><!-- 版本列表 -->
+								<tab
+									label="访问权限">
+								</tab><!-- 访问权限 -->
+							</tabs>
+							<tabpanels width="100%">
+								<tabpanel>
+									<listwindow id="docversion"
+										title="文档版本列表" parentWnd="document"
+										orderby="createdate desc"
+										use="combiz.system.doclib.DocversionList"
+										dialog="/doclib/common/docversiondialog.xul"><!-- title:文档版本列表 -->
+										<tablelist band="docversion"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="VERSION" label="版本号"
+													sort="auto" width="10%" /><!-- 版本号 -->
+												<tablelistheader
+													data="DESCRIPTION" label="版本描述"
+													sort="auto" width="30%" /><!-- 版本描述 -->
+												<tablelistheader
+													data="status" label="是否上传"
+													sort="auto" width="10%" /><!-- 是否上传 -->
+												<tablelistheader
+													data="filename" label="文件名"
+													sort="auto" width="20%" /><!-- 文件名 -->
+												<tablelistheader
+													data="CREATOR" label="创建人"
+													sort="auto" width="15%" /><!-- 创建人 -->
+												<tablelistheader
+													data="CREATEDATE" label="创建时间"
+													sort="auto" width="15%" /><!-- 创建时间 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+								<tabpanel>
+									<listwindow id="docauth"
+										title="文档权限"
+										parentWnd="document" use="combiz.system.doclib.DocauthList"
+										dialog="/doclib/common/docauthdialog.xul"><!-- title:文档权限 -->
+										<tablelist band="docauth"
+											pageSize="10">
+											<listhead>
+												<tablelistheader
+													src="/images/img_listitem.gif" />
+												<tablelistheader
+													data="DOCNUM" label="文档编号"
+													sort="auto" width="20%" /><!-- 文档编号 -->
+												<tablelistheader
+													data="GRPNAME" label="用户组名称"
+													sort="auto" width="20%" /><!-- 用户组名称 -->
+												<tablelistheader
+													data="DOCREAD" label="是否可读"
+													sort="auto" width="20%" /><!-- 是否可读 -->
+												<tablelistheader
+													data="DOCEDIT" label="是否可写"
+													sort="auto" width="20%" /><!-- 是否可写 -->
+												<tablelistheader
+													data="MEMO" label="备注" sort="auto"
+													width="20%" /><!-- 备注 -->
+											</listhead>
+											<tablelistfoot />
+										</tablelist>
+									</listwindow>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+						<!-- 子表 -->
+					</vbox>
+				</hbox>
+
+			</tabpanel>
+			<!-- ********************************** //文档数据窗口 ********************************** -->
+			<!-- **********************************  //文 档  ********************************** -->
+
+
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="chlmis">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S">2008-09-01-5</O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select * from workticket where wonum = '[?wonum|2008-09-01-5?]']]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.7499999999999999" bottom="0.27" right="0.7499999999999999" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,19.0,33.0,22.0,19.0,30.0,30.0,33.0,23.0,30.0,30.0,27.0,19.0,19.0,19.0,28.0,30.0,19.0,19.0,19.0,24.0,30.0,30.0,19.0,28.0,25.0,19.0,29.0,19.0,19.0,19.0,30.0,25.0,26.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[48.0,73.0,130.0,73.0,59.0,30.0,81.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="7" r="0" cs="2" rs="4" s="0"><O t="S">盖章处</O></C>
+<C c="2" r="2" cs="5" rs="2" s="1"><O t="S">电力线路二种工作票</O></C>
+<C c="0" r="5" cs="2" s="2"><O t="S">单位：</O></C>
+<C c="2" r="5" cs="2" s="3"><O t="DSColumn"><Attributes dsName="chlmis" columnName="WORKDEPT" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="5" cs="2" s="2"><O t="S"> 编号：</O></C>
+<C c="6" r="5" cs="2" s="3"><O t="DSColumn"><Attributes dsName="chlmis" columnName="TICKETNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="7" cs="2" s="4"><O t="S">1.工作负责人：</O></C>
+<C c="2" r="7" cs="2" s="5"><O t="DSColumn"><Attributes dsName="chlmis" columnName="PRINCIPAL" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="7" s="6"><O t="S">班组：</O></C>
+<C c="5" r="7" cs="2" s="7"><O t="DSColumn"><Attributes dsName="chlmis" columnName="DEPTGROUP" />
+</O><Expand dir="0" />
+</C>
+<C c="7" r="7" s="6"><O t="S"></O></C>
+<C c="8" r="7" s="8"><O t="S"></O></C>
+<C c="0" r="8" cs="2" s="9"><O t="S">2.工作班人员：</O></C>
+<C c="2" r="8" s="10"><O t="S"></O></C>
+<C c="3" r="8" s="10"><O t="S"></O></C>
+<C c="4" r="8" s="10"><O t="S"></O></C>
+<C c="5" r="8" s="10"><O t="S"></O></C>
+<C c="6" r="8" s="10"><O t="S"></O></C>
+<C c="7" r="8" s="10"><O t="S"></O></C>
+<C c="8" r="8" s="11"><O t="S"></O></C>
+<C c="0" r="9" cs="9" s="12"><O t="DSColumn"><Attributes dsName="chlmis" columnName="WORKUSER" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="10" s="9"><O t="S"></O></C>
+<C c="1" r="10" s="10"><O t="S"></O></C>
+<C c="2" r="10" s="10"><O t="S"></O></C>
+<C c="3" r="10" s="10"><O t="S"></O></C>
+<C c="4" r="10" s="10"><O t="S"></O></C>
+<C c="5" r="10" s="10"><O t="S"></O></C>
+<C c="6" r="10" s="3"><O t="S">共 </O></C>
+<C c="7" r="10" s="10"><O t="DSColumn"><Attributes dsName="chlmis" columnName="REMARK3" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="10" s="11"><O t="S">人</O></C>
+<C c="0" r="11" cs="2" s="9"><O t="S">3.工作地段：</O></C>
+<C c="2" r="11" s="10"><O t="S"></O></C>
+<C c="3" r="11" s="10"><O t="S"></O></C>
+<C c="4" r="11" s="10"><O t="S"></O></C>
+<C c="5" r="11" s="10"><O t="S"></O></C>
+<C c="6" r="11" s="10"><O t="S"></O></C>
+<C c="7" r="11" s="10"><O t="S"></O></C>
+<C c="8" r="11" s="11"><O t="S"></O></C>
+<C c="0" r="12" cs="9" s="13"><O t="DSColumn"><Attributes dsName="chlmis" columnName="SITENUM" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="13" cs="2" s="9"><O t="S">4.工作任务：</O></C>
+<C c="2" r="13" s="10"><O t="S"></O></C>
+<C c="3" r="13" s="10"><O t="S"></O></C>
+<C c="4" r="13" s="10"><O t="S"></O></C>
+<C c="5" r="13" s="10"><O t="S"></O></C>
+<C c="6" r="13" s="10"><O t="S"></O></C>
+<C c="7" r="13" s="10"><O t="S"></O></C>
+<C c="8" r="13" s="11"><O t="S"></O></C>
+<C c="0" r="14" cs="9" rs="3" s="13"><O t="DSColumn"><Attributes dsName="chlmis" columnName="WORKTASK" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="17" cs="2" s="9"><O t="S">5.计划工作时间：</O></C>
+<C c="2" r="17" s="3"><O t="S">自</O></C>
+<C c="3" r="17" cs="2" s="14"><O t="DSColumn"><Attributes dsName="chlmis" columnName="STARTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="17" s="15"><O t="S">至</O></C>
+<C c="6" r="17" cs="3" s="16"><O t="DSColumn"><Attributes dsName="chlmis" columnName="ENDDATE" />
+</O></C>
+<C c="0" r="18" cs="3" s="17"><O t="S">6.注意事项（安全措施）:</O></C>
+<C c="3" r="18"><O t="S"></O></C>
+<C c="4" r="18"><O t="S"></O></C>
+<C c="5" r="18"><O t="S"></O></C>
+<C c="6" r="18"><O t="S"></O></C>
+<C c="7" r="18"><O t="S"></O></C>
+<C c="8" r="18" s="18"><O t="S"></O></C>
+<C c="0" r="19" cs="9" rs="3" s="13"><O t="DSColumn"><Attributes dsName="chlmis" columnName="REMARK1" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="22" cs="2" s="19"><O t="S">签发时间：</O></C>
+<C c="2" r="22" cs="2" s="20"><O t="DSColumn"><Attributes dsName="chlmis" columnName="STARTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="22" cs="3" s="15"><O t="S">工作票签发人签名：</O></C>
+<C c="7" r="22" cs="2" s="21"><O t="DSColumn"><Attributes dsName="chlmis" columnName="SIGNATORY" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="23" cs="2" s="17"><O t="S">7.许可开始工作时间:</O></C>
+<C c="2" r="23" cs="2" s="22"><O t="DSColumn"><Attributes dsName="chlmis" columnName="FIATDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="23"><O t="S"></O></C>
+<C c="5" r="23"><O t="S"></O></C>
+<C c="6" r="23"><O t="S"></O></C>
+<C c="7" r="23"><O t="S"></O></C>
+<C c="8" r="23" s="18"><O t="S"></O></C>
+<C c="0" r="24" cs="3" s="23"><O t="S">工作许可人（值班员）签名:</O></C>
+<C c="3" r="24" cs="2" s="3"><O t="DSColumn"><Attributes dsName="chlmis" columnName="FIATUSER1" />
+</O><Expand dir="0" />
+</C>
+<C c="5" r="24" cs="2" s="2"><O t="S"> 工作负责人签名：</O></C>
+<C c="7" r="24" cs="2" s="21"><O t="DSColumn"><Attributes dsName="chlmis" columnName="PRINCIPAL1" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="25" s="9"><O t="S"></O></C>
+<C c="1" r="25" s="10"><O t="S"></O></C>
+<C c="2" r="25" s="10"><O t="S"></O></C>
+<C c="3" r="25" s="10"><O t="S"></O></C>
+<C c="4" r="25" s="10"><O t="S"></O></C>
+<C c="5" r="25" s="10"><O t="S"></O></C>
+<C c="6" r="25" s="10"><O t="S"></O></C>
+<C c="7" r="25" s="10"><O t="S"></O></C>
+<C c="8" r="25" s="11"><O t="S"></O></C>
+<C c="0" r="26" cs="2" s="17"><O t="S">8.工作结束时间：</O></C>
+<C c="2" r="26" cs="2" s="22"><O t="DSColumn"><Attributes dsName="chlmis" columnName="FINALTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="26"><O t="S"></O></C>
+<C c="5" r="26"><O t="S"></O></C>
+<C c="6" r="26"><O t="S"></O></C>
+<C c="7" r="26"><O t="S"></O></C>
+<C c="8" r="26" s="18"><O t="S"></O></C>
+<C c="0" r="27" cs="2" s="17"><O t="S"> 工作负责人签名:</O></C>
+<C c="2" r="27" cs="2" s="3"><O t="DSColumn"><Attributes dsName="chlmis" columnName="PRINCIPAL5" />
+</O><Expand dir="0" />
+</C>
+<C c="4" r="27" cs="3" s="2"><O t="S"> 工作许可人（值班员）签名：</O></C>
+<C c="7" r="27" cs="2" s="21"><O t="DSColumn"><Attributes dsName="chlmis" columnName="FIATUSER4" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="28" s="9"><O t="S"></O></C>
+<C c="1" r="28" s="10"><O t="S"></O></C>
+<C c="2" r="28" s="10"><O t="S"></O></C>
+<C c="3" r="28" s="10"><O t="S"></O></C>
+<C c="4" r="28" s="10"><O t="S"></O></C>
+<C c="5" r="28" s="10"><O t="S"></O></C>
+<C c="6" r="28" s="10"><O t="S"></O></C>
+<C c="7" r="28" s="10"><O t="S"></O></C>
+<C c="8" r="28" s="11"><O t="S"></O></C>
+<C c="0" r="29" cs="2" s="17"><O t="S">9.备注：</O></C>
+<C c="2" r="29"><O t="S"></O></C>
+<C c="3" r="29"><O t="S"></O></C>
+<C c="4" r="29"><O t="S"></O></C>
+<C c="5" r="29"><O t="S"></O></C>
+<C c="6" r="29"><O t="S"></O></C>
+<C c="7" r="29"><O t="S"></O></C>
+<C c="8" r="29" s="18"><O t="S"></O></C>
+<C c="0" r="30" cs="9" rs="3" s="13"><O t="DSColumn"><Attributes dsName="chlmis" columnName="REMARK4" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="33" cs="2" s="17"><O t="S">10.工作票检查：</O></C>
+<C c="2" r="33"><O t="S"></O></C>
+<C c="3" r="33"><O t="S"></O></C>
+<C c="4" r="33"><O t="S"></O></C>
+<C c="5" r="33"><O t="S"></O></C>
+<C c="6" r="33"><O t="S"></O></C>
+<C c="7" r="33"><O t="S"></O></C>
+<C c="8" r="33" s="18"><O t="S"></O></C>
+<C c="0" r="34" cs="2" s="23"><O t="S">本工作票已于</O></C>
+<C c="2" r="34" s="24"><O t="DSColumn"><Attributes dsName="chlmis" columnName="CHECKDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="3" r="34" cs="3"><O t="S">检查,合格（）/不合格（）。</O></C>
+<C c="6" r="34"><O t="S">检查人签名:</O></C>
+<C c="7" r="34" cs="2" s="21"><O t="DSColumn"><Attributes dsName="chlmis" columnName="CHECKPERSON" />
+</O><Expand dir="0" />
+</C>
+<C c="0" r="35" cs="2" s="25"><O t="S">存在问题：</O></C>
+<C c="2" r="35"><O t="S"></O></C>
+<C c="3" r="35"><O t="S"></O></C>
+<C c="4" r="35"><O t="S"></O></C>
+<C c="5" r="35"><O t="S"></O></C>
+<C c="6" r="35"><O t="S"></O></C>
+<C c="7" r="35"><O t="S"></O></C>
+<C c="8" r="35" s="18"><O t="S"></O></C>
+<C c="0" r="36" cs="9" rs="3" s="12"><O t="DSColumn"><Attributes dsName="chlmis" columnName="CHECKQUESTION" />
+</O><Expand dir="0" />
+</C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="18" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="28" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 h时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Left style="1" /></Border>
+</Style>
+<Style>
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Bottom style="1" /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<Format class="java.text.SimpleDateFormat"><![CDATA[yyyy年M月d日 H时mm分]]>
+</Format>
+<FRFont name="SimSun" style="0" size="12" underline="1" />
+<Background name="NullBackground" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Left style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="GBK"?>
+<?page id="topPage"?>
+<window use="combiz.system.ui.TopWindow">
+	<zscript><![CDATA[
+String prodName = topWnd.getProductName();
+]]></zscript>
+	<html>
+		<attribute name="content">
+<![CDATA[
+<script type="text/javascript">
+window.document.title="${prodName}";
+</script>
+]]>
+		</attribute>
+	</html>
+	<vbox width="100%">
+		<!-- //////////////////////系统顶级导航条///////////////////////// -->
+		<hbox>
+			<hbox width="100%">
+				<div align="left">
+					<image src="/images/main_logo.gif" />
+					<label value="${prodName}"
+						style="font-family: 幼圆; font-size: 20pt; font-weight: bold" />
+				</div>
+				<div align="right">
+					<groupbox>
+						<userlabel
+							format="欢迎：:{ibsusers.loginid}(:{labor.laborname})|:{labor.deptnum}(:{description})" />
+					</groupbox>
+				</div>
+			</hbox>
+			<hbox width="100%" style="text-align:right">
+				<menubar autodrop="true" style="border: 0px;">
+					<menuitem label="我的任务" image="/images/top_wfinbox.gif"
+						onClick="topWnd.wfinbox()" />
+					<menuitem label="收件箱" image="/images/top_inbox.gif"
+						onClick="topWnd.msginbox()" />
+					<menu label="个人信息" image="/images/top_userinfo.gif">
+						<menupopup>
+							<menuitem label="个人信息" image="/images/top_personal.gif"
+								onClick="topWnd.editProfile()" />
+							<menuitem label="修改密码" image="/images/top_changepwd.gif"
+								onClick="topWnd.changepwd()" />
+						</menupopup>
+					</menu>
+					<menuitem label="退出" image="/images/top_logout.gif"
+						onClick="topWnd.logout()" />
+					<menu label="帮助" image="/images/top_help.gif">
+						<menupopup>
+							<menuitem label="帮助文档" image="/images/top_helpdoc.gif"
+								onClick="topWnd.help()" />
+							<menuitem label="关于产品" image="/images/top_about.gif"
+								onClick="topWnd.about()" />
+						</menupopup>
+					</menu>
+				</menubar>
+			</hbox>
+		</hbox>
+		<!-- //////////////////////系统应用导航条///////////////////////// -->
+		<menubar id="nvmenubar" use="combiz.system.ui.common.NavMenuBar"
+			style="border: 0px;" />
+		<!-- //////////////////////应用程序容器///////////////////////// -->
+		<window id="contents" border="none" />
+
+	</vbox>
+</window>

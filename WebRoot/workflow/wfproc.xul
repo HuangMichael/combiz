@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="WFPROC" title="工作流" resize="true" use="combiz.ui.workflow.WfprocessWindow" 
+xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+
+<!-- ********************************** 标签页面 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="工作流" width="70px"/>
+			<tab id="wfnodeTab" label="流程节点和操作" width="120px"/>
+		</tabs>
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel>
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("tablename,app,wfrevision desc,wfname");
+			]]></zscript>
+			<!-- 查询过滤器 -->
+			<hbox width="100%">
+				<groupbox width="180">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+						名称：<stextbox data="wfname" cols="10"/>
+						描述：<stextbox data="description" cols="20"/>
+						主表：<stextbox data="tablename" cols="10"/>
+						版本：<stextbox data="wfrevision" cols="8"/>
+				</groupbox>
+			</hbox>
+
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="wfname" label="流程名称" sort="auto" width="15%"/>
+						<resultlistheader data="tablename" label="主表" sort="auto" width="15%" applink="ibstables" linkstring="tablename=':{tablename}'"/>
+						<resultlistheader data="app" label="应用程序" sort="auto" width="15%"/>
+						<resultlistheader data="wfrevision" label="版本号" sort="auto" width="5%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="30%"/>
+						<resultlistheader data="active" label="启用" sort="auto" width="5%"/>
+						<resultlistheader data="enabled" label="有效" sort="auto" width="5%"/>
+						<resultlistheader data="changedate" label="修改日期" sort="auto" width="15%"/>
+					</listhead>
+				</resultlist>
+			</tabpanel>
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {""};
+ mainWnd.setRequired(required);
+ String[] readonly = {"wfprocess.wfname","wfprocess.wfrevision","wfprocess.tablename","wfprocess.active","wfprocess.enabled","wfprocess.changeby","wfprocess.changedate"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<row>
+						工作流:<a:bind value="wfprocess.wfname"/><itextbox id="wfprocess.wfname"/>
+						描述:<a:bind value="wfprocess.description"/><itextbox id="wfprocess.description" cols="60"/>
+						</row>
+						<row>
+						工作流版本：<a:bind value="wfprocess.wfrevision"/><ilongbox id="wfprocess.wfrevision"/>
+						主表:<a:bind value="wfprocess.tablename"/><itextbox id="wfprocess.tablename"/>
+						</row>
+						<row>
+						启用:<a:bind value="wfprocess.active"/><icheckbox id="wfprocess.active"/>
+						有效:<a:bind value="wfprocess.enabled"/><icheckbox id="wfprocess.enabled"/>
+						</row>
+						
+						<!--
+						字段AUTOINIT:<a:bind value="wfprocess.autoinit"/><itextbox id="wfprocess.autoinit"/>
+						-->
+						<row spans="1,3">
+						流程实例描述:<a:bind value="wfprocess.wfinstdesc"/><itextbox id="wfprocess.wfinstdesc" cols="90"/>
+						</row>
+						
+						<row spans="4">
+						流程实例描述说明： 该描述可以使用单据参数，如:{wonum}:{description}，该描述会在启动时自动写入到每个流程实例中。
+						</row>
+						
+						<row>
+						修改人:<a:bind value="wfprocess.changeby"/><itextbox id="wfprocess.changeby"/>
+						修改日期:<a:bind value="wfprocess.changedate"/><idatebox id="wfprocess.changedate"/>
+						</row>
+						
+					</rows>
+				</grid>
+				
+				<listwindow id="wfinstance" title="流程运行的实例" orderby="active desc,starttime desc"
+				 use="combiz.ui.workflow.WfinstanceList" edittype="listonly">
+				<defaultvalue band="wfinstance" value=""/>
+				<tablelist band="wfinstance" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="startor" label="启动者" sort="auto" width="20%"/>
+						<tablelistheader data="ownertable" label="业务数据表" sort="auto" width="20%" applink="wfinst" linkstring="id=:{id}"/>
+						<tablelistheader data="curnodeid" label="当前节点" sort="auto" width="10%" applink="wfinst" linkstring="id=:{id}"/>
+						<tablelistheader data="ownerid" label="业务数据键值" sort="auto" width="20%" applink="wfinst" linkstring="id=:{id}"/>
+						<tablelistheader data="starttime" label="开始时间" sort="auto" width="20%" format="yyyy-MM-dd hh:mm:ss"/>
+						<tablelistheader data="active" label="是否活动？" sort="auto" width="10%" preclass="combiz.ui.workflow.IsWFActive"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+		
+		</tabpanel>
+		
+		
+		<tabpanel>
+			<grid>
+					<rows>
+						<row>
+						工作流:<a:bind value="wfprocess.wfname"/><textbox/>
+						描述:<a:bind value="wfprocess.description"/><textbox cols="60"/>
+						</row>
+						<!--<row>
+						工作流版本：<a:bind value="wfprocess.wfrevision"/><longbox/>
+						主表:<a:bind value="wfprocess.tablename"/><textbox/>
+						</row>
+					-->
+					</rows>
+			</grid>
+			<listwindow id="wfnode" title="流程节点" edittype="editonly" orderby="xcanvas" 
+			use="combiz.ui.workflow.WfnodeList" dialog="/workflow/wfnodedialog.xul" editpopup="true">
+				<defaultvalue band="wfnode" value=""/>
+				<tablelist band="wfnode" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="title" label="节点" sort="auto" width="15%"/>
+						<tablelistheader data="description" label="描述" sort="auto" width="25%"/>
+						<tablelistheader data="nodetype" label="节点类型" sort="auto" width="10%"/>
+						<tablelistheader data="isaggre" label="是否会签" sort="auto" width="10%"/>
+						<tablelistheader data="condition" label="条件" sort="auto" width="30%"/>
+						<tablelistheader data="customclass" label="是否条件类" sort="auto" width="10%"/>
+						<!--<tablelistheader data="ycanvas" label="字段YCANVAS" sort="auto" width="10%"/>
+						<tablelistheader data="xcanvas" label="字段XCANVAS" sort="auto" width="10%"/>
+						-->
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+			</listwindow>			
+		<tabbox width="100%">
+		<tabs>
+			<tab label="节点开始的操作" width="120px"/>
+			<tab label="节点的任务分配" width="120px"/>
+			<tab label="节点的任务抄送" width="120px"/>
+		</tabs>
+		<tabpanels width="100%">
+			<tabpanel>
+			<listwindow id="wfaction" parentWnd="wfnode" title="流程走向操作" edittype="editonly" editpopup="true"
+			use="combiz.ui.workflow.WfactionList" dialog="/workflow/wfactiondialog.xul">
+				<defaultvalue band="wfaction" value=""/>
+				<tablelist band="wfaction" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="action" label="操作" sort="auto" width="15%"/>
+						<tablelistheader data="description" label="描述" sort="auto" width="25%"/>
+						<tablelistheader data="ispositive" label="正反向？" sort="auto" width="5%"/>
+						<tablelistheader data="condition" label="条件" sort="auto" width="30%"/>
+						<tablelistheader data="conditionclass" label="条件类？" sort="auto" width="5%"/>
+						<tablelistheader data="defaultsel" label="默认操作？" sort="auto" width="5%"/>
+						<tablelistheader data="actorderby" label="排序号" sort="auto" width="5%"/>
+						<tablelistheader data="startnodeid" label="开始节点" sort="auto" width="5%"/>
+						<tablelistheader data="endnodeid" label="结束节点" sort="auto" width="5%"/>
+						<!--
+						<tablelistheader data="startpt" label="图标开始点" sort="auto" width="10%"/>
+						<tablelistheader data="endpt" label="图标终点" sort="auto" width="10%"/>
+						-->
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+				<listwindow id="wfdoaction" parentWnd="wfaction" title="执行动作" editpopup="true"
+				use="combiz.ui.workflow.WfactionList" dialog="/workflow/wfaction2dialog.xul">
+				<defaultvalue band="wfaction" value=""/>
+				<tablelist band="wfdoaction" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="action" label="动作" sort="auto" width="13%"/>
+						<tablelistheader data="actiontype" label="类型" sort="auto" width="12%"/>
+						<tablelistheader data="actionstring" label="动作值" sort="auto" width="20%"/>
+						<tablelistheader data="description" label="描述" sort="auto" width="20%"/>
+						<tablelistheader data="condition" label="执行条件" sort="auto" width="20%"/>
+						<tablelistheader data="conditionclass" label="条件类？" sort="auto" width="5%"/>
+						<tablelistheader data="startnodeid" label="开始节点" sort="auto" width="5%"/>
+						<tablelistheader data="endnodeid" label="结束节点" sort="auto" width="5%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+			<tabpanel>
+			<listwindow id="wftaskassign" parentWnd="wfnode" title="流程任务分配定义表" editpopup="true"
+			use="combiz.ui.workflow.WftaskassignList" dialog="/workflow/wftaskassigndialog.xul">
+				<defaultvalue band="wftaskassign" value=""/>
+				<tablelist band="wftaskassign" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="description" label="任务描述" sort="auto" width="30%"/>
+						<tablelistheader data="app" label="应用程序" sort="auto" width="10%" applink="ibsapps" linkstring="app=':{app}'"/>
+						<tablelistheader data="wfrole" label="角色" sort="auto" width="10%" applink="wfrole" linkstring="wfrole=':{wfrole}'"/>
+						<tablelistheader data="condition" label="条件" sort="auto" width="10%"/>
+						<tablelistheader data="conditionclass" label="条件类?" sort="auto" width="5%"/>
+						<tablelistheader data="needpass" label="密码验证" sort="auto" width="5%"/>
+						<tablelistheader data="sitefilter" label="地点过滤" sort="auto" width="5%"/>
+						<tablelistheader data="priority" label="优先级" sort="auto" width="5%"/>
+						<tablelistheader data="emailnotify" label="通知" sort="auto" width="5%"/>
+						<tablelistheader data="dealtimeout" label="超时" sort="auto" width="5%"/>
+						<tablelistheader data="dealtype" label="超时处理类型" sort="auto" width="10%"/>
+						<tablelistheader data="upwfrole" label="上报角色" sort="auto" width="10%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+			
+			<tabpanel>
+			<listwindow id="wftasknotify" parentWnd="wfnode" title="流程任务抄送定义表" editpopup="true"
+			use="combiz.ui.workflow.WftasknotifyList" dialog="/workflow/wftasknotifydialog.xul">
+				<defaultvalue band="wftasknotify" value=""/>
+				<tablelist band="wftasknotify" pageSize="16">
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="description" label="描述" sort="auto" width="30%"/>
+						<tablelistheader data="app" label="应用程序" sort="auto" width="15%" applink="ibsapps" linkstring="app=':{app}'"/>
+						<tablelistheader data="wfrole" label="角色" sort="auto" width="15%" applink="wfrole" linkstring="wfrole=':{wfrole}'"/>
+						<tablelistheader data="sitefilter" label="地点过滤" sort="auto" width="5%"/>
+						<tablelistheader data="emailnotify" label="通知" sort="auto" width="5%"/>
+						<tablelistheader data="condition" label="条件" sort="auto" width="25%"/>
+						<tablelistheader data="conditionclass" label="条件类?" sort="auto" width="5%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+		</tabpanels>
+		</tabbox>
+
+		</tabpanel>
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

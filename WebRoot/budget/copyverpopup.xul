@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<commondialog title="新版本预算" use="combiz.ui.budget.CopyVerBudgetitem"
+ width="650px" closable="true" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+	String[] required = {}; 
+	mainWnd.setRequired(required); 
+	String[] readonly = {}; 
+	mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="新版本预算" />
+		<grid>
+			<rows>
+
+				<row>
+					预算版本(如2008年)：
+					<a:bind value="budgetitem.version" />
+					<itextbox id="budgetitem.version" />
+					是否启用:
+					<a:bind value="budgetitem.enabled" />
+					<icheckbox id="budgetitem.enabled" />
+				</row>
+			</rows>
+		</grid>
+		<div align="center">
+			<button label="复制新版本" onClick="mainWnd.copynew()" />
+			<button label="取消" onClick="mainWnd.cancel()" />
+		</div>
+	</groupbox>
+</commondialog>

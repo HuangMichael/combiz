@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="固资折旧"
+	use="combiz.ui.equipment.DepAssetDialog"
+	xmlns:a="http://www.w3c.com/2005/zk/annotation" border="normal"
+	closable="true" width="500"><!-- 固资折旧 -->
+	<groupbox>
+		<zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+		<grid>
+			<rows>
+				<!-- //////////////////////row//////////////// -->
+				<row>
+					固资折旧法:<!-- 固资折旧法 -->
+					<a:bind value="equipdep.depcount" />
+					<icombobox id="equipdep.depcount" cols="25" />
+					折旧率:<!-- 折旧率: -->
+					<a:bind value="equipdep.ldeprate" />
+					<idoublebox id="equipdep.ldeprate" />
+				</row>
+				<row>
+					已使用年限:<!-- 已使用年限: -->
+					<a:bind value="equipdep.lusedyears" />
+					<ilongbox id="equipdep.lusedyears" />
+					折旧额:<!-- 折旧额:-->
+					<a:bind value="equipdep.ldepcost" />
+					<idoublebox id="equipdep.ldepcost" />
+				</row>
+				<row spans="6,1">
+					1:如输入折旧额,所有选中设备的折旧只以折旧额为准.
+				</row>
+				<row spans="6,1">
+					2:如输入折旧率,无输折旧额,所有选中设备的折旧只以此折旧率换算折旧额.
+				</row>
+				<row spans="6,1">
+					3:如输入折旧法,所有选中设备的折旧法只以此折旧法为准.
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<div align="center">
+		<button label="确 定" onClick="mainWnd.depssets()" /><!-- 确 定  -->
+		<button label="取 消" onClick="mainWnd.onClose()" /><!-- 取 消  -->
+	</div>
+</window>

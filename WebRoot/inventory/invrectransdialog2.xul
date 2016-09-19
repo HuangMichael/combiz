@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+	<zscript>
+		String[] required = {}; mainWnd.setRequired(required); String[]
+		readonly = {"item.description","invrectrans.rectype","invrectrans.towarehouse","invrectrans.tolot","invrectrans.unitcost","invrectrans.itemnum","invrectrans.oldavgcost","invrectrans.linecost","invrectrans.status","pr.budnum","pr.buditem"};
+		mainWnd.setReadonly(readonly);
+	</zscript>
+	<groupbox>
+		<caption label="物料接收"><!--  "物料接收-->
+			<toolbarbutton label="关闭"
+				src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()" /><!-- 关闭 -->
+		</caption>
+		<groupbox>
+			<caption label="基本信息" /><!-- 基本信息 -->
+			<grid>
+				<rows>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						预算号:
+						<a:bind value="invrectrans.budnum" />
+						<ibandbox id="invrectrans.budnum" lookup= 'budnum'/>
+								
+						预算项目:
+						<a:bind value="invrectrans.buditem" />
+						<ibandbox id="invrectrans.buditem" lookup='budgetitem'/>
+					</row>
+					<row>
+						接收处理类型:<!-- 接收处理类型-->
+						<a:bind value="invrectrans.rectype" />
+						<icombobox id="invrectrans.rectype" />
+						接收仓库:<!-- 接收仓库 -->
+						<a:bind value="invrectrans.towarehouse" />
+						<ibandbox id="invrectrans.towarehouse"
+							lookup="warehouse"  />
+							接收箱柜:<!--  接收箱柜-->
+						<a:bind value="invrectrans.tobin" />
+						<ibandbox id="invrectrans.tobin" lookup="binnum" checkdata="false" />
+					</row>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						库存项目:<!-- 库存项目 -->
+						<a:bind value="invrectrans.itemnum" />
+						<itextbox id="invrectrans.itemnum" />
+						 库存项目描述:<!-- 库存项目描述 -->	
+						<a:bind value="item.description" />
+						<itextbox id="item.description" />
+						接收数量:<!-- 接收数量 -->
+						<a:bind value="invrectrans.quantity" />
+						<idoublebox id="invrectrans.quantity"  format="0.00"/>
+					</row>
+					<row>
+						单价:<!-- 单价 -->
+						<a:bind value="invrectrans.unitcost" />
+						<idoublebox id="invrectrans.unitcost" format="0.0000"/>
+						<!-- 实际单价：<a:bind value="invrectrans.actualcost"/><idoublebox id="invrectrans.actualcost"/> -->
+						原平均成本:<!-- 原平均成本 -->
+						<a:bind value="invrectrans.oldavgcost" />
+						<idoublebox id="invrectrans.oldavgcost" format="0.0000"/>
+						行总价:<!-- 行总价 -->
+						<a:bind value="invrectrans.linecost" />
+						<idoublebox id="invrectrans.linecost" format="0.0000"/>
+					</row>
+					<row>
+					    接收单位:<!-- 接收单位 -->
+						<a:bind value="invrectrans.recunit" />
+						<ibandbox id="invrectrans.recunit" lookup="measurement"/>
+						接收日期:<!-- 接收日期 -->
+						<a:bind value="invrectrans.transdate" />
+						<idatetimebox id="invrectrans.transdate" />
+						实际日期:<!-- 实际日期 -->
+						<a:bind value="invrectrans.actualdate" />
+						<idatebox id="invrectrans.actualdate" />
+
+					</row>
+
+
+					<row>
+						税代码:<!-- 税代码 -->
+						<a:bind value="invrectrans.taxcode" />
+						<itextbox id="invrectrans.taxcode" />
+						税率:<!-- 税率 -->
+						<a:bind value="invrectrans.taxrate" />
+						<idoublebox id="invrectrans.taxrate" />
+						税额:<!-- 税额 -->
+						<a:bind value="invrectrans.tax" />
+						<idoublebox id="invrectrans.tax" />
+					</row>
+					
+
+				</rows>
+			</grid>
+		</groupbox>
+
+		<groupbox>
+			<caption label="其它信息" /><!-- 其它信息 -->
+			<grid>
+				<rows>
+
+					<row>
+						发票编号:<!-- 发票编号 -->
+						<a:bind value="invrectrans.invoicenum" />
+						<itextbox id="invrectrans.invoicenum" />
+						装箱单编号:<!-- 装箱单编号 -->
+						<a:bind value="invrectrans.packnum" />
+						<itextbox id="invrectrans.packnum" />
+					</row>
+
+					<row>
+						工单编号:<!-- 工单编号 -->
+						<a:bind value="invrectrans.wonum" />
+						<ibandbox id="invrectrans.wonum" lookup="wonum" />
+						$设备编号:<!-- 设备编号 -->
+						<a:bind value="invrectrans.eqnum" />
+						<itextbox id="invrectrans.eqnum" />
+						工单任务:<!-- 工单任务 -->
+						<a:bind value="invrectrans.tasknum" />
+						<itextbox id="invrectrans.tasknum" />
+					</row>
+
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						采购单行:<!-- 采购单行 -->
+						<a:bind value="invrectrans.polinenum" />
+						<ilongbox id="invrectrans.polinenum" />
+						拒收代码:<!-- 拒收代码 -->
+						<a:bind value="invrectrans.rejectcode" />
+						<itextbox id="invrectrans.rejectcode" />
+						拒收数量:<!-- 拒收数量 -->
+						<a:bind value="invrectrans.rejectqty" />
+						<idoublebox id="invrectrans.rejectqty" format="0.00" />
+					</row>
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						转换系数:<!-- 转换系数 -->
+						<a:bind value="invrectrans.conversion" />
+						<idoublebox id="invrectrans.conversion" />
+						当前余量:<!--当前余量  -->
+						<a:bind value="invrectrans.curbal" />
+						<idoublebox id="invrectrans.curbal" format="0.00" />
+						
+					</row>
+
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						申请人:<!-- 申请人 -->
+						<a:bind value="invrectrans.reqby" />
+						<ibandbox id="invrectrans.reqby" lookup="labor" />
+						发至员工:<!-- 发至员工 -->
+						<a:bind value="invrectrans.issuetolabor" />
+						<ibandbox id="invrectrans.issuetolabor"
+							lookup="labor" />
+						汇率:<!-- 汇率 -->
+						<a:bind value="invrectrans.exchangerate" />
+						<idoublebox id="invrectrans.exchangerate" />
+					</row>
+
+					<row>
+						制造商:<!-- 制造商 -->
+						<a:bind value="invrectrans.manufacturer" />
+						<ibandbox id="invrectrans.manufacturer"
+							lookup="companies2" />
+						型号:<!--型号  -->
+						<a:bind value="invrectrans.modelnum" />
+						<itextbox id="invrectrans.modelnum" />
+						接收行注释:<!-- 接收行注释 -->
+						<a:bind value="invrectrans.remark" />
+						<itextbox id="invrectrans.remark" />
+					</row>
+					<!-- //////////////////////row//////////////// -->
+
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						来自仓库:<!-- 来自仓库 -->
+						<a:bind value="invrectrans.fromwarehouse" />
+						<itextbox id="invrectrans.fromwarehouse" />
+						来自箱柜:<!-- 来自箱柜 -->
+						<a:bind value="invrectrans.frombin" />
+						<itextbox id="invrectrans.frombin" />
+						执行转移的项目批次:<!-- 执行转移的项目批次 -->
+						<a:bind value="invrectrans.fromlot" />
+						<itextbox id="invrectrans.fromlot" />
+					</row>
+
+					<row>
+						到批次:<!-- 到批次 -->
+						<a:bind value="invrectrans.tolot" />
+						<itextbox id="invrectrans.tolot" />
+						载入的成本:<!-- 载入的成本 -->
+						<a:bind value="invrectrans.loadedcost" />
+						<idoublebox id="invrectrans.loadedcost" format="0.0000"/>
+						接收的状态:<!-- 接收的状态 -->
+						<a:bind value="invrectrans.status" />
+						<itextbox id="invrectrans.status" />
+					</row>
+					<!-- //////////////////////row//////////////// -->
+					<!-- //////////////////////row//////////////// -->
+					<row>
+						状态更改日期:<!-- 状态更改日期 -->
+						<a:bind value="invrectrans.statusdate" />
+						<idatebox id="invrectrans.statusdate" />
+						状态更改人:<!-- 状态更改人 -->
+						<a:bind value="invrectrans.statuschangeby" />
+						<ibandbox id="invrectrans.statuschangeby"
+							lookup="labor" />
+						记帐位置:<!-- 记帐位置 -->
+						<a:bind value="invrectrans.location" />
+						<itextbox id="invrectrans.location" />
+					</row>
+					<!-- //////////////////////row//////////////// -->
+
+					<row spans="6,,,,," align="right" height="30">
+						<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/><!-- 关闭编辑窗口 -->
+					</row>
+
+				</rows>
+			</grid>
+		</groupbox>
+	</groupbox>
+
+</editwindow>

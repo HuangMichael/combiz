@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GBK"?>
+<window width="100%" title="超时或者未登录" border="normal">
+	<vbox>
+	您未登录，或者长时间未操作系统，请重新登录：
+	<div style="margin-top: 10px"> <toolbarbutton href="/webui/login.xul" label="重新进入系统"/>
+	</div>
+	
+	</vbox>
+</window>

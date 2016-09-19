@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow use="combiz.system.eqdraw.DocversionDialog" xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {"docversion.docnum","docversion.ownertable","docversion.ownerid","docversion.status",
+ "docversion.createdate","docversion.creator","docversion.urlpath","docversion.urltype","docversion.libnum",
+ "docversion.contenttype","docversion.filename","docversion.version"}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="图形版本"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<!-- //////////////////////row//////////////// -->
+						<row>
+							版本号:<a:bind value="docversion.version"/><itextbox id="docversion.version"/>		
+							文档编号:<a:bind value="docversion.docnum"/><itextbox id="docversion.docnum"/>		
+						</row>
+						<row spans="1,3">
+							版本描述:<a:bind value="docversion.description"/><itextbox id="docversion.description" width="90%"/>		
+						</row>
+						<row spans="1,3">
+							修订意见:<a:bind value="docversion.memo"/><itextbox id="docversion.memo" width="90%" rows="3"/>			
+						</row>
+						<row  spans="1,3">
+						搜索关键词:<a:bind value="docversion.searchkey"/><itextbox id="docversion.searchkey" width="90%"/>
+						</row>
+						<row spans="1,3">
+							修订日期:<a:bind value="docversion.revdate"/><idatebox id="docversion.revdate"/>		
+						</row>
+						<row>
+							创建时间:<a:bind value="docversion.createdate"/><idatebox id="docversion.createdate"/>		
+							创建人:<a:bind value="docversion.creator"/><itextbox id="docversion.creator"/>		
+						</row>
+						<row>
+							文档路径:<a:bind value="docversion.urlpath"/><itextbox id="docversion.urlpath" cols="60"/>		
+							文件名:<a:bind value="docversion.filename"/><itextbox id="docversion.filename"/>		
+						</row>
+						<row>
+							文档路径类型:<a:bind value="docversion.urltype"/><itextbox id="docversion.urltype"/>		
+							文档媒体类型:<a:bind value="docversion.contenttype"/><itextbox id="docversion.contenttype"/>		
+						</row>
+						<row>
+							文档状态:<a:bind value="docversion.status"/><itextbox id="docversion.status"/>			
+							所属目录:<a:bind value="docversion.libnum"/><itextbox id="docversion.libnum"/>
+						</row>
+						<!--<row>
+						所属地点:<a:bind value="docversion.sitenum"/><ibandbox id="docversion.sitenum" lookup="corpsite"/>
+						</row>
+						-->
+						<row spans="4,,,," align="right" height="30">
+							<div>
+							<button label="版本复制" onClick="mainWnd.copylastver()"/><space/>
+							<button label="下载设备画图文件(.ibx)" onClick="mainWnd.downloadDoc()"/><space/>
+							<button label="预览设备图" onClick="mainWnd.prevview()"/><space/>
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+							</div>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

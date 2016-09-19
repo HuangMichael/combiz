@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK"?>
+<window  border="normal" title="请选择工作流程" width="550"
+use="combiz.system.workflow.WFStartDialog">
+<vbox width="100%">
+	该应用绑定并且启用了多个工作流，请选择其中一个工作流发送。
+	<groupbox>
+		<caption label="请选择工作流程"/>
+		<hbox>
+		<image src="/images/mulitple_startwf.jpg"/>
+		<radiogroup id="wfstartGroup"/>
+		</hbox>
+	</groupbox>
+<separator spacing="4px"/>
+<div align="center">
+	<button label="发送工作流" onClick="wfstartWnd.confirm()"/>
+	<button label="取消并返回" onClick="wfstartWnd.cancel()"/>
+</div>
+
+</vbox>
+</window>

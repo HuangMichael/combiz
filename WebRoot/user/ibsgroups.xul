@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="GBK"?>
+<mainwindow app="ibsgroups" title="权限组" resize="true" use="combiz.ui.user.IbsgroupsWindow"
+ xmlns:a="http://www.w3c.com/2005/zk/annotation">
+
+<!-- ********************************** 菜单条和工具栏 ********************************** -->
+<imenubar id="menubar"/>
+<!-- ********************************** //菜单条和工具栏 ********************************** -->
+
+<!-- ********************************** 消息提示框栏 ********************************** -->
+<messagebar/>
+<!-- ********************************** //消息提示框栏 ********************************** -->
+
+<!-- ********************************** //顶级标签 ********************************** -->
+	<tabbox id="appTabbox" width="100%" onSelect="mainWnd.selectTab()">
+		<tabs>
+			<tab id="list" label="列表" width="70px"/>
+			<tab id="main" label="权限组" width="70px"/>
+			<tab id="warehouseauthtab" label="仓库授权" width="90px"/>
+			<tab id="ibsportaltab" label="门户授权" width="90px"/>
+			<tab id="appauthtab" label="应用程序权限" width="110px"/>
+		</tabs>
+<!-- ********************************** //顶级标签 ********************************** -->
+		
+<!-- **********************************  列表结果集页面 ********************************** -->
+		<tabpanels width="100%">
+			<tabpanel> 
+			<zscript><![CDATA[
+			//在此处加入应用程序默认过滤条件
+			String queryString="";
+			mainWnd.setQueryString(queryString);
+			mainWnd.setOrderby("");
+			]]></zscript>
+			<!-- 查询过滤器：字段ID一定要用s_字段名，对时间格式的采用 s_字段名,e_字段名 来定义一个时间段的过滤 -->
+			<hbox width="100%">
+				<groupbox width="170">
+				<caption label="高级查询" />
+					<menubar use="combiz.system.ui.common.SearchMenuBar"/>
+				</groupbox>
+				<groupbox id="searchBox">
+					<caption label="过滤器" />
+					权限组：<stextbox data="grpname"/>
+					描述：<stextbox data="description"/>
+					
+				</groupbox>
+			</hbox>				
+			<!-- ////查询过滤器 -->
+			<!-- 结果集列表  -->
+			<pagenavigator/>
+				<resultlist pageSize="20">
+					<listhead>
+						<resultlistheader src="/images/img_listitem.gif"/>
+						<resultlistheader data="grpname" label="权限组" sort="auto" width="30%"/>
+						<resultlistheader data="description" label="描述" sort="auto" width="60%"/>
+						<resultlistheader data="allsite" label="授权所有地点？" sort="auto" width="10%"/>
+						<!--<resultlistheader data="bicenter" label="业务中心" sort="auto" width="20%"/>
+					-->
+					</listhead>
+				</resultlist>
+			</tabpanel>
+<!-- ********************************** //列表结果集页面 ********************************** -->
+			
+<!-- ********************************** 主数据窗口 ********************************** -->
+<!-- 初始化设置字段的必输和只读 -->
+ <zscript><![CDATA[
+ String[] required = {};
+ mainWnd.setRequired(required);
+ String[] readonly = {"allsite1"};
+ mainWnd.setReadonly(readonly);
+ ]]></zscript>
+			<tabpanel>
+				<grid>
+					<rows>
+						<!-- ******************************************************************** -->
+						<!-- *************************在下面修改主界面字段**************************** -->
+						<!-- ********************************************************************-->
+						<!-- //////////////////////row//////////////// -->
+						<row>
+						权限组:<a:bind value="ibsgroups.grpname"/><itextbox id="ibsgroups.grpname"/>
+						组描述：<a:bind value="ibsgroups.description"/><itextbox id="ibsgroups.description" cols="40"/>
+						</row>
+						<row spans="1,3">
+						<!--
+						业务中心:<a:bind value="ibsgroups.bicenter"/><ibandbox id="ibsgroups.bicenter" lookup="ibsportal"/>
+						-->
+						授权所有地点？:<a:bind value="ibsgroups.allsite"/><icheckbox id="allsite1" />
+						</row>
+						
+						<!-- ******************************************************************** -->
+						<!-- *************************在上面修改主界面界面字段*********************** -->
+						<!-- ********************************************************************-->						
+					</rows>
+				</grid>
+				<listwindow id="groupuserTable" title="用户" use="combiz.ui.user.GroupuserList" dialog="/user/groupuserdialog.xul">
+				<tablelist band="groupuserTable" pageSize="8">	
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="userid" label="用户" sort="auto" width="30%"/>
+						<tablelistheader data="user.labornum" label="工号" sort="auto" width="70%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** 仓库 ********************************** -->
+			<tabpanel>
+			<grid>
+			<rows>
+				<row>
+				权限组:<a:bind value="ibsgroups.grpname"/><textbox/>
+				描述：<a:bind value="ibsgroups.description"/><textbox cols="40"/>
+				</row>
+			</rows>
+			</grid>
+			  <listwindow id="ibswhauth" title="仓库授权" dialog="/user/ibswhauthdialog.xul" >
+			  <defaultvalue band="ibswhauth" value="grpname={grpname}"/>
+				<tablelist band="ibswhauth" pageSize="8">	
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="warehouse" label="仓库" sort="auto" width="40%"/>
+						<tablelistheader data="warehouse.description" label="描述" sort="auto" width="60%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>
+<!-- ********************************** 门户 ********************************** -->
+			<tabpanel>
+			<grid>
+			<rows>
+				<row>
+				权限组:<a:bind value="ibsgroups.grpname"/><textbox/>
+				描述：<a:bind value="ibsgroups.description"/><textbox cols="40"/>
+				</row>
+			</rows>
+			</grid>
+			  <listwindow id="ibsportalauth" title="授权门户" dialog="/user/ibsgroups_ibsportalauth.xul" orderby="position">
+			  <defaultvalue band="ibsportalauth" value="grpname={grpname};position=0"/>
+				<tablelist band="ibsportalauth" pageSize="8">	
+					<listhead>
+						<tablelistheader src="/images/img_listitem.gif"/>
+						<tablelistheader data="portal" label="门户" sort="auto" width="40%"/>
+						<tablelistheader data="ibsportal.description" label="描述" sort="auto" width="50%"/>
+						<tablelistheader data="position" label="排序" sort="auto" width="10%"/>
+					</listhead>
+					<tablelistfoot/>
+				</tablelist>
+				</listwindow>
+			</tabpanel>		
+<!-- ********************************** 应用程序授权 ********************************** -->	
+<tabpanel>
+	<hbox>
+		<tree use="combiz.system.ui.common.AppauthTree" width="200px"/>
+		<window use="combiz.system.ui.AppauthWindow" border="none">
+			<groupbox><caption label="应用程序权限"/>
+				<vbox>
+					<hbox>读取[R]:<appauthcheckbox id="appread" value="read"/></hbox>
+					<hbox>新建[A]:<appauthcheckbox id="appadd" value="add"/></hbox>
+					<hbox>保存[S]:<appauthcheckbox id="appsave" value="save"/></hbox>
+					<hbox>删除[D]:<appauthcheckbox id="appdelete" value="delete"/></hbox>
+				</vbox>
+			</groupbox>
+			<vbox>
+			<button label="授予所有权限" onClick="appauthWnd.authAll()"/>
+			<button label="取消所有权限" onClick="appauthWnd.cancelAuthAll()"/>
+			</vbox>
+		</window>
+		<tree use="combiz.system.ui.common.AppmenuauthTree" width="200px"/>
+		<window use="combiz.system.ui.AppmenuauthWindow" border="none">
+			<groupbox><caption label="应用程序菜单权限"/>
+				授予[√]:<appauthcheckbox id="menusread" value="read"/>
+			</groupbox>
+			<vbox>
+			<button label="授予所有菜单" onClick="appmenuauthWnd.authAll()"/>
+			<button label="取消所有菜单授权" onClick="appmenuauthWnd.cancelAuthAll()"/>
+			</vbox>
+		</window>
+	</hbox>
+</tabpanel>	
+<!-- ********************************** 权限数据窗口 ********************************** -->
+
+
+		</tabpanels>
+	</tabbox>
+</mainwindow>

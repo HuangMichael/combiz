@@ -1,0 +1,1642 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkBook>
+<Version>6.1</Version>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<TableDataMap>
+<NameTableData name="chlimis2">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter">
+<Attributes name="wonum" type="0" pop="true" />
+<O t="S">s</O><CellEditorDef class="com.fr.report.cellElement.TextCellEditorDef"><Regexp><![CDATA[^[a-z]+\d+$]]></Regexp><Attr allowBlank="false" /></CellEditorDef></Parameter>
+</Parameters>
+<Attributes type="0" isCache="false" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select 
+	
+	wk.WORKDEPT,wk.TICKETNUM,wk.PRINCIPAL,wk.DEPTGROUP,wk.WORKUSER,wk.REMARK3,
+	wk.STARTDATE,wk.ENDDATE,wk.SIGNATORY,wk.INCEPTDATE,wk.INCEPTMAN,wk.FIATDATE,wk.PRINCIPAL,
+	wk.ADDPEOPLE,wk.ADDTIME,wk.WORKADDPEOPLE,wk.AWAYPEOPLE,wk.AWAYTIME,wk.WORKSTEERPEOPLE,
+	wk.FINALTIME,wk.PRINCIPAL5,wk.FIATUSER4,wk.UNLINECOUNT,wk.SWITCHCOUNT,wk.TICKETFINALTIME,wk.UNLINECOUNT,
+	wk.SWITCHCOUNT,wk.FIATUSER5,wk.PRINCIPAL4,wk.PRINCIPAL3,wk.NEWPRINCIPAL,
+	wf.name,wf.ISEXECUTE,
+	wa.*,
+	wd.NEWDATE,wd.PRINCIPAL,wd.FIATUSER,
+	ws.*,
+	wtime.FINALTIME,wtime.PRINCIPAL1,wtime.FIATUSER1,wtime.STARTTIME,wtime.PRINCIPAL2,wtime.FIATUSER2,
+	wos.name as name22,
+	wos.ISEXECUTE as ISEXECUTE22,
+	wosa.name as name33,
+	wosa.ISEXECUTE as ISEXECUTE33,
+	woh.ELENAME,woh.NOTICE,
+	wtak.ADDRESS,wtak.WORKCONTENT,
+	wntl.WARDSTATION,wntl.WARDUSER,wntl.WORKCONTENT,dept.DEPTNUM
+from			
+	DEPARTMENT dept,workticket wk
+		left join wosafety wf on  wf.wonum = wk.wonum 
+		left join workadd wa on wa.wonum = wk.wonum 
+	        left join workdefer  wd on wd.wonum =wk.wonum 
+		left join wostop ws on ws.wonum = wk.wonum 
+	        left join wostartendtime wtime on wtime.wonum = wk.wonum 
+		left join WOSAFETYLINE wos on wos.wonum = wk.wonum 
+		left join WOSAFETYBAFFLE wosa on wosa.wonum = wk.wonum 
+		left join WOHAVEELE woh on woh.wonum = wk.wonum 
+		left join WOWORKTASK wtak on wtak.wonum = wk.wonum	
+		left join WOSAFECONTROL wntl on wntl.wonum = wk.wonum	where wk.wonum = '[?wonum|?]' and
+		dept.parent is  null]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings shrinkToFit="false" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.27" left="0.75" bottom="0.27" right="0.75" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+</Parameters>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="0" userDefineWindow="false" />
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,20.0,18.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,22.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,19.0,15.0,0.0,0.0,0.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="0" cs="9" rs="4" s="0"><O t="S">变 电 第 二 种 工 作 票</O></C>
+<C c="9" r="0"><O t="S"></O></C>
+<C c="10" r="0"><O t="S"></O></C>
+<C c="11" r="0"><O t="S"></O></C>
+<C c="12" r="0"><O t="S"></O></C>
+<C c="13" r="0"><O t="S"></O></C>
+<C c="14" r="0"><O t="S"></O></C>
+<C c="15" r="0"><O t="S"></O></C>
+<C c="16" r="0"><O t="S"></O></C>
+<C c="17" r="0"><O t="S"></O></C>
+<C c="18" r="0"><O t="S"></O></C>
+<C c="9" r="1"><O t="S"></O></C>
+<C c="10" r="1"><O t="S"></O></C>
+<C c="11" r="1"><O t="S"></O></C>
+<C c="12" r="1"><O t="S"></O></C>
+<C c="13" r="1"><O t="S"></O></C>
+<C c="14" r="1"><O t="S"></O></C>
+<C c="15" r="1"><O t="S"></O></C>
+<C c="16" r="1"><O t="S"></O></C>
+<C c="17" r="1"><O t="S"></O></C>
+<C c="18" r="1"><O t="S"></O></C>
+<C c="9" r="2"><O t="S"></O></C>
+<C c="10" r="2"><O t="S"></O></C>
+<C c="11" r="2"><O t="S"></O></C>
+<C c="12" r="2"><O t="S"></O></C>
+<C c="13" r="2"><O t="S"></O></C>
+<C c="14" r="2"><O t="S"></O></C>
+<C c="15" r="2"><O t="S"></O></C>
+<C c="16" r="2"><O t="S"></O></C>
+<C c="17" r="2"><O t="S"></O></C>
+<C c="18" r="2"><O t="S"></O></C>
+<C c="9" r="3"><O t="S"></O></C>
+<C c="10" r="3"><O t="S"></O></C>
+<C c="11" r="3"><O t="S"></O></C>
+<C c="12" r="3"><O t="S"></O></C>
+<C c="13" r="3"><O t="S"></O></C>
+<C c="14" r="3"><O t="S"></O></C>
+<C c="15" r="3"><O t="S"></O></C>
+<C c="16" r="3"><O t="S"></O></C>
+<C c="17" r="3"><O t="S"></O></C>
+<C c="18" r="3"><O t="S"></O></C>
+<C c="0" r="4" rs="2" s="1"><O t="S">单位：</O></C>
+<C c="1" r="4" cs="8" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="WORKDEPT" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="4"><O t="S"></O></C>
+<C c="10" r="4"><O t="S"></O></C>
+<C c="11" r="4"><O t="S"></O></C>
+<C c="12" r="4"><O t="S"></O></C>
+<C c="13" r="4"><O t="S"></O></C>
+<C c="14" r="4"><O t="S"></O></C>
+<C c="15" r="4"><O t="S"></O></C>
+<C c="16" r="4"><O t="S"></O></C>
+<C c="17" r="4"><O t="S"></O></C>
+<C c="18" r="4"><O t="S"></O></C>
+<C c="9" r="5"><O t="S"></O></C>
+<C c="10" r="5"><O t="S"></O></C>
+<C c="11" r="5"><O t="S"></O></C>
+<C c="12" r="5"><O t="S"></O></C>
+<C c="13" r="5"><O t="S"></O></C>
+<C c="14" r="5"><O t="S"></O></C>
+<C c="15" r="5"><O t="S"></O></C>
+<C c="16" r="5"><O t="S"></O></C>
+<C c="17" r="5"><O t="S"></O></C>
+<C c="18" r="5"><O t="S"></O></C>
+<C c="0" r="6" rs="2" s="1"><O t="S">编号:</O></C>
+<C c="1" r="6" cs="8" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="TICKETNUM" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="6"><O t="S"></O></C>
+<C c="10" r="6"><O t="S"></O></C>
+<C c="11" r="6"><O t="S"></O></C>
+<C c="12" r="6"><O t="S"></O></C>
+<C c="13" r="6"><O t="S"></O></C>
+<C c="14" r="6"><O t="S"></O></C>
+<C c="15" r="6"><O t="S"></O></C>
+<C c="16" r="6"><O t="S"></O></C>
+<C c="17" r="6"><O t="S"></O></C>
+<C c="18" r="6"><O t="S"></O></C>
+<C c="9" r="7"><O t="S"></O></C>
+<C c="10" r="7"><O t="S"></O></C>
+<C c="11" r="7"><O t="S"></O></C>
+<C c="12" r="7"><O t="S"></O></C>
+<C c="13" r="7"><O t="S"></O></C>
+<C c="14" r="7"><O t="S"></O></C>
+<C c="15" r="7"><O t="S"></O></C>
+<C c="16" r="7"><O t="S"></O></C>
+<C c="17" r="7"><O t="S"></O></C>
+<C c="18" r="7"><O t="S"></O></C>
+<C c="0" r="8" cs="3" rs="2" s="1"><O t="S">1.工作负责人员（监护人）：</O></C>
+<C c="3" r="8" cs="3" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="PRINCIPAL" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="8" rs="2" s="1"><O t="S">班组:</O></C>
+<C c="7" r="8" cs="2" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="DEPTGROUP" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="8"><O t="S"></O></C>
+<C c="10" r="8"><O t="S"></O></C>
+<C c="11" r="8"><O t="S"></O></C>
+<C c="12" r="8"><O t="S"></O></C>
+<C c="13" r="8"><O t="S"></O></C>
+<C c="14" r="8"><O t="S"></O></C>
+<C c="15" r="8"><O t="S"></O></C>
+<C c="16" r="8"><O t="S"></O></C>
+<C c="17" r="8"><O t="S"></O></C>
+<C c="18" r="8"><O t="S"></O></C>
+<C c="9" r="9"><O t="S"></O></C>
+<C c="10" r="9"><O t="S"></O></C>
+<C c="11" r="9"><O t="S"></O></C>
+<C c="12" r="9"><O t="S"></O></C>
+<C c="13" r="9"><O t="S"></O></C>
+<C c="14" r="9"><O t="S"></O></C>
+<C c="15" r="9"><O t="S"></O></C>
+<C c="16" r="9"><O t="S"></O></C>
+<C c="17" r="9"><O t="S"></O></C>
+<C c="18" r="9"><O t="S"></O></C>
+<C c="0" r="10" cs="9" rs="2" s="1"><O t="S">2.工作班人员：</O></C>
+<C c="9" r="10"><O t="S"></O></C>
+<C c="10" r="10"><O t="S"></O></C>
+<C c="11" r="10"><O t="S"></O></C>
+<C c="12" r="10"><O t="S"></O></C>
+<C c="13" r="10"><O t="S"></O></C>
+<C c="14" r="10"><O t="S"></O></C>
+<C c="15" r="10"><O t="S"></O></C>
+<C c="16" r="10"><O t="S"></O></C>
+<C c="17" r="10"><O t="S"></O></C>
+<C c="18" r="10"><O t="S"></O></C>
+<C c="9" r="11"><O t="S"></O></C>
+<C c="10" r="11"><O t="S"></O></C>
+<C c="11" r="11"><O t="S"></O></C>
+<C c="12" r="11"><O t="S"></O></C>
+<C c="13" r="11"><O t="S"></O></C>
+<C c="14" r="11"><O t="S"></O></C>
+<C c="15" r="11"><O t="S"></O></C>
+<C c="16" r="11"><O t="S"></O></C>
+<C c="17" r="11"><O t="S"></O></C>
+<C c="18" r="11"><O t="S"></O></C>
+<C c="0" r="12" cs="6" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="WORKUSER" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="12" rs="2" s="1"><O t="S">共</O></C>
+<C c="7" r="12" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="REMARK3" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="12" rs="2" s="1"><O t="S">人</O></C>
+<C c="9" r="12"><O t="S"></O></C>
+<C c="10" r="12"><O t="S"></O></C>
+<C c="11" r="12"><O t="S"></O></C>
+<C c="12" r="12"><O t="S"></O></C>
+<C c="13" r="12"><O t="S"></O></C>
+<C c="14" r="12"><O t="S"></O></C>
+<C c="15" r="12"><O t="S"></O></C>
+<C c="16" r="12"><O t="S"></O></C>
+<C c="17" r="12"><O t="S"></O></C>
+<C c="18" r="12"><O t="S"></O></C>
+<C c="9" r="13"><O t="S"></O></C>
+<C c="10" r="13"><O t="S"></O></C>
+<C c="11" r="13"><O t="S"></O></C>
+<C c="12" r="13"><O t="S"></O></C>
+<C c="13" r="13"><O t="S"></O></C>
+<C c="14" r="13"><O t="S"></O></C>
+<C c="15" r="13"><O t="S"></O></C>
+<C c="16" r="13"><O t="S"></O></C>
+<C c="17" r="13"><O t="S"></O></C>
+<C c="18" r="13"><O t="S"></O></C>
+<C c="0" r="14" cs="6" rs="2" s="1"><O t="S">3工作地点</O></C>
+<C c="6" r="14" cs="3" rs="2" s="1"><O t="S">任务</O></C>
+<C c="9" r="14"><O t="S"></O></C>
+<C c="10" r="14"><O t="S"></O></C>
+<C c="11" r="14"><O t="S"></O></C>
+<C c="12" r="14"><O t="S"></O></C>
+<C c="13" r="14"><O t="S"></O></C>
+<C c="14" r="14"><O t="S"></O></C>
+<C c="15" r="14"><O t="S"></O></C>
+<C c="16" r="14"><O t="S"></O></C>
+<C c="17" r="14"><O t="S"></O></C>
+<C c="18" r="14"><O t="S"></O></C>
+<C c="9" r="15"><O t="S"></O></C>
+<C c="10" r="15"><O t="S"></O></C>
+<C c="11" r="15"><O t="S"></O></C>
+<C c="12" r="15"><O t="S"></O></C>
+<C c="13" r="15"><O t="S"></O></C>
+<C c="14" r="15"><O t="S"></O></C>
+<C c="15" r="15"><O t="S"></O></C>
+<C c="16" r="15"><O t="S"></O></C>
+<C c="17" r="15"><O t="S"></O></C>
+<C c="18" r="15"><O t="S"></O></C>
+<C c="0" r="16" cs="6" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="ADDRESS" />
+</O><Expand dir="0" />
+</C>
+<C c="6" r="16" cs="3" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="WORKCONTENT" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="16"><O t="S"></O></C>
+<C c="10" r="16"><O t="S"></O></C>
+<C c="11" r="16"><O t="S"></O></C>
+<C c="12" r="16"><O t="S"></O></C>
+<C c="13" r="16"><O t="S"></O></C>
+<C c="14" r="16"><O t="S"></O></C>
+<C c="15" r="16"><O t="S"></O></C>
+<C c="16" r="16"><O t="S"></O></C>
+<C c="17" r="16"><O t="S"></O></C>
+<C c="18" r="16"><O t="S"></O></C>
+<C c="9" r="17"><O t="S"></O></C>
+<C c="10" r="17"><O t="S"></O></C>
+<C c="11" r="17"><O t="S"></O></C>
+<C c="12" r="17"><O t="S"></O></C>
+<C c="13" r="17"><O t="S"></O></C>
+<C c="14" r="17"><O t="S"></O></C>
+<C c="15" r="17"><O t="S"></O></C>
+<C c="16" r="17"><O t="S"></O></C>
+<C c="17" r="17"><O t="S"></O></C>
+<C c="18" r="17"><O t="S"></O></C>
+<C c="0" r="18" cs="9" rs="2" s="1"><O t="S">4计划时间</O></C>
+<C c="9" r="18"><O t="S"></O></C>
+<C c="10" r="18"><O t="S"></O></C>
+<C c="11" r="18"><O t="S"></O></C>
+<C c="12" r="18"><O t="S"></O></C>
+<C c="13" r="18"><O t="S"></O></C>
+<C c="14" r="18"><O t="S"></O></C>
+<C c="15" r="18"><O t="S"></O></C>
+<C c="16" r="18"><O t="S"></O></C>
+<C c="17" r="18"><O t="S"></O></C>
+<C c="18" r="18"><O t="S"></O></C>
+<C c="9" r="19"><O t="S"></O></C>
+<C c="10" r="19"><O t="S"></O></C>
+<C c="11" r="19"><O t="S"></O></C>
+<C c="12" r="19"><O t="S"></O></C>
+<C c="13" r="19"><O t="S"></O></C>
+<C c="14" r="19"><O t="S"></O></C>
+<C c="15" r="19"><O t="S"></O></C>
+<C c="16" r="19"><O t="S"></O></C>
+<C c="17" r="19"><O t="S"></O></C>
+<C c="18" r="19"><O t="S"></O></C>
+<C c="0" r="20" rs="2" s="1"><O t="S">自:</O></C>
+<C c="1" r="20" cs="7" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="STARTDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="20" rs="2" s="1"><O t="S">开始</O></C>
+<C c="9" r="20"><O t="S"></O></C>
+<C c="10" r="20"><O t="S"></O></C>
+<C c="11" r="20"><O t="S"></O></C>
+<C c="12" r="20"><O t="S"></O></C>
+<C c="13" r="20"><O t="S"></O></C>
+<C c="14" r="20"><O t="S"></O></C>
+<C c="15" r="20"><O t="S"></O></C>
+<C c="16" r="20"><O t="S"></O></C>
+<C c="17" r="20"><O t="S"></O></C>
+<C c="18" r="20"><O t="S"></O></C>
+<C c="9" r="21"><O t="S"></O></C>
+<C c="10" r="21"><O t="S"></O></C>
+<C c="11" r="21"><O t="S"></O></C>
+<C c="12" r="21"><O t="S"></O></C>
+<C c="13" r="21"><O t="S"></O></C>
+<C c="14" r="21"><O t="S"></O></C>
+<C c="15" r="21"><O t="S"></O></C>
+<C c="16" r="21"><O t="S"></O></C>
+<C c="17" r="21"><O t="S"></O></C>
+<C c="18" r="21"><O t="S"></O></C>
+<C c="0" r="22" rs="2" s="1"><O t="S">至:</O></C>
+<C c="1" r="22" cs="7" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="ENDDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="8" r="22" rs="2" s="1"><O t="S">结束</O></C>
+<C c="9" r="22"><O t="S"></O></C>
+<C c="10" r="22"><O t="S"></O></C>
+<C c="11" r="22"><O t="S"></O></C>
+<C c="12" r="22"><O t="S"></O></C>
+<C c="13" r="22"><O t="S"></O></C>
+<C c="14" r="22"><O t="S"></O></C>
+<C c="15" r="22"><O t="S"></O></C>
+<C c="16" r="22"><O t="S"></O></C>
+<C c="17" r="22"><O t="S"></O></C>
+<C c="18" r="22"><O t="S"></O></C>
+<C c="9" r="23"><O t="S"></O></C>
+<C c="10" r="23"><O t="S"></O></C>
+<C c="11" r="23"><O t="S"></O></C>
+<C c="12" r="23"><O t="S"></O></C>
+<C c="13" r="23"><O t="S"></O></C>
+<C c="14" r="23"><O t="S"></O></C>
+<C c="15" r="23"><O t="S"></O></C>
+<C c="16" r="23"><O t="S"></O></C>
+<C c="17" r="23"><O t="S"></O></C>
+<C c="18" r="23"><O t="S"></O></C>
+<C c="0" r="24" cs="9" rs="2" s="1"><O t="S">5.工作条件（停电、不停电、或带电）：</O></C>
+<C c="9" r="24"><O t="S"></O></C>
+<C c="10" r="24"><O t="S"></O></C>
+<C c="11" r="24"><O t="S"></O></C>
+<C c="12" r="24"><O t="S"></O></C>
+<C c="13" r="24"><O t="S"></O></C>
+<C c="14" r="24"><O t="S"></O></C>
+<C c="15" r="24"><O t="S"></O></C>
+<C c="16" r="24"><O t="S"></O></C>
+<C c="17" r="24"><O t="S"></O></C>
+<C c="18" r="24"><O t="S"></O></C>
+<C c="9" r="25"><O t="S"></O></C>
+<C c="10" r="25"><O t="S"></O></C>
+<C c="11" r="25"><O t="S"></O></C>
+<C c="12" r="25"><O t="S"></O></C>
+<C c="13" r="25"><O t="S"></O></C>
+<C c="14" r="25"><O t="S"></O></C>
+<C c="15" r="25"><O t="S"></O></C>
+<C c="16" r="25"><O t="S"></O></C>
+<C c="17" r="25"><O t="S"></O></C>
+<C c="18" r="25"><O t="S"></O></C>
+<C c="0" r="26" cs="9" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="PRESERVING" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="26"><O t="S"></O></C>
+<C c="10" r="26"><O t="S"></O></C>
+<C c="11" r="26"><O t="S"></O></C>
+<C c="12" r="26"><O t="S"></O></C>
+<C c="13" r="26"><O t="S"></O></C>
+<C c="14" r="26"><O t="S"></O></C>
+<C c="15" r="26"><O t="S"></O></C>
+<C c="16" r="26"><O t="S"></O></C>
+<C c="17" r="26"><O t="S"></O></C>
+<C c="18" r="26"><O t="S"></O></C>
+<C c="9" r="27"><O t="S"></O></C>
+<C c="10" r="27"><O t="S"></O></C>
+<C c="11" r="27"><O t="S"></O></C>
+<C c="12" r="27"><O t="S"></O></C>
+<C c="13" r="27"><O t="S"></O></C>
+<C c="14" r="27"><O t="S"></O></C>
+<C c="15" r="27"><O t="S"></O></C>
+<C c="16" r="27"><O t="S"></O></C>
+<C c="17" r="27"><O t="S"></O></C>
+<C c="18" r="27"><O t="S"></O></C>
+<C c="0" r="28" cs="9" rs="2" s="1"><O t="S">6.注意事项（安全措施）：</O></C>
+<C c="9" r="28"><O t="S"></O></C>
+<C c="10" r="28"><O t="S"></O></C>
+<C c="11" r="28"><O t="S"></O></C>
+<C c="12" r="28"><O t="S"></O></C>
+<C c="13" r="28"><O t="S"></O></C>
+<C c="14" r="28"><O t="S"></O></C>
+<C c="15" r="28"><O t="S"></O></C>
+<C c="16" r="28"><O t="S"></O></C>
+<C c="17" r="28"><O t="S"></O></C>
+<C c="18" r="28"><O t="S"></O></C>
+<C c="9" r="29"><O t="S"></O></C>
+<C c="10" r="29"><O t="S"></O></C>
+<C c="11" r="29"><O t="S"></O></C>
+<C c="12" r="29"><O t="S"></O></C>
+<C c="13" r="29"><O t="S"></O></C>
+<C c="14" r="29"><O t="S"></O></C>
+<C c="15" r="29"><O t="S"></O></C>
+<C c="16" r="29"><O t="S"></O></C>
+<C c="17" r="29"><O t="S"></O></C>
+<C c="18" r="29"><O t="S"></O></C>
+<C c="0" r="30" cs="9" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="REMARK1" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="30"><O t="S"></O></C>
+<C c="10" r="30"><O t="S"></O></C>
+<C c="11" r="30"><O t="S"></O></C>
+<C c="12" r="30"><O t="S"></O></C>
+<C c="13" r="30"><O t="S"></O></C>
+<C c="14" r="30"><O t="S"></O></C>
+<C c="15" r="30"><O t="S"></O></C>
+<C c="16" r="30"><O t="S"></O></C>
+<C c="17" r="30"><O t="S"></O></C>
+<C c="18" r="30"><O t="S"></O></C>
+<C c="9" r="31"><O t="S"></O></C>
+<C c="10" r="31"><O t="S"></O></C>
+<C c="11" r="31"><O t="S"></O></C>
+<C c="12" r="31"><O t="S"></O></C>
+<C c="13" r="31"><O t="S"></O></C>
+<C c="14" r="31"><O t="S"></O></C>
+<C c="15" r="31"><O t="S"></O></C>
+<C c="16" r="31"><O t="S"></O></C>
+<C c="17" r="31"><O t="S"></O></C>
+<C c="18" r="31"><O t="S"></O></C>
+<C c="0" r="32" cs="7" rs="5" s="2"><O t="S">工作票签发人签名</O></C>
+<C c="7" r="32" cs="2" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="SIGNATORY" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="32"><O t="S"></O></C>
+<C c="10" r="32"><O t="S"></O></C>
+<C c="11" r="32"><O t="S"></O></C>
+<C c="12" r="32"><O t="S"></O></C>
+<C c="13" r="32"><O t="S"></O></C>
+<C c="14" r="32"><O t="S"></O></C>
+<C c="15" r="32"><O t="S"></O></C>
+<C c="16" r="32"><O t="S"></O></C>
+<C c="17" r="32"><O t="S"></O></C>
+<C c="18" r="32"><O t="S"></O></C>
+<C c="9" r="33"><O t="S"></O></C>
+<C c="10" r="33"><O t="S"></O></C>
+<C c="11" r="33"><O t="S"></O></C>
+<C c="12" r="33"><O t="S"></O></C>
+<C c="13" r="33"><O t="S"></O></C>
+<C c="14" r="33"><O t="S"></O></C>
+<C c="15" r="33"><O t="S"></O></C>
+<C c="16" r="33"><O t="S"></O></C>
+<C c="17" r="33"><O t="S"></O></C>
+<C c="18" r="33"><O t="S"></O></C>
+<C c="7" r="34" s="1"><O t="S"></O></C>
+<C c="8" r="34" s="1"><O t="S"></O></C>
+<C c="9" r="34"><O t="S"></O></C>
+<C c="10" r="34"><O t="S"></O></C>
+<C c="11" r="34"><O t="S"></O></C>
+<C c="12" r="34"><O t="S"></O></C>
+<C c="13" r="34"><O t="S"></O></C>
+<C c="14" r="34"><O t="S"></O></C>
+<C c="15" r="34"><O t="S"></O></C>
+<C c="16" r="34"><O t="S"></O></C>
+<C c="17" r="34"><O t="S"></O></C>
+<C c="18" r="34"><O t="S"></O></C>
+<C c="7" r="35" s="1"><O t="S"></O></C>
+<C c="8" r="35" s="1"><O t="S"></O></C>
+<C c="9" r="35"><O t="S"></O></C>
+<C c="10" r="35"><O t="S"></O></C>
+<C c="11" r="35"><O t="S"></O></C>
+<C c="12" r="35"><O t="S"></O></C>
+<C c="13" r="35"><O t="S"></O></C>
+<C c="14" r="35"><O t="S"></O></C>
+<C c="15" r="35"><O t="S"></O></C>
+<C c="16" r="35"><O t="S"></O></C>
+<C c="17" r="35"><O t="S"></O></C>
+<C c="18" r="35"><O t="S"></O></C>
+<C c="7" r="36" s="1"><O t="S"></O></C>
+<C c="8" r="36" s="1"><O t="S"></O></C>
+<C c="9" r="36"><O t="S"></O></C>
+<C c="10" r="36"><O t="S"></O></C>
+<C c="11" r="36"><O t="S"></O></C>
+<C c="12" r="36"><O t="S"></O></C>
+<C c="13" r="36"><O t="S"></O></C>
+<C c="14" r="36"><O t="S"></O></C>
+<C c="15" r="36"><O t="S"></O></C>
+<C c="16" r="36"><O t="S"></O></C>
+<C c="17" r="36"><O t="S"></O></C>
+<C c="18" r="36"><O t="S"></O></C>
+<C c="0" r="37" cs="3" rs="2" s="1"><O t="S">7.许可开始工作时间：</O></C>
+<C c="3" r="37" cs="6" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="FIATDATE" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="37"><O t="S"></O></C>
+<C c="10" r="37"><O t="S"></O></C>
+<C c="11" r="37"><O t="S"></O></C>
+<C c="12" r="37"><O t="S"></O></C>
+<C c="13" r="37"><O t="S"></O></C>
+<C c="14" r="37"><O t="S"></O></C>
+<C c="15" r="37"><O t="S"></O></C>
+<C c="16" r="37"><O t="S"></O></C>
+<C c="17" r="37"><O t="S"></O></C>
+<C c="18" r="37"><O t="S"></O></C>
+<C c="9" r="38"><O t="S"></O></C>
+<C c="10" r="38"><O t="S"></O></C>
+<C c="11" r="38"><O t="S"></O></C>
+<C c="12" r="38"><O t="S"></O></C>
+<C c="13" r="38"><O t="S"></O></C>
+<C c="14" r="38"><O t="S"></O></C>
+<C c="15" r="38"><O t="S"></O></C>
+<C c="16" r="38"><O t="S"></O></C>
+<C c="17" r="38"><O t="S"></O></C>
+<C c="18" r="38"><O t="S"></O></C>
+<C c="0" r="39" cs="4" rs="2" s="1"><O t="S">工作许可人（值班员）签名：</O></C>
+<C c="4" r="39" cs="5" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="FIATUSER1" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="39"><O t="S"></O></C>
+<C c="10" r="39"><O t="S"></O></C>
+<C c="11" r="39"><O t="S"></O></C>
+<C c="12" r="39"><O t="S"></O></C>
+<C c="13" r="39"><O t="S"></O></C>
+<C c="14" r="39"><O t="S"></O></C>
+<C c="15" r="39"><O t="S"></O></C>
+<C c="16" r="39"><O t="S"></O></C>
+<C c="17" r="39"><O t="S"></O></C>
+<C c="18" r="39"><O t="S"></O></C>
+<C c="9" r="40"><O t="S"></O></C>
+<C c="10" r="40"><O t="S"></O></C>
+<C c="11" r="40"><O t="S"></O></C>
+<C c="12" r="40"><O t="S"></O></C>
+<C c="13" r="40"><O t="S"></O></C>
+<C c="14" r="40"><O t="S"></O></C>
+<C c="15" r="40"><O t="S"></O></C>
+<C c="16" r="40"><O t="S"></O></C>
+<C c="17" r="40"><O t="S"></O></C>
+<C c="18" r="40"><O t="S"></O></C>
+<C c="0" r="41" cs="4" rs="2" s="1"><O t="S">工作负责人签名：</O></C>
+<C c="4" r="41" cs="5" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="PRINCIPAL1" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="41"><O t="S"></O></C>
+<C c="10" r="41"><O t="S"></O></C>
+<C c="11" r="41"><O t="S"></O></C>
+<C c="12" r="41"><O t="S"></O></C>
+<C c="13" r="41"><O t="S"></O></C>
+<C c="14" r="41"><O t="S"></O></C>
+<C c="15" r="41"><O t="S"></O></C>
+<C c="16" r="41"><O t="S"></O></C>
+<C c="17" r="41"><O t="S"></O></C>
+<C c="18" r="41"><O t="S"></O></C>
+<C c="9" r="42"><O t="S"></O></C>
+<C c="10" r="42"><O t="S"></O></C>
+<C c="11" r="42"><O t="S"></O></C>
+<C c="12" r="42"><O t="S"></O></C>
+<C c="13" r="42"><O t="S"></O></C>
+<C c="14" r="42"><O t="S"></O></C>
+<C c="15" r="42"><O t="S"></O></C>
+<C c="16" r="42"><O t="S"></O></C>
+<C c="17" r="42"><O t="S"></O></C>
+<C c="18" r="42"><O t="S"></O></C>
+<C c="0" r="43" cs="3" rs="2" s="1"><O t="S">8.工作结束时间：</O></C>
+<C c="3" r="43" cs="6" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="FINALTIME" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="43"><O t="S"></O></C>
+<C c="10" r="43"><O t="S"></O></C>
+<C c="11" r="43"><O t="S"></O></C>
+<C c="12" r="43"><O t="S"></O></C>
+<C c="13" r="43"><O t="S"></O></C>
+<C c="14" r="43"><O t="S"></O></C>
+<C c="15" r="43"><O t="S"></O></C>
+<C c="16" r="43"><O t="S"></O></C>
+<C c="17" r="43"><O t="S"></O></C>
+<C c="18" r="43"><O t="S"></O></C>
+<C c="9" r="44"><O t="S"></O></C>
+<C c="10" r="44"><O t="S"></O></C>
+<C c="11" r="44"><O t="S"></O></C>
+<C c="12" r="44"><O t="S"></O></C>
+<C c="13" r="44"><O t="S"></O></C>
+<C c="14" r="44"><O t="S"></O></C>
+<C c="15" r="44"><O t="S"></O></C>
+<C c="16" r="44"><O t="S"></O></C>
+<C c="17" r="44"><O t="S"></O></C>
+<C c="18" r="44"><O t="S"></O></C>
+<C c="0" r="45" cs="4" rs="2" s="1"><O t="S">工作负责人签名：</O></C>
+<C c="4" r="45" cs="5" rs="2" s="1"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="PRINCIPAL5" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="45"><O t="S"></O></C>
+<C c="10" r="45"><O t="S"></O></C>
+<C c="11" r="45"><O t="S"></O></C>
+<C c="12" r="45"><O t="S"></O></C>
+<C c="13" r="45"><O t="S"></O></C>
+<C c="14" r="45"><O t="S"></O></C>
+<C c="15" r="45"><O t="S"></O></C>
+<C c="16" r="45"><O t="S"></O></C>
+<C c="17" r="45"><O t="S"></O></C>
+<C c="18" r="45"><O t="S"></O></C>
+<C c="9" r="46"><O t="S"></O></C>
+<C c="10" r="46"><O t="S"></O></C>
+<C c="11" r="46"><O t="S"></O></C>
+<C c="12" r="46"><O t="S"></O></C>
+<C c="13" r="46"><O t="S"></O></C>
+<C c="14" r="46"><O t="S"></O></C>
+<C c="15" r="46"><O t="S"></O></C>
+<C c="16" r="46"><O t="S"></O></C>
+<C c="17" r="46"><O t="S"></O></C>
+<C c="18" r="46"><O t="S"></O></C>
+<C c="0" r="47" cs="4" rs="2" s="1"><O t="S">工作许可人签名：</O></C>
+<C c="4" r="47" cs="5" rs="2" s="3"><O t="DSColumn"><Attributes dsName="chlimis2" columnName="FIATUSER4" />
+</O><Expand dir="0" />
+</C>
+<C c="9" r="47"><O t="S"></O></C>
+<C c="10" r="47"><O t="S"></O></C>
+<C c="11" r="47"><O t="S"></O></C>
+<C c="12" r="47"><O t="S"></O></C>
+<C c="13" r="47"><O t="S"></O></C>
+<C c="14" r="47"><O t="S"></O></C>
+<C c="15" r="47"><O t="S"></O></C>
+<C c="16" r="47"><O t="S"></O></C>
+<C c="17" r="47"><O t="S"></O></C>
+<C c="18" r="47"><O t="S"></O></C>
+<C c="9" r="48"><O t="S"></O></C>
+<C c="10" r="48"><O t="S"></O></C>
+<C c="11" r="48"><O t="S"></O></C>
+<C c="12" r="48"><O t="S"></O></C>
+<C c="13" r="48"><O t="S"></O></C>
+<C c="14" r="48"><O t="S"></O></C>
+<C c="15" r="48"><O t="S"></O></C>
+<C c="16" r="48"><O t="S"></O></C>
+<C c="17" r="48"><O t="S"></O></C>
+<C c="18" r="48"><O t="S"></O></C>
+<C c="0" r="49" cs="9" rs="2" s="1"><O t="S">9.备注：</O></C>
+<C c="9" r="49"><O t="S"></O></C>
+<C c="10" r="49"><O t="S"></O></C>
+<C c="11" r="49"><O t="S"></O></C>
+<C c="12" r="49"><O t="S"></O></C>
+<C c="13" r="49"><O t="S"></O></C>
+<C c="14" r="49"><O t="S"></O></C>
+<C c="15" r="49"><O t="S"></O></C>
+<C c="16" r="49"><O t="S"></O></C>
+<C c="17" r="49"><O t="S"></O></C>
+<C c="18" r="49"><O t="S"></O></C>
+<C c="9" r="50"><O t="S"></O></C>
+<C c="10" r="50"><O t="S"></O></C>
+<C c="11" r="50"><O t="S"></O></C>
+<C c="12" r="50"><O t="S"></O></C>
+<C c="13" r="50"><O t="S"></O></C>
+<C c="14" r="50"><O t="S"></O></C>
+<C c="15" r="50"><O t="S"></O></C>
+<C c="16" r="50"><O t="S"></O></C>
+<C c="17" r="50"><O t="S"></O></C>
+<C c="18" r="50"><O t="S"></O></C>
+<C c="0" r="51" cs="9" rs="5" s="3"><O t="S"></O></C>
+<C c="9" r="51"><O t="S"></O></C>
+<C c="10" r="51"><O t="S"></O></C>
+<C c="11" r="51"><O t="S"></O></C>
+<C c="12" r="51"><O t="S"></O></C>
+<C c="13" r="51"><O t="S"></O></C>
+<C c="14" r="51"><O t="S"></O></C>
+<C c="15" r="51"><O t="S"></O></C>
+<C c="16" r="51"><O t="S"></O></C>
+<C c="17" r="51"><O t="S"></O></C>
+<C c="18" r="51"><O t="S"></O></C>
+<C c="9" r="52"><O t="S"></O></C>
+<C c="10" r="52"><O t="S"></O></C>
+<C c="11" r="52"><O t="S"></O></C>
+<C c="12" r="52"><O t="S"></O></C>
+<C c="13" r="52"><O t="S"></O></C>
+<C c="14" r="52"><O t="S"></O></C>
+<C c="15" r="52"><O t="S"></O></C>
+<C c="16" r="52"><O t="S"></O></C>
+<C c="17" r="52"><O t="S"></O></C>
+<C c="18" r="52"><O t="S"></O></C>
+<C c="9" r="53"><O t="S"></O></C>
+<C c="10" r="53"><O t="S"></O></C>
+<C c="11" r="53"><O t="S"></O></C>
+<C c="12" r="53"><O t="S"></O></C>
+<C c="13" r="53"><O t="S"></O></C>
+<C c="14" r="53"><O t="S"></O></C>
+<C c="15" r="53"><O t="S"></O></C>
+<C c="16" r="53"><O t="S"></O></C>
+<C c="17" r="53"><O t="S"></O></C>
+<C c="18" r="53"><O t="S"></O></C>
+<C c="9" r="54"><O t="S"></O></C>
+<C c="10" r="54"><O t="S"></O></C>
+<C c="11" r="54"><O t="S"></O></C>
+<C c="12" r="54"><O t="S"></O></C>
+<C c="13" r="54"><O t="S"></O></C>
+<C c="14" r="54"><O t="S"></O></C>
+<C c="15" r="54"><O t="S"></O></C>
+<C c="16" r="54"><O t="S"></O></C>
+<C c="17" r="54"><O t="S"></O></C>
+<C c="18" r="54"><O t="S"></O></C>
+<C c="9" r="55"><O t="S"></O></C>
+<C c="10" r="55"><O t="S"></O></C>
+<C c="11" r="55"><O t="S"></O></C>
+<C c="12" r="55"><O t="S"></O></C>
+<C c="13" r="55"><O t="S"></O></C>
+<C c="14" r="55"><O t="S"></O></C>
+<C c="15" r="55"><O t="S"></O></C>
+<C c="16" r="55"><O t="S"></O></C>
+<C c="17" r="55"><O t="S"></O></C>
+<C c="18" r="55"><O t="S"></O></C>
+<C c="0" r="56" cs="9" rs="2" s="1"><O t="S">10.工作票检查：</O></C>
+<C c="9" r="56"><O t="S"></O></C>
+<C c="10" r="56"><O t="S"></O></C>
+<C c="11" r="56"><O t="S"></O></C>
+<C c="12" r="56"><O t="S"></O></C>
+<C c="13" r="56"><O t="S"></O></C>
+<C c="14" r="56"><O t="S"></O></C>
+<C c="15" r="56"><O t="S"></O></C>
+<C c="16" r="56"><O t="S"></O></C>
+<C c="17" r="56"><O t="S"></O></C>
+<C c="18" r="56"><O t="S"></O></C>
+<C c="9" r="57"><O t="S"></O></C>
+<C c="10" r="57"><O t="S"></O></C>
+<C c="11" r="57"><O t="S"></O></C>
+<C c="12" r="57"><O t="S"></O></C>
+<C c="13" r="57"><O t="S"></O></C>
+<C c="14" r="57"><O t="S"></O></C>
+<C c="15" r="57"><O t="S"></O></C>
+<C c="16" r="57"><O t="S"></O></C>
+<C c="17" r="57"><O t="S"></O></C>
+<C c="18" r="57"><O t="S"></O></C>
+<C c="0" r="58" cs="3" rs="2" s="2"><O t="S">本工作票已于</O></C>
+<C c="3" r="58" cs="5" rs="2" s="1"><O t="S"></O></C>
+<C c="8" r="58" rs="2" s="1"><O t="S">检查</O></C>
+<C c="9" r="58"><O t="S"></O></C>
+<C c="10" r="58"><O t="S"></O></C>
+<C c="11" r="58"><O t="S"></O></C>
+<C c="12" r="58"><O t="S"></O></C>
+<C c="13" r="58"><O t="S"></O></C>
+<C c="14" r="58"><O t="S"></O></C>
+<C c="15" r="58"><O t="S"></O></C>
+<C c="16" r="58"><O t="S"></O></C>
+<C c="17" r="58"><O t="S"></O></C>
+<C c="18" r="58"><O t="S"></O></C>
+<C c="9" r="59"><O t="S"></O></C>
+<C c="10" r="59"><O t="S"></O></C>
+<C c="11" r="59"><O t="S"></O></C>
+<C c="12" r="59"><O t="S"></O></C>
+<C c="13" r="59"><O t="S"></O></C>
+<C c="14" r="59"><O t="S"></O></C>
+<C c="15" r="59"><O t="S"></O></C>
+<C c="16" r="59"><O t="S"></O></C>
+<C c="17" r="59"><O t="S"></O></C>
+<C c="18" r="59"><O t="S"></O></C>
+<C c="0" r="60" cs="3" rs="2" s="1"><O t="S">合格（）/不合格（）。</O></C>
+<C c="3" r="60" cs="3" rs="2" s="1"><O t="S">检查人签名：</O></C>
+<C c="6" r="60" cs="3" rs="2" s="1"><O t="S"></O></C>
+<C c="9" r="60"><O t="S"></O></C>
+<C c="10" r="60"><O t="S"></O></C>
+<C c="11" r="60"><O t="S"></O></C>
+<C c="12" r="60"><O t="S"></O></C>
+<C c="13" r="60"><O t="S"></O></C>
+<C c="14" r="60"><O t="S"></O></C>
+<C c="15" r="60"><O t="S"></O></C>
+<C c="16" r="60"><O t="S"></O></C>
+<C c="17" r="60"><O t="S"></O></C>
+<C c="18" r="60"><O t="S"></O></C>
+<C c="9" r="61"><O t="S"></O></C>
+<C c="10" r="61"><O t="S"></O></C>
+<C c="11" r="61"><O t="S"></O></C>
+<C c="12" r="61"><O t="S"></O></C>
+<C c="13" r="61"><O t="S"></O></C>
+<C c="14" r="61"><O t="S"></O></C>
+<C c="15" r="61"><O t="S"></O></C>
+<C c="16" r="61"><O t="S"></O></C>
+<C c="17" r="61"><O t="S"></O></C>
+<C c="18" r="61"><O t="S"></O></C>
+<C c="0" r="62" cs="9" rs="2" s="1"><O t="S">存在问题：</O></C>
+<C c="9" r="62"><O t="S"></O></C>
+<C c="10" r="62"><O t="S"></O></C>
+<C c="11" r="62"><O t="S"></O></C>
+<C c="12" r="62"><O t="S"></O></C>
+<C c="13" r="62"><O t="S"></O></C>
+<C c="14" r="62"><O t="S"></O></C>
+<C c="15" r="62"><O t="S"></O></C>
+<C c="16" r="62"><O t="S"></O></C>
+<C c="17" r="62"><O t="S"></O></C>
+<C c="18" r="62"><O t="S"></O></C>
+<C c="9" r="63"><O t="S"></O></C>
+<C c="10" r="63"><O t="S"></O></C>
+<C c="11" r="63"><O t="S"></O></C>
+<C c="12" r="63"><O t="S"></O></C>
+<C c="13" r="63"><O t="S"></O></C>
+<C c="14" r="63"><O t="S"></O></C>
+<C c="15" r="63"><O t="S"></O></C>
+<C c="16" r="63"><O t="S"></O></C>
+<C c="17" r="63"><O t="S"></O></C>
+<C c="18" r="63"><O t="S"></O></C>
+<C c="0" r="64" cs="9" rs="6" s="1"><O t="S"></O></C>
+<C c="9" r="64"><O t="S"></O></C>
+<C c="10" r="64"><O t="S"></O></C>
+<C c="11" r="64"><O t="S"></O></C>
+<C c="12" r="64"><O t="S"></O></C>
+<C c="13" r="64"><O t="S"></O></C>
+<C c="14" r="64"><O t="S"></O></C>
+<C c="15" r="64"><O t="S"></O></C>
+<C c="16" r="64"><O t="S"></O></C>
+<C c="17" r="64"><O t="S"></O></C>
+<C c="18" r="64"><O t="S"></O></C>
+<C c="9" r="65"><O t="S"></O></C>
+<C c="10" r="65"><O t="S"></O></C>
+<C c="11" r="65"><O t="S"></O></C>
+<C c="12" r="65"><O t="S"></O></C>
+<C c="13" r="65"><O t="S"></O></C>
+<C c="14" r="65"><O t="S"></O></C>
+<C c="15" r="65"><O t="S"></O></C>
+<C c="16" r="65"><O t="S"></O></C>
+<C c="17" r="65"><O t="S"></O></C>
+<C c="18" r="65"><O t="S"></O></C>
+<C c="9" r="66"><O t="S"></O></C>
+<C c="10" r="66"><O t="S"></O></C>
+<C c="11" r="66"><O t="S"></O></C>
+<C c="12" r="66"><O t="S"></O></C>
+<C c="13" r="66"><O t="S"></O></C>
+<C c="14" r="66"><O t="S"></O></C>
+<C c="15" r="66"><O t="S"></O></C>
+<C c="16" r="66"><O t="S"></O></C>
+<C c="17" r="66"><O t="S"></O></C>
+<C c="18" r="66"><O t="S"></O></C>
+<C c="9" r="67"><O t="S"></O></C>
+<C c="10" r="67"><O t="S"></O></C>
+<C c="11" r="67"><O t="S"></O></C>
+<C c="12" r="67"><O t="S"></O></C>
+<C c="13" r="67"><O t="S"></O></C>
+<C c="14" r="67"><O t="S"></O></C>
+<C c="15" r="67"><O t="S"></O></C>
+<C c="16" r="67"><O t="S"></O></C>
+<C c="17" r="67"><O t="S"></O></C>
+<C c="18" r="67"><O t="S"></O></C>
+<C c="9" r="68"><O t="S"></O></C>
+<C c="10" r="68"><O t="S"></O></C>
+<C c="11" r="68"><O t="S"></O></C>
+<C c="12" r="68"><O t="S"></O></C>
+<C c="13" r="68"><O t="S"></O></C>
+<C c="14" r="68"><O t="S"></O></C>
+<C c="15" r="68"><O t="S"></O></C>
+<C c="16" r="68"><O t="S"></O></C>
+<C c="17" r="68"><O t="S"></O></C>
+<C c="18" r="68"><O t="S"></O></C>
+<C c="9" r="69"><O t="S"></O></C>
+<C c="10" r="69"><O t="S"></O></C>
+<C c="11" r="69"><O t="S"></O></C>
+<C c="12" r="69"><O t="S"></O></C>
+<C c="13" r="69"><O t="S"></O></C>
+<C c="14" r="69"><O t="S"></O></C>
+<C c="15" r="69"><O t="S"></O></C>
+<C c="16" r="69"><O t="S"></O></C>
+<C c="17" r="69"><O t="S"></O></C>
+<C c="18" r="69"><O t="S"></O></C>
+<C c="0" r="70"><O t="S"></O></C>
+<C c="1" r="70"><O t="S"></O></C>
+<C c="2" r="70"><O t="S"></O></C>
+<C c="3" r="70"><O t="S"></O></C>
+<C c="4" r="70"><O t="S"></O></C>
+<C c="5" r="70"><O t="S"></O></C>
+<C c="6" r="70"><O t="S"></O></C>
+<C c="7" r="70"><O t="S"></O></C>
+<C c="8" r="70"><O t="S"></O></C>
+<C c="9" r="70"><O t="S"></O></C>
+<C c="10" r="70"><O t="S"></O></C>
+<C c="11" r="70"><O t="S"></O></C>
+<C c="12" r="70"><O t="S"></O></C>
+<C c="13" r="70"><O t="S"></O></C>
+<C c="14" r="70"><O t="S"></O></C>
+<C c="15" r="70"><O t="S"></O></C>
+<C c="16" r="70"><O t="S"></O></C>
+<C c="17" r="70"><O t="S"></O></C>
+<C c="18" r="70"><O t="S"></O></C>
+<C c="0" r="71"><O t="S"></O></C>
+<C c="1" r="71"><O t="S"></O></C>
+<C c="2" r="71"><O t="S"></O></C>
+<C c="3" r="71"><O t="S"></O></C>
+<C c="4" r="71"><O t="S"></O></C>
+<C c="5" r="71"><O t="S"></O></C>
+<C c="6" r="71"><O t="S"></O></C>
+<C c="7" r="71"><O t="S"></O></C>
+<C c="8" r="71"><O t="S"></O></C>
+<C c="9" r="71"><O t="S"></O></C>
+<C c="10" r="71"><O t="S"></O></C>
+<C c="11" r="71"><O t="S"></O></C>
+<C c="12" r="71"><O t="S"></O></C>
+<C c="13" r="71"><O t="S"></O></C>
+<C c="14" r="71"><O t="S"></O></C>
+<C c="15" r="71"><O t="S"></O></C>
+<C c="16" r="71"><O t="S"></O></C>
+<C c="17" r="71"><O t="S"></O></C>
+<C c="18" r="71"><O t="S"></O></C>
+<C c="0" r="72"><O t="S"></O></C>
+<C c="1" r="72"><O t="S"></O></C>
+<C c="2" r="72"><O t="S"></O></C>
+<C c="3" r="72"><O t="S"></O></C>
+<C c="4" r="72"><O t="S"></O></C>
+<C c="5" r="72"><O t="S"></O></C>
+<C c="6" r="72"><O t="S"></O></C>
+<C c="7" r="72"><O t="S"></O></C>
+<C c="8" r="72"><O t="S"></O></C>
+<C c="9" r="72"><O t="S"></O></C>
+<C c="10" r="72"><O t="S"></O></C>
+<C c="11" r="72"><O t="S"></O></C>
+<C c="12" r="72"><O t="S"></O></C>
+<C c="13" r="72"><O t="S"></O></C>
+<C c="14" r="72"><O t="S"></O></C>
+<C c="15" r="72"><O t="S"></O></C>
+<C c="16" r="72"><O t="S"></O></C>
+<C c="17" r="72"><O t="S"></O></C>
+<C c="18" r="72"><O t="S"></O></C>
+<C c="0" r="73"><O t="S"></O></C>
+<C c="1" r="73"><O t="S"></O></C>
+<C c="2" r="73"><O t="S"></O></C>
+<C c="3" r="73"><O t="S"></O></C>
+<C c="4" r="73"><O t="S"></O></C>
+<C c="5" r="73"><O t="S"></O></C>
+<C c="6" r="73"><O t="S"></O></C>
+<C c="7" r="73"><O t="S"></O></C>
+<C c="8" r="73"><O t="S"></O></C>
+<C c="9" r="73"><O t="S"></O></C>
+<C c="10" r="73"><O t="S"></O></C>
+<C c="11" r="73"><O t="S"></O></C>
+<C c="12" r="73"><O t="S"></O></C>
+<C c="13" r="73"><O t="S"></O></C>
+<C c="14" r="73"><O t="S"></O></C>
+<C c="15" r="73"><O t="S"></O></C>
+<C c="16" r="73"><O t="S"></O></C>
+<C c="17" r="73"><O t="S"></O></C>
+<C c="18" r="73"><O t="S"></O></C>
+<C c="0" r="74"><O t="S"></O></C>
+<C c="1" r="74"><O t="S"></O></C>
+<C c="2" r="74"><O t="S"></O></C>
+<C c="3" r="74"><O t="S"></O></C>
+<C c="4" r="74"><O t="S"></O></C>
+<C c="5" r="74"><O t="S"></O></C>
+<C c="6" r="74"><O t="S"></O></C>
+<C c="7" r="74"><O t="S"></O></C>
+<C c="8" r="74"><O t="S"></O></C>
+<C c="9" r="74"><O t="S"></O></C>
+<C c="10" r="74"><O t="S"></O></C>
+<C c="11" r="74"><O t="S"></O></C>
+<C c="12" r="74"><O t="S"></O></C>
+<C c="13" r="74"><O t="S"></O></C>
+<C c="14" r="74"><O t="S"></O></C>
+<C c="15" r="74"><O t="S"></O></C>
+<C c="16" r="74"><O t="S"></O></C>
+<C c="17" r="74"><O t="S"></O></C>
+<C c="18" r="74"><O t="S"></O></C>
+<C c="0" r="75"><O t="S"></O></C>
+<C c="1" r="75"><O t="S"></O></C>
+<C c="2" r="75"><O t="S"></O></C>
+<C c="3" r="75"><O t="S"></O></C>
+<C c="4" r="75"><O t="S"></O></C>
+<C c="5" r="75"><O t="S"></O></C>
+<C c="6" r="75"><O t="S"></O></C>
+<C c="7" r="75"><O t="S"></O></C>
+<C c="8" r="75"><O t="S"></O></C>
+<C c="9" r="75"><O t="S"></O></C>
+<C c="10" r="75"><O t="S"></O></C>
+<C c="11" r="75"><O t="S"></O></C>
+<C c="12" r="75"><O t="S"></O></C>
+<C c="13" r="75"><O t="S"></O></C>
+<C c="14" r="75"><O t="S"></O></C>
+<C c="15" r="75"><O t="S"></O></C>
+<C c="16" r="75"><O t="S"></O></C>
+<C c="17" r="75"><O t="S"></O></C>
+<C c="18" r="75"><O t="S"></O></C>
+<C c="0" r="76"><O t="S"></O></C>
+<C c="1" r="76"><O t="S"></O></C>
+<C c="2" r="76"><O t="S"></O></C>
+<C c="3" r="76"><O t="S"></O></C>
+<C c="4" r="76"><O t="S"></O></C>
+<C c="5" r="76"><O t="S"></O></C>
+<C c="6" r="76"><O t="S"></O></C>
+<C c="7" r="76"><O t="S"></O></C>
+<C c="8" r="76"><O t="S"></O></C>
+<C c="9" r="76"><O t="S"></O></C>
+<C c="10" r="76"><O t="S"></O></C>
+<C c="11" r="76"><O t="S"></O></C>
+<C c="12" r="76"><O t="S"></O></C>
+<C c="13" r="76"><O t="S"></O></C>
+<C c="14" r="76"><O t="S"></O></C>
+<C c="15" r="76"><O t="S"></O></C>
+<C c="16" r="76"><O t="S"></O></C>
+<C c="17" r="76"><O t="S"></O></C>
+<C c="18" r="76"><O t="S"></O></C>
+<C c="0" r="77"><O t="S"></O></C>
+<C c="1" r="77"><O t="S"></O></C>
+<C c="2" r="77"><O t="S"></O></C>
+<C c="3" r="77"><O t="S"></O></C>
+<C c="4" r="77"><O t="S"></O></C>
+<C c="5" r="77"><O t="S"></O></C>
+<C c="6" r="77"><O t="S"></O></C>
+<C c="7" r="77"><O t="S"></O></C>
+<C c="8" r="77"><O t="S"></O></C>
+<C c="9" r="77"><O t="S"></O></C>
+<C c="10" r="77"><O t="S"></O></C>
+<C c="11" r="77"><O t="S"></O></C>
+<C c="12" r="77"><O t="S"></O></C>
+<C c="13" r="77"><O t="S"></O></C>
+<C c="14" r="77"><O t="S"></O></C>
+<C c="15" r="77"><O t="S"></O></C>
+<C c="16" r="77"><O t="S"></O></C>
+<C c="17" r="77"><O t="S"></O></C>
+<C c="18" r="77"><O t="S"></O></C>
+<C c="0" r="78"><O t="S"></O></C>
+<C c="1" r="78"><O t="S"></O></C>
+<C c="2" r="78"><O t="S"></O></C>
+<C c="3" r="78"><O t="S"></O></C>
+<C c="4" r="78"><O t="S"></O></C>
+<C c="5" r="78"><O t="S"></O></C>
+<C c="6" r="78"><O t="S"></O></C>
+<C c="7" r="78"><O t="S"></O></C>
+<C c="8" r="78"><O t="S"></O></C>
+<C c="9" r="78"><O t="S"></O></C>
+<C c="10" r="78"><O t="S"></O></C>
+<C c="11" r="78"><O t="S"></O></C>
+<C c="12" r="78"><O t="S"></O></C>
+<C c="13" r="78"><O t="S"></O></C>
+<C c="14" r="78"><O t="S"></O></C>
+<C c="15" r="78"><O t="S"></O></C>
+<C c="16" r="78"><O t="S"></O></C>
+<C c="17" r="78"><O t="S"></O></C>
+<C c="18" r="78"><O t="S"></O></C>
+<C c="0" r="79"><O t="S"></O></C>
+<C c="1" r="79"><O t="S"></O></C>
+<C c="2" r="79"><O t="S"></O></C>
+<C c="3" r="79"><O t="S"></O></C>
+<C c="4" r="79"><O t="S"></O></C>
+<C c="5" r="79"><O t="S"></O></C>
+<C c="6" r="79"><O t="S"></O></C>
+<C c="7" r="79"><O t="S"></O></C>
+<C c="8" r="79"><O t="S"></O></C>
+<C c="9" r="79"><O t="S"></O></C>
+<C c="10" r="79"><O t="S"></O></C>
+<C c="11" r="79"><O t="S"></O></C>
+<C c="12" r="79"><O t="S"></O></C>
+<C c="13" r="79"><O t="S"></O></C>
+<C c="14" r="79"><O t="S"></O></C>
+<C c="15" r="79"><O t="S"></O></C>
+<C c="16" r="79"><O t="S"></O></C>
+<C c="17" r="79"><O t="S"></O></C>
+<C c="18" r="79"><O t="S"></O></C>
+<C c="0" r="80"><O t="S"></O></C>
+<C c="1" r="80"><O t="S"></O></C>
+<C c="2" r="80"><O t="S"></O></C>
+<C c="3" r="80"><O t="S"></O></C>
+<C c="4" r="80"><O t="S"></O></C>
+<C c="5" r="80"><O t="S"></O></C>
+<C c="6" r="80"><O t="S"></O></C>
+<C c="7" r="80"><O t="S"></O></C>
+<C c="8" r="80"><O t="S"></O></C>
+<C c="9" r="80"><O t="S"></O></C>
+<C c="10" r="80"><O t="S"></O></C>
+<C c="11" r="80"><O t="S"></O></C>
+<C c="12" r="80"><O t="S"></O></C>
+<C c="13" r="80"><O t="S"></O></C>
+<C c="14" r="80"><O t="S"></O></C>
+<C c="15" r="80"><O t="S"></O></C>
+<C c="16" r="80"><O t="S"></O></C>
+<C c="17" r="80"><O t="S"></O></C>
+<C c="18" r="80"><O t="S"></O></C>
+<C c="0" r="81"><O t="S"></O></C>
+<C c="1" r="81"><O t="S"></O></C>
+<C c="2" r="81"><O t="S"></O></C>
+<C c="3" r="81"><O t="S"></O></C>
+<C c="4" r="81"><O t="S"></O></C>
+<C c="5" r="81"><O t="S"></O></C>
+<C c="6" r="81"><O t="S"></O></C>
+<C c="7" r="81"><O t="S"></O></C>
+<C c="8" r="81"><O t="S"></O></C>
+<C c="9" r="81"><O t="S"></O></C>
+<C c="10" r="81"><O t="S"></O></C>
+<C c="11" r="81"><O t="S"></O></C>
+<C c="12" r="81"><O t="S"></O></C>
+<C c="13" r="81"><O t="S"></O></C>
+<C c="14" r="81"><O t="S"></O></C>
+<C c="15" r="81"><O t="S"></O></C>
+<C c="16" r="81"><O t="S"></O></C>
+<C c="17" r="81"><O t="S"></O></C>
+<C c="18" r="81"><O t="S"></O></C>
+<C c="0" r="82"><O t="S"></O></C>
+<C c="1" r="82"><O t="S"></O></C>
+<C c="2" r="82"><O t="S"></O></C>
+<C c="3" r="82"><O t="S"></O></C>
+<C c="4" r="82"><O t="S"></O></C>
+<C c="5" r="82"><O t="S"></O></C>
+<C c="6" r="82"><O t="S"></O></C>
+<C c="7" r="82"><O t="S"></O></C>
+<C c="8" r="82"><O t="S"></O></C>
+<C c="9" r="82"><O t="S"></O></C>
+<C c="10" r="82"><O t="S"></O></C>
+<C c="11" r="82"><O t="S"></O></C>
+<C c="12" r="82"><O t="S"></O></C>
+<C c="13" r="82"><O t="S"></O></C>
+<C c="14" r="82"><O t="S"></O></C>
+<C c="15" r="82"><O t="S"></O></C>
+<C c="16" r="82"><O t="S"></O></C>
+<C c="17" r="82"><O t="S"></O></C>
+<C c="18" r="82"><O t="S"></O></C>
+<C c="0" r="83"><O t="S"></O></C>
+<C c="1" r="83"><O t="S"></O></C>
+<C c="2" r="83"><O t="S"></O></C>
+<C c="3" r="83"><O t="S"></O></C>
+<C c="4" r="83"><O t="S"></O></C>
+<C c="5" r="83"><O t="S"></O></C>
+<C c="6" r="83"><O t="S"></O></C>
+<C c="7" r="83"><O t="S"></O></C>
+<C c="8" r="83"><O t="S"></O></C>
+<C c="9" r="83"><O t="S"></O></C>
+<C c="10" r="83"><O t="S"></O></C>
+<C c="11" r="83"><O t="S"></O></C>
+<C c="12" r="83"><O t="S"></O></C>
+<C c="13" r="83"><O t="S"></O></C>
+<C c="14" r="83"><O t="S"></O></C>
+<C c="15" r="83"><O t="S"></O></C>
+<C c="16" r="83"><O t="S"></O></C>
+<C c="17" r="83"><O t="S"></O></C>
+<C c="18" r="83"><O t="S"></O></C>
+<C c="0" r="84"><O t="S"></O></C>
+<C c="1" r="84"><O t="S"></O></C>
+<C c="2" r="84"><O t="S"></O></C>
+<C c="3" r="84"><O t="S"></O></C>
+<C c="4" r="84"><O t="S"></O></C>
+<C c="5" r="84"><O t="S"></O></C>
+<C c="6" r="84"><O t="S"></O></C>
+<C c="7" r="84"><O t="S"></O></C>
+<C c="8" r="84"><O t="S"></O></C>
+<C c="9" r="84"><O t="S"></O></C>
+<C c="10" r="84"><O t="S"></O></C>
+<C c="11" r="84"><O t="S"></O></C>
+<C c="12" r="84"><O t="S"></O></C>
+<C c="13" r="84"><O t="S"></O></C>
+<C c="14" r="84"><O t="S"></O></C>
+<C c="15" r="84"><O t="S"></O></C>
+<C c="16" r="84"><O t="S"></O></C>
+<C c="17" r="84"><O t="S"></O></C>
+<C c="18" r="84"><O t="S"></O></C>
+<C c="0" r="85"><O t="S"></O></C>
+<C c="1" r="85"><O t="S"></O></C>
+<C c="2" r="85"><O t="S"></O></C>
+<C c="3" r="85"><O t="S"></O></C>
+<C c="4" r="85"><O t="S"></O></C>
+<C c="5" r="85"><O t="S"></O></C>
+<C c="6" r="85"><O t="S"></O></C>
+<C c="7" r="85"><O t="S"></O></C>
+<C c="8" r="85"><O t="S"></O></C>
+<C c="9" r="85"><O t="S"></O></C>
+<C c="10" r="85"><O t="S"></O></C>
+<C c="11" r="85"><O t="S"></O></C>
+<C c="12" r="85"><O t="S"></O></C>
+<C c="13" r="85"><O t="S"></O></C>
+<C c="14" r="85"><O t="S"></O></C>
+<C c="15" r="85"><O t="S"></O></C>
+<C c="16" r="85"><O t="S"></O></C>
+<C c="17" r="85"><O t="S"></O></C>
+<C c="18" r="85"><O t="S"></O></C>
+<C c="0" r="86"><O t="S"></O></C>
+<C c="1" r="86"><O t="S"></O></C>
+<C c="2" r="86"><O t="S"></O></C>
+<C c="3" r="86"><O t="S"></O></C>
+<C c="4" r="86"><O t="S"></O></C>
+<C c="5" r="86"><O t="S"></O></C>
+<C c="6" r="86"><O t="S"></O></C>
+<C c="7" r="86"><O t="S"></O></C>
+<C c="8" r="86"><O t="S"></O></C>
+<C c="9" r="86"><O t="S"></O></C>
+<C c="10" r="86"><O t="S"></O></C>
+<C c="11" r="86"><O t="S"></O></C>
+<C c="12" r="86"><O t="S"></O></C>
+<C c="13" r="86"><O t="S"></O></C>
+<C c="14" r="86"><O t="S"></O></C>
+<C c="15" r="86"><O t="S"></O></C>
+<C c="16" r="86"><O t="S"></O></C>
+<C c="17" r="86"><O t="S"></O></C>
+<C c="18" r="86"><O t="S"></O></C>
+<C c="0" r="87"><O t="S"></O></C>
+<C c="1" r="87"><O t="S"></O></C>
+<C c="2" r="87"><O t="S"></O></C>
+<C c="3" r="87"><O t="S"></O></C>
+<C c="4" r="87"><O t="S"></O></C>
+<C c="5" r="87"><O t="S"></O></C>
+<C c="6" r="87"><O t="S"></O></C>
+<C c="7" r="87"><O t="S"></O></C>
+<C c="8" r="87"><O t="S"></O></C>
+<C c="9" r="87"><O t="S"></O></C>
+<C c="10" r="87"><O t="S"></O></C>
+<C c="11" r="87"><O t="S"></O></C>
+<C c="12" r="87"><O t="S"></O></C>
+<C c="13" r="87"><O t="S"></O></C>
+<C c="14" r="87"><O t="S"></O></C>
+<C c="15" r="87"><O t="S"></O></C>
+<C c="16" r="87"><O t="S"></O></C>
+<C c="17" r="87"><O t="S"></O></C>
+<C c="18" r="87"><O t="S"></O></C>
+<C c="0" r="88"><O t="S"></O></C>
+<C c="1" r="88"><O t="S"></O></C>
+<C c="2" r="88"><O t="S"></O></C>
+<C c="3" r="88"><O t="S"></O></C>
+<C c="4" r="88"><O t="S"></O></C>
+<C c="5" r="88"><O t="S"></O></C>
+<C c="6" r="88"><O t="S"></O></C>
+<C c="7" r="88"><O t="S"></O></C>
+<C c="8" r="88"><O t="S"></O></C>
+<C c="9" r="88"><O t="S"></O></C>
+<C c="10" r="88"><O t="S"></O></C>
+<C c="11" r="88"><O t="S"></O></C>
+<C c="12" r="88"><O t="S"></O></C>
+<C c="13" r="88"><O t="S"></O></C>
+<C c="14" r="88"><O t="S"></O></C>
+<C c="15" r="88"><O t="S"></O></C>
+<C c="16" r="88"><O t="S"></O></C>
+<C c="17" r="88"><O t="S"></O></C>
+<C c="18" r="88"><O t="S"></O></C>
+<C c="0" r="89"><O t="S"></O></C>
+<C c="1" r="89"><O t="S"></O></C>
+<C c="2" r="89"><O t="S"></O></C>
+<C c="3" r="89"><O t="S"></O></C>
+<C c="4" r="89"><O t="S"></O></C>
+<C c="5" r="89"><O t="S"></O></C>
+<C c="6" r="89"><O t="S"></O></C>
+<C c="7" r="89"><O t="S"></O></C>
+<C c="8" r="89"><O t="S"></O></C>
+<C c="9" r="89"><O t="S"></O></C>
+<C c="10" r="89"><O t="S"></O></C>
+<C c="11" r="89"><O t="S"></O></C>
+<C c="12" r="89"><O t="S"></O></C>
+<C c="13" r="89"><O t="S"></O></C>
+<C c="14" r="89"><O t="S"></O></C>
+<C c="15" r="89"><O t="S"></O></C>
+<C c="16" r="89"><O t="S"></O></C>
+<C c="17" r="89"><O t="S"></O></C>
+<C c="18" r="89"><O t="S"></O></C>
+<C c="0" r="90"><O t="S"></O></C>
+<C c="1" r="90"><O t="S"></O></C>
+<C c="2" r="90"><O t="S"></O></C>
+<C c="3" r="90"><O t="S"></O></C>
+<C c="4" r="90"><O t="S"></O></C>
+<C c="5" r="90"><O t="S"></O></C>
+<C c="6" r="90"><O t="S"></O></C>
+<C c="7" r="90"><O t="S"></O></C>
+<C c="8" r="90"><O t="S"></O></C>
+<C c="9" r="90"><O t="S"></O></C>
+<C c="10" r="90"><O t="S"></O></C>
+<C c="11" r="90"><O t="S"></O></C>
+<C c="12" r="90"><O t="S"></O></C>
+<C c="13" r="90"><O t="S"></O></C>
+<C c="14" r="90"><O t="S"></O></C>
+<C c="15" r="90"><O t="S"></O></C>
+<C c="16" r="90"><O t="S"></O></C>
+<C c="17" r="90"><O t="S"></O></C>
+<C c="18" r="90"><O t="S"></O></C>
+<C c="0" r="91"><O t="S"></O></C>
+<C c="1" r="91"><O t="S"></O></C>
+<C c="2" r="91"><O t="S"></O></C>
+<C c="3" r="91"><O t="S"></O></C>
+<C c="4" r="91"><O t="S"></O></C>
+<C c="5" r="91"><O t="S"></O></C>
+<C c="6" r="91"><O t="S"></O></C>
+<C c="7" r="91"><O t="S"></O></C>
+<C c="8" r="91"><O t="S"></O></C>
+<C c="9" r="91"><O t="S"></O></C>
+<C c="10" r="91"><O t="S"></O></C>
+<C c="11" r="91"><O t="S"></O></C>
+<C c="12" r="91"><O t="S"></O></C>
+<C c="13" r="91"><O t="S"></O></C>
+<C c="14" r="91"><O t="S"></O></C>
+<C c="15" r="91"><O t="S"></O></C>
+<C c="16" r="91"><O t="S"></O></C>
+<C c="17" r="91"><O t="S"></O></C>
+<C c="18" r="91"><O t="S"></O></C>
+<C c="0" r="92"><O t="S"></O></C>
+<C c="1" r="92"><O t="S"></O></C>
+<C c="2" r="92"><O t="S"></O></C>
+<C c="3" r="92"><O t="S"></O></C>
+<C c="4" r="92"><O t="S"></O></C>
+<C c="5" r="92"><O t="S"></O></C>
+<C c="6" r="92"><O t="S"></O></C>
+<C c="7" r="92"><O t="S"></O></C>
+<C c="8" r="92"><O t="S"></O></C>
+<C c="9" r="92"><O t="S"></O></C>
+<C c="10" r="92"><O t="S"></O></C>
+<C c="11" r="92"><O t="S"></O></C>
+<C c="12" r="92"><O t="S"></O></C>
+<C c="13" r="92"><O t="S"></O></C>
+<C c="14" r="92"><O t="S"></O></C>
+<C c="15" r="92"><O t="S"></O></C>
+<C c="16" r="92"><O t="S"></O></C>
+<C c="17" r="92"><O t="S"></O></C>
+<C c="18" r="92"><O t="S"></O></C>
+<C c="0" r="93"><O t="S"></O></C>
+<C c="1" r="93"><O t="S"></O></C>
+<C c="2" r="93"><O t="S"></O></C>
+<C c="3" r="93"><O t="S"></O></C>
+<C c="4" r="93"><O t="S"></O></C>
+<C c="5" r="93"><O t="S"></O></C>
+<C c="6" r="93"><O t="S"></O></C>
+<C c="7" r="93"><O t="S"></O></C>
+<C c="8" r="93"><O t="S"></O></C>
+<C c="9" r="93"><O t="S"></O></C>
+<C c="10" r="93"><O t="S"></O></C>
+<C c="11" r="93"><O t="S"></O></C>
+<C c="12" r="93"><O t="S"></O></C>
+<C c="13" r="93"><O t="S"></O></C>
+<C c="14" r="93"><O t="S"></O></C>
+<C c="15" r="93"><O t="S"></O></C>
+<C c="16" r="93"><O t="S"></O></C>
+<C c="17" r="93"><O t="S"></O></C>
+<C c="18" r="93"><O t="S"></O></C>
+<C c="0" r="94"><O t="S"></O></C>
+<C c="1" r="94"><O t="S"></O></C>
+<C c="2" r="94"><O t="S"></O></C>
+<C c="3" r="94"><O t="S"></O></C>
+<C c="4" r="94"><O t="S"></O></C>
+<C c="5" r="94"><O t="S"></O></C>
+<C c="6" r="94"><O t="S"></O></C>
+<C c="7" r="94"><O t="S"></O></C>
+<C c="8" r="94"><O t="S"></O></C>
+<C c="9" r="94"><O t="S"></O></C>
+<C c="10" r="94"><O t="S"></O></C>
+<C c="11" r="94"><O t="S"></O></C>
+<C c="12" r="94"><O t="S"></O></C>
+<C c="13" r="94"><O t="S"></O></C>
+<C c="14" r="94"><O t="S"></O></C>
+<C c="15" r="94"><O t="S"></O></C>
+<C c="16" r="94"><O t="S"></O></C>
+<C c="17" r="94"><O t="S"></O></C>
+<C c="18" r="94"><O t="S"></O></C>
+<C c="0" r="95"><O t="S"></O></C>
+<C c="1" r="95"><O t="S"></O></C>
+<C c="2" r="95"><O t="S"></O></C>
+<C c="3" r="95"><O t="S"></O></C>
+<C c="4" r="95"><O t="S"></O></C>
+<C c="5" r="95"><O t="S"></O></C>
+<C c="6" r="95"><O t="S"></O></C>
+<C c="7" r="95"><O t="S"></O></C>
+<C c="8" r="95"><O t="S"></O></C>
+<C c="9" r="95"><O t="S"></O></C>
+<C c="10" r="95"><O t="S"></O></C>
+<C c="11" r="95"><O t="S"></O></C>
+<C c="12" r="95"><O t="S"></O></C>
+<C c="13" r="95"><O t="S"></O></C>
+<C c="14" r="95"><O t="S"></O></C>
+<C c="15" r="95"><O t="S"></O></C>
+<C c="16" r="95"><O t="S"></O></C>
+<C c="17" r="95"><O t="S"></O></C>
+<C c="18" r="95"><O t="S"></O></C>
+<C c="0" r="96"><O t="S"></O></C>
+<C c="1" r="96"><O t="S"></O></C>
+<C c="2" r="96"><O t="S"></O></C>
+<C c="3" r="96"><O t="S"></O></C>
+<C c="4" r="96"><O t="S"></O></C>
+<C c="5" r="96"><O t="S"></O></C>
+<C c="6" r="96"><O t="S"></O></C>
+<C c="7" r="96"><O t="S"></O></C>
+<C c="8" r="96"><O t="S"></O></C>
+<C c="9" r="96"><O t="S"></O></C>
+<C c="10" r="96"><O t="S"></O></C>
+<C c="11" r="96"><O t="S"></O></C>
+<C c="12" r="96"><O t="S"></O></C>
+<C c="13" r="96"><O t="S"></O></C>
+<C c="14" r="96"><O t="S"></O></C>
+<C c="15" r="96"><O t="S"></O></C>
+<C c="16" r="96"><O t="S"></O></C>
+<C c="17" r="96"><O t="S"></O></C>
+<C c="18" r="96"><O t="S"></O></C>
+<C c="0" r="97"><O t="S"></O></C>
+<C c="1" r="97"><O t="S"></O></C>
+<C c="2" r="97"><O t="S"></O></C>
+<C c="3" r="97"><O t="S"></O></C>
+<C c="4" r="97"><O t="S"></O></C>
+<C c="5" r="97"><O t="S"></O></C>
+<C c="6" r="97"><O t="S"></O></C>
+<C c="7" r="97"><O t="S"></O></C>
+<C c="8" r="97"><O t="S"></O></C>
+<C c="9" r="97"><O t="S"></O></C>
+<C c="10" r="97"><O t="S"></O></C>
+<C c="11" r="97"><O t="S"></O></C>
+<C c="12" r="97"><O t="S"></O></C>
+<C c="13" r="97"><O t="S"></O></C>
+<C c="14" r="97"><O t="S"></O></C>
+<C c="15" r="97"><O t="S"></O></C>
+<C c="16" r="97"><O t="S"></O></C>
+<C c="17" r="97"><O t="S"></O></C>
+<C c="18" r="97"><O t="S"></O></C>
+<C c="0" r="98"><O t="S"></O></C>
+<C c="1" r="98"><O t="S"></O></C>
+<C c="2" r="98"><O t="S"></O></C>
+<C c="3" r="98"><O t="S"></O></C>
+<C c="4" r="98"><O t="S"></O></C>
+<C c="5" r="98"><O t="S"></O></C>
+<C c="6" r="98"><O t="S"></O></C>
+<C c="7" r="98"><O t="S"></O></C>
+<C c="8" r="98"><O t="S"></O></C>
+<C c="9" r="98"><O t="S"></O></C>
+<C c="10" r="98"><O t="S"></O></C>
+<C c="11" r="98"><O t="S"></O></C>
+<C c="12" r="98"><O t="S"></O></C>
+<C c="13" r="98"><O t="S"></O></C>
+<C c="14" r="98"><O t="S"></O></C>
+<C c="15" r="98"><O t="S"></O></C>
+<C c="16" r="98"><O t="S"></O></C>
+<C c="17" r="98"><O t="S"></O></C>
+<C c="18" r="98"><O t="S"></O></C>
+<C c="0" r="99"><O t="S"></O></C>
+<C c="1" r="99"><O t="S"></O></C>
+<C c="2" r="99"><O t="S"></O></C>
+<C c="3" r="99"><O t="S"></O></C>
+<C c="4" r="99"><O t="S"></O></C>
+<C c="5" r="99"><O t="S"></O></C>
+<C c="6" r="99"><O t="S"></O></C>
+<C c="7" r="99"><O t="S"></O></C>
+<C c="8" r="99"><O t="S"></O></C>
+<C c="9" r="99"><O t="S"></O></C>
+<C c="10" r="99"><O t="S"></O></C>
+<C c="11" r="99"><O t="S"></O></C>
+<C c="12" r="99"><O t="S"></O></C>
+<C c="13" r="99"><O t="S"></O></C>
+<C c="14" r="99"><O t="S"></O></C>
+<C c="15" r="99"><O t="S"></O></C>
+<C c="16" r="99"><O t="S"></O></C>
+<C c="17" r="99"><O t="S"></O></C>
+<C c="18" r="99"><O t="S"></O></C>
+<C c="0" r="100"><O t="S"></O></C>
+<C c="1" r="100"><O t="S"></O></C>
+<C c="2" r="100"><O t="S"></O></C>
+<C c="3" r="100"><O t="S"></O></C>
+<C c="4" r="100"><O t="S"></O></C>
+<C c="5" r="100"><O t="S"></O></C>
+<C c="6" r="100"><O t="S"></O></C>
+<C c="7" r="100"><O t="S"></O></C>
+<C c="8" r="100"><O t="S"></O></C>
+<C c="9" r="100"><O t="S"></O></C>
+<C c="10" r="100"><O t="S"></O></C>
+<C c="11" r="100"><O t="S"></O></C>
+<C c="12" r="100"><O t="S"></O></C>
+<C c="13" r="100"><O t="S"></O></C>
+<C c="14" r="100"><O t="S"></O></C>
+<C c="15" r="100"><O t="S"></O></C>
+<C c="16" r="100"><O t="S"></O></C>
+<C c="17" r="100"><O t="S"></O></C>
+<C c="18" r="100"><O t="S"></O></C>
+<C c="0" r="101"><O t="S"></O></C>
+<C c="1" r="101"><O t="S"></O></C>
+<C c="2" r="101"><O t="S"></O></C>
+<C c="3" r="101"><O t="S"></O></C>
+<C c="4" r="101"><O t="S"></O></C>
+<C c="5" r="101"><O t="S"></O></C>
+<C c="6" r="101"><O t="S"></O></C>
+<C c="7" r="101"><O t="S"></O></C>
+<C c="8" r="101"><O t="S"></O></C>
+<C c="9" r="101"><O t="S"></O></C>
+<C c="10" r="101"><O t="S"></O></C>
+<C c="11" r="101"><O t="S"></O></C>
+<C c="12" r="101"><O t="S"></O></C>
+<C c="13" r="101"><O t="S"></O></C>
+<C c="14" r="101"><O t="S"></O></C>
+<C c="15" r="101"><O t="S"></O></C>
+<C c="16" r="101"><O t="S"></O></C>
+<C c="17" r="101"><O t="S"></O></C>
+<C c="18" r="101"><O t="S"></O></C>
+<C c="0" r="102"><O t="S"></O></C>
+<C c="1" r="102"><O t="S"></O></C>
+<C c="2" r="102"><O t="S"></O></C>
+<C c="3" r="102"><O t="S"></O></C>
+<C c="4" r="102"><O t="S"></O></C>
+<C c="5" r="102"><O t="S"></O></C>
+<C c="6" r="102"><O t="S"></O></C>
+<C c="7" r="102"><O t="S"></O></C>
+<C c="8" r="102"><O t="S"></O></C>
+<C c="9" r="102"><O t="S"></O></C>
+<C c="10" r="102"><O t="S"></O></C>
+<C c="11" r="102"><O t="S"></O></C>
+<C c="12" r="102"><O t="S"></O></C>
+<C c="13" r="102"><O t="S"></O></C>
+<C c="14" r="102"><O t="S"></O></C>
+<C c="15" r="102"><O t="S"></O></C>
+<C c="16" r="102"><O t="S"></O></C>
+<C c="17" r="102"><O t="S"></O></C>
+<C c="18" r="102"><O t="S"></O></C>
+<C c="0" r="103"><O t="S"></O></C>
+<C c="1" r="103"><O t="S"></O></C>
+<C c="2" r="103"><O t="S"></O></C>
+<C c="3" r="103"><O t="S"></O></C>
+<C c="4" r="103"><O t="S"></O></C>
+<C c="5" r="103"><O t="S"></O></C>
+<C c="6" r="103"><O t="S"></O></C>
+<C c="7" r="103"><O t="S"></O></C>
+<C c="8" r="103"><O t="S"></O></C>
+<C c="9" r="103"><O t="S"></O></C>
+<C c="10" r="103"><O t="S"></O></C>
+<C c="11" r="103"><O t="S"></O></C>
+<C c="12" r="103"><O t="S"></O></C>
+<C c="13" r="103"><O t="S"></O></C>
+<C c="14" r="103"><O t="S"></O></C>
+<C c="15" r="103"><O t="S"></O></C>
+<C c="16" r="103"><O t="S"></O></C>
+<C c="17" r="103"><O t="S"></O></C>
+<C c="18" r="103"><O t="S"></O></C>
+<C c="0" r="104"><O t="S"></O></C>
+<C c="1" r="104"><O t="S"></O></C>
+<C c="2" r="104"><O t="S"></O></C>
+<C c="3" r="104"><O t="S"></O></C>
+<C c="4" r="104"><O t="S"></O></C>
+<C c="5" r="104"><O t="S"></O></C>
+<C c="6" r="104"><O t="S"></O></C>
+<C c="7" r="104"><O t="S"></O></C>
+<C c="8" r="104"><O t="S"></O></C>
+<C c="9" r="104"><O t="S"></O></C>
+<C c="10" r="104"><O t="S"></O></C>
+<C c="11" r="104"><O t="S"></O></C>
+<C c="12" r="104"><O t="S"></O></C>
+<C c="13" r="104"><O t="S"></O></C>
+<C c="14" r="104"><O t="S"></O></C>
+<C c="15" r="104"><O t="S"></O></C>
+<C c="16" r="104"><O t="S"></O></C>
+<C c="17" r="104"><O t="S"></O></C>
+<C c="18" r="104"><O t="S"></O></C>
+<C c="0" r="105"><O t="S"></O></C>
+<C c="1" r="105"><O t="S"></O></C>
+<C c="2" r="105"><O t="S"></O></C>
+<C c="3" r="105"><O t="S"></O></C>
+<C c="4" r="105"><O t="S"></O></C>
+<C c="5" r="105"><O t="S"></O></C>
+<C c="6" r="105"><O t="S"></O></C>
+<C c="7" r="105"><O t="S"></O></C>
+<C c="8" r="105"><O t="S"></O></C>
+<C c="9" r="105"><O t="S"></O></C>
+<C c="10" r="105"><O t="S"></O></C>
+<C c="11" r="105"><O t="S"></O></C>
+<C c="12" r="105"><O t="S"></O></C>
+<C c="13" r="105"><O t="S"></O></C>
+<C c="14" r="105"><O t="S"></O></C>
+<C c="15" r="105"><O t="S"></O></C>
+<C c="16" r="105"><O t="S"></O></C>
+<C c="17" r="105"><O t="S"></O></C>
+<C c="18" r="105"><O t="S"></O></C>
+<C c="0" r="106"><O t="S"></O></C>
+<C c="1" r="106"><O t="S"></O></C>
+<C c="2" r="106"><O t="S"></O></C>
+<C c="3" r="106"><O t="S"></O></C>
+<C c="4" r="106"><O t="S"></O></C>
+<C c="5" r="106"><O t="S"></O></C>
+<C c="6" r="106"><O t="S"></O></C>
+<C c="7" r="106"><O t="S"></O></C>
+<C c="8" r="106"><O t="S"></O></C>
+<C c="9" r="106"><O t="S"></O></C>
+<C c="10" r="106"><O t="S"></O></C>
+<C c="11" r="106"><O t="S"></O></C>
+<C c="12" r="106"><O t="S"></O></C>
+<C c="13" r="106"><O t="S"></O></C>
+<C c="14" r="106"><O t="S"></O></C>
+<C c="15" r="106"><O t="S"></O></C>
+<C c="16" r="106"><O t="S"></O></C>
+<C c="17" r="106"><O t="S"></O></C>
+<C c="18" r="106"><O t="S"></O></C>
+<C c="0" r="107"><O t="S"></O></C>
+<C c="1" r="107"><O t="S"></O></C>
+<C c="2" r="107"><O t="S"></O></C>
+<C c="3" r="107"><O t="S"></O></C>
+<C c="4" r="107"><O t="S"></O></C>
+<C c="5" r="107"><O t="S"></O></C>
+<C c="6" r="107"><O t="S"></O></C>
+<C c="7" r="107"><O t="S"></O></C>
+<C c="8" r="107"><O t="S"></O></C>
+<C c="9" r="107"><O t="S"></O></C>
+<C c="10" r="107"><O t="S"></O></C>
+<C c="11" r="107"><O t="S"></O></C>
+<C c="12" r="107"><O t="S"></O></C>
+<C c="13" r="107"><O t="S"></O></C>
+<C c="14" r="107"><O t="S"></O></C>
+<C c="15" r="107"><O t="S"></O></C>
+<C c="16" r="107"><O t="S"></O></C>
+<C c="17" r="107"><O t="S"></O></C>
+<C c="18" r="107"><O t="S"></O></C>
+<C c="0" r="108"><O t="S"></O></C>
+<C c="1" r="108"><O t="S"></O></C>
+<C c="2" r="108"><O t="S"></O></C>
+<C c="3" r="108"><O t="S"></O></C>
+<C c="4" r="108"><O t="S"></O></C>
+<C c="5" r="108"><O t="S"></O></C>
+<C c="6" r="108"><O t="S"></O></C>
+<C c="7" r="108"><O t="S"></O></C>
+<C c="8" r="108"><O t="S"></O></C>
+<C c="9" r="108"><O t="S"></O></C>
+<C c="10" r="108"><O t="S"></O></C>
+<C c="11" r="108"><O t="S"></O></C>
+<C c="12" r="108"><O t="S"></O></C>
+<C c="13" r="108"><O t="S"></O></C>
+<C c="14" r="108"><O t="S"></O></C>
+<C c="15" r="108"><O t="S"></O></C>
+<C c="16" r="108"><O t="S"></O></C>
+<C c="17" r="108"><O t="S"></O></C>
+<C c="18" r="108"><O t="S"></O></C>
+</CellElementList>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="41" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="16" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="16" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="12" />
+<Background name="NullBackground" />
+<Border><Top style="1" /><Bottom style="1" /><Left style="1" /><Right style="1" /></Border>
+</Style>
+</StyleList>
+</WorkBook>

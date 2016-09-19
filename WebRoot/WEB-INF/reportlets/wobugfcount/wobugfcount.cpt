@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report class="com.fr.report.WorkSheet">
+<Version>2.0</Version>
+<TableDataMap>
+<NameTableData name="inbasis.wobugeq">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="sitenum" type="0">
+<O t="S">like &apos;%&apos;</O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select a.* from wobugeq a,equipment b where a.eqnum=b.eqnum 
+and (a.sitenum [?sitenum|like '%'?]) order by a.ID]]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.equpment">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="sitenum" type="0">
+<O t="S">like &apos;%&apos;</O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select b.* from wobugeq a,equipment b where a.eqnum=b.eqnum
+and   (a.sitenum [?sitenum|like '%'?])
+]]></Query>
+</TableData>
+</NameTableData>
+<NameTableData name="inbasis.wobugfconut">
+<TableData class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="0">
+</Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="0">
+</Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="sitenum" type="0">
+<O t="S">like &apos;%&apos;</O></Parameter>
+</Parameters>
+<Attributes type="0" />
+<Database class="com.fr.data.impl.NameDatabase">
+<DatabaseName><![CDATA[inbasis]]></DatabaseName>
+</Database>
+<Query><![CDATA[select  e.manufacturer ,e.classid , count(*) as wcount  from equipment e ,wobugeq w
+where e.eqnum = w.eqnum
+and   (e.manufacturer<>'' or  (not (e.manufacturer is null)))
+and   (w.findtime >=to_date('[?begindate|?] 00:00:00','yyyy-mm-DD HH24:MI:SS'))
+and   (w.findtime <=to_date('[?enddate|?] 23:59:59','yyyy-mm-DD HH24:MI:SS'))
+and   (w.sitenum [?sitenum|like '%'?])
+group by e.manufacturer,e.classid]]></Query>
+</TableData>
+</NameTableData>
+</TableDataMap>
+<ReportSettings isHorizontalCenterOnPage="true" headerHeight="0.33" footerHeight="0.33">
+<Margin top="0.3937007874015748" left="0.5118110236220472" bottom="0.3937007874015748" right="0.5118110236220472" />
+</ReportSettings>
+<ReportParameterAttr>
+<Parameters>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="begindate" type="5">
+<O t="S">2007-01-01</O></Parameter>
+<Parameter class="com.fr.report.parameter.DefaultParameter" name="enddate" type="5">
+<O t="S">2007-12-31</O></Parameter>
+</Parameters>
+</ReportParameterAttr>
+<AutoRecalculate>false</AutoRecalculate>
+<DesignAttributes>
+</DesignAttributes>
+<ReportWebAttr>
+<EmailManager mailHost="" password="" user="" fromEmailAddress="" />
+<ServerPrinter>
+</ServerPrinter>
+</ReportWebAttr>
+<ReportExportAttr pdfPrinting="false"/>
+<ReportWriteAttr>
+</ReportWriteAttr>
+<RowHeight defaultValue="19.0">
+<![CDATA[60.0,60.0,60.0,19.0,30.0,60.0,60.0,30.0,30.0]]>
+</RowHeight>
+<ColumnWidth defaultValue="72.0">
+<![CDATA[72.0,72.0,72.0,72.0,72.0,72.0,72.0,77.0,65.0,60.0,72.0,76.0,60.0,60.0]]>
+</ColumnWidth>
+<FloatElementList>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="0" cs="9" rs="2" s="0"><O t="S">生产厂家设备缺陷统计报表</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="5" cs="3" s="1"><O t="S">产生缺陷的设备生产厂家</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="6" cs="3" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugfconut" columnName="MANUFACTURER" />
+</O><CellExpandAttr />
+</C>
+<C c="3" r="5" cs="5" s="3"><O t="S">设备类别</O><CellExpandAttr direction="2" />
+</C>
+<C c="3" r="6" cs="5" s="4"><O t="DSColumn"><Attributes dsName="inbasis.wobugfconut" columnName="CLASSID" />
+</O><CellExpandAttr />
+</C>
+<C c="0" r="4" cs="4" s="5"><O t="S">以下统计数据以缺陷发现时间为准</O></C>
+<C c="8" r="5" s="1"><O t="S">产生缺陷的次数</O><CellExpandAttr direction="2" />
+</C>
+<C c="8" r="6" s="2"><O t="DSColumn"><Attributes dsName="inbasis.wobugfconut" columnName="WCOUNT" dsDisplayName="inbasis.wobugfconut" />
+<Complex type="2" />
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="4" r="2" s="6"><O t="S">——</O><CellExpandAttr direction="2" />
+</C>
+<C c="2" r="2" cs="2" s="7"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=$begindate]]>
+</Attributes>
+</O><CellExpandAttr />
+</C>
+<C c="5" r="2" cs="2" s="8"><O t="Formula" class="Formula" ><Attributes reserveExecute="false">
+<![CDATA[=$enddate]]>
+</Attributes>
+</O><CellExpandAttr direction="2" />
+</C>
+<C c="0" r="2" cs="2"><O t="S"></O></C>
+<C c="5" r="4" s="9"><O t="S">地点：</O></C>
+<C c="6" r="4" cs="2"><O t="S"></O></C>
+</CellElementList>
+<WorkSheetAttr />
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="32" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /><Left style="1" color="-16777216"
+ /><Right style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="12" />
+<Border><Top style="1" color="-16777216"
+ /><Bottom style="1" color="-16777216"
+ /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="20" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="1" size="20" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="20" />
+<Border><Top color="-16777216"
+ /><Bottom color="-16777216"
+ /><Left color="-16777216"
+ /><Right color="-16777216"
+ /></Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="1" size="12" />
+<Border></Border>
+</Style>
+</StyleList>
+</Report>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+<window title="树结构应用程序界面属性设置" use="combiz.ui.ibs.GenTreeUIWindow" width="800" closable="true">
+ <groupbox>
+				<grid>
+					<rows>
+						<row>
+						树顶层查询条件(parent is null):<textbox id="topwhere" cols="80" style="background-color: #FFCC99" value="parent is null or parent=''"/>
+						</row>
+						<row>
+						树节点扩展查询条件(parent=':{关联字段}')：<textbox id="expwhere" cols="80" style="background-color: #FFCC99"/>
+						</row>
+						<row>
+						树的关联字段(parent关联字段)：<textbox id="parentvalue" style="background-color: #FFCC99"/>
+						</row>
+						<row>
+						树节点显示的文字(可以使用参数:{field}):<textbox id="label" cols="40" style="background-color: #FFCC99"/>
+						</row>
+						<row>
+						有子集节点的图标：<textbox id="parentimg" cols="40" value="/images/img_location.gif"/>
+						</row>
+						<row>
+						无子集节点的图标:<textbox id="childimg" cols="40" value="/images/img_location.gif"/>
+						</row>
+						<row>
+						默认打开所有树节点(否)：<checkbox id="openchild"/>
+						</row>
+					</rows>
+				</grid>
+				
+				<div align="center">
+				<button label="生成应用程序界面" onClick="genTreeUIWnd.genui();"/>
+				<button label="取    消" onClick="genTreeUIWnd.onClose()"/>
+				</div>
+ </groupbox>				
+</window>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GBK"?>
+<editwindow xmlns:a="http://www.w3c.com/2005/zk/annotation">
+ <zscript>
+ String[] required = {}; 
+ mainWnd.setRequired(required);
+ String[] readonly = {""}; 
+ mainWnd.setReadonly(readonly);
+ </zscript>
+ <groupbox><caption label="门户授权"><toolbarbutton label="关闭" src="/images/close_edit_dialog.gif" onClick="mainWnd.closeWnd()"/></caption>
+				<grid >
+					<rows>
+						<row>
+						权限组：<a:bind value="ibsportalauth.portal"/><ibandbox id="ibsportalauth.portal" lookup="ibsportal"/>						
+						</row>
+						<row>
+						描述：<a:bind value="ibsportal.description"/><itextbox id="ibsportal.description"/>
+						</row>
+						<row>
+						排序：<a:bind value="ibsportalauth.position"/><ilongbox id="ibsportalauth.position"/>
+						</row>
+						
+						<row spans="2" align="right" height="30">	
+							<button label="关闭编辑窗口" onClick="mainWnd.closeWnd()"/>
+						</row>
+					</rows>
+				</grid>
+ </groupbox>				
+</editwindow>

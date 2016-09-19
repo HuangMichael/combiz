@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GBK"?>
+<listwindow id="favoritelistWnd" title="请选择数据" edittype="listonly" 
+	tablename="favorite" multiple="true"
+	use="combiz.system.ui.CommonListWindow" closable="true" width="900"><!-- 请选择数据 -->
+	<tablelist band="favoritelistWnd" pageSize="16">
+		<listhead>
+			<tablelistheader src="/images/img_listitem.gif" />
+			<tablelistheader data="itemnum" label="备件编号" sort="auto" width="15%" /><!-- 备件编号 -->
+			<tablelistheader data="item.description" label="描述" sort="auto" width="30%" /><!-- 描述 -->
+			<tablelistheader data="eqnum" label="设备编号" sort="auto" width="15%" /><!-- 设备编号 -->
+			<tablelistheader data="equipment.description" label="描述" sort="auto" width="30%" /><!-- 描述 -->
+			<tablelistheader data="favoriteby" label="录入人" sort="auto" width="10%" /><!-- 录入人 -->
+		</listhead>
+	</tablelist>
+	<div align="center">
+		<button label="确 定" onClick="favoritelistWnd.confirm()" /><!-- 确 定  -->
+		<button label="取 消" onClick="favoritelistWnd.cancel()" /><!-- 取 消  -->
+	</div>
+</listwindow>
