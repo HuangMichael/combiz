@@ -10,11 +10,6 @@ xmlns:a="http://www.w3c.com/2005/zk/annotation">
 <hbox spacing="0">
 <!-- **********************************  结果树页面 ********************************** -->
 <groupbox><caption label="设备位置结构"/>
-<hbox width="220px">
-<label value="系统:"/>
-<listbox use="combiz.ui.location.LocsystemListbox" width="170"/>
-</hbox>
-<separator spacing="1"/>
 <tree use="combiz.ui.location.LocationsTree"/>
 </groupbox>
 <splitter collapse="before"/>

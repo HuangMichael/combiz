@@ -51,9 +51,9 @@ window.document.title="${prodName}";
 	
 	<hbox>
 		<!-- //////////////////////系统应用导航条///////////////////////// -->
-		<tree id="navTree" use="combiz.system.ui.common.NavTree" width="180px"/>
+		<tree id="navTree" use="combiz.system.ui.common.NavTree" width="125px"/>
 		<!-- //////////////////////应用程序容器///////////////////////// -->
-		<window id="contents" border="none">
+		<window id="contents" border="none" width="99.6%">
 		</window>
 		
 	</hbox>
