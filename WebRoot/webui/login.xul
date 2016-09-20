@@ -21,15 +21,14 @@ window.document.title="${prodName}";
 		<META http-equiv=Content-Type content="text/html; charset=utf-8">
 		<META content="MSHTML 6.00.6000.16674" name=GENERATOR>
 	</HEAD>
-	<BODY id=userlogin_body>
+	<BODY id="userlogin_body">
 	
 	
-		<DIV id=user_login style="margin:left:50%;top:50%">
+		<DIV id="user_login" >
 			<DL>
 				<DD id=user_top>
-				
 					<UL>
-						<li><div style="margin:100px;font-famliy:'微软雅黑';color:white;font-size:20pt;font-weight:bold;top:50%">企业资产设备信息平台登录</div></li>
+						<li><div style="margin:50px 150px;font-famliy:'微软雅黑';color:white;font-size:20pt;font-weight:bold">企业资产设备信息平台</div></li>
 					</UL>
 					
 					<UL>
