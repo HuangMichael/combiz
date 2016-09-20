@@ -13,68 +13,123 @@ String prodName = loginWnd.getProductName();
 <script type="text/javascript">
 window.document.title="${prodName}";
 </script>
-<link href="css/login.css" type="text/css" rel="stylesheet"/>
-		
-		<body class="bg">	
-<table width="100%" style="height:900px; vertical-align:middle" >
-			<tr height="25%">
-				<td colspan="4" width="100%"></td>
-			</tr>
-			<tr height="5%">				
-				<td width="30%"></td>
-				<td width="20%"></td>
-				<td width="20%" ><div align="left" style="font-size:24pt;font-weight:bold;color:black;font-family:'微软雅黑'">企业资产管理信息系统</div></td>
-				<td width="30%"></td>
+		<HEAD>
+		<TITLE>企业资产设备管理系统登录</TITLE>
+		<LINK href="/bluelogin/images/Default.css" type=text/css rel=stylesheet>
+		<LINK href="/bluelogin/images/xtree.css" type=text/css rel=stylesheet>
+		<LINK href="/bluelogin/images/User_Login.css" type=text/css rel=stylesheet>
+		<META http-equiv=Content-Type content="text/html; charset=utf-8">
+		<META content="MSHTML 6.00.6000.16674" name=GENERATOR>
+	</HEAD>
+	<BODY id=userlogin_body>
+	
+	
+		<DIV id=user_login style="margin:left:50%;top:50%">
+			<DL>
+				<DD id=user_top>
 				
-			</tr>
-			<tr height="10%">
-				<td width="30%"></td>
-				<td width="20%"></td>
-				<td width="20%" >
-				<div style="border-radius:15px">
-				
-				
-				
-				  ]]>
+					<UL>
+						<li><div style="margin:100px;font-famliy:'微软雅黑';color:white;font-size:20pt;font-weight:bold;top:50%">企业资产设备信息平台登录</div></li>
+					</UL>
+					
+					<UL>
+						<LI class=user_top_l></LI>
+						<LI class=user_top_c></LI>
+						<LI class=user_top_r></LI>
+					</UL>
+					<DD id=user_main>
+						<UL>
+							<LI class=user_main_l></LI>
+							<LI class=user_main_c>
+								<DIV class=user_main_box>
+									<UL>
+										<LI class=user_main_text> 用户名</LI>
+										<LI class=user_main_input>
+													  ]]>
 		</attribute>
 	</html>
-	<vbox style="vertical-align:middle">
-		<hbox>
-			<vbox height="64px">
-				<label value="账号" style="font-size:9pt;color:black;font-family:'微软雅黑'" />
-				<label value="密 码" style="font-size:9pt;color:black;font-family:'微软雅黑'" />
-			</vbox>
-			<vbox>
-				<hbox>
-					<iusernamebox />
-				</hbox>
-				<hbox>
-					<ipasswordbox />
-				</hbox>
-				<hbox>
+	<iusernamebox class="TxtUserNameCssClass" />
 
-					<button id="loginAction" label=" 登     录 " style="cursor:hand"
-						onClick="loginWnd.onLogin()" />
-				</hbox>
-			</vbox>
-
-		</hbox>
-
-		<div height="15px">
-			<label id="uiMessage" />
-		</div>
-	</vbox>
 	<html>
 		<attribute name="content">
-<![CDATA[</div></td>
-<td width="30%"></td>
-			</tr>
-			<tr height="25%">
-				<td colspan="4" width="100%"></td>
-			</tr>
-		</table>
-		</body>
-]]>
+<![CDATA[
+											
+											</LI>
+									</UL>
+									<UL>
+										<LI class=user_main_text>密&nbsp;&nbsp;&nbsp;码 </LI>
+										<LI class=user_main_input>
+										
+																											  ]]>
+		</attribute>
+	</html>
+	<ipasswordbox class="TxtPasswordCssClass" />
+
+	<html>
+		<attribute name="content">
+<![CDATA[
+											 </LI>
+									</UL>
+									
+									<UL>
+										<LI class=user_main_text> </LI>
+										<LI class=user_main_input>
+										
+																											  ]]>
+		</attribute>
+	</html>
+	<button id="loginAction" label=" 登     录 " style="cursor:hand;text-align:center;vertical-align:middle" onClick="loginWnd.onLogin()" />
+
+	<html>
+		<attribute name="content">
+<![CDATA[
+											 </LI>
+									</UL>
+									
+									
+									
+																		<UL>
+										
+										<LI class=user_main_input>
+										
+																											  ]]>
+		</attribute>
+	</html>
+	<div height="15px">
+		<label id="uiMessage" />
+	</div>
+
+	<html>
+		<attribute name="content">
+<![CDATA[
+											 </LI>
+									</UL>
+									
+									
+								</DIV>
+							</LI>
+							<LI class=user_main_r>
+							 </LI>
+						</UL>
+						<DD id=user_bottom>
+							<UL>
+								<LI class=user_bottom_l></LI>
+								<LI class=user_bottom_c> </LI>
+								<LI class=user_bottom_r></LI>
+							</UL>
+						</DD>
+			</DL>
+		</DIV>
+		<SPAN id=ValrUserName style="DISPLAY: none; COLOR: red"></SPAN>
+		<SPAN id=ValrPassword style="DISPLAY: none; COLOR: red"></SPAN>
+		<SPAN id=ValrValidateCode style="DISPLAY: none; COLOR: red"></SPAN>
+		<DIV id=ValidationSummary1 style="DISPLAY: none; COLOR: red"></DIV>
+
+		<DIV></DIV>
+
+		</FORM>
+	</BODY>
+				  ]]>
 		</attribute>
 	</html>
 </window>
