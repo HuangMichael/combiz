@@ -22,13 +22,11 @@ window.document.title="${prodName}";
 		<META content="MSHTML 6.00.6000.16674" name=GENERATOR>
 	</HEAD>
 	<BODY id="userlogin_body">
-	
-	
 		<DIV id="user_login" >
 			<DL>
 				<DD id=user_top>
 					<UL>
-						<li><div style="margin:50px 150px;font-famliy:'微软雅黑';color:white;font-size:20pt;font-weight:bold">企业资产设备信息平台</div></li>
+						<li><div class="login_label">企业资产设备信息平台</div></li>
 					</UL>
 					
 					<UL>
@@ -77,7 +75,8 @@ window.document.title="${prodName}";
 																											  ]]>
 		</attribute>
 	</html>
-	<button id="loginAction" label=" 登     录 " style="cursor:hand;text-align:center;vertical-align:middle" onClick="loginWnd.onLogin()" />
+	<button id="loginAction" label=" 登     录 " class="login_btn"
+		onClick="loginWnd.onLogin()" />
 
 	<html>
 		<attribute name="content">
@@ -119,13 +118,6 @@ window.document.title="${prodName}";
 						</DD>
 			</DL>
 		</DIV>
-		<SPAN id=ValrUserName style="DISPLAY: none; COLOR: red"></SPAN>
-		<SPAN id=ValrPassword style="DISPLAY: none; COLOR: red"></SPAN>
-		<SPAN id=ValrValidateCode style="DISPLAY: none; COLOR: red"></SPAN>
-		<DIV id=ValidationSummary1 style="DISPLAY: none; COLOR: red"></DIV>
-
-		<DIV></DIV>
-
 		</FORM>
 	</BODY>
 				  ]]>
