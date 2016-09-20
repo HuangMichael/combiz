@@ -23,7 +23,7 @@ window.document.title="${prodName}";
 			<tr height="5%">				
 				<td width="30%"></td>
 				<td width="20%"></td>
-				<td width="20%" ><div align="left" style="font-size:16pt;color:black;font-family:'微软雅黑'">企业资产管理信息系统</div></td>
+				<td width="20%" ><div align="left" style="font-size:24pt;font-weight:bold;color:black;font-family:'微软雅黑'">企业资产管理信息系统</div></td>
 				<td width="30%"></td>
 				
 			</tr>
