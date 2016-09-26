@@ -90,6 +90,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/combiz_xawk.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/combiz_xml.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/combiz_rpt.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
